@@ -1,0 +1,14 @@
+snippet TAG
+abbr    tag TAG
+options head
+    private static final String TAG = "${0}";
+
+snippet Thread
+abbr    thread Thread runnable Runnable
+options indent
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            ${0}
+        }
+    }).start();

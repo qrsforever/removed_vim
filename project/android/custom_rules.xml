@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="custom_rules" default="release">
+    <target name="-pre-compile">
+        <!-- tested_project.classpath 中的Jar包不会dex打包到apk中 -->
+        <path id="test.jars">
+            <path path="${toString:tested.project.classpath}" />
+            <pathelement location="${jar.libs.dir}/test/framework.jar" />
+            <!-- <pathelement location="xxx/xxx2.jar" /> -->
+        </path>
+        <path id="tested.project.classpath">
+            <path refid="test.jars" />
+        </path>
+        <echo message="TESTED_PROJECT_JARPATH=${toString:tested.project.classpath}" />
+        <!-- ${jar.libs.dir}: 默认目录下全会dex打包到apk中 -->
+        <!-- project.all.jars.path 里面的jar会dex打包到apk中  -->
+        <path id="proj.jars">
+            <path path="${toString:project.all.jars.path}" />
+            <!-- <pathelement location="xxx/xxx1.jar" /> -->
+            <!-- <pathelement location="xxx/xxx2.jar" /> -->
+        </path>
+        <path id="project.all.jars.path">
+            <path refid="proj.jars" />
+        </path>
+        <echo message="DEXOUT_PROJECT_JARPATH=${toString:project.all.jars.path}" />
+    </target>
+    <target name="-post-compile">
+    </target>
+</project>
+<!-- local.properties -->
+<!-- java.compiler.classpath=libs/test/framework.jar -->

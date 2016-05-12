@@ -1,0 +1,233 @@
+"""控件
+AbsoluteLayout 绝对布局
+DialerFilter 拨号器过滤器
+ExpandableListView 可扩展的列表视图
+FrameLayout 针布局
+GridView 网格视图
+HorizontalScrollView 水平滚动查看
+ImageSwither 图像切换
+LinearLayout 线性布局
+ListView 列表视图
+MediaController 媒体控制器
+RadioGroup 单选按钮组
+RelativeLayout 相对布局
+ScrollView 滚动查看
+SlidingDrawer 滑动抽屉
+TabHost 标签主机
+TabWidget 标签控件
+TableLayout 表格布局
+TableRow 表行
+TextSwitcher 文字切换
+ViewAnimator 查看动画
+ViewFlipper 参看弗利珀
+ViewSwitcher 查看切换
+GestureOverlayView 手势覆盖查看
+SurfaceView 表现观
+View 参看
+ViewStub 查看存根
+WebView WEB视图
+AnalogClock 模拟时钟
+AutoCompleteTextView 自动完成文本视图
+Button 按钮
+CheckBox 复选框
+CheckedTextView 检查的文字查看
+Chronometer 时计
+DatePicker 日期选择器
+DigitalClock 数字时钟
+EditText 编辑文字
+Gallery 画廊
+ImageButton 图像按钮
+ImageView 图像查看
+MultiAutoCompleteTextView 多自动完成文本查看
+ProgressBar 进度
+QuickContactBadge 快速联系徽章
+RadioButton 单选按钮
+RatingBar 评分酒吧
+SeekBar 搜索栏:即拖拉进度条
+Spinner 微调
+TextView 文本视图
+TimePicker 时间选择器
+ToggleButton 切换按钮
+TwoLineListItem 两线列表项
+VideoView 视频查看
+ZoomButton 变焦按钮
+ZoomControls 缩放控制
+Include 包括
+
+"""基本布局属性
+android:layout_width = "fill_parent|match_parent|wrap_content"
+android:layout_height = "fill_parent|match_parent_wrap_content"
+android:layout_gravity = "top|bottom|right|left|center_vertical|center_horizontal|fill_vertical|fill_horizontal|center|fill|clip_vertical|clip_horizontal":重力
+android:layout_centerHrizontal = "true|false" 水平居中
+android:layout_centerVertical = "true|false" 垂直居中
+android:layout_centerInparent = "true|false" 相对于父元素完全居中
+android:layout_alignParentBottom = "true|false" 贴紧父元素的下边缘
+android:layout_alignParentLeft = "true|false" 贴紧父元素的左边缘
+android:layout_alignParentRight = "true|false" 贴紧父元素的右边缘
+android:layout_alignParentTop = "true|false" 贴紧父元素的上边缘
+android:layout_alignWithParentIfMissing = "true|false"如果对应的兄弟元素找不到的话就以父元素做参照物
+android:layout_below = "@+id/xxx" 在某元素的下方
+android:layout_above  = "@+id/xxx"在某元素的的上方
+android:layout_toLeftOf = "@+id/xxx" 在某元素的左边
+android:layout_toRightOf = "@+id/xxx" 在某元素的右边
+android:layout_alignTop = "@+id/xxx"本元素的上边缘和某元素的的上边缘对齐
+android:layout_alignLeft = "@+id/xxx" 本元素的左边缘和某元素的的左边缘对齐
+android:layout_alignBottom = "@+id/xxx" 本元素的下边缘和某元素的的下边缘对齐
+android:layout_alignRight = "@+id/xxx" 本元素的右边缘和某元素的的右边缘对齐
+android:layout_marginBottom = "30dip" 离某元素底边缘的距离
+android:layout_marginLeft = "30dip"离某元素左边缘的距离
+android:layout_marginRight = "30dip" 离某元素右边缘的距离
+android:layout_marginTop = "30dip" 离某元素上边缘的距离
+android:clipChildren = "true|false"
+android:clipToPadding = "true|false"
+android:layoutAnimation = "@---"
+android:animationCache = "true|false"
+android:persistentDrawingCache = "none|animation|scrolling|all":持续高速缓存绘图
+android:alwaysDrawnWithCache = "true|false"
+android:andStatesFromChildre = "true|false"
+android:descendantFocusability = "beforeDescendants|afterDescendants|blocksDescendants":后裔可聚焦
+android:id = "@+id/absoluteLayout"
+android:tag = "@---"
+android:scrollX = "---"
+android:scrollY = "---"
+android:background = "@---"
+android:padding = "----"
+android:paddingLeft = "----"
+android:paddingTop = "----"
+android:paddingRight = "----"
+android:paddingBotton = "---"
+android:focusable = "true|false"
+android:focusableInTouchMode = "true|false"
+android:visibility = "visible|invisible|gone"
+android:fitsSystemWindows = "true|false":适合系统窗口
+android:scrollbars = "none|horizontal|vertical"
+android:scrollbarStyle = "insideOverlay(内覆盖)|insideInset(内插图)|outsideOverlay(外覆盖)|outsideInset(外插图)"
+android:isScrollContainer = "true|false":是一个滚动集合
+android:fadeScrollbars = "true|false":褪色的滚动条
+android:scrollbarFadeDuration = "---":卷轴淡出
+android:scrollDefaultDelayBeforeFade = "---":滚动前默认延迟
+android:scrollbarSize = "---"
+android:scrollbarThumbHorizontal = "@----":拇指水平滚动条
+android:scrollbarThumbVertical = "@----":拇指垂直滚动条
+android:scrollbarTrackVertical = "@---":垂直滚动条轨道
+android:scrollbarTrackHorizontal = "@---":水平滚动条轨道
+android:scrollbarAlwaysDrawHorizontalTrack = "true|false":水平滚动条总是吸引轨道
+android:scrollbarAlwaysDrawVerticalTrack = "true|false":垂直滚动条总是吸引轨道
+android:fadingEdge = "none|horizontal|vertical":衰落的边缘
+android:fadingEdgeLength = "---":边长衰落
+android:nextFocusLeft = "----":下左焦点
+android:nextFocusUp = "---":下一个重点注册
+android:nextFocusRight = "---":正确的下一个重点
+android:nextFocusDown = "---":下一个焦点下移
+android:clickable = "true|false":点击
+android:longClickable = "true|false"
+android:saveEnabled = "true|false":启用保存
+android:drawingCacheQuality = "auto|low|hight":绘图缓存质量
+android:keepScreenOn = "true|false":保持屏幕
+android:duplicateParentState = "true|false":重复父状态
+android:soundEffectEnabled = "true|false":音效启用
+android:hapticFeedbackEnable = "true|false":触觉反馈启用
+android:contentDescription = "@---":内容概述
+android:onClick = "@---":
+
+"""EditText 属性 TextView 属性
+android:hint = "请输入数字！" 设置显示在空间上的提示信息
+android:numeric = "integer" 设置只能输入整数，如果是小数则是：decimal
+android:singleLine = "true" 设置单行输入，一旦设置为true，则文字不会自动换行。
+android:password = "true" 设置只能输入密码
+android:text 设置显示文本.
+android:textColor = "#ff8c00" 字体颜色
+android:textStyle = "bold" 字体，bold, italic, bolditalic
+android:textSize = "20dip" 大小
+android:textAlign = "center" EditText没有这个属性，但TextView有
+android:textColorHighlight = "#cccccc" 被选中文字的底色，默认为蓝色
+android:textColorHint = "#ffff00" 设置提示信息文字的颜色，默认为灰色
+android:textColorLink = "" 文字链接的颜色.
+android:textScaleX = "1.5" 控制字与字之间的间距
+android:textAppearance = "?android:attr/textAppearanceLargeInverse" 文字外观，这里引用的是系统自带的一个外观，？表示系统是否有这种外观，否则使用默认的外观。
+android:capitalize  = "characters" 以大写字母写
+android:typeface = "monospace" 字型，normal, sans, serif, monospace
+android:background = "@null" 空间背景，这里没有，指透明
+android:layout_weight = "1" 权重，控制控件之间的地位,在控制控件显示的大小时蛮有用的。
+android:editable = "false" 设置EditText不可编辑
+android:
+android:autoLink 设置是否当文本为URL链接/email/电话号码/map时，文本显示为可点击的链接。可选值(none/web/email/phone/map/all)
+android:autoText 如果设置，将自动执行输入值的拼写纠正。此处无效果，在显示输入法并输入的时候起作用。
+android:bufferType 指定getText()方式取得的文本类别。android:capitalize设置英文字母大写类型。此处无效果，需要弹出输入法才能看得到，参见EditView此属性说明。
+android:cursorVisible 设定光标为显示/隐藏，默认显示。
+android:digits 设置允许输入哪些字符。如“1234567890.+-*/% ()”
+android:drawableBottom 在text的下方输出一个drawable，如图片。如果指定一个颜色的话会把text的背景设为该颜色，并且同时和background使用时覆盖后者。
+android:drawableLeft 在text的左边输出一个drawable，如图片。
+android:drawablePadding 设置text与drawable(图片)的间隔，与drawableLeft、 drawableRight、drawableTop、drawableBottom一起使用，可设置为负数，单独使用没有效果。
+android:drawableRight 在text的右边输出一个drawable。
+android:drawableTop 在text的正上方输出一个drawable。
+android:editorExtras 设置文本的额外的输入数据。
+android:ellipsize 设置当文字过长时,该控件该如何显示。有如下值设置：”start”—-省略号显示在开头;”end” ——省略号显示在结尾;”middle”—-省略号显示在中间;”marquee” ——以跑马
+
+"""其他
+android:freezesText 设置保存文本的内容以及光标的位置。
+android:gravity 设置文本位置，如设置成“center”，文本将居中显示。
+android:hintText 为空时显示的文字提示信息，可通过textColorHint设置提示信息的颜色。此属性在 EditView中使用，但是这里也可以用。
+android:imeOptions 附加功能，设置右下角IME动作与编辑框相关的动作，如actionDone右下角将显示一个“完成”，而不设置默认是一个回车符号。这个在EditView中再详细说明，此处无用。
+android:imeActionId 设置IME动作ID。
+android:imeActionLabel 设置IME动作标签。
+android:includeFontPadding 设置文本是否包含顶部和底部额外空白，默认为true。
+android:inputMethod 为文本指定输入法，需要完全限定名(完整的包名)。例如：com.google.android.inputmethod.pinyin，但是这里报错找不到。
+android:inputType 设置文本的类型，用于帮助输入法显示合适的键盘类型。在EditView中再详细说明，这里无效果。
+android:linksClickable 设置链接是否点击连接，即使设置了autoLink。
+android:marqueeRepeatLimit在ellipsize 指定marquee的情况下，设置重复滚动的次数，当设置为 marquee_forever时表示无限次。
+android:ems 设置TextView的宽度为N个字符的宽度。这里测试为一个汉字字符宽度
+android:maxEms 设置TextView的宽度为最长为N个字符的宽度。与ems同时使用时覆盖ems选项。
+android:minEms 设置TextView的宽度为最短为N个字符的宽度。与ems同时使用时覆盖ems选项。
+android:maxLength 限制显示的文本长度，超出部分不显示。
+android:lines 设置文本的行数，设置两行就显示两行，即使第二行没有数据。
+android:maxLines 设置文本的最大显示行数，与width或者layout_width结合使用，超出部分自动换行，超出行数将不显示。
+android:minLines 设置文本的最小行数，与lines类似。
+android:lineSpacingExtra 设置行间距。
+android:lineSpacingMultiplier 设置行间距的倍数。如”1.2”
+android:phoneNumber 设置为电话号码的输入方式。
+android:privateImeOptions 设置输入法选项，此处无用，在EditText将进一步讨论。
+android:scrollHorizontally 设置文本超出TextView的宽度的情况下，是否出现横拉条。
+android:selectAllOnFocus 如果文本是可选择的，让他获取焦点而不是将光标移动为文本的开始位置或者末尾位置。 TextView中设置后无效果。
+android:shadowColor 指定文本阴影的颜色，需要与shadowRadius一起使用。
+android:shadowDx 设置阴影横向坐标开始位置。
+android:shadowDy 设置阴影纵向坐标开始位置。
+android:shadowRadius 设置阴影的半径。设置为0.1就变成字体的颜色了，一般设置为3.0的效果比较好。
+android:height 设置文本区域的高度，支持度量单位：px(像素)/dp/sp/in/mm(毫米)
+android:width 设置文本区域的宽度，支持度量单位：px(像素)/dp/sp/in/mm(毫米)，与layout_width 的区别看这里。
+android:maxHeight 设置文本区域的最大高度
+android:minHeight 设置文本区域的最小高度
+android:maxWidth 设置文本区域的最大宽度
+android:minWidth 设置文本区域的最小宽度
+
+
+"""其他属性值 
+top
+bottom
+left
+right
+center
+fill
+horizontal
+vertical
+center_vertical
+center_horizontal
+fill_vertical
+fill_horizontal
+clip_vertical
+clip_horizontal
+insideOverlay 内覆盖
+insideInset 内插图
+outsideOverlay 外覆盖
+outsideInset 外插图
+visible
+invisible
+gone
+beforeDescendants
+afterDescendants
+blocksDescendants
+fill_parent
+match_parent
+wrap_content
+animation
+scrolling
