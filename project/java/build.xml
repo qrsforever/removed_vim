@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="StringTest" default="debug" basedir=".">
+<project name="Calculator" default="debug" basedir=".">
 
     <!--加载工程自定义属性-->
     <property file="build.properties"/>
@@ -12,6 +12,7 @@
     <property name="lib.dir" value="lib"/>
     <property name="jar.dir" value="${bin.dir}/jar"/>
     <property name="junit.dir" value="${bin.dir}/junit"/>
+    <property name="junit.debug" value="false"/>
     <property name="classes.dir" location="${bin.dir}/classes"/>  <!-- 内部转换为绝对路径 -->
 
     <!-- <echo level="info">relative path:${bin.dir} absolute path:${classes.dir}</echo> -->
@@ -38,28 +39,28 @@
         <tstamp/>  <!-- 生成时间戳 -->
         <mkdir dir="${lib.dir}"/>
         <!-- 查找Main-Class 包名类 -->
-        <exec dir="${src.dir}" executable="grep">
-            <arg value="-r" />
-            <arg value="public static void main" />
-            <redirector outputproperty="grep.main.class" 
-                    errorproperty="grep.error">
+        <exec dir="${src.dir}" executable="find">
+            <arg value="-name" />
+            <arg value="${ant.project.name}.java" />
+            <redirector outputproperty="find.main.class"
+                        errorproperty="find.error">
                 <outputfilterchain>
+                    <linecontains>
+                        <contains value="${ant.project.name}" />
+                    </linecontains>
                     <tokenfilter>
-                        <replaceregex 
-                                pattern=".java:\s+(.*)" 
-                                flags="g"
-                                replace=""
-                                byline="true" />
+                        <replacestring from=".java" to="" />
+                        <replacestring from="./" to="" />
                         <replacestring from="/" to="." />
                     </tokenfilter>
                 </outputfilterchain>
             </redirector>
         </exec>
-        <echo level="info">grep main-class: ${grep.main.class} </echo>
         <!-- 如果没有查找到Main-Class, 使用默认的类, 工程名 -->
-        <condition property="main-class" value="${def-main-class}" else="${grep.main.class}">
-            <equals arg1="${grep.main.class}" arg2="" />
+        <condition property="main-class" value="${def-main-class}" else="${find.main.class}">
+            <equals arg1="${find.main.class}" arg2="" />
         </condition>
+        <echo level="info">Main-Class:${main-class}</echo>
     </target>
 
     <!-- 编译任务 -->
@@ -100,20 +101,55 @@
     <target name="debug" depends="compile,jar" description="debug target">
     </target>
 
+    <target name="isTrue" if="junit.out.console">
+        <echo> is true </echo>
+    </target>
+    <target name="isFalse" unless="junit.out.console">
+        <echo> is false </echo>
+    </target>
+
     <!-- 单元测试任务 -->
     <target name="test" depends="compile,jar" description="junit test">
         <echo level="info">Run Junit Test</echo>
-        <mkdir dir="${junit.dir}"/>
-        <junit printsummary="yes" haltonfailure="no" failureproperty="test.failed" showoutput="ture" >
+        <condition property="junit.out.console">
+            <istrue value="${junit.debug}"/>
+        </condition>
+        <antcall target="test.console.out"></antcall>
+        <antcall target="test.file.out"></antcall>
+    </target>
+    <target name="test.console.out" if="junit.out.console">
+        <mkdir dir="${junit.dir}/plain"/>
+        <junit printsummary="true" haltonfailure="off" haltonerror="off" failureproperty="test.failed" showoutput="ture" >
             <classpath refid="classpath.test"/>
-            <formatter type="plain"/>
-            <batchtest fork="yes" todir="${junit.dir}">
+            <formatter type="plain" usefile="false"/>
+            <batchtest fork="yes" todir="${junit.dir}/xml">
                 <fileset dir="${src.dir}">
                     <include name="**/*Test.java"/>
                     <include name="**/Test*.java"/>
                 </fileset>
             </batchtest>
         </junit>
+        <fail if="test.failed" message="junit test error"/>
+    </target>
+    <target name="test.file.out" unless="junit.out.console">
+        <mkdir dir="${junit.dir}/xml"/>
+        <mkdir dir="${junit.dir}/html"/>
+        <junit printsummary="false" haltonfailure="off" haltonerror="off" failureproperty="test.failed" showoutput="ture" >
+            <classpath refid="classpath.test"/>
+            <formatter type="xml" usefile="true"/>
+            <batchtest fork="yes" todir="${junit.dir}/xml">
+                <fileset dir="${src.dir}">
+                    <include name="**/*Test.java"/>
+                    <include name="**/Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="${junit.dir}/html">
+            <fileset dir="${junit.dir}/xml">
+                <include name="*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.dir}/html"/>
+        </junitreport>
         <fail if="test.failed" message="junit test error"/>
     </target>
 </project>
