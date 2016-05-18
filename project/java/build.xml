@@ -39,26 +39,27 @@
         <tstamp/>  <!-- 生成时间戳 -->
         <mkdir dir="${lib.dir}"/>
         <!-- 查找Main-Class 包名类 -->
-        <exec dir="${src.dir}" executable="find">
-            <arg value="-name" />
-            <arg value="${ant.project.name}.java" />
-            <redirector outputproperty="find.main.class"
-                        errorproperty="find.error">
+        <exec dir="${src.dir}" executable="grep">
+            <arg value="-r" />
+            <arg value="public static void main" />
+            <redirector outputproperty="grep.main.class" 
+                    errorproperty="grep.error">
                 <outputfilterchain>
-                    <linecontains>
-                        <contains value="${ant.project.name}" />
-                    </linecontains>
                     <tokenfilter>
-                        <replacestring from=".java" to="" />
-                        <replacestring from="./" to="" />
+                        <replaceregex 
+                                pattern=".java:\s+(.*)" 
+                                flags="g"
+                                replace=""
+                                byline="true" />
                         <replacestring from="/" to="." />
                     </tokenfilter>
                 </outputfilterchain>
             </redirector>
         </exec>
+        <echo level="info">grep main-class: ${grep.main.class} </echo>
         <!-- 如果没有查找到Main-Class, 使用默认的类, 工程名 -->
-        <condition property="main-class" value="${def-main-class}" else="${find.main.class}">
-            <equals arg1="${find.main.class}" arg2="" />
+        <condition property="main-class" value="${def-main-class}" else="${grep.main.class}">
+            <equals arg1="${grep.main.class}" arg2="" />
         </condition>
         <echo level="info">Main-Class:${main-class}</echo>
     </target>
@@ -99,13 +100,6 @@
 
     <!-- 兼容Android -->
     <target name="debug" depends="compile,jar" description="debug target">
-    </target>
-
-    <target name="isTrue" if="junit.out.console">
-        <echo> is true </echo>
-    </target>
-    <target name="isFalse" unless="junit.out.console">
-        <echo> is false </echo>
     </target>
 
     <!-- 单元测试任务 -->
