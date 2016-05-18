@@ -103,17 +103,45 @@
     <!-- 单元测试任务 -->
     <target name="test" depends="compile,jar" description="junit test">
         <echo level="info">Run Junit Test</echo>
-        <mkdir dir="${junit.dir}"/>
-        <junit printsummary="yes" haltonfailure="no" failureproperty="test.failed" showoutput="ture" >
+        <condition property="junit.out.console">
+            <istrue value="${junit.debug}"/>
+        </condition>
+        <antcall target="test.console.out"></antcall>
+        <antcall target="test.file.out"></antcall>
+    </target>
+    <target name="test.console.out" if="junit.out.console">
+        <mkdir dir="${junit.dir}/plain"/>
+        <junit printsummary="true" haltonfailure="off" haltonerror="off" failureproperty="test.failed" showoutput="ture" >
             <classpath refid="classpath.test"/>
-            <formatter type="plain"/>
-            <batchtest fork="yes" todir="${junit.dir}">
+            <formatter type="plain" usefile="false"/>
+            <batchtest fork="yes" todir="${junit.dir}/xml">
                 <fileset dir="${src.dir}">
                     <include name="**/*Test.java"/>
                     <include name="**/Test*.java"/>
                 </fileset>
             </batchtest>
         </junit>
+        <fail if="test.failed" message="junit test error"/>
+    </target>
+    <target name="test.file.out" unless="junit.out.console">
+        <mkdir dir="${junit.dir}/xml"/>
+        <mkdir dir="${junit.dir}/html"/>
+        <junit printsummary="false" haltonfailure="off" haltonerror="off" failureproperty="test.failed" showoutput="ture" >
+            <classpath refid="classpath.test"/>
+            <formatter type="xml" usefile="true"/>
+            <batchtest fork="yes" todir="${junit.dir}/xml">
+                <fileset dir="${src.dir}">
+                    <include name="**/*Test.java"/>
+                    <include name="**/Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="${junit.dir}/html">
+            <fileset dir="${junit.dir}/xml">
+                <include name="*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.dir}/html"/>
+        </junitreport>
         <fail if="test.failed" message="junit test error"/>
     </target>
 </project>
