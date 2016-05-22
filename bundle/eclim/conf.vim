@@ -5,6 +5,10 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimBrowser = "firefox"
 " let g:EclimPythonValidate = 0
 
+let g:EclimJavaDebugStatusWinWidth = 80
+let g:EclimJavaDebugStatusWinHeight = 30
+" let g:EclimJavaDebugLineSignText = "^"
+
 "open:使用浏览器打开, lopen就vim打开
 let g:EclimJavaDocSearchSingleResult = "open" 
 
