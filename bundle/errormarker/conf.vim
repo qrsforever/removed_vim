@@ -41,7 +41,7 @@ command! -nargs=* -complete=file MyMake call s:DoSelectMake(<f-args>)
 let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
 let s:MaxFileCount = 3
 
-func! s:DoSelectMake(...) 
+func! s:DoSelectMake(...) "{{{
     if ! filereadable(s:MakefileDirsFile)
         call writefile(["#Makefile director"], s:MakefileDirsFile)
     endif
@@ -77,11 +77,7 @@ func! s:DoSelectMake(...)
     let inputdir = ""
     let select = str2nr(input("Select Makefile in dirs: ", ''), 10)         
 
-    if select == 0
-        let select = 1
-    endif
-
-    if select > i 
+    if select ==0 || select > i 
         echomsg " "
         echomsg "Select error!"
         return 
@@ -156,4 +152,4 @@ func! s:DoSelectMake(...)
         echomsg "Input is empty!"
         return 
     endif
-endfunc
+endfunc"}}}

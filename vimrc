@@ -27,6 +27,8 @@ map <unique> <silent> <S-F3> <ESC>:cn<CR>
 map <unique> <silent> <C-F2> <ESC>:tN<CR>
 map <unique> <silent> <C-F3> <ESC>:tn<CR>
 
+"<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
+
 "S-F2"
 map <silent><Esc>O1;2Q <C-O>:cN<CR>
 nmap <silent><Esc>O1;2Q :cN<CR>
@@ -412,10 +414,11 @@ hi! TabLineSel term=bold ctermfg=blue ctermbg=green gui=bold guifg=blue guibg=gr
 
 "高亮 其他"{{{
 "hi statusline cterm=bold ctermfg=LightGreen ctermbg=DarkMagenta gui=bold guifg=Green guibg=DarkMagenta
-hi Folded       term=none   cterm=bold    ctermbg=none  ctermfg=none    gui=bold    guibg=NONE
-hi FoldColumn   term=none   cterm=bold    ctermbg=none  ctermfg=none    gui=bold    guibg=NONE
-hi SignColumn   term=none   cterm=bold    ctermbg=none  ctermfg=none    gui=bold    guibg=NONE
-hi VertSplit    term=none   cterm=bold    ctermbg=none  ctermfg=none    gui=bold    guibg=NONE
+hi Folded       term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
+hi FoldColumn   term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
+hi SignColumn   term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
+hi VertSplit    term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
+hi DebugBreak   term=bold   cterm=bold    ctermbg=cyan      ctermbg=none    gui=bold    guibg=magenta  guifg=NONE
 "高亮 其他"}}}
 
 "字符编码(多字节)"{{{

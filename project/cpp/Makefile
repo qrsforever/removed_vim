@@ -1,6 +1,6 @@
 # 通用 Makefile 
  
-$(info "######## Makefile #######")
+# $(info "######## Makefile #######")
 
 # 其他变量
 OPTIMIZE := -O2
@@ -14,7 +14,7 @@ CXX 	:= $(CROSS_COMPILE)g++
 CC		:=
 AR		:= $(CROSS_COMPILE)ar
 CFLAGS  := $(OPTIMIZE) $(WARNINGS) $(DEFS)
-CPPFLAGS:=
+CPPFLAGS:= -std=c++11
 LDFLAGS :=
 INCLUDE :=
 
@@ -66,7 +66,7 @@ endef
 # 函数: 生成中间文件
 define gen_o_cmd
 $2/%.o: %.$1
-	$(GCC) $(INCLUDE) -Wp,-MT,$$@ -Wp,-MMD,$$@.d $(CFLAGS) -c -o $$@ $$<
+	$(CXX) $(INCLUDE) -Wp,-MT,$$@ -Wp,-MMD,$$@.d $(CFLAGS) $(CPPFLAGS) -c -o $$@ $$<
 
 endef
 

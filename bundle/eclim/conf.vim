@@ -1,5 +1,10 @@
 "You need: java -jar eclim_2.4.0.jar or higher
 
+map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
+map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
+map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
+map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
+
 let g:EclimCompletionMethod = 'omnifunc'
 " let g:EclimBrowser = "chromium-browser"
 let g:EclimBrowser = "firefox"
@@ -159,7 +164,7 @@ func! DoProjectSearch() "{{{
     if len(search) == 0
         return
     endif
-    echo "field[1] method[2] classOrInterface[3] enum[4] type[5]\n"
+    echo "field[1] method[2] classOrInterface[3] enum[4] type[5]  "
     let op = str2nr(input("Select:", ' '), 10)
     if  op == 1 
         let param="field"
@@ -201,4 +206,8 @@ command -nargs=?
 "command -nargs=? 
 "            \ -complete=customlist,eclim#client#nailgun#CommandCompleteWorkspaces
 "            \ PL :call eclim#project#util#ProjectList('<args>')
-"
+
+"<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
+command XDStart JavaDebugStart localhost 1044
+command XDStop  JavaDebugStop 
+command XDList  JavaDebugBreakpointsList!

@@ -112,7 +112,7 @@ function! s:DefineVariableWinSettings() " {{{
 
   nnoremap <silent> <buffer> ? :call eclim#help#BufferHelp(
     \ [
-      \ '<CR> - expand the variable under the cursor',
+      \ 'CR - expand the variable under the cursor',
       \ 'p - preview toString value',
       \ 'B - view all breakpoints',
     \ ],

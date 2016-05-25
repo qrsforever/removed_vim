@@ -18,6 +18,7 @@ func! s:DoSelectTagDB(...)
         echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; source sh.sh '
         return
     endif
+    echomsg "   Input 0(./tags) or  88 (libc) or 99 (cpp)"
     let subdirs = [ ]
     if vimshell#util#has_vimproc()
         let dirs = vimproc#readdir(tagdir)
@@ -50,10 +51,6 @@ func! s:DoSelectTagDB(...)
             endif
             return
         endif
-
-        " if select == 0
-           " let  select = 1
-        " endif
 
         let select = select -1
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="Calculator" default="debug" basedir=".">
+<project name="Logger" default="run" basedir=".">
 
     <!--加载工程自定义属性-->
     <property file="build.properties"/>
@@ -11,11 +11,12 @@
     <property name="bin.dir" value="bin"/>
     <property name="lib.dir" value="lib"/>
     <property name="jar.dir" value="${bin.dir}/jar"/>
-    <property name="junit.dir" value="${bin.dir}/junit"/>
-    <property name="junit.debug" value="false"/>
     <property name="classes.dir" location="${bin.dir}/classes"/>  <!-- 内部转换为绝对路径 -->
 
-    <!-- <echo level="info">relative path:${bin.dir} absolute path:${classes.dir}</echo> -->
+    <!-- 调试属性 -->
+    <property name="junit.dir" value="${bin.dir}/junit"/>
+    <property name="junit.debug" value="true"/>
+    <property name="compile.debug" value="true"/>
 
     <!-- 配置运行时classhpath -->
     <path id="classpath.run">
@@ -69,7 +70,7 @@
         <echo level="info">Compile ${ant.project.name}</echo>
         <mkdir dir="${bin.dir}"/>
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false" debug="${compile.debug}">
             <classpath refid="classpath.run"/>
         </javac>
     </target>
@@ -98,8 +99,15 @@
         <!-- <java fork="true" jar="${jar.dir}/${ant.project.name}-${DSTAMP}${TSTAMP}.jar"/> -->
     </target>
 
-    <!-- 兼容Android -->
+    <!-- Debug -->
     <target name="debug" depends="compile,jar" description="debug target">
+        <echo level="info">Debug ${ant.project.name}</echo>
+        <java fork="true" classname="${main-class}">
+            <jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/>
+            <classpath>
+                <path refid="classpath.run"/>
+            </classpath>
+        </java>
     </target>
 
     <!-- 单元测试任务 -->
