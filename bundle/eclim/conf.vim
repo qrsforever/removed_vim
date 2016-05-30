@@ -50,11 +50,11 @@ nnoremap <silent> <Leader>ji :JavaImport<cr>
 nnoremap <silent> <leader>jg :JavaImportOrganize<CR>
 " " C-S-F java_format current java file
 
-nnoremap <silent> <leader>pl :ProjectList<cr>
-nnoremap <silent> <leader>pt :ProjectTreeToggle<cr>
+" nnoremap <silent> <leader>pl :ProjectList<cr>
+" nnoremap <silent> <leader>pt :ProjectTreeToggle<cr>
 nnoremap <silent> <leader>pi :call DoCurrentProject(0)<CR>
-nnoremap <silent> <leader>po :call DoCurrentProject(1)<CR>
-nnoremap <silent> <leader>pc :call DoCurrentProject(2)<CR>
+" nnoremap <silent> <leader>po :call DoCurrentProject(1)<CR>
+" nnoremap <silent> <leader>pc :call DoCurrentProject(2)<CR>
 nnoremap <silent> <leader>pd :call DoCurrentProject(3)<CR>
 nnoremap <silent> <leader>pp :call DoSelectProjects()<CR>
 nnoremap <silent> <leader>ps :call DoProjectSearch()<CR>
@@ -107,7 +107,11 @@ func! DoCurrentProject(flag) "{{{
 endfunc"}}}
 
 func! DoSelectProjects() "{{{
-    let op = str2nr(input("Select Open[1] Close[2] Delete[3] ", ' '), 10)   
+    let op = str2nr(input("Select List[0] Open[1] Close[2] Delete[3] ", ' '), 10)   
+    if op == 0
+        call eclim#project#util#ProjectList('')
+        return 
+    endif
 
     let names = eclim#project#util#GetProjectNames()
     let i = 0
@@ -118,13 +122,22 @@ func! DoSelectProjects() "{{{
         echomsg ' ' . i . ' ' . n 
     endfor
 
-    let select = str2nr(input("Select project: ", ' '), 10)
-    echomsg ' '
+    let tmpstr = input("Select project: ", ' ')
+    let tokpos = stridx(tmpstr, ',')
+    if tokpos > 0
+        let select = split(tmpstr, ',')
+    else
+        let select = split(tmpstr)
+    endif
+    let len = len(select)
+    if len < 0 && len > i
+        return
+    endif
 
     let i = 0
     for proname in names
         let i = i + 1
-        if select == 0
+        if select[0] == 0 && len == 1
             if op == 1
                 echo 'Open project: ' . proname
                 call eclim#project#util#ProjectOpen(proname)
@@ -137,12 +150,25 @@ func! DoSelectProjects() "{{{
             else 
                 echomsg "Never run here."
             endif
-        endif
-
-        if i != select
             continue
         endif
 
+        echomsg ' '
+        let j = 0
+        while j < len
+            let s = str2nr(select[j], 10)
+            if s == i
+                break
+            endif
+            let j = j + 1
+        endwhile
+
+        echomsg ' ' . i . ' ' . j . ' ' . len . ' ' . s
+        if j >= len
+            continue
+        endif
+
+        echomsg 'dealwith ' . proname
         if op == 1
             echo 'Open project: ' . proname
             call eclim#project#util#ProjectOpen(proname)
@@ -198,14 +224,6 @@ endfunc"}}}
 command -nargs=?
             \ -complete=customlist,eclim#project#util#CommandCompleteProject
             \ Project :call eclim#project#util#ProjectList('<args>')
-
-"command -nargs=?
-"            \ -complete=customlist,eclim#project#util#CommandCompleteProject
-"            \ PO :call eclim#project#util#ProjectOpen('<args>')
-"
-"command -nargs=? 
-"            \ -complete=customlist,eclim#client#nailgun#CommandCompleteWorkspaces
-"            \ PL :call eclim#project#util#ProjectList('<args>')
 
 "<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
 command XDStart JavaDebugStart localhost 1044
