@@ -163,12 +163,10 @@ func! DoSelectProjects() "{{{
             let j = j + 1
         endwhile
 
-        echomsg ' ' . i . ' ' . j . ' ' . len . ' ' . s
         if j >= len
             continue
         endif
 
-        echomsg 'dealwith ' . proname
         if op == 1
             echo 'Open project: ' . proname
             call eclim#project#util#ProjectOpen(proname)
