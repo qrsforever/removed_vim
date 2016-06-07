@@ -153,7 +153,6 @@ func! DoSelectProjects() "{{{
             continue
         endif
 
-        echomsg ' '
         let j = 0
         while j < len
             let s = str2nr(select[j], 10)
