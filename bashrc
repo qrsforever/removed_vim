@@ -124,6 +124,8 @@ fi
 stty stop ''
 
 export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
 export ECLIPSE_HOME=/data/opt/eclipse
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk
