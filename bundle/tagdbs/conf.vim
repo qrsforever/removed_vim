@@ -32,7 +32,14 @@ func! s:DoSelectTagDB(...)
             endif
         endfor
 
-        let select = str2nr(input("Select TagDB: ", ' '), 10)         
+        let tmpstr = input("Select TagDB: ", ' ')
+        let tokpos = stridx(tmpstr, '+')
+        if tokpos > 0
+            let select = str2nr(strpart(tmpstr, tokpos+1), 10)         
+        else 
+            set tags=./tags
+            let select = str2nr(tmpstr, 10)         
+        endif
         echomsg ' '
 
         if select > i || i == 0 || select == 0
@@ -54,9 +61,9 @@ func! s:DoSelectTagDB(...)
 
         let select = select -1
 
-        set tags=./tags 
-        set tags+=~/.vim/tags/include.tags
-        set tags+=~/.vim/tags/cpp.tags
+        " commont off templatly.
+        " set tags+=~/.vim/tags/include.tags
+        " set tags+=~/.vim/tags/cpp.tags
 
         let dbfile = subdirs[select] . '/db.vim'
         if filereadable(dbfile)

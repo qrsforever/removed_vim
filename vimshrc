@@ -1,5 +1,3 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias svim='vim -g -p -f --servername QRS --remote-tab-silent'
-alias tvim='vim -g -p -f --servername TMP --remote-tab-silent'

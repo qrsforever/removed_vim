@@ -34,8 +34,8 @@ let g:EclimKeepLocalHistory = 1
 autocmd FileType java nmap <C-RightMouse> <esc><c-o>
 autocmd FileType java nmap <C-LeftMouse> <esc>:JavaSearchContext -a edit<cr>
 autocmd BufEnter *.c,*.cpp,*.h silent! unmap <C-LeftMouse>
-autocmd FileType java nmap g] <esc>:JavaSearchContext -a edit<cr>
-autocmd BufEnter *.c,*.cpp,*.h silent! unmap g]
+" autocmd FileType java nmap g] <esc>:JavaSearchContext -a edit<cr>
+" autocmd BufEnter *.c,*.cpp,*.h silent! unmap g]
 
 " autocmd FileType java nnoremap <silent> <C-F> :%JavaFormat<cr>
 "

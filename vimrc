@@ -6,7 +6,6 @@ let g:mapleader=","
 "F1~F12快捷键映射"{{{
 autocmd!
 :mapclear
-
 map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
 map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
@@ -19,7 +18,8 @@ map <unique> <silent> <F8> <ESC>:MyTags<CR>
 
 map <unique> <silent> <F9> <ESC>:MaximizerToggle<CR>
 
-map <unique> <silent> <F12> <ESC>:ToggleHtmlPhp<CR>
+" map <unique> <silent> <F12> <ESC>:ToggleHtmlPhp<CR>
+map <unique> <silent> <F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 map <unique> <silent> <S-F2> <ESC>:cN<CR>
 map <unique> <silent> <S-F3> <ESC>:cn<CR>
