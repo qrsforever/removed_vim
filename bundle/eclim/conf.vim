@@ -206,6 +206,26 @@ func! DoProjectSearch() "{{{
     call eclim#java#search#SearchAndDisplay('java_search', params)
 endfunc"}}}
 
+command -nargs=? JSC :call MyJavaSearchContext()
+func! MyJavaSearchContext() 
+    let search=expand('<cword>') 
+    if len(search) == 0
+        return
+    endif
+    let params=' -p ' . search . ' -t classOrInterface' . ' -x declarations -a edit'
+    call eclim#java#search#SearchAndDisplay('java_search', params)
+endfunc
+
+command -nargs=? JSM :call MyJavaSearchMethod()
+func! MyJavaSearchMethod() 
+    let search=expand('<cword>') 
+    if len(search) == 0
+        return
+    endif
+    let params=' -p ' . search . ' -t method' . ' -x declarations -a edit'
+    call eclim#java#search#SearchAndDisplay('java_search', params)
+endfunc
+
 "修改powerline使之显示在底部状态栏中
 "let g:EclimProjectStatusLine = 'eclim(p=${name}, n=${natures})'
 " %{eclim#project#util#ProjectStatusLine()}%)
@@ -226,3 +246,11 @@ command -nargs=?
 command XDStart JavaDebugStart localhost 1044
 command XDStop  JavaDebugStop 
 command XDList  JavaDebugBreakpointsList!
+
+command JC     JavaSearchContext -a edit
+command JCS    JavaSearchContext -a split
+
+command JD     JavaDocSearch 
+command JDS    JavaDocPreview
+
+command JS     JSC
