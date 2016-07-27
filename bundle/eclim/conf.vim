@@ -31,9 +31,9 @@ let g:EclimValidateSortResults = 'severity'
 "Using this local history, you can view diffs against previously saved versions of your file or revert to one of those revisions.
 let g:EclimKeepLocalHistory = 1
 
-autocmd FileType java nmap <C-RightMouse> <esc><c-o>
-autocmd FileType java nmap <C-LeftMouse> <esc>:JavaSearchContext -a edit<cr>
-autocmd BufEnter *.c,*.cpp,*.h silent! unmap <C-LeftMouse>
+" autocmd FileType java nmap <C-RightMouse> <esc><c-o>
+" autocmd FileType java nmap <C-LeftMouse> <esc>:JavaSearchContext -a edit<cr>
+" autocmd BufEnter *.c,*.cpp,*.h silent! unmap <C-LeftMouse>
 " autocmd FileType java nmap g] <esc>:JavaSearchContext -a edit<cr>
 " autocmd BufEnter *.c,*.cpp,*.h silent! unmap g]
 
@@ -141,6 +141,7 @@ func! DoSelectProjects() "{{{
             if op == 1
                 echo 'Open project: ' . proname
                 call eclim#project#util#ProjectOpen(proname)
+                silent! exec 'NERDTree ' . eclim#project#util#GetProjectRoot(proname)  
             elseif op == 2
                 echo 'Close project: ' . proname
                 call eclim#project#util#ProjectClose(proname)
@@ -169,6 +170,7 @@ func! DoSelectProjects() "{{{
         if op == 1
             echo 'Open project: ' . proname
             call eclim#project#util#ProjectOpen(proname)
+            silent! exec 'NERDTree ' . eclim#project#util#GetProjectRoot(proname)  
         elseif op == 2
             echo 'Close project: ' . proname
             call eclim#project#util#ProjectClose(proname)
