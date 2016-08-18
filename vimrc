@@ -70,6 +70,7 @@ command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge         "消除文件中的^M字符
 command XHTML set ft=html
 command XPHP  set ft=php
+command XSCROLL :MyScroll
 "自己定义的命令 "}}}
 
 "窗口配置"{{{ 
@@ -658,3 +659,6 @@ source ~/.vim/bundle/eclim/conf.vim
 "
 "altercmd 为命令定义别名, eg: adi --> Ant debug install 
 "
+"
+"
+"" set scrollbind ; set scrollopt=ver

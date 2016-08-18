@@ -23,11 +23,9 @@ func! s:DoSelectGrep()
     if select == 1
         exec "Rgrep"
     elseif select == 2
-        let fname = expand('%')
-        " let fname = expand('%:p')
         let word = input("Search for pattern ", expand("<cword>"), "tag")
-        exec "vimgrep " . word . " " . fname
-        exec "belowright cw 15"
+        exec "lvimgrep " . word . " " . expand('%')
+        exec "belowright lw 15"
     elseif select == 3
         exec "Grep"
     elseif select == 4
