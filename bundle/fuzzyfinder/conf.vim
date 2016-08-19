@@ -19,16 +19,16 @@ nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 nnoremap <silent> st     :FufTag<CR>
 nnoremap <silent> sT     :FufTag!<CR>
 "nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
-nnoremap <silent> s,     :FufBufferTag<CR>
-nnoremap <silent> s<     :FufBufferTag!<CR>
 " vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
 " vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
-nnoremap <silent> s}     :FufBufferTagWithCursorWord!<CR>
+nnoremap <silent> s,     :FufBufferTag<CR>
 nnoremap <silent> s.     :FufBufferTagAll<CR>
+nnoremap <silent> s<     :FufBufferTag!<CR>
 nnoremap <silent> s>     :FufBufferTagAll!<CR>
+nnoremap <silent> s]     :FufBufferTagWithCursorWord!<CR>
+nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 "vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
 "vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
-nnoremap <silent> s]     :FufBufferTagAllWithCursorWord!<CR>
 " nnoremap <silent> sg     :FufTaggedFile<CR>
 " nnoremap <silent> sG     :FufTaggedFile!<CR>
 "nnoremap <silent> so     :FufJumpList<CR>

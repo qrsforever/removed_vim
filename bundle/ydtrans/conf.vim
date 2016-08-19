@@ -8,11 +8,12 @@ let g:trv_grepOptions = "-i"    "Grep命令参数忽略大小写
 let g:trv_dictionary = "~/.vim/dict/toefl_eng.txt"  "Grep搜索单词的文件 toefl_eng.txt: 托福4000多个单词
 
 func! GetTransLoc() 
-    let word = expand("<cword>")
+    let word = input("Dict: ", expand("<cword>"), "buffer")
     if (word == "")
         echo "No word can translate!"
         return 0
     endif
+    echomsg ' '
     let cmd = g:trv_grep . " " . g:trv_grepOptions . " " . "\"\\\<" . word  . "\\\>\"" . " " . g:trv_dictionary
     let len0 = len(word)
     let result = system(cmd)
