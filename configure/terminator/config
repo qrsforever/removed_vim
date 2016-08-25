@@ -1,0 +1,49 @@
+[global_config]
+  always_split_with_profile = True
+  borderless = True
+  enabled_plugins = ,
+  handle_size = 3
+  homogeneous_tabbar = False
+  inactive_color_offset = 0.53
+  scroll_tabbar = True
+  suppress_multiple_term_dialog = True
+  title_font = Monospace 12
+  title_hide_sizetext = True
+  title_use_system_font = False
+  window_state = maximise
+[keybindings]
+  go_down = <Alt>j
+  go_left = <Alt>h
+  go_right = <Alt>l
+  go_up = <Alt>k
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = None
+  switch_to_tab_7 = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.74
+    background_image = None
+    background_type = transparent
+    copy_on_selection = True
+    cursor_shape = ibeam
+    font = Monospace 12
+    foreground_color = "#ffffff"
+    icon_bell = False
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
