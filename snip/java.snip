@@ -12,3 +12,40 @@ options indent
             ${0}
         }
     }).start();
+
+snippet Handler
+abbr hander
+options indent
+    class ${1:#:name} extends Handler {
+        public $1(Looper looper) {
+            super(looper);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                default:
+                    ;
+            }
+            super.handleMessage(msg);
+        }
+    }
+
+snippet Looper
+abbr looper
+options indent
+    Looper ${1:#:name};
+    if (($1 = Looper.myLooper()) != null ||
+        ($1 = Looper.getMainLooper()) != null) {
+        ${2:TARGET}
+    } else {
+        ${3}
+    }
+
+snippet Sleep
+abbr sleep
+options indent
+    try {
+        Thread.sleep(${1:#:milsec})
+    } catch (InterruptedException e) {
+        ${2}
+    }
