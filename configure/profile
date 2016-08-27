@@ -1,0 +1,33 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# export http_proxy="123.125.89.214:80"
+# export https_proxy="123.125.89.214:80"
+# sudo mount -o user=andbase,password=andbase,uid=1000,gid=1000 //10.142.130.7/workspace /data/.r130
+# sudo mount -o user=andbase,password=andbase,uid=1000,gid=1000 //10.142.128.117/workspace /data/.r128
+# 1， ssh -fN -L 54130:10.142.130.7:22 lidong8@jump3.oss.letv.cn -p 50022
+# 2， ssh -p 54128 andbase@localhost
+# 
+# 1， ssh -fN -L 54128:10.142.128.117:22 lidong8@jump3.oss.letv.cn -p 50022
+# 2， ssh -p 54128 andbase@localhost 
+# DtK1DLGUo

@@ -49,3 +49,22 @@ options indent
     } catch (InterruptedException e) {
         ${2}
     }
+
+snippet BindService
+abbr bindService
+options indent 
+    private I${1:#:Service} ${2:#:name} = null;
+    private ServiceConnection ${3:#:name} = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName arg0, IBinder arg1) {
+            $2 = $1.Stub.asInterface(arg1);
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+
+        }
+    }
+    Intent i = new Intent("${4}.$1");
+    i.setPackage("$4");
+    bindService(i, $3, Context.BIND_AUTO_CREATE);
+
