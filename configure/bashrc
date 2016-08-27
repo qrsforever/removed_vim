@@ -178,6 +178,7 @@ xv () {
     vim -p $argv
 }
 
+alias xtmux='tmux attach -t main'
 alias xvi='xv'
 alias xvim='xv'
 
