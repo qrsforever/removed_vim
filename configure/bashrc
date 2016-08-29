@@ -129,7 +129,7 @@ export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
 export ECLIPSE_HOME=/data/opt/eclipse
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk
-export PATH=$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH
+export PATH=/opt/android/sdk/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH
 
 xadb () {
     adb disconnect
@@ -201,3 +201,15 @@ xgv () {
 
 alias xgvi='xgv'
 alias xgvim='xgv'
+
+alias x128='ssh -p 54128 andbase@localhost'
+alias x130='ssh -p 54130 andbase@localhost'
+
+alias xroot='adb disconnect; adb root; adb tcpip 555; adb remount'
+alias xip='cd ~/Templates; ./ip.sh c; cd -'
+alias xusb='cd ~/Templates; ./usb.sh c; cd -'
+
+export max=/data/source/MAX
+export x2=/data/source/X2
+export app=/data/source/VRApp/LVR
+
