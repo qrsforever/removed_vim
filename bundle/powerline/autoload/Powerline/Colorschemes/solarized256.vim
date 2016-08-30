@@ -68,9 +68,9 @@ let g:Powerline#Colorschemes#solarized256#colorscheme = Pl#Colorscheme#Init([
 		\ }),
 	\
 	\ Pl#Hi#Segments(['mode_indicator'], {
-		\ 'n': ['darkestgreen', 'brightgreen', ['bold']],
+		\ 'n': ['orange', 'brightgreen', ['bold']],
 		\ 'i': ['darkestcyan', 'white', ['bold']],
-		\ 'v': ['red', 'brightorange', ['bold']],
+		\ 'v': ['red', 'gray5', ['bold']],
 		\ 'r': ['white', 'violet', ['bold']],
 		\ 's': ['white', 'gray5', ['bold']],
 		\ }),
@@ -109,7 +109,7 @@ let g:Powerline#Colorschemes#solarized256#colorscheme = Pl#Colorscheme#Init([
 		\ }),
 	\
 	\ Pl#Hi#Segments(['currenttag', 'fullcurrenttag', 'projectname', 'fileformat', 'fileencoding', 'pwd', 'filetype', 'rvm:string', 'rvm:statusline', 'virtualenv:statusline', 'charcode', 'currhigroup'], {
-		\ 'n': ['gray5', 'gray2'],
+		\ 'n': ['gray10', 'gray2'],
 		\ 'i': ['mediumcyan', 'base02'],
 		\ }),
 	\
