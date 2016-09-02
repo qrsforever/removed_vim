@@ -205,7 +205,7 @@ alias xgvim='xgv'
 alias x128='ssh -p 54128 andbase@localhost'
 alias x130='ssh -p 54130 andbase@localhost'
 
-alias xroot='adb disconnect; adb root; adb tcpip 555; adb remount'
+# alias xroot='adb disconnect; sleep 2; adb root; sleep 1; adb tcpip 5555; sleep 1; adb remount'
 alias xip='cd ~/Templates; ./ip.sh c; cd -'
 alias xusb='cd ~/Templates; ./usb.sh c; cd -'
 
