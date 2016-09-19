@@ -74,3 +74,5 @@ let g:fuf_autoPreview = 0
 let g:fuf_mrufile_maxItem = 200
 let g:fuf_mrucmd_maxItem = 100
 let g:fuf_keyOpenTabpage = '<C-h>'
+
+let g:fuf_mrufile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
