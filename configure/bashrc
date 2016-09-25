@@ -92,8 +92,8 @@ alias l='ls -CF'
 alias sl='ls'
 
 alias rm='rm -i'
-alias minicom='cd /home/lidong/Templates; sudo minicom'
-alias eclimd='cd /home/lidong/Templates; eclimd'
+alias minicom='cd /home/lidong8/Templates; sudo minicom'
+alias eclimd='cd /home/lidong8/Templates; eclimd'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude=tags'
 
@@ -123,22 +123,14 @@ fi
 
 stty stop ''
 
-export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
-export JRE_HOME=${JAVA_HOME}/jre
+# export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
+# export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
-export ECLIPSE_HOME=/data/opt/eclipse
+export ECLIPSE_HOME=/opt/eclipse
 export ANSDK_PATH=/opt/android/sdk
-export ANNDK_PATH=/opt/android/ndk
+export ANNDK_PATH=/opt/android/ndk/ndk-r10d
+export ANDROID_HOME=$ANSDK_PATH
 export PATH=/opt/android/sdk/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH
-
-xadb () {
-    adb disconnect
-    if [[ "$1"x != x ]]
-    then
-        adb connect 172.16.0.$1
-    fi
-    return $?
-}
 
 xgr () {
     if [[ "$1"x == x ]]
@@ -178,6 +170,8 @@ xv () {
     vim -p $argv
 }
 
+DATEFILE=`date +%Y%m%d`
+
 alias xtmux='tmux attach -t main'
 alias xvi='xv'
 alias xvim='xv'
@@ -204,12 +198,24 @@ alias xgvim='xgv'
 
 alias x128='ssh -p 54128 andbase@localhost'
 alias x130='ssh -p 54130 andbase@localhost'
+alias adb='/usr/bin/adb'
 
-# alias xroot='adb disconnect; sleep 2; adb root; sleep 1; adb tcpip 5555; sleep 1; adb remount'
-alias xip='cd ~/Templates; ./ip.sh c; cd -'
-alias xusb='cd ~/Templates; ./usb.sh c; cd -'
+xlog () {
+    if [[ ! -d /tmp/xlog/$DATEFILE ]]
+    then
+        mkdir -p /tmp/xlog/$DATEFILE
+    fi
+    file=`date +%H%M%S`
+    adb wait-for-device 
+    if [[ "$1"x == x ]]
+    then
+        adb shell logcat -c 
+    fi
+    adb shell logcat | tee /tmp/xlog/$DATEFILE/$file.txt
+}
 
-export max=/data/source/MAX
-export x2=/data/source/X2
-export app=/data/source/VRApp/LVR
+export max=/data2/source/max
+export bb=/data2/source/bigbang
+export sdk=/data2/source/unitysdk/coolengine/
+# export x2=/data/source/X2
 
