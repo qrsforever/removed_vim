@@ -1,6 +1,6 @@
 command! -nargs=* -complete=file MyTags call s:DoSelectTagDB(<f-args>)
 
-func! s:DoSelectTagDB(...) 
+func! s:DoSelectTagDB(...)
     let tagdir = $tags
     if len(tagdir) == 0
         echomsg 'set env tags dir, you can add export tags=your_tag_dir into ~/.profile'

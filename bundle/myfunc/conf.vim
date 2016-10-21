@@ -40,3 +40,34 @@ function s:MyScrollBinder()
         set noscrollbind
     endif
 endfunction
+
+
+command! -nargs=* MyTagDB call s:BuildAndUseDB()
+
+func! s:BuildAndUseDB(...) 
+    let path = getcwd()
+    while 1 < len(path)
+        let path = fnamemodify(path, ':h')
+        let dbfile = path . '/.tags/db.vim'
+        if filereadable(dbfile)
+            break
+        endif
+    endwhile
+    if filereadable(dbfile)
+        echomsg "Use TagDB: " . dbfile
+        exec 'source ' . dbfile
+        exec "redraw"
+        return
+    endif
+    let dbrun = '~/.vim/bin/db.sh'
+    let inputdir = substitute(input("TagDB dir: ", getcwd(), "dir"), '\/$', '', '')
+    let tagsdir = inputdir . '/.tags'
+    if !isdirectory(tagsdir)
+        call mkdir(tagsdir, 'p')
+    endif
+    echomsg "Build TagDB: " . inputdir
+    exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
+    echomsg "UseTagDB: " . tagsdir . '/db.vim'
+    exec 'source ' . tagsdir . '/db.vim'
+    exec "redraw"
+endfunc
