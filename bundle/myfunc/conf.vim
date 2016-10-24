@@ -42,32 +42,41 @@ function s:MyScrollBinder()
 endfunction
 
 
-command! -nargs=* MyTagDB call s:BuildAndUseDB()
+command! -nargs=* MyTagL0 call s:LoadTagDB(0)
+command! -nargs=* MyTagL1 call s:LoadTagDB(1)
 
-func! s:BuildAndUseDB(...) 
-    let path = getcwd()
+func! s:LoadTagDB(force) 
+    let root = getcwd()
+    let flg = str2nr(a:force, 10) 
+    let dbfile = s:FindTagDB(root)
+    if flg == 1 || empty(dbfile)
+        let dbfile = s:CreateTagDB(root)
+    endif
+    exec 'source ' . dbfile
+    exec "redraw"
+    echomsg "Use TagDB: " . dbfile
+endfunc
+
+func! s:FindTagDB(root) 
+    let path = a:root
     while 1 < len(path)
-        let path = fnamemodify(path, ':h')
         let dbfile = path . '/.tags/db.vim'
         if filereadable(dbfile)
-            break
+            return dbfile
         endif
+        let path = fnamemodify(path, ':h')
     endwhile
-    if filereadable(dbfile)
-        echomsg "Use TagDB: " . dbfile
-        exec 'source ' . dbfile
-        exec "redraw"
-        return
-    endif
+    return ''
+endfunction
+
+func! s:CreateTagDB(root) 
     let dbrun = '~/.vim/bin/db.sh'
-    let inputdir = substitute(input("TagDB dir: ", getcwd(), "dir"), '\/$', '', '')
+    let inputdir = substitute(input("TagDB dir: ", a:root, "dir"), '\/$', '', '')
     let tagsdir = inputdir . '/.tags'
     if !isdirectory(tagsdir)
         call mkdir(tagsdir, 'p')
     endif
     echomsg "Build TagDB: " . inputdir
     exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
-    echomsg "UseTagDB: " . tagsdir . '/db.vim'
-    exec 'source ' . tagsdir . '/db.vim'
-    exec "redraw"
-endfunc
+    return tagsdir . '/db.vim'
+endfunction
