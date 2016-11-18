@@ -64,35 +64,35 @@ nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "
+"window tab 
+nmap <C-\><C-\>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\><C-\>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\><C-\>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\><C-\>t :tab cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\><C-\>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\><C-\>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\><C-\>i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\><C-\>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
+
 ""window split horizontally <C-@> 在gvim有些冲突
-nmap <C-\><C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\><C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\><C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\t :scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\e :scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>\f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>\i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
-nmap <C-\>\s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>\i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>\d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-"
-"window tab 
-nmap <C-\>/s :tab cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/g :tab cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/c :tab cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/t :tab cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/e :tab cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>/i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>/d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/s :vert scs cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/g :vert scs cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/c :vert scs cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/t :vert scs cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/e :vert scs cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/f :vert scs cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>/i :vert scs cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>/d :vert scs cs find d <C-R>=expand("<cword>")<CR><CR>
 "
 "
 """使用方法
