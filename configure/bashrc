@@ -132,7 +132,7 @@ export ECLIPSE_HOME=/opt/eclipse
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk/ndk-r10d
 export ANDROID_HOME=$ANSDK_PATH
-export PATH=/opt/android/sdk/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH
+export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:$ANSDK_PATH/build-tools/23.0.2
 
 xgr () {
     if [[ "$1"x == x ]]
@@ -216,8 +216,4 @@ xlog () {
     adb shell logcat | tee /tmp/xlog/$DATEFILE/$file.txt
 }
 
-export max=/data2/source/max
-export bb=/data2/source/bigbang
-export sdk=/data2/source/unitysdk/coolengine/
-# export x2=/data/source/X2
-
+# sudo route add -net 192.168.150.0/24  gw 192.168.150.1 

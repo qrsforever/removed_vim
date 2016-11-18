@@ -10,12 +10,12 @@ func! s:DoSelectTagDB(...)
         echomsg '    eg. export tags=/home/lidong/Workspace/tags (可以写到~/.profile) '
         echomsg ' 3. 增加需要创建Tag的不同工程的目录 '
         echomsg '    eg. mkdir -p /home/lidong/Workspace/tags/myproject1 '
-        echomsg ' 4. 将脚本script/*.sh拷贝到工程目录中 '
-        echomsg '    eg. cp script/*.sh /home/lidong/Workspace/tags/myproject1 '
-        echomsg ' 5. 修改sh.sh文件, 指定工程源码路径即可'
+        echomsg ' 4. 将脚本bin/db.sh拷贝到工程目录中 '
+        echomsg '    eg. cp ~/.vim/bin/db.sh /home/lidong/Workspace/tags/myproject1 '
+        echomsg ' 5. 修改db.sh文件, 指定工程源码路径即可'
         echomsg '    eg. SRC_DIRS="/home/lidong/Workspace/source/myproject1"'
         echomsg ' 6. 在工程目录里, 执行source sh.sh生成需要的tags, filenametags, cscope'
-        echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; source sh.sh '
+        echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; source db.sh '
         return
     endif
     echomsg "   Input 0(./tags) or  88 (libc) or 99 (cpp)"
