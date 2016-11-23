@@ -560,7 +560,6 @@ set completeopt=menu
 let alternateNoDefaultAlternate = 1
 
 "Set Tags database : tags cscope filenametags
-source ~/.vim/bundle/tagdbs/conf.vim
 source ~/.vim/bundle/myfunc/conf.vim
 
 "Set PHP
