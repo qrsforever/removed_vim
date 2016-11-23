@@ -132,7 +132,7 @@ export ECLIPSE_HOME=/opt/eclipse
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk/ndk-r10d
 export ANDROID_HOME=$ANSDK_PATH
-export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:$ANSDK_PATH/build-tools/23.0.2
+export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:~/.vim/bin:$ANSDK_PATH/build-tools/23.0.2
 
 xgr () {
     if [[ "$1"x == x ]]
