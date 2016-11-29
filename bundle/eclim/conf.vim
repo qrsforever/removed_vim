@@ -251,6 +251,7 @@ command XDList  JavaDebugBreakpointsList!
 
 command JC     JavaSearchContext -a edit
 command JCS    JavaSearchContext -a split
+command J      JC
 
 command JD     JavaDocSearch 
 command JDS    JavaDocPreview
