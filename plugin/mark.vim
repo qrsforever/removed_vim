@@ -73,6 +73,7 @@ hi MarkWord3  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
 hi MarkWord4  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
 hi MarkWord5  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
 hi MarkWord6  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+hi MarkWord7  ctermbg=Brown    ctermfg=Black  guibg=#0FA202    guifg=Black
 
 " Anti reinclusion guards
 if exists('g:loaded_mark') && !exists('g:force_reload_mark')

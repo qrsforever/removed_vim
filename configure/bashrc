@@ -97,8 +97,6 @@ alias eclimd='cd /home/lidong8/Templates; eclimd'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude=tags'
 
-export tags="/work/tags"
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -177,11 +175,12 @@ DATEFILE=`date +%Y%m%d`
 alias xtmux='tmux attach -t main'
 alias xvi='xv'
 alias xvim='xv'
+alias 0vi='vim --noplugin'
 
 xgv () {
     if [[ "$1"x == x ]] 
     then
-        vim -g -p -f --servername QRS
+        gvim -p -f --servername QRS
         return
     fi
     argc=$#
@@ -192,14 +191,16 @@ xgv () {
         filepath=`echo "$item" | cut -d: -f1`
         argv+=" $filepath"
     done
-    vim -g -p -f --servername QRS --remote-tab-silent $argv
+    gvim -p -f --servername QRS --remote-tab-silent $argv
 }
 
 alias xgvi='xgv'
 alias xgvim='xgv'
 
 alias x130='ssh -p 54130 andbase@localhost'
-alias adb='/usr/bin/adb'
+alias adb='/opt/android/sdk/platform-tools/adb'
+alias addr2line='/opt/android/ndk/ndk-r10d/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line'
+alias ndk-stack='/opt/android/ndk/ndk-r10d/ndk-stack'
 
 xlog () {
     if [[ ! -d /tmp/xlog/$DATEFILE ]]
@@ -212,9 +213,12 @@ xlog () {
     then
         adb shell logcat -c 
     fi
-    adb shell logcat | tee /tmp/xlog/$DATEFILE/$file.txt
+    adb shell logcat -v threadtime | tee /tmp/xlog/$DATEFILE/$file.txt
 }
 
 export M94=/system/source/mainline/msm8094
 
-# sudo route add -net 192.168.150.0/24  gw 192.168.150.1 
+# sudo route add -net 192.168.150.0/24  gw 192.168.150.1  
+
+
+alias xsync='repo sync -cd --no-tags'

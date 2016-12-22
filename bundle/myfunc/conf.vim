@@ -46,17 +46,19 @@ endfunction
 
 "========TAG
 
-command! -nargs=* MyTagL0 call s:LoadTagDB(0)
 command! -nargs=* MyTagL1 call s:LoadTagDB(1)
+command! -nargs=* MyTagL2 call s:LoadTagDB(2)
 command! -nargs=* MyTags  call s:DoSelectTagDB()
 
 func! s:LoadTagDB(force) 
     let root = getcwd()
     let flg = str2nr(a:force, 10) 
-    if flg == 1
+    if flg == 2
         let dbfile = s:DeleteTagDB(root) 
-    else
+    elseif flg == 1
         let dbfile = s:FindTagDB(root)
+    else 
+        return
     endif
     if empty(dbfile)
         let dbfile = s:CreateTagDB(root)
@@ -120,7 +122,7 @@ func! s:DoSelectTagDB()
         echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; source db.sh '
         return
     endif
-    echomsg "   Input 0(MyTagL1) or  88 (libc) or 99 (cpp)"
+    echomsg "   Input 0(Build DB) or  88 (libc) or 99 (cpp)"
     let subdirs = [ ]
     if vimshell#util#has_vimproc()
         let dirs = vimproc#readdir(tagdir)
@@ -146,7 +148,15 @@ func! s:DoSelectTagDB()
 
         if select > i || i == 0 || select == 0
             if select == 0
-                exec "MyTagL1"
+                echomsg "1: MyTagL1(only load) 2: MyTagL2(delete before load)"
+                let res = str2nr(input("Select : ", ' '), 10)
+                if res == 1
+                    exec "MyTagL1"
+                elseif res == 2
+                    exec "MyTagL2"
+                else 
+                    return
+                endif
             elseif select == 99
                 set tags+=~/.vim/tags/include.tags
                 set tags+=~/.vim/tags/cpp.tags

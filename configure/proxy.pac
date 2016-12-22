@@ -7,8 +7,8 @@ function FindProxyForURL(url, host)
             return "PROXY 123.125.89.214:80";
         if (shExpMatch(url, "https:*"))
             return "PROXY 123.125.89.214:80";
-        if (shExpMatch(url, "ftp:*"))
-            return "PROXY 123.125.89.214:23";
+        // if (shExpMatch(url, "ftp:*"))
+            // return "PROXY 123.125.89.214:23";
         return "DIRECT";
     }
 }
