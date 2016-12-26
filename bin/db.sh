@@ -1,12 +1,20 @@
 #!/bin/bash 
 
-if [[ $# != 2 ]]
+if [[ $# < 2 ]]
 then
     echo "use: db.sh tag_dir src_dir"
+    exit
 fi
 
+((DIR_NUM = $# - 1))
+
+DIRS=($@)
 TAG_DIR=$1
-SRC_DIR=$2
+SRC_DIR=${DIRS[@]: 1:$DIR_NUM}
+
+echo "DirNum = $DIR_NUM"
+echo "TagDir = $TAG_DIR"
+echo "SrcDir = $SRC_DIR"
 
 CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
