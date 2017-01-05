@@ -2,13 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-<!-- 
-   -     <classpathentry kind="lib" 
-   -             path="/opt/android/sdk/extras/android/support/v4/android-support-v4.jar" 
-   -             sourcepath="/opt/android/sdk/extras/android/support/v4/src/">
-   -     </classpathentry>
-   -      -->
 	<classpathentry kind="lib" path="/opt/android/sdk/platforms/android-17/android.jar" sourcepath="/opt/android/sdk/sources/android-17/">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/opt/android/sdk/docs/android-17/reference"/>
@@ -19,4 +12,21 @@
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
 
+<!-- <classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/> -->
 <!-- :NewJarEntry xx/android.jar xx/android-17/ xx/docs/android-17/reference/ -->
+
+<!--
+<classpathentry kind="lib"                                                                                                   
+        path="/system/source/mainline/msm8064/out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar" 
+        sourcepath="/system/source/mainline/msm8064/frameworks/base/core/java" 
+    /> 
+<classpathentry kind="lib" 
+        path="/system/source/mainline/msm8064/out/target/common/obj/JAVA_LIBRARIES/services_intermediates/classes.jar" 
+        sourcepath="/system/source/mainline/msm8064/frameworks/base/services/java" 
+    /> 
+<classpathentry kind="lib" 
+        path="/opt/android/jdk/jdk1.8.0_73/jre/lib/rt.jar" 
+        sourcepath="/opt/android/jdk/src"
+    />                    
+
+-->

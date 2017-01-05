@@ -45,7 +45,7 @@ snippet Sleep
 abbr sleep
 options indent
     try {
-        Thread.sleep(${1:#:milsec})
+        Thread.sleep(${1:#:milsec});
     } catch (InterruptedException e) {
         ${2}
     }
