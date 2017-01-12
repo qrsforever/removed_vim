@@ -23,7 +23,7 @@ func! s:DoSelectGrep()
     if select == 1
         exec "Rgrep"
     elseif select == 2
-        let word = input("Search for pattern ", expand("<cword>"), "buffer")
+        let word = input("Search for pattern: ", expand("<cword>"), "buffer")
         exec "lvimgrep " . word . " " . expand('%')
         exec "belowright lw 15"
     elseif select == 3
@@ -31,7 +31,7 @@ func! s:DoSelectGrep()
     elseif select == 4
         exec "Bgrep"
     elseif select == 5
-        let word = input("Search for pattern ", expand("<cword>"), "tag")
+        let word = input("Search for pattern: ", expand("<cword>"), "tag")
         exec "cs find e " . word
         exec "cw"
     else

@@ -96,6 +96,7 @@ alias minicom='cd /home/lidong8/Templates; sudo minicom'
 alias eclimd='cd /home/lidong8/Templates; eclimd'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude=tags'
+alias xsync='repo sync -cd --no-tags'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -123,7 +124,7 @@ fi
 
 stty stop ''
 
-# export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
+export JAVA_HOME=/opt/android/jdk/jdk1.7.0_80
 # export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
 export ECLIPSE_HOME=/opt/eclipse/Mars
@@ -216,9 +217,28 @@ xlog () {
     adb shell logcat -v threadtime | tee /tmp/xlog/$DATEFILE/$file.txt
 }
 
-export M94=/system/source/mainline/msm8094
+# alias myadb='adb -s 10.57.180.91:5555'
+# mylog () {
+#     if [[ ! -d /tmp/xlog/$DATEFILE ]]
+#     then
+#         mkdir -p /tmp/xlog/$DATEFILE
+#     fi
+#     file=`date +%H%M%S`
+#     myadb wait-for-device 
+#     if [[ "$1"x == x ]]
+#     then
+#         myadb shell logcat -c 
+#     fi
+#     myadb shell logcat -v threadtime | tee /tmp/xlog/$DATEFILE/$file.txt
+# }
 
 # sudo route add -net 192.168.150.0/24  gw 192.168.150.1  
 
 
-alias xsync='repo sync -cd --no-tags'
+if [ -f /data/source/.descr.sh ]; then
+    . /data/source/.descr.sh 
+fi
+
+if [ -f /system/source/.descr.sh ]; then
+    . /system/source/.descr.sh 
+fi

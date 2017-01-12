@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-if [[ $# < 2 ]]
+if (( $# < 2 ))
 then
     echo "use: db.sh tag_dir src_dir"
     exit
