@@ -121,8 +121,8 @@ set pumheight=15
 set mouse=a  "在vim里可以用鼠标复制粘贴, 用鼠标左键选中,中键粘贴(中键), shift + 选中:可复制(右键)
 
 "可以在buffer中任意地方使用鼠标
-"set selection=exclusive
-"set selectmode=mouse,key
+set selection=exclusive
+set selectmode=mouse,key
 
 "autocmd 如果切换文件, 自动切换当前路径, BufEnter * 会使 eclim插件的JavaImpl冲突
 "if has("autocmd")
@@ -193,10 +193,10 @@ set ruler
 set laststatus=2 "always show
 
 "当光标达到上端或下端时 翻滚的行数
-"set scrolljump=3
+set scrolljump=2
 
 "当光标达到水平极端时 移动的列数
-"set sidescroll=10
+set sidescroll=20
 
 "当光标距离极端(上,下,左,右)多少时发生窗口滚动
 set scrolloff=2
@@ -299,7 +299,7 @@ set matchtime=1
 "set updatecount=40  "设置敲入40个字符后执行
 
 "交换文件刷新后的超时时间
-set updatetime=2000  "4秒后刷新
+set updatetime=2000  "x秒后刷新
 ":preserve "若设置的时间过长,该命令会手工的存入交换文件中.
 
 " When using make, where should it dump the file, please see ./bundle/errormarker/conf.vim
