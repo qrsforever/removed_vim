@@ -46,18 +46,21 @@ endfunction
 
 "========TAG
 
+command! -nargs=* MyTagL0 call s:LoadTagDB(0)
 command! -nargs=* MyTagL1 call s:LoadTagDB(1)
 command! -nargs=* MyTagL2 call s:LoadTagDB(2)
 command! -nargs=* MyTags  call s:DoSelectTagDB()
 
 func! s:LoadTagDB(force) 
+    exec 'lchdir %:p:h'
     let root = getcwd()
     let flg = str2nr(a:force, 10) 
-    if flg == 2
-        let dbfile = s:DeleteTagDB(root) 
-    elseif flg == 1
+    if flg == 1
         let dbfile = s:FindTagDB(root)
-    else 
+    else
+        let dbfile = s:DeleteTagDB(root) 
+    endif
+    if flg == 0
         return
     endif
     if empty(dbfile)
@@ -114,12 +117,10 @@ func! s:DoSelectTagDB()
         echomsg '    eg. export tags=/home/lidong/Workspace/tags (可以写到~/.profile) '
         echomsg ' 3. 增加需要创建Tag的不同工程的目录 '
         echomsg '    eg. mkdir -p /home/lidong/Workspace/tags/myproject1 '
-        echomsg ' 4. 将脚本bin/db.sh拷贝到工程目录中 '
-        echomsg '    eg. cp ~/.vim/bin/db.sh /home/lidong/Workspace/tags/myproject1 '
-        echomsg ' 5. 修改db.sh文件, 指定工程源码路径即可'
-        echomsg '    eg. SRC_DIRS="/home/lidong/Workspace/source/myproject1"'
-        echomsg ' 6. 在工程目录里, 执行source sh.sh生成需要的tags, filenametags, cscope'
-        echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; source db.sh '
+        echomsg ' 4. 在工程目录中创建db.sh, 指定工程源码路径即可'
+        echomsg '    db.sh内容可参考~/.vim/bin/db.sh '
+        echomsg ' 5. 在工程目录里, 执行./db.sh生成需要的tags, filenametags, cscope'
+        echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; ./db.sh '
         return
     endif
     echomsg "   Input 0(Build DB) or  88 (libc) or 99 (cpp)"
@@ -148,13 +149,15 @@ func! s:DoSelectTagDB()
 
         if select > i || i == 0 || select == 0
             if select == 0
-                echomsg "1: MyTagL1(only load) 2: MyTagL2(delete before load)"
+                echomsg "1: MyTagL1(only load) 2: MyTagL2(delete before load) 3: MyTagL0(delete)"
                 let res = str2nr(input("Select : ", ' '), 10)
                 if res == 1
                     exec "MyTagL1"
                 elseif res == 2
                     exec "MyTagL2"
-                else 
+                elseif res == 3
+                    exec "MyTagL0"
+                else
                     return
                 endif
             elseif select == 99
