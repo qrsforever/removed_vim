@@ -11,14 +11,10 @@ map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
 map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
 map <unique> <silent> <F5> <ESC>:LookupFile<CR>
-
-map <unique> <silent> <F6> <ESC>:MyMake<CR>
+" map <unique> <silent> <F6> <ESC>:MyMake<CR>
 map <unique> <silent> <F7> <ESC>:MyGrep<CR>
 map <unique> <silent> <F8> <ESC>:MyTags<CR>
 
-map <unique> <silent> <F9> <ESC>:MaximizerToggle<CR>
-
-" map <unique> <silent> <F12> <ESC>:ToggleHtmlPhp<CR>
 map <unique> <silent> <F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 map <unique> <silent> <S-F2> <ESC>:cN<CR>
@@ -70,7 +66,6 @@ command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge         "消除文件中的^M字符
 command XHTML set ft=html
 command XPHP  set ft=php
-command XSCROLL :MyScroll
 "自己定义的命令 "}}}
 
 "窗口配置"{{{ 
@@ -121,8 +116,8 @@ set pumheight=15
 set mouse=a  "在vim里可以用鼠标复制粘贴, 用鼠标左键选中,中键粘贴(中键), shift + 选中:可复制(右键)
 
 "可以在buffer中任意地方使用鼠标
-set selection=exclusive
-set selectmode=mouse,key
+" set selection=exclusive
+" set selectmode=mouse,key
 
 "autocmd 如果切换文件, 自动切换当前路径, BufEnter * 会使 eclim插件的JavaImpl冲突
 "if has("autocmd")
