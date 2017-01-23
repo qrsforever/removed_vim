@@ -11,6 +11,76 @@ let Grep_Default_Filelist = '*'
 
 command! -nargs=* -complete=file MyGrep call s:DoSelectGrep(<f-args>)
 
+let s:MRUGrepWordsFile = expand('$HOME/.MRUGrepWordsFile')
+let s:MaxCount = 6
+
+func! s:InputWords()
+    if ! filereadable(s:MRUGrepWordsFile)
+        call writefile([], s:MRUGrepWordsFile)
+    endif
+    let grepwords = readfile(s:MRUGrepWordsFile)
+    let cnt = 0
+    let recwords = []
+    for w in grepwords
+        if count < s:MaxCount  
+            call add(recwords, w)
+        endif
+        let cnt += 1
+    endfor
+    let i = 1
+    echomsg " "
+    for line in recwords
+        echomsg " " . i . ". " . line
+        let i += 1
+    endfor
+
+    let tmpstr = input("Search for pattern(a|b): ", expand("<cword>"), "buffer")
+    if tmpstr == ""
+        return ""
+    endif
+    let select = str2nr(tmpstr, 10)         
+    let outputs = []
+    if select > 0 && select <= cnt
+        let tmpstr = recwords[select - 1]
+    else 
+        let addflg = 1
+        for line in recwords
+            if line == tmpstr
+                let addflg = 0
+            endif
+        endfor 
+        if addflg == 1
+            call add(outputs, tmpstr)
+            let cnt = 1
+            for line in recwords
+                if cnt < s:MaxCount
+                    call add(outputs, line)
+                endif
+                let cnt += 1
+            endfor
+            call writefile(outputs, s:MRUGrepWordsFile)
+        endif
+    endif
+    let tokpos = stridx(tmpstr, '|')
+    if tokpos < 0
+        return tmpstr
+    endif
+    
+    let twd = split(tmpstr, '|')
+    let len = len(twd)
+    let words=''
+    let i = 0
+    while i < len
+        if i == 0
+            let words = twd[i]
+        else
+            let words = words . '\|' . twd[i]
+        endif
+        let i = i + 1
+    endwhile
+    return words
+endfunc
+
 func! s:DoSelectGrep() 
     echomsg ' Use Shift+F2 Shift+F3 (for next match pattern)'
     echomsg ' 1. in directory'
@@ -20,22 +90,23 @@ func! s:DoSelectGrep()
     echomsg ' 5. in cscope'
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
     
+    exec "Mark " 
+    let word = s:InputWords()
     if select == 1
-        exec "Rgrep"
+        exec "Rgrep " . word 
     elseif select == 2
-        let word = input("Search for pattern: ", expand("<cword>"), "buffer")
-        exec "lvimgrep " . word . " " . expand('%')
+        exec "silent! lvimgrep " . word . " " . expand('%')
         exec "belowright lw 15"
     elseif select == 3
-        exec "Grep"
+        exec "Grep " . word
     elseif select == 4
-        exec "Bgrep"
+        exec "Bgrep " . word
     elseif select == 5
-        let word = input("Search for pattern: ", expand("<cword>"), "tag")
         exec "cs find e " . word
-        exec "cw"
+        exec "belowright cw 15"
     else
         return
     endif
+    exec "Mark " . word 
     exec "redraw"
 endfunc
