@@ -56,8 +56,8 @@ nmap cd :lchdir %:p:h<CR>:pwd<CR>
 "单手保存 ctrl+s 在BASH中,是Lock the console, 解锁ctrl+q, 解决方法是在.bashrc中添加stty stop '' 或者 alias vim="stty stop ''; vim"
 " nmap <C-s> :update<CR>:echo expand('%:p')<CR>
 " imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
-nmap <C-s> :update!<CR>:lchdir %:p:h<CR>:pwd<CR>
-imap <C-s> <ESC>:<c-u>update!<CR>:lchdir %:p:h<CR>:pwd<CR>
+nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
+imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 "非F1~F12快捷键"}}}
 
 "自己定义的命令 "{{{
@@ -390,8 +390,8 @@ set cursorline
 set cursorcolumn
 " ctermfg : red(1) yellow(2) blue green grey brown cyan magenta 数字
 "hi CursorLine   term=none cterm=underline      ctermbg=none    ctermfg=none "  gui=bold      guibg=NONE"
-hi CursorLine   term=none cterm=bold      ctermbg=none    ctermfg=none "  gui=bold      guibg=NONE"
-hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none "  gui=bold      guibg=NONE"
+hi CursorLine   term=none cterm=underline ctermbg=none    ctermfg=none   gui=underline  guibg=none
+hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold       guibg=none
 "高亮 当前行(列)"}}}
 
 "高亮tab标签"{{{
@@ -556,9 +556,6 @@ let alternateNoDefaultAlternate = 1
 
 "Set Tags database : tags cscope filenametags
 source ~/.vim/bundle/myfunc/conf.vim
-
-"Set PHP
-source ~/.vim/bundle/php/conf.vim
 
 "pathogen脚本运行环境,更新插件相当方便
 call pathogen#infect()

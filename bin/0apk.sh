@@ -1,8 +1,15 @@
+#!/bin/bash
+
+if (( $# < 1 ))
+then
+   echo "Use: 0apk.sh a.apk" 
+   exit
+fi
+
 rm apk-tool -rf
 rm apk-decode -rf
 rm apk-unzip -rf
 rm dex2jar -rf
-
 rm jd-gui.jar -f
 
 VIM_HOME="$HOME/.vim"

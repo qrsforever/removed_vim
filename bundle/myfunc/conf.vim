@@ -96,7 +96,7 @@ func! s:DeleteTagDB(root)
 endfunction
 
 func! s:CreateTagDB(root) 
-    let dbrun = '~/.vim/bin/db.sh'
+    let dbrun = '~/.vim/bin/0db.sh'
     let inputdir = substitute(input("TagDB dir: ", a:root, "dir"), '\/$', '', '')
     let tagsdir = inputdir . '/.tags'
     if !isdirectory(tagsdir)
@@ -137,7 +137,9 @@ func! s:DoSelectTagDB()
             endif
         endfor
 
+        echohl Search
         let tmpstr = input("Select TagDB: ", ' ')
+        echohl None
         let tokpos = stridx(tmpstr, '+')
         if tokpos > 0
             let select = str2nr(strpart(tmpstr, tokpos+1), 10)         
@@ -150,7 +152,9 @@ func! s:DoSelectTagDB()
         if select > i || i == 0 || select == 0
             if select == 0
                 echomsg "1: MyTagL1(only load) 2: MyTagL2(delete before load) 3: MyTagL0(delete)"
+                echohl Search
                 let res = str2nr(input("Select : ", ' '), 10)
+                echohl None
                 if res == 1
                     exec "MyTagL1"
                 elseif res == 2

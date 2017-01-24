@@ -34,11 +34,21 @@ func! s:InputWords()
         let i += 1
     endfor
 
-    let tmpstr = input("Search for pattern(a|b): ", expand("<cword>"), "buffer")
-    if tmpstr == ""
+    echohl Search
+    let tmpstr = input("Search for pattern: ", expand("<cword>") . "|")
+    echohl None
+    if tmpstr == "|"
         return ""
     endif
-    let select = str2nr(tmpstr, 10)         
+    let select = -1
+    let ex = split(tmpstr, '|')
+    if 1 == len(ex)
+        let tmpstr = ex[0]
+    else
+        if 1 == len(ex[1])
+            let select = str2nr(ex[1], 10)         
+        endif
+    endif
     let outputs = []
     if select > 0 && select <= cnt
         let tmpstr = recwords[select - 1]
@@ -88,7 +98,9 @@ func! s:DoSelectGrep()
     echomsg ' 3. in files'
     echomsg ' 4. in buffer' 
     echomsg ' 5. in cscope'
+    echohl Search
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
+    echohl None
     
     exec "Mark " 
     let word = s:InputWords()

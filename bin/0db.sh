@@ -2,7 +2,7 @@
 
 #===============TagDir=====================
 #!/bin/bash 
-# SCRIPT_DB=~/.vim/bin/db.sh
+# SCRIPT_DB=~/.vim/bin/0db.sh
 # TAG_DIR=`pwd`
 # SRC_DIR="\
 #   dir1 \
@@ -14,7 +14,7 @@
 
 if (( $# < 2 ))
 then
-    echo "use: db.sh tag_dir src_dir"
+    echo "use: 0db.sh tag_dir src_dir"
     exit
 fi
 
