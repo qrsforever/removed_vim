@@ -37,7 +37,7 @@ func! s:InputWords()
     echohl Search
     let tmpstr = input("Search for pattern: ", expand("<cword>") . "|")
     echohl None
-    if tmpstr == "|"
+    if len(tmpstr) < 2
         return ""
     endif
     let select = -1

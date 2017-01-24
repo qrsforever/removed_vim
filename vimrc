@@ -68,7 +68,7 @@ command XHTML set ft=html
 command XPHP  set ft=php
 "自己定义的命令 "}}}
 
-"窗口配置"{{{ 
+"窗口配置"{{{
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
@@ -79,7 +79,7 @@ imap <C-j> <esc><C-W>j
 imap <C-k> <esc><C-W>k
 imap <C-h> <esc><C-W>h
 imap <C-l> <esc><C-W>l
-  
+
 noremap <C-W>v <C-W>v<C-W>l
 noremap <C-W>s <C-W>s<C-W>j
 "窗口配置"}}}
@@ -174,7 +174,7 @@ set expandtab
 set showtabline=1 "0表示从不显示标签栏 1表示打开文件多于一个时显示标签栏 2表示总是显示标签栏
 set tabpagemax=15 "标签个数
 
-"在vim编辑器下方不显示命令 
+"在vim编辑器下方不显示命令
 ""To reduce the number of hit-enter prompts:
 "   Set 'cmdheight' to 2 or higher.
 "   Add flags to 'shortmess'.
@@ -326,10 +326,10 @@ if has("gui_running")
    "set guioptions=e    " GUI Tabbar
    "set guioptions+=m   " 菜单栏
    "set guioptions+=T   " 工具栏
-   "set guioptions+=b   " 底边滚动条
-   "set guioptions+=l   " 左边滚动条
+   " set guioptions+=b   " 底边滚动条
+   " set guioptions+=l   " 左边滚动条
    "set guioptions+=L   " 垂直分隔窗口左边滚动条
-   "set guioptions+=r   " 右边滚动条
+   set guioptions+=r   " 右边滚动条
    "set guioptions+=R   " 垂直分隔窗口右边滚动条
     set mousemodel=popup
     map! <S-Insert> <MiddleMouse>
@@ -389,9 +389,8 @@ highlight PmenuThumb    ctermbg=Yellow                      guibg=Yellow
 set cursorline
 set cursorcolumn
 " ctermfg : red(1) yellow(2) blue green grey brown cyan magenta 数字
-"hi CursorLine   term=none cterm=underline      ctermbg=none    ctermfg=none "  gui=bold      guibg=NONE"
-hi CursorLine   term=none cterm=underline ctermbg=none    ctermfg=none   gui=underline  guibg=none
-hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold       guibg=none
+hi CursorLine   term=none cterm=underline ctermbg=none    ctermfg=none   gui=underline guibg=NONE
+hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold  guibg=NONE
 "高亮 当前行(列)"}}}
 
 "高亮tab标签"{{{
@@ -566,7 +565,7 @@ source ~/.vim/bundle/fuzzyfinder/conf.vim
 "Shougo的unite插件，和fuzzyfinder功能相似， 尝试一下
 source ~/.vim/bundle/unite/conf.vim
 
-"NERD_commenter.vim 
+"NERD_commenter.vim
 source ~/.vim/bundle/nerdcommenter/conf.vim
 
 "单独切换打开NERD_tree(目录树)
@@ -645,10 +644,10 @@ source ~/.vim/bundle/eclim/conf.vim
 "clang_complete.vim
 "source ~/.vim/bundle/clang_complete/conf.vim
 "
-"xmlEditor 
+"xmlEditor
 " source ~/.vim/bundle/xmledit/conf.vim
 "
-"altercmd 为命令定义别名, eg: adi --> Ant debug install 
+"altercmd 为命令定义别名, eg: adi --> Ant debug install
 "
 "
 "
