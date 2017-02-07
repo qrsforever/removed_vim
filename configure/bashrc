@@ -184,15 +184,7 @@ xgv () {
         gvim -p -f --servername QRS
         return
     fi
-    argc=$#
-    argv=""
-    line=""
-    for item in $@
-    do
-        filepath=`echo "$item" | cut -d: -f1`
-        argv+=" $filepath"
-    done
-    gvim -p -f --servername QRS --remote-tab-silent $argv
+    gvim -p -f --servername QRS --remote-tab-silent $@
 }
 
 alias xgvi='xgv'
