@@ -171,8 +171,6 @@ xv () {
     vim -p $argv
 }
 
-DATEFILE=`date +%Y%m%d`
-
 alias xtmux='tmux attach -t main'
 alias xvi='xv'
 alias xvim='xv'
@@ -194,6 +192,13 @@ alias x130='ssh -p 54130 andbase@localhost'
 alias adb='/opt/android/sdk/platform-tools/adb'
 alias addr2line='/opt/android/ndk/ndk-r10d/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line'
 alias ndk-stack='/opt/android/ndk/ndk-r10d/ndk-stack'
+
+DATEFILE=`date +%Y%m%d`
+
+if [[ ! -d /tmp/xlog/$DATEFILE ]]
+then
+    mkdir -p /tmp/xlog/$DATEFILE
+fi
 
 xlog () {
     if [[ ! -d /tmp/xlog/$DATEFILE ]]

@@ -74,7 +74,7 @@ endfunc
 func! s:FindTagDB(root) 
     let path = a:root
     while 1 < len(path)
-        let dbfile = path . '/.tags/db.vim'
+        let dbfile = '/tmp/tags' . path . '/.tags/db.vim'
         if filereadable(dbfile)
             return dbfile
         endif
@@ -86,7 +86,7 @@ endfunction
 func! s:DeleteTagDB(root) 
     let path = a:root
     while 1 < len(path)
-        let dir = path . '/.tags'
+        let dir = '/tmp/tags' . path . '/.tags'
         if isdirectory(dir)
             call system("rm " . ' -rf ' . dir)
         endif
@@ -98,7 +98,7 @@ endfunction
 func! s:CreateTagDB(root) 
     let dbrun = '~/.vim/bin/0db.sh'
     let inputdir = substitute(input("TagDB dir: ", a:root, "dir"), '\/$', '', '')
-    let tagsdir = inputdir . '/.tags'
+    let tagsdir = '/tmp/tags' . inputdir . '/.tags'
     if !isdirectory(tagsdir)
         call mkdir(tagsdir, 'p')
     endif

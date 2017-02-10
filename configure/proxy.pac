@@ -5,6 +5,11 @@ function FindProxyForURL(url, host) {
         return "DIRECT";
     }
 
+    if (shExpMatch(host, "leshiren.cn"))
+    {
+        return "DIRECT";
+    }
+
     // URLs within this network are accessed through
     // port 8080 on fastproxy.example.com:
     if (isInNet(host, "10.0.0.0", "255.255.248.0"))
