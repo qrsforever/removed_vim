@@ -46,9 +46,9 @@ let g:CCTreeMinVisibleDepth = 3 "Maximum visible(unfolded) level,
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 "echo "export CSCOPE_DB=/home/tags/cscope.out" >> ~/.bashrc
 "------- 下面是对cscope_map.vim文件的部分翻译
-""0 或 s  查找本 C 符号(可以跳过注释)
-""1 或 g  查找本定义
-""2 或 d  查找本函数调用的函数 --可以到函数的定义处
+""0 或 s  查找C语言符号，即查找函数名、宏、枚举值等出现的地方 (可以跳过注释)
+""1 或 g  查找本定义 --可以到函数的定义处
+""2 或 d  查找本函数调用的函数 
 ""3 或 c  查找调用本函数的函数 --该函数被谁调用
 ""4 或 t  查找本字符串
 ""6 或 e  查找本 egrep 模式
@@ -121,6 +121,9 @@ nmap <C-\>/d :vert scs cs find d <C-R>=expand("<cword>")<CR><CR>
 """-b: 只生成索引文件，不进入cscope的界面
 """-k: 在生成索引文件时，不搜索/usr/include目录 注意：如果使用ccglue生成数据库，不要这个参数
 """-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
+"""-I: 在-I选项指出的目录中查找头文件
+"""-u: 扫描所有文件，重新生成交叉索引文件
+"""-C: 在搜索时忽略大小写
 """
 """cscope和ctags的兼容问题
 if has("cscope")

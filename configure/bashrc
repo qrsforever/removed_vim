@@ -131,7 +131,7 @@ export ECLIPSE_HOME=/opt/eclipse/Mars
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk/ndk-r10d
 export ANDROID_HOME=$ANSDK_PATH
-export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:~/.vim/bin:$ANSDK_PATH/build-tools/23.0.2
+export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:~/.vim/bin:$ANSDK_PATH/build-tools/23.0.2:/opt/android/mat
 
 xgr () {
     if [[ "$1"x == x ]]
@@ -191,6 +191,7 @@ alias xgvim='xgv'
 alias x130='ssh -p 54130 andbase@localhost'
 alias adb='/opt/android/sdk/platform-tools/adb'
 alias addr2line='/opt/android/ndk/ndk-r10d/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line'
+alias addr2line64='/data/opt/android/ndk/ndk-r10d/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-addr2line'
 alias ndk-stack='/opt/android/ndk/ndk-r10d/ndk-stack'
 
 DATEFILE=`date +%Y%m%d`
@@ -205,11 +206,11 @@ xlog () {
     adb wait-for-device 
     if [[ "$1"x == x ]]
     then
-        adb shell logcat -b all -c 
-        echo "exec logcat -b all -c"
+        adb shell logcat -b main -b events -b system -c 
+        echo "exec logcat -b main -b events -b system -c"
     fi
     # adb shell logcat -b events -b main -b system -v threadtime | tee /tmp/xlog/$DATEFILE/$file.txt
-    adb shell logcat -b all -v threadtime *:V | tee /tmp/xlog/$DATEFILE/$file.txt
+    adb shell logcat -K -b main -b events -b system -v threadtime *:V | tee /tmp/xlog/$DATEFILE/$file.txt
 }
 
 # alias myadb='adb -s 10.57.180.91:5555'
