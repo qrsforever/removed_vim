@@ -11,7 +11,7 @@ map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
 map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
 map <unique> <silent> <F5> <ESC>:LookupFile<CR>
-" map <unique> <silent> <F6> <ESC>:MyMake<CR>
+map <unique> <silent> <F6> <ESC>:MyMake<CR>
 map <unique> <silent> <F7> <ESC>:MyGrep<CR>
 map <unique> <silent> <F8> <ESC>:MyTags<CR>
 
@@ -624,6 +624,9 @@ source ~/.vim/bundle/easymotion/conf.vim
 
 "eclim 再也不用担心Android开发了"
 source ~/.vim/bundle/eclim/conf.vim
+
+"python completion
+source ~/.vim/bundle/jedi/conf.vim
 
 "Sessionman
 " source ~/.vim/bundle/sessionman/conf.vim
