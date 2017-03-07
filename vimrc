@@ -626,7 +626,7 @@ source ~/.vim/bundle/easymotion/conf.vim
 source ~/.vim/bundle/eclim/conf.vim
 
 "python completion
-source ~/.vim/bundle/jedi/conf.vim
+" source ~/.vim/bundle/jedi/conf.vim
 
 "Sessionman
 " source ~/.vim/bundle/sessionman/conf.vim

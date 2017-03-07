@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/lidong/.vim'
-let g:netrw_dirhist_2='/home/lidong/.vim/autoload'
-let g:netrw_dirhist_3='/home/lidong/.vim'
-let g:netrw_dirhist_4='/home/lidong/.vim/autoload'
-let g:netrw_dirhist_5='/system/source/mainline/msm8064/build'
-let g:netrw_dirhist_6='/data/source/branch/mstart938-CN/external/jemalloc/test/include/test'
-let g:netrw_dirhist_7='/tmp/xlog/20161220'

@@ -1,6 +1,6 @@
 nailgun.server.host=0.0.0.0
 nailgun.server.port=20012
-osgi.instance.area.default=/work/eclim
+osgi.instance.area.default=/data/work/eclim
 -Xmx256M
 -XX:PermSize=64m
 -XX:MaxPermSize=128m

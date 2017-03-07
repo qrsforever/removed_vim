@@ -124,7 +124,7 @@ fi
 
 stty stop ''
 
-export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
+export JAVA_HOME=/opt/android/jdk/jdk1.7.0_80
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
 export ECLIPSE_HOME=/opt/eclipse/Mars
@@ -238,3 +238,5 @@ fi
 if [ -f /system/source/.descr.sh ]; then
     . /system/source/.descr.sh 
 fi
+
+PATH=$PATH:/opt/010Editor;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 87FF8EFC-483D-BCAA-D67D-735CF60410D1 0928FB19-F8F1-27F0-BCD8-019FFC410F65
