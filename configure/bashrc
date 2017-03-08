@@ -172,6 +172,7 @@ xv () {
 }
 
 alias xtmux='tmux attach -t main'
+alias vi='xv'
 alias xvi='xv'
 alias xvim='xv'
 alias 0vi='vim --noplugin'
@@ -179,12 +180,13 @@ alias 0vi='vim --noplugin'
 xgv () {
     if [[ "$1"x == x ]] 
     then
-        gvim -p -f --servername QRS
+        vim -g -p -f --servername QRS
         return
     fi
-    gvim -p -f --servername QRS --remote-tab-silent $@
+    vim -g -p -f --servername QRS --remote-tab-silent $@
 }
 
+alias gvi='xgv'
 alias xgvi='xgv'
 alias xgvim='xgv'
 

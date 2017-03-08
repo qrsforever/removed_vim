@@ -1,11 +1,13 @@
 let mapleader=","
 let g:mapleader=","
 
-"==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
-
-"F1~F12快捷键映射"{{{
 autocmd!
 :mapclear
+
+"==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
+source ~/.vim/bundle/Vundle.vim/conf.vim
+
+"F1~F12快捷键映射"{{{
 map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
 map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
@@ -553,105 +555,3 @@ set completeopt=menu
 "a.vim实现源文件与头文件切换
 let alternateNoDefaultAlternate = 1
 
-"Set Tags database : tags cscope filenametags
-source ~/.vim/bundle/myfunc/conf.vim
-
-"pathogen脚本运行环境,更新插件相当方便
-call pathogen#infect()
-
-"FuzzyFinder fuf.vim模糊查找 (功能之一： 查找并打开最近修改的文件， 相当方便)
-source ~/.vim/bundle/fuzzyfinder/conf.vim
-
-"Shougo的unite插件，和fuzzyfinder功能相似， 尝试一下
-source ~/.vim/bundle/unite/conf.vim
-
-"NERD_commenter.vim
-source ~/.vim/bundle/nerdcommenter/conf.vim
-
-"单独切换打开NERD_tree(目录树)
-source ~/.vim/bundle/nerdtree/conf.vim
-
-"neocomplete 如果不支持内嵌lua，~/.vim/src有lua的源码，编译一下，重新编译vim指定lua静态库位置
-source ~/.vim/bundle/neocomplete/conf.vim
-
-"neosnippet.vim (代码片段补全)
-source ~/.vim/bundle/neosnippet/conf.vim
-
-"vimshell.vim (在vim中使用终端)
-source ~/.vim/bundle/vimshell/conf.vim
-
-"omnicppcomplete.vim (c/c++补全)
-source ~/.vim/bundle/omnicppcomplete/conf.vim
-
-"code_complete.vim (功能提示补全, 可以废掉)
-source ~/.vim/bundle/code_complete/conf.vim
-
-"PowerLine.vim 状态栏更绚丽
-source ~/.vim/bundle/powerline/conf.vim
-
-"lookupfile插件默认会使用ctags产生的tag来查找，效率很低,使用下面脚本生成filenametags
-source ~/.vim/bundle/lookupfile/conf.vim
-
-"CCtree.Vim  C Call-Tree Explorer 源码浏览工具 关系树 (赞)
-source ~/.vim/bundle/cctree/conf.vim
-
-"tagbar 样式比taglist好看
-source ~/.vim/bundle/tagbar/conf.vim
-
-"errormarker.vim (可以快速定位工程中出错的文件)
-source ~/.vim/bundle/errormarker/conf.vim
-
-"vcscommand 各种版本控制 svn cvs git hg
-source ~/.vim/bundle/vcscommand/conf.vim
-
-"F7 Grep.vim 查找字符 (也可以使用Unite的部分功能， 不过这个简单实用)
-source ~/.vim/bundle/grep/conf.vim
-
-"ft-cmake for CMakeLists.txt
-source ~/.vim/bundle/ft-cmake/conf.vim
-
-"maximizer.vim (分割多个窗口时， 可以只用这个将某个窗口最大化)
-source ~/.vim/bundle/maximizer/conf.vim
-
-"使用有道翻译
-source ~/.vim/bundle/ydtrans/conf.vim
-
-"Text中快速移动，让你在没有鼠标的时侯不失速度
-source ~/.vim/bundle/easymotion/conf.vim
-
-"DrawIt 在vim中轻松绘图
-" source ~/.vim/bundle/DrawIt/conf.vim
-
-"eclim 再也不用担心Android开发了"
-source ~/.vim/bundle/eclim/conf.vim
-
-"python completion
-" source ~/.vim/bundle/jedi/conf.vim
-
-"Sessionman
-" source ~/.vim/bundle/sessionman/conf.vim
-
-"目录文件对比
-" source ~/.vim/bundle/DirDiff/conf.vim
-
-" 被废弃的插件，很怀念
-"neocomplcache.vim
-"source ~/.vim/bundle/neocomplcache/conf.vim
-"
-""ctrlspace.vim
-""source ~/.vim/bundle/ctrlspace/conf.vim
-"
-""GoldenView 窗口切割编辑利器
-"source ~/.vim/bundle/GoldenView/conf.vim
-"
-"clang_complete.vim
-"source ~/.vim/bundle/clang_complete/conf.vim
-"
-"xmlEditor
-" source ~/.vim/bundle/xmledit/conf.vim
-"
-"altercmd 为命令定义别名, eg: adi --> Ant debug install
-"
-"
-"
-"" set scrollbind ; set scrollopt=ver

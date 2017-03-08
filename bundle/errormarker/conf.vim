@@ -169,7 +169,7 @@ function s:Python_Run()
     let mp = &makeprg
     let ef = &errorformat
     let exeFile = expand("%:t")
-    setlocal makeprg=python\ -u
+    setlocal makeprg=python3\ -u
     set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
     silent make %
     copen
