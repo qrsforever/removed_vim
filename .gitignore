@@ -21,3 +21,7 @@
 /bundle/errormarker.vim
 /bundle/vimshell.vim
 /bundle/grep.vim
+/bundle/neocomplete.vim
+/bundle/neosnippet-snippets
+/bundle/neosnippet
+/bundle/vim-snippets

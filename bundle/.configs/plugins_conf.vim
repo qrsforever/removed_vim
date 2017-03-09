@@ -27,7 +27,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-MyPlugin 'VundleVim/Vundle.vim'
+" MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
 MyPlugin 'CCTree'
 MyPlugin 'EasyMotion'
@@ -37,7 +37,11 @@ MyPlugin 'Valloric/YouCompleteMe'
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
+" MyPlugin 'Shougo/neocomplete.vim'
+" MyPlugin 'Shougo/neosnippet'
+" MyPlugin 'Shougo/neosnippet-snippets'
 MyPlugin 'SirVer/ultisnips'
+MyPlugin 'honza/vim-snippets'
 MyPlugin 'scrooloose/syntastic'
 MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'

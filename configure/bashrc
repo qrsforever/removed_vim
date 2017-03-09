@@ -172,7 +172,7 @@ xv () {
 }
 
 alias xtmux='tmux attach -t main'
-alias vi='xv'
+alias vi='vim'
 alias xvi='xv'
 alias xvim='xv'
 alias 0vi='vim --noplugin'
