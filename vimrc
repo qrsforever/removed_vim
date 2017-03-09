@@ -5,7 +5,7 @@ autocmd!
 :mapclear
 
 "==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
-source ~/.vim/bundle/Vundle.vim/conf.vim
+source ~/.vim/bundle/.configs/plugins_conf.vim
 
 "F1~F12快捷键映射"{{{
 map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
