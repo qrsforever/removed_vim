@@ -2,12 +2,10 @@
 /configure/bashrc
 /.netrwhist
 /.VimballRecord
-/bundle/.vundle
 /bundle/powerline/Powerline_default_solarized256_unicode.cache
-/bundle/YouCompleteMe 
 /bundle/L9
 /bundle/syntastic/
-/YouCompleteMe
+/bundle/Vundle.vim
 /bundle/unite.vim
 /bundle/vimproc.vim
 /bundle/ultisnips

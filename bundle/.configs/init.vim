@@ -1,5 +1,12 @@
 " For load plugins
 
+if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+    echomsg "-------------------------------------------------"
+    echomsg "   Need install Vundle plugin, See README.md"
+    echomsg "-------------------------------------------------"
+    finish
+endif
+
 func! s:_AddPlugin(plgname) 
     let ss = split(a:plgname, '\/')
     let ballpath = expand('$HOME/.vim/bundle')
@@ -27,7 +34,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-" MyPlugin 'VundleVim/Vundle.vim'
+MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
 MyPlugin 'CCTree'
 MyPlugin 'EasyMotion'
@@ -47,11 +54,19 @@ MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 
-MyPlugin 'local/vim-powerline'
-MyPlugin 'local/fuzzyfinder'
-MyPlugin 'local/vcscommand'
-MyPlugin 'local/ydtrans'
-MyPlugin 'local/maximizer'
-MyPlugin 'local/lookupfile'
+if isdirectory(expand('~/.vim/bundle/L9'))
+    MyPlugin 'local/vim-powerline'
+    MyPlugin 'local/fuzzyfinder'
+    MyPlugin 'local/vcscommand'
+    MyPlugin 'local/ydtrans'
+    MyPlugin 'local/maximizer'
+    MyPlugin 'local/lookupfile'
+else
+    echomsg "---------------------------------------------"
+    echomsg "   Plugins is not downloads!!!"
+    echomsg "   Open vim, then exec :PluginInstall"
+    echomsg "   Restart vim at last."
+    echomsg "---------------------------------------------"
+endif
  
 call vundle#end()

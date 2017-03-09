@@ -5,7 +5,7 @@ autocmd!
 :mapclear
 
 "==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
-source ~/.vim/bundle/.configs/plugins_conf.vim
+source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
 map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
@@ -60,6 +60,7 @@ nmap cd :lchdir %:p:h<CR>:pwd<CR>
 " imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
 nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
+imap \\ <C-x><C-o>
 "非F1~F12快捷键"}}}
 
 "自己定义的命令 "{{{
@@ -544,8 +545,8 @@ au BufReadPost *
 "" menu     使用弹出菜单来显示可能的补全
 "" longest  只插入匹配的最长公共文本
 ""set completeopt=menuone,menu,longest,preview
-set completeopt=menu
-"set completeopt=menu,longest
+" set completeopt=menu
+set completeopt=longest,menu
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"}}}
 
 "----------------------

@@ -36,7 +36,7 @@ nnoremap <silent> [unite]v :<C-u>Unite mapping<CR>
 
 " Prompt choices.
 "let g:unite_prompt = '❫ '
-"let g:unite_prompt = '» '
+let g:unite_prompt = '» '
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
