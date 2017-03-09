@@ -1,16 +1,9 @@
-# vim
- favorite vim for my first project
+Use:
 
-2016.05.12 : create 
+1. 要求vim版本：vim7.5 or high 
 
-2016-05-12T16:39:27
+2. 安装插件: Open vim, 执行:PluginInstall
 
-2016-05-12T16:47:00
+3. cd bundle/vimproc.vim; make -f make_unix.mk
 
-2016-05-12T16:49:19
-
-2016-05-12T16:57:54
-
-2016-05-12T17:01:11
-
-2016-05-12T17:56:35
+4. 保证系统clang版本5.9， 到YouCompleteMe执行./install.py -clang-completer (时间比较久)

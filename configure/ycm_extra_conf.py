@@ -2,10 +2,10 @@ import os
 import ycm_core
 
 flags = [
-# '-Wall',
-# '-Wextra',
-# '-Wno-long-long',
-# '-Wno-variadic-macros',
+'-Wall',
+'-Wextra',
+'-Wno-long-long',
+'-Wno-variadic-macros',
 '-fexceptions',
 '-stdlib=libc++',
 '-std=c++11',
@@ -18,7 +18,7 @@ flags = [
 '-isystem',
 '/usr/local/include',
 '-isystem',
-'/usr/include/c++/4.8',
+'/usr/include/c++/v1',
 ]
 
 
