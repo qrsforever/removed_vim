@@ -1,105 +1,142 @@
-"let g:unite_winheight = 20
-"let g:unite_winwidth = 90
-let g:unite_force_overwrite_statusline = 1
+" Start in insert mode
+let g:unite_enable_start_insert = 1
 
-"Set the default options for grep.
+" Enable short source name in window
+" let g:unite_enable_short_source_names = 1
+
+" Enable history yank source
+let g:unite_source_history_yank_enable = 1
+let g:unite_enable_split_vertically = 0
+
+" Open in bottom right
+let g:unite_split_rule = "botright"
+
+" Shorten the default update date of 500ms
+let g:unite_update_time = 500
+let g:unite_source_file_rec_max_cache_files = 0
+let g:unite_source_rec_max_cache_files = 0
+let g:unite_source_rec_min_cache_files = 120
+let g:unite_source_buffer_time_format = "(%Y-%m-%d %H:%M:%S) "
+let g:unite_source_file_mru_time_format = "(%Y-%m-%d %H:%M:%S) "
+let g:unite_source_directory_mru_time_format = "(%Y-%m-%d %H:%M:%S) "
+let g:unite_force_overwrite_statusline = 1
+let g:unite_ignore_source_files = []
+let g:unite_data_directory = "~/.cache/unite"
+let g:unite_source_bookmark_directory = ''
+let g:unite_enable_auto_select = 1
+let g:unite_source_file_async_command = "ls -la"
 let g:unite_source_grep_default_opts = '-iRHn'
 
-"Set the max number of unite-source-grep candidates.
-let g:unite_source_grep_max_candidates = 150
+call unite#custom#profile(
+    \ 'files',
+    \ 'filters',
+    \ 'sorter_rank')
+
+call unite#custom#source(
+    \ 'file_rec, file_rec/async, file_rec/git',
+    \ 'max_candidates', 
+    \ 1000)
+
+call unite#custom#source(
+    \ 'buffer, file_rec, file_rec/git',
+    \ 'matchers',
+    \ ['converter_relative_word', 'matcher_fuzzy', 'matcher_project_ignore_files'])
+
+call unite#custom#source(
+    \ 'file_rec/async',
+    \ 'matchers', 
+    \ ['converter_relative_word', 'matcher_default'])
+
+call unite#custom#source(
+      \ 'file_rec, file_rec/async, file_rec/git, file_mru',
+      \ 'converters',
+      \ ['converter_file_directory'])
+
+call unite#custom#source(
+      \ 'file_rec, file_rec/async',
+      \ 'required_pattern_length',
+      \ 2)
+
+call unite#custom#source(
+    \ 'file_rec', 
+    \ 'sorters', 
+    \ 'sorter_length')
 
 " The prefix key.
 nnoremap [unite]   <Nop>
 nmap s [unite]
 
-nnoremap <silent> [unite]r :<C-u>Unite file_rec<CR>
-nnoremap <silent> [unite]d :<C-u>Unite directory_mru<CR>
-nnoremap <silent> [unite]s :<C-u>Unite source<CR>
-nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
-nnoremap <silent> [unite]f :<C-u>Unite find<CR>
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]c :<C-u>Unite command<CR>
-nnoremap <silent> [unite]v :<C-u>Unite mapping<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -no-split -no-empty -start-insert -buffer-name=files buffer file_rec/async:! <CR>
+nnoremap <silent> [unite]o :<C-u>Unite -no-split -buffer-name=outline -vertical outline<CR>
+nnoremap <silent> [unite]p :<C-u>Unite -no-split -buffer-name=sessions session<CR>
+nnoremap <silent> [unite]a :<C-u>Unite -no-split -buffer-name=sources source<CR>
+nnoremap <silent> [unite]s :<C-u>Unite -no-split -buffer-name=snippets snippet<CR>
+nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru<CR>
+nnoremap <silent> [unite]g :<C-u>Unite -winwidth=150 grep:%::<CR>
+nnoremap <silent> [unite]G :<C-u>Unite -buffer-name=search -auto-preview -no-quit -no-empty grep:.::<CR>
+nnoremap <silent> [unite]h :<C-u>Unite -buffer-name=help help<CR>
+nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
+nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
+nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
+nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=history history/command command<CR>
+" nnoremap <silent> [unite]r :<C-u>Unite file_rec<CR>
+" nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+" nnoremap <silent> [unite]x :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru<CR>
+" nnoremap <silent> [unite]x :<C-u>Unite -no-split -buffer-name=register register<CR>
+" nnoremap <silent> [unite]x :<C-u>UniteWithBufferDir -no-split -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
+" nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=commands command<CR>
+" nnoremap <silent> [unite]x :<C-u>UniteWithCursorWord -buffer-name=search_file line<CR>
+" nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=search_file line<CR>
+" nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=files file_rec/async file/new<CR>
 
-" Start insert.
-" let g:unite_enable_start_insert = 1
-"let g:unite_enable_short_source_names = 1
-
-" To track long mru history.
-"let g:unite_source_file_mru_long_limit = 3000
-"let g:unite_source_directory_mru_long_limit = 3000
-
-" Like ctrlp.vim settings.
-"let g:unite_enable_start_insert = 1
-"let g:unite_winheight = 10
-"let g:unite_split_rule = 'botright'
-
-" Prompt choices.
-"let g:unite_prompt = '❫ '
 let g:unite_prompt = '» '
 
-autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
-    " Overwrite settings.
-    nmap <buffer> <ESC>      <Plug>(unite_exit)
-    imap <buffer> jj      <Plug>(unite_insert_leave)
-    "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
 
-    imap <buffer><expr> j unite#smart_map('j', '')
-    imap <buffer> <TAB>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-    imap <buffer> '     <Plug>(unite_quick_match_default_action)
-    nmap <buffer> '     <Plug>(unite_quick_match_default_action)
-    imap <buffer><expr> x
-                \ unite#smart_map('x', "\<Plug>(unite_quick_match_choose_action)")
-    nmap <buffer> x     <Plug>(unite_quick_match_choose_action)
-    nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-    imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
-    imap <buffer> <C-y>     <Plug>(unite_narrowing_path)
-    nmap <buffer> <C-y>     <Plug>(unite_narrowing_path)
-    nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
-    nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-    imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
-    nnoremap <silent><buffer><expr> l
-                \ unite#smart_map('l', unite#do_action('default'))
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+  nmap <buffer> <C-c> <Plug>(unite_exit)
+  imap <buffer> <C-c> <Plug>(unite_exit)
+  imap <buffer> <ESC> <Plug>(unite_exit)
+  "imap <buffer> <c-j> <Plug>(unite_select_next_line)
+  "imap <buffer><expr> j unite#smart_map('j', '')
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  imap <buffer> <c-j> <Plug>(unite_insert_leave)
+  nmap <buffer> <c-j> <Plug>(unite_loop_cursor_down)
+  nmap <buffer> <c-k> <Plug>(unite_loop_cursor_up)
+  imap <buffer> <c-a> <Plug>(unite_choose_action)
+  imap <buffer> <Tab> <Plug>(unite_insert_leave)
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_word)
+  imap <buffer> <C-u> <Plug>(unite_delete_backward_path)
+  imap <buffer> '     <Plug>(unite_quick_match_default_action)
+  nmap <buffer> '     <Plug>(unite_quick_match_default_action)
+  nmap <buffer> <C-r> <Plug>(unite_redraw)
+  imap <buffer> <C-r> <Plug>(unite_redraw)
+  inoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  "nnoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  "nnoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 
-    let unite = unite#get_current_unite()
-    if unite.buffer_name =~# '^search'
-        nnoremap <silent><buffer><expr> r     unite#do_action('replace')
-    else
-        nnoremap <silent><buffer><expr> r     unite#do_action('rename')
-    endif
+  let unite = unite#get_current_unite()
+  if unite.buffer_name =~# '^search'
+    nnoremap <silent><buffer><expr> r     unite#do_action('replace')
+  else
+    nnoremap <silent><buffer><expr> r     unite#do_action('rename')
+  endif
 
-    nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
-    nnoremap <buffer><expr> S      unite#mappings#set_current_filters(
-                \ empty(unite#mappings#get_current_filters()) ? ['sorter_reverse'] : [])
+  nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
+
+  " Using Ctrl-\ to trigger outline, so close it using the same keystroke
+  if unite.buffer_name =~# '^outline'
+    imap <buffer> <C-\> <Plug>(unite_exit)
+  endif
+
+  " Using Ctrl-/ to trigger line, close it using same keystroke
+  if unite.buffer_name =~# '^search_file'
+    imap <buffer> <C-_> <Plug>(unite_exit)
+  endif
 endfunction
-
-"let g:unite_source_file_mru_limit = 200
-"let g:unite_cursor_line_highlight = 'TabLineSel'
-"let g:unite_abbr_highlight = 'TabLine'
-
-" For optimize.
-let g:unite_source_file_mru_filename_format = ''
-
-if executable('jvgrep')
-    " For jvgrep.
-    let g:unite_source_grep_command = 'jvgrep'
-    let g:unite_source_grep_default_opts = '--exclude ''\.(git|svn|hg|bzr)'''
-    let g:unite_source_grep_recursive_opt = '-R'
-endif
-
-" For ack.
-if executable('ack-grep')
-    " let g:unite_source_grep_command = 'ack-grep'
-    " let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
-    " let g:unite_source_grep_recursive_opt = ''
-endif
-
-inoremap <silent><expr> <C-z>
-            \ unite#start_complete('register', { 'input': unite#get_cur_text() })
-
-
+autocmd FileType unite call s:unite_my_settings()
 
 " Normal mode mappings.
 " {lhs}		{rhs}

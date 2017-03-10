@@ -7,6 +7,8 @@ if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
     finish
 endif
 
+let allconfs = []
+
 func! s:_AddPlugin(plgname) 
     let ss = split(a:plgname, '\/')
     let ballpath = expand('$HOME/.vim/bundle')
@@ -22,7 +24,7 @@ func! s:_AddPlugin(plgname)
     endif
     let inifile = ballpath . '/.configs/' . conf . '_conf.vim'
     if filereadable(inifile)
-         exec 'source ' . inifile
+         call add(g:allconfs, inifile)
     endif
 endfunction
 com! -nargs=*  -bar MyPlugin :call s:_AddPlugin(<args>)
@@ -42,6 +44,7 @@ MyPlugin 'errormarker.vim'
 MyPlugin 'grep.vim'
 MyPlugin 'Valloric/YouCompleteMe'
 MyPlugin 'Shougo/unite.vim'
+MyPlugin 'Shougo/neomru.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
 " MyPlugin 'Shougo/neocomplete.vim'
@@ -56,7 +59,7 @@ MyPlugin 'majutsushi/tagbar'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     MyPlugin 'local/vim-powerline'
-    MyPlugin 'local/fuzzyfinder'
+    " MyPlugin 'local/fuzzyfinder'
     MyPlugin 'local/vcscommand'
     MyPlugin 'local/ydtrans'
     MyPlugin 'local/maximizer'
@@ -70,3 +73,9 @@ else
 endif
  
 call vundle#end()
+
+for ifile in allconfs
+    exec 'source ' . ifile
+endfor
+
+unlet allconfs
