@@ -1,9 +1,9 @@
 
 "[normal, horizontal, vertical, context]
 let g:UltiSnipsEditSplit = "horizontal"
-let g:UltiSnipsSnippetsDir = "~/.vim/snippets"
-let g:UltiSnipsSnippetDirectories=["bundle/vim-snippets/UltiSnips"]
-let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+" let g:UltiSnipsSnippetDirectories =['~/.vim/bundle/vim-snippets/UltiSnips', '~/.vim/UltiSnips']
+let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-e>"

@@ -1,0 +1,39 @@
+snippet xtag "log prefix" b
+public static final String TAG = "`!p snip.rv = snip.basename`"
+endsnippet
+
+snippet xthread "new thread" b
+new Thread(new Runnable() {
+	@Override
+	public void run() {
+		$0
+	}
+}).start();
+endsnippet
+
+snippet xhandler "def handler" b
+class ${1:Name} extends Handler {
+	public $1(Looper looper) {
+		super(looper);
+		$0
+	}
+
+	@Override
+	public void handleMessage(Message msg) {
+		switch (msg.what) {
+
+		}
+		super.handleMessage(msg);
+	}
+}
+endsnippet
+
+snippet xlooper "def looper" b
+Looper ${1:VarName};
+if (($1 = Looper.myLooper()) ! = null ||
+	($1 = Lopper.getMainLooper()) ! = null) {
+	${2:IF-Statement}
+} else {
+	${3:Else-Statement}
+}
+endsnippet
