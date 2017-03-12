@@ -5,6 +5,7 @@
 doc/tags
 configure/eclimrc
 configure/bashrc
+bundle/.vundle
 bundle/powerline/Powerline_default_solarized256_unicode.cache
 bundle/L9
 bundle/syntastic/
@@ -22,6 +23,9 @@ bundle/EasyMotion
 bundle/errormarker.vim
 bundle/vimshell.vim
 bundle/grep.vim
+bundle/neomru.vim
+bundle/neoyank.vim
+bundle/unite-outline
 bundle/neocomplete.vim
 bundle/neosnippet-snippets
 bundle/neosnippet

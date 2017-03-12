@@ -18,7 +18,7 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_max_diagnostics_to_display = 10
-let g:ycm_cache_omnifunc= 0
+let g:ycm_cache_omnifunc= 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 20000
 let g:ycm_seed_identifiers_with_syntax = 1	
@@ -27,6 +27,8 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_filetype_blacklist = {
             \ 'tagbar' : 1,
             \ 'nerdtree' : 1,
+            \ 'bookmark' : 1,
+            \ 'files' : 1,
             \ 'qf' : 1,
             \ 'notes' : 1,
             \ 'markdown' : 1,
