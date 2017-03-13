@@ -101,7 +101,7 @@ nmap s [unite]
 
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
-nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -profile-name=default file_mru<CR>
+nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split -profile-name=default file_mru<CR>
 nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
 nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
