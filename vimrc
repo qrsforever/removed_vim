@@ -9,7 +9,7 @@ source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
 map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
-map <unique> <silent> <F2> <ESC>:BufExplorer<CR>
+map <unique> <silent> <F2> <ESC>:MyBufExplorer<CR>
 map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
 map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
 map <unique> <silent> <F5> <ESC>:LookupFile<CR>
@@ -555,4 +555,3 @@ set completeopt=longest,menu
 
 "a.vim实现源文件与头文件切换
 let alternateNoDefaultAlternate = 1
-
