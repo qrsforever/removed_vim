@@ -14,24 +14,41 @@ let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
 let g:unite_source_grep_default_opts = '-iRHn'
 
-" let s:filters = {
-"     \   "name" : "my_converter",
-"     \ }
-" 
-" function! s:filters.filter(candidates, context)
-"     for candidate in a:candidates
-"         let bufname = bufname(candidate.action__buffer_nr)
-"         let filename = fnamemodify(bufname, ':p:t')
-"         let path = fnamemodify(bufname, ':p:h')
-"         " Customize output format.
-"         let candidate.abbr = printf("[%s] %s", filename, path)
-"     endfor
-"     return a:candidates
-" endfunction
-" 
-" call unite#define_filter(s:filters)
-" unlet s:filters
-" call unite#custom#source('buffer', 'converters', 'my_converter')
+let g:unite_source_menu_menus = {
+    \   "default" : {
+    \       "description" : "shortcut for unite-menu",
+    \       "command_candidates" : [
+    \           ["1. Open xlog", "NERDTree /tmp/xlog"],
+    \           ["2. Edit vimrc", "edit ~/.vim/vimrc"],
+    \       ],
+    \   },
+    \}
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+let s:myfilters = {
+    \   "name" : "love_format",
+    \   "description" : "Add my love format"
+    \ }
+
+function! s:myfilters.filter(candidates, context)
+    for candidate in filter(copy(a:candidates), "!has_key(v:val, 'abbr')")
+        let path = candidate.action__path
+        let filename = fnamemodify(path, ":p:t") 
+        let candidate.abbr = strftime(g:unite_source_buffer_time_format, getftime(candidate.action__path))
+        let candidate.abbr .= fnamemodify(path, ":p:t") 
+        let candidate.abbr .= "\t" . path
+    endfor
+    return a:candidates
+endfunction
+
+call unite#define_filter(s:myfilters)
+unlet s:myfilters
+call unite#custom#source(
+    \ 'file_mru, directory_mru',
+    \ 'converters', 
+    \ ['love_format'])
 
 call unite#custom#profile(
     \ 'default', 
@@ -54,6 +71,16 @@ call unite#custom#profile(
     \ 'filters',
     \ 'sorter_rank')
 
+call unite#custom#profile(
+    \ 'menusource',
+    \ 'context',
+    \ {
+        \ 'winwidth': 36,
+        \ 'direction': 'aboveleft',
+        \ 'vertical': 1,
+        \ 'horizontal': 0,
+    \ })
+
 call unite#custom#source(
     \ 'file_rec, file_rec/async, file_rec/git',
     \ 'max_candidates', 
@@ -70,7 +97,7 @@ call unite#custom#source(
     \ ['converter_relative_word', 'matcher_default'])
 
 call unite#custom#source(
-    \ 'file_rec, file_rec/async, file_rec/git, file_mru',
+    \ 'file_rec, file_rec/async, file_rec/git',
     \ 'converters',
     \ ['converter_file_directory'])
 
@@ -83,7 +110,6 @@ call unite#custom#source(
     \ 'file_rec', 
     \ 'sorters', 
     \ 'sorter_length')
-
 
 call unite#custom#source(
     \ 'file_rec, file_rec/async',
@@ -100,14 +126,17 @@ nnoremap [unite]   <Nop>
 nmap s [unite]
 
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
-nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split -profile-name=default file_mru<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
+nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
+nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split file_mru<CR>
 nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
 nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/async<CR>
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
+nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
+nnoremap <silent> [unite]m :<C-u>Unite -profile-name=menusource menu:default<CR>
 
 let g:unite_prompt = '» '
 
@@ -116,11 +145,13 @@ function! s:unite_my_settings()
   imap <buffer> <ESC> <Plug>(unite_exit)
   nmap <buffer> <C-c> <Plug>(unite_exit)
   imap <buffer> <C-c> <Plug>(unite_exit)
-  imap <buffer> jj <Plug>(unite_insert_leave)
+  imap <buffer> jj  <Plug>(unite_insert_leave)
+  imap <buffer> <TAB> <Plug>(unite_insert_leave)
+  nmap <buffer> <TAB>   <Plug>(unite_loop_cursor_down)
+  nmap <buffer> <S-TAB> <Plug>(unite_loop_cursor_up)
   imap <buffer> <c-a> <Plug>(unite_choose_action)
   imap <buffer> <C-w> <Plug>(unite_delete_backward_word)
   imap <buffer> <C-u> <Plug>(unite_delete_backward_path)
-  imap <buffer> <TAB> <Plug>(unite_select_next_line)
   imap <buffer> '     <Plug>(unite_quick_match_default_action)
   nmap <buffer> '     <Plug>(unite_quick_match_default_action)
   nmap <buffer> <C-r> <Plug>(unite_redraw)

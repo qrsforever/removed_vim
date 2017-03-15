@@ -3,6 +3,7 @@ nmap \ [ycm]
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
