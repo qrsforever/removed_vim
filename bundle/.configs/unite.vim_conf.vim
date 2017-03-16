@@ -19,7 +19,8 @@ let g:unite_source_menu_menus = {
     \       "description" : "shortcut for unite-menu",
     \       "command_candidates" : [
     \           ["1. Open xlog", "NERDTree /tmp/xlog"],
-    \           ["2. Edit vimrc", "edit ~/.vim/vimrc"],
+    \           ["2. Open jira", "NERDTree ~/Downloads/jira"],
+    \           ["3. Edit vimrc", "edit ~/.vim/vimrc"],
     \       ],
     \   },
     \}

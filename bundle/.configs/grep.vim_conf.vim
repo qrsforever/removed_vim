@@ -12,70 +12,44 @@ let Grep_Default_Filelist = '*'
 command! -nargs=* -complete=file MyGrep call s:DoSelectGrep(<f-args>)
 
 let s:MRUGrepWordsFile = expand('$HOME/.MRUGrepWordsFile')
-let s:MaxCount = 6
+let s:MaxCount = 30
+
+func ListCandidateWord(A, L, P)
+    return system("cat " . s:MRUGrepWordsFile)
+endfunc
 
 func! s:InputWords()
     if ! filereadable(s:MRUGrepWordsFile)
         call writefile([], s:MRUGrepWordsFile)
     endif
     let grepwords = readfile(s:MRUGrepWordsFile)
-    let cnt = 0
-    let recwords = []
-    for w in grepwords
-        if count < s:MaxCount  
-            call add(recwords, w)
-        endif
-        let cnt += 1
-    endfor
-    let i = 1
-    echomsg " "
-    for line in recwords
-        echomsg " " . i . ". " . line
-        let i += 1
-    endfor
 
     echohl Search
-    let tmpstr = input("Search for pattern: ", expand("<cword>") . "|")
+    let tmpstr = input("Search for pattern: ", expand("<cword>"), 'custom,ListCandidateWord')
     echohl None
     if len(tmpstr) < 2
+        unlet grepwords
         return ""
     endif
-    let select = -1
-    let ex = split(tmpstr, '|')
-    if 1 == len(ex)
-        let tmpstr = ex[0]
-    else
-        if 1 == len(ex[1])
-            let select = str2nr(ex[1], 10)         
-        endif
-    endif
     let outputs = []
-    if select > 0 && select <= cnt
-        let tmpstr = recwords[select - 1]
-    else 
-        let addflg = 1
-        for line in recwords
-            if line == tmpstr
-                let addflg = 0
-            endif
-        endfor 
-        if addflg == 1
-            call add(outputs, tmpstr)
-            let cnt = 1
-            for line in recwords
-                if cnt < s:MaxCount
-                    call add(outputs, line)
-                endif
-                let cnt += 1
-            endfor
-            call writefile(outputs, s:MRUGrepWordsFile)
+    let addflg = 1
+    for line in grepwords
+        if line == tmpstr
+            let addflg = 0
         endif
+    endfor 
+    if addflg == 1
+        call add(outputs, tmpstr)
+        let cnt = 1
+        for line in grepwords
+            if cnt < s:MaxCount
+                call add(outputs, line)
+            endif
+            let cnt += 1
+        endfor
+        call writefile(outputs, s:MRUGrepWordsFile)
+        unlet outputs
     endif
-    let tokpos = stridx(tmpstr, '|')
-    if tokpos < 0
-        return tmpstr
-    endif
-    
     let twd = split(tmpstr, '|')
     let len = len(twd)
     let words=''
