@@ -28,12 +28,11 @@ let g:unite_source_menu_menus = {
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-let s:myfilters = {
-    \   "name" : "love_format",
-    \   "description" : "Add my love format"
+let s:my_mrufilter = {
+    \   "name" : "my_mru_filter",
+    \   "description" : "Add my mru filter"
     \ }
-
-function! s:myfilters.filter(candidates, context)
+function! s:my_mrufilter.filter(candidates, context)
     for candidate in filter(copy(a:candidates), "!has_key(v:val, 'abbr')")
         let path = candidate.action__path
         let filename = fnamemodify(path, ":p:t") 
@@ -43,13 +42,13 @@ function! s:myfilters.filter(candidates, context)
     endfor
     return a:candidates
 endfunction
+call unite#define_filter(s:my_mrufilter)
+unlet s:my_mrufilter
 
-call unite#define_filter(s:myfilters)
-unlet s:myfilters
 call unite#custom#source(
     \ 'file_mru, directory_mru',
     \ 'converters', 
-    \ ['love_format'])
+    \ ['my_mru_filter'])
 
 call unite#custom#profile(
     \ 'default', 
@@ -64,7 +63,8 @@ call unite#custom#profile(
         \ 'prompt_direction': 'top',
         \ 'update-time': 250,
         \ 'auto-resize': 1,
-        \ 'max-multi-lines': 6,
+        \ 'max-multi-lines': 5,
+        \ 'multi-line': 0,
     \ })
 
 call unite#custom#profile(
@@ -86,6 +86,11 @@ call unite#custom#source(
     \ 'file_rec, file_rec/async, file_rec/git',
     \ 'max_candidates', 
     \ 1000)
+
+call unite#custom#source(
+    \ 'file_mru, directory_mru',
+    \ 'max_candidates', 
+    \ 500)
 
 call unite#custom#source(
     \ 'buffer, file_rec, file_rec/git',
@@ -136,7 +141,7 @@ nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/async<CR>
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
-nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
+nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty -no-quit grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -profile-name=menusource menu:default<CR>
 
 let g:unite_prompt = '» '

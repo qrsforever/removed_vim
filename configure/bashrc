@@ -202,7 +202,7 @@ if [[ ! -d /tmp/xlog/$DATEFILE ]]
 then
     mkdir -p /tmp/xlog/$DATEFILE
 fi
-
+export log=/tmp/xlog/$DATEFILE
 xlog () {
     file=`date +%H%M%S`
     adb wait-for-device 

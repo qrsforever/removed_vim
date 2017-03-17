@@ -11,6 +11,10 @@ bundle/L9
 bundle/syntastic/
 bundle/Vundle.vim
 bundle/unite.vim
+bundle/unite-help
+bundle/unite-quickfix
+bundle/unite-tag
+bundle/unite-outline
 bundle/vimproc.vim
 bundle/ultisnips
 bundle/syntastic
@@ -25,9 +29,9 @@ bundle/vimshell.vim
 bundle/grep.vim
 bundle/neomru.vim
 bundle/neoyank.vim
-bundle/unite-outline
 bundle/neocomplete.vim
 bundle/neosnippet-snippets
 bundle/neosnippet
 bundle/vim-snippets
 bundle/bufexplorer
+bundle/neoinclude.vim

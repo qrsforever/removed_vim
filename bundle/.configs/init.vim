@@ -48,11 +48,15 @@ MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
 MyPlugin 'Shougo/neoyank.vim'
 MyPlugin 'Shougo/neomru.vim'
+" MyPlugin 'Shougo/unite-help'
 " MyPlugin 'Shougo/unite-outline'
 " MyPlugin 'Shougo/tabpagebuffer'
 " MyPlugin 'Shougo/neocomplete.vim'
+" MyPlugin 'Shougo/neoinclude.vim'
 " MyPlugin 'Shougo/neosnippet'
 " MyPlugin 'Shougo/neosnippet-snippets'
+" MyPlugin 'tsukkee/unite-tag'
+MyPlugin 'osyo-manga/unite-quickfix'
 MyPlugin 'SirVer/ultisnips'
 MyPlugin 'honza/vim-snippets'
 MyPlugin 'scrooloose/syntastic'
@@ -68,6 +72,12 @@ if isdirectory(expand('~/.vim/bundle/L9'))
     MyPlugin 'local/ydtrans'
     MyPlugin 'local/maximizer'
     MyPlugin 'local/lookupfile'
+    call vundle#end()
+
+    for ifile in allconfs
+        exec 'source ' . ifile
+    endfor
+    unlet allconfs
 else
     echomsg "---------------------------------------------"
     echomsg "   Plugins is not downloads!!!"
@@ -76,10 +86,3 @@ else
     echomsg "---------------------------------------------"
 endif
  
-call vundle#end()
-
-for ifile in allconfs
-    exec 'source ' . ifile
-endfor
-
-unlet allconfs
