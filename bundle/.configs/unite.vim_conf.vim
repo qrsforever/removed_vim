@@ -18,9 +18,8 @@ let g:unite_source_menu_menus = {
     \   "default" : {
     \       "description" : "shortcut for unite-menu",
     \       "command_candidates" : [
-    \           ["1. Open xlog", "NERDTree /tmp/xlog"],
-    \           ["2. Open jira", "NERDTree ~/Downloads/jira"],
-    \           ["3. Edit vimrc", "edit ~/.vim/vimrc"],
+    \           ["1. Open xlog dir", "NERDTree /tmp/xlog"],
+    \           ["2. Open jira dir", "NERDTree ~/Downloads/jira"],
     \       ],
     \   },
     \}
@@ -142,7 +141,7 @@ nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -s
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty -no-quit grep:%<CR>
-nnoremap <silent> [unite]m :<C-u>Unite -profile-name=menusource menu:default<CR>
+nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=menusource menu:default<CR>
 
 let g:unite_prompt = '» '
 

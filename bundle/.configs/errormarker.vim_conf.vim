@@ -1,8 +1,8 @@
 nmap <silent> <unique> `<space> :ErrorAtCursor<CR>
 " hi ErrorMsg cterm=bold ctermbg=DarkRed gui=bold guibg=DarkRed
 " hi WarningMsg cterm=bold ctermbg=LightRed gui=bold guibg=LightRed
-let errormarker_errortext = "Er"
-let errormarker_warningtext = "Wa"
+let errormarker_errortext = "EE"
+let errormarker_warningtext = "WW"
 let errormarker_warningtypes = "wW"
 let errormarker_errorgroup = "ErrorMsg"
 let errormarker_warninggroup = "Todo"
@@ -12,10 +12,9 @@ let errormarker_warninggroup = "Todo"
 let errormarker_erroricon = "/usr/share/icons/gnome/16x16/status/dialog-error.png"   "gvim
 let errormarker_warningicon = "/usr/share/icons/gnome/16x16/status/dialog-warning.png" "gvim
 
-
-"个人添加， 是否有问题尚未知
 function QfSearchError(pattern)
-    execute "botright copen 10"
+    let h = winheight(0) / 2
+    execute "topleft copen" . h
     execute "redraw"
     let results = []
     execute "silent! g/" . a:pattern . "/call add(results, getline('.'))"
@@ -30,9 +29,11 @@ endfunction
 
 "CTRL-W <Enter>  垂直打开
 
-" au QuickFixCmdPre make execute "silent! lchdir %:p:h"
-
-au QuickfixCmdPost make call QfSearchError("error:")
+augroup QFix
+    au BufReadPost quickfix silent! nmap <buffer> q :cclose<CR>
+    " au QuickFixCmdPre make execute "silent! lchdir %:p:h"
+    " au QuickfixCmdPost make call QfSearchError("error:")
+augroup END
 
 au FileType c,cpp setlocal makeprg=make\ -j4
 
@@ -171,8 +172,13 @@ function s:Python_Run()
     let exeFile = expand("%:t")
     setlocal makeprg=python3\ -u
     set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+    execute 'cclose'
     silent make %
-    copen
+    let h = winheight(0) / 2
+    execute "topleft copen" . h
+    execute "normal G"
+    execute "normal zb"
     let &makeprg     = mp
     let &errorformat = ef
 endfunction

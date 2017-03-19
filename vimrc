@@ -300,7 +300,7 @@ set matchtime=1
 set updatetime=2000  "x秒后刷新
 ":preserve "若设置的时间过长,该命令会手工的存入交换文件中.
 
-" When using make, where should it dump the file, please see ./bundle/errormarker/conf.vim
+" When using make, where should it dump the file, please see ./bundle/.config/errormarker.vim_conf.vim
 " set makeprg=make\ -j4
 " set makeprg=ant
 set makeef=errors
@@ -555,3 +555,5 @@ set completeopt=longest,menu
 
 "a.vim实现源文件与头文件切换
 let alternateNoDefaultAlternate = 1
+
+"按q之后按:进入histroy command
