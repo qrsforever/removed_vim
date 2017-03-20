@@ -175,8 +175,7 @@ function s:Python_Run()
 
     execute 'cclose'
     silent make %
-    let h = winheight(0) / 2
-    execute "topleft copen" . h
+    execute "MyCopen"
     execute "normal G"
     execute "normal zb"
     let &makeprg     = mp
