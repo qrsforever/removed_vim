@@ -35,3 +35,4 @@ bundle/neosnippet
 bundle/vim-snippets
 bundle/bufexplorer
 bundle/neoinclude.vim
+bundle/vim-powerline

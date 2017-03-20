@@ -158,8 +158,7 @@ set writebackup
 "set nowritebackup
 
 "vi兼容开关 当使用omni自动补全时,要设置
-"set nocompatible
-set nocp
+set nocompatible
 
 "不使用swap文件
 set noswapfile
