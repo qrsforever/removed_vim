@@ -1,5 +1,5 @@
 "========Scroll
-command! -nargs=* MyScroll call s:MyScrollBinder()
+command! MyScroll call s:MyScrollBinder()
 
 function s:MyScrollBinder() 
     echomsg " Ver(1) Hor(2) Cancel(0) "
@@ -13,4 +13,11 @@ function s:MyScrollBinder()
     else
         set noscrollbind
     endif
+endfunction
+
+command! MyCopen call s:_MyCopen()
+function s:_MyCopen()
+    " execute "cclose"
+    let h = winheight(0) / 2
+    execute "topleft copen" . h
 endfunction
