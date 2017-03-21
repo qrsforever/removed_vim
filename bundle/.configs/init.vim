@@ -68,6 +68,7 @@ MyPlugin 'jlanzarotta/bufexplorer'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     " MyPlugin 'local/fuzzyfinder'
+    MyPlugin 'local/eclim'
     MyPlugin 'local/vcscommand'
     MyPlugin 'local/ydtrans'
     MyPlugin 'local/maximizer'
