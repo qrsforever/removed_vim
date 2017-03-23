@@ -1,4 +1,5 @@
-"You need: java -jar eclim_2.4.0.jar or higher
+"  git clone git://github.com/ervandew/eclim.git
+"  ant -Declipse.home=/your/eclipse/home/dir
 
 map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
 map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>

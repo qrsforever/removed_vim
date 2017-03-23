@@ -44,9 +44,7 @@ function! eclim#display#fold#GetTreeFold(lnum) " {{{
 endfunction " }}}
 
 function! eclim#display#fold#IndentLevel(lnum) " {{{
-  " return indent(a:lnum) / &shiftwidth
-  " lidong mod
-  return indent(a:lnum) / 2
+  return indent(a:lnum) / &shiftwidth
 endfunction " }}}
 
 function! eclim#display#fold#NextNonBlankLine(lnum) " {{{

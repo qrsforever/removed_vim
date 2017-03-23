@@ -39,6 +39,6 @@ let g:ycm_filetype_blacklist = {
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
 let g:ycm_goto_buffer_command = 'same-buffer'
 let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_key_invoke_completion = '<C-Space>'
+" let g:ycm_key_invoke_completion = '<C-Space>' "Using Ctrl+2
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
