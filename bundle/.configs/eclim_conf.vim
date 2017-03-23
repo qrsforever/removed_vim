@@ -205,7 +205,8 @@ func! DoProjectSearch(flag, xp, split) "{{{
     endif
     let op = a:flag
     if a:flag == 0
-        echo "classOrInterface[1] method[2] field[3] enum[4] type[5]  "
+        echomsg "J(all) - M(declaration) - S(plit)"
+        echomsg "classOrInterface[1] method[2] field[3] enum[4] type[5]  "
         let op = str2nr(input("Select:", ' '), 10)
     endif
     if a:xp == 0
