@@ -127,7 +127,7 @@ stty stop ''
 export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
-export ECLIPSE_HOME=/opt/eclipse/Mars
+export ECLIPSE_HOME=/opt/eclipse/Neon2
 export ANSDK_PATH=/opt/android/sdk
 export ANNDK_PATH=/opt/android/ndk/ndk-r10d
 export ANDROID_HOME=$ANSDK_PATH
@@ -147,34 +147,8 @@ xgr () {
     fi
 }
 
-xv () {
-    if [[ "$1"x == x ]] 
-    then
-        return -1
-    fi
-    argc=$#
-    argv=""
-    line=""
-    for item in $@
-    do
-        filepath=`echo "$item" | cut -d: -f1`
-        if [[ "$line"x == x ]]
-        then
-            [[ $item =~ ":" ]] && line=`echo "$item" | cut -d: -f2`
-        fi
-        argv+=" $filepath"
-    done
-    if [[ "$line"x != x ]]
-    then
-        argv+=" +$line"
-    fi
-    vim -p $argv
-}
-
 alias xtmux='tmux attach -t main'
 alias vi='vim'
-alias xvi='xv'
-alias xvim='xv'
 alias 0vi='vim --noplugin'
 
 xgv () {
