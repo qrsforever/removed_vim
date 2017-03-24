@@ -548,6 +548,9 @@ au BufReadPost *
 set completeopt=longest,menu
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"}}}
 
+" 设置Logcat文件类型
+au BufRead,BufNewFile *logcat* set filetype=logcat 
+
 "----------------------
 "利用 插件 丰富 功能
 "----------------------
