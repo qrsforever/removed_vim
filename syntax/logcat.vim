@@ -3,15 +3,15 @@ if exists("b:current_syntax")
 endif
 
 "Define colors
-hi def LogX_color ctermfg=yellow guifg=yellow term=bold gui=bold
+hi def LogX_color ctermfg=yellow guifg=yellow
 hi def LogF_color ctermfg=white guifg=white ctermbg=red guibg=red
-hi def LogE_color ctermfg=yellow guifg=yellow ctermbg=red guibg=red
-hi def LogW_color ctermfg=blue guifg=blue
+hi def LogE_color ctermfg=blue guifg=blue cterm=bold gui=bold
+hi def LogW_color ctermfg=red guifg=red cterm=bold gui=bold
 hi def LogI_color ctermfg=brown guifg=brown
 hi def LogD_color ctermfg=darkgreen guifg=darkgreen
 hi def LogV_color ctermfg=gray guifg=gray
 
-syn match LogX '\ lidong\ '
+syn match LogX '.*lidong.*'
 
 syn match LogF 'F/' 
 syn match LogE 'E/' 

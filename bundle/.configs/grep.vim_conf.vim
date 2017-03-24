@@ -76,7 +76,7 @@ func! s:DoSelectGrep()
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
     echohl None
     
-    exec "Mark " 
+    " exec "Mark " 
     let word = s:InputWords()
     if select == 1
         exec "Rgrep " . word 
@@ -93,6 +93,6 @@ func! s:DoSelectGrep()
     else
         return
     endif
-    exec "Mark " . word 
+    " exec "Mark " . word 
     exec "redraw"
 endfunc
