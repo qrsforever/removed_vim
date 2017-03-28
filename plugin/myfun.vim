@@ -17,8 +17,8 @@ endfunction
 
 command! MyCopen call s:_MyCopen()
 function s:_MyCopen()
-    " let h = winheight(0) / 2
-    " execute "topleft copen" . h
-    let w = winwidth(0) / 2 - 5
-    execute "vertical copen" . w
+    let h = winheight(0) / 3 - 5
+    execute "topleft copen" . h
+    " let w = winwidth(0) / 2 - 5
+    " execute "vertical copen" . w
 endfunction

@@ -96,7 +96,7 @@ alias minicom='cd /home/lidong8/Templates; sudo minicom'
 alias eclimd='cd /home/lidong8/Templates; eclimd'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=tags'
-alias xsync='repo sync -cd --no-tags'
+alias xsync='repo sync -cd --no-tags .'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

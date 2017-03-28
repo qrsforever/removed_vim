@@ -171,13 +171,24 @@ function s:Python_Run()
     let ef = &errorformat
     let exeFile = expand("%:t")
     setlocal makeprg=python3\ -u
-    set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-
-    execute 'cclose'
+    setlocal errorformat=
+                \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+                \%C\ \ \ \ %.%#,
+                \%+Z%.%#Error\:\ %.%#,
+                \%A\ \ File\ \"%f\"\\\,\ line\ %l,
+                \%+C\ \ %.%#,
+                \%-C%p^,
+                \%Z%m,
+                \%-G%.%#
     silent make %
-    execute "MyCopen"
-    execute "normal G"
-    execute "normal zb"
+    let list = getqflist()
+    if len(list) > 0
+        execute "MyCopen"
+        execute "normal G"
+        execute "normal zb"
+    else
+        echomsg "no error!"
+    endif
     let &makeprg     = mp
     let &errorformat = ef
 endfunction
