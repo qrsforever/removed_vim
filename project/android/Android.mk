@@ -34,9 +34,6 @@ LOCAL_PROGUARD_ENABLED := full
 # 指定混淆配置
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
-# 指定overlay的相对路径 :overlay/${PRODUCT_NAME}的路径要和src_dirs一致
-# LOCAL_PACKAGE_OVERLAYS := overlay/${PRODUCT_NAME}
-
 LOCAL_DEX_PREOPT := false
 
 # 不是标准的java库
