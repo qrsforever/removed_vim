@@ -35,6 +35,7 @@ let g:ycm_filetype_blacklist = {
             \ 'markdown' : 1,
             \ 'unite' : 1,
             \ 'text' : 1,
+            \ 'logcat' : 1,
             \}
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
 let g:ycm_goto_buffer_command = 'same-buffer'

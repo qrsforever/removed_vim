@@ -37,3 +37,60 @@ if (($1 = Looper.myLooper()) ! = null ||
 	${3:Else-Statement}
 }
 endsnippet
+
+snippet xju_suite "RunWith(Suite.class)" b                            
+package ${0:pacakge}
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses(
+{
+})
+public class `!p snip.rv = snip.basename` {
+	$0
+}             
+endsnippet    
+
+snippet xju_param "RunWith(Parameterized.class)" b
+package ${0:pacakge}
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+
+@RunWith(Parameterized.class)
+public class `!p snip.rv = snip.basename` {
+	@SuppressWarnings("rawtypes")
+	@Parameters
+	public static Collection data() {
+		return Arrays.asList(new Object[][] {
+			});
+	}
+
+	public `!p snip.rv = snip.basename`(${1:param}) {
+
+	}
+}             
+
+endsnippet
+
+snippet xju_test "Simple JUnit Test" b
+package ${0:pacakge}
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class `!p snip.rv = snip.basename` {
+
+}
+
+endsnippet
