@@ -36,7 +36,7 @@ let NERDTreeHighlightCursorline=1                    "是否高亮显示光标�
 let NERDTreeMouseMode=1                              "指定鼠标模式
 let NERDTreeShowBookmarks=1                          "默认显示书签列表
 let NERDTreeShowFiles=1                              "默认显示文件
-let NERDTreeShowHidden=1                             "默认not显示隐藏文件
+let NERDTreeShowHidden=0                             "默认not显示隐藏文件
 let NERDTreeShowLineNumbers=0                        "默认是否显示行号
 let NERDTreeWinPos='left'                            "窗口位置left
 let NERDTreeWinSize=36                               "窗口宽
@@ -60,7 +60,7 @@ let NERDTreeIgnore += ['.*\.bz2$', '.*\.gz$', '.*\.tar$', '.*\.zip$', '.*\.tgz$'
 let NERDTreeIgnore += ['.*\.deb$', '.*\.ipk$', '.*\.rpm$', '.*\.tbz$']" flash "
 let NERDTreeIgnore += ['.*\.[sS][wW][fF]$']
 " libtool archives and objs "
-let NERDTreeIgnore += ['.*\.lo', '.*\.la']
+let NERDTreeIgnore += ['.*\.lo$', '.*\.la']
 " java's binary files "
 let NERDTreeIgnore += ['.*\.class']
 " tags "
