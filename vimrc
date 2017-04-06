@@ -8,14 +8,25 @@ autocmd!
 source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
-map <unique> <silent> <F1> <ESC>:MarksBrowser<CR>
-map <unique> <silent> <F2> <ESC>:MyBufExplorer<CR>
-map <unique> <silent> <F3> <ESC>:NERDTreeToggle %:p:h<CR>
-map <unique> <silent> <F4> <ESC>:TagbarToggle<CR>
-map <unique> <silent> <F5> <ESC>:LookupFile<CR>
-map <unique> <silent> <F6> <ESC>:MyMake<CR>
-map <unique> <silent> <F7> <ESC>:MyGrep<CR>
-map <unique> <silent> <F8> <ESC>:MyTags<CR>
+nmap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
+nmap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
+nmap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
+nmap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
+nmap <unique> <silent> <F5>  <ESC>:LookupFile<CR>
+nmap <unique> <silent> <F6>  <ESC>:MyMake<CR>
+nmap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
+nmap <unique> <silent> <F8>  <ESC>:MyTags<CR>
+nmap <unique> <silent> <F11> <ESC>:MyShell<CR>
+
+imap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
+imap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
+imap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
+imap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
+imap <unique> <silent> <F5>  <ESC>:LookupFile<CR>
+imap <unique> <silent> <F6>  <ESC>:MyMake<CR>
+imap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
+imap <unique> <silent> <F8>  <ESC>:MyTags<CR>
+imap <unique> <silent> <F11> <ESC>:MyShell<CR>
 
 map <unique> <silent> <F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 

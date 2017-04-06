@@ -10,21 +10,21 @@ nnoremap <silent> sj     :FufBuffer<CR>
 " nnoremap <silent> s<C-d> :FufDir<CR>
 nnoremap <silent> sn     :FufMruFile<CR>
 "nnoremap <silent> sN     :FufMruFileInCwd<CR>
-nnoremap <silent> sm     :FufMruCmd<CR>
+nnoremap <silent> sc     :FufMruCmd<CR>
 nnoremap <silent> su     :FufBookmarkFile<CR>
 nnoremap <silent> sU     :FufBookmarkFileAdd<CR>
 "vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
 nnoremap <silent> si     :FufBookmarkDir<CR>
 nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
-nnoremap <silent> st     :FufTag<CR>
-nnoremap <silent> sT     :FufTag!<CR>
+" nnoremap <silent> st     :FufTag<CR>
+" nnoremap <silent> sT     :FufTag!<CR>
 "nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
 " vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
 " vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
-nnoremap <silent> s,     :FufBufferTag<CR>
-nnoremap <silent> s.     :FufBufferTagAll<CR>
-nnoremap <silent> s<     :FufBufferTag!<CR>
-nnoremap <silent> s>     :FufBufferTagAll!<CR>
+" nnoremap <silent> s,     :FufBufferTag<CR>
+" nnoremap <silent> s.     :FufBufferTagAll<CR>
+" nnoremap <silent> s<     :FufBufferTag!<CR>
+" nnoremap <silent> s>     :FufBufferTagAll!<CR>
 nnoremap <silent> s]     :FufBufferTagWithCursorWord!<CR>
 nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 "vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>

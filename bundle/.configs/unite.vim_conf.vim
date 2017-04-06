@@ -133,10 +133,11 @@ nmap s [unite]
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
 nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
-nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split file_mru<CR>
-nnoremap <silent> [unite]q :<C-u>MyCopen <CR>
-nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
-nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" Use fuzzyfinder plugin instead.
+" nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split file_mru<CR>
+" nnoremap <silent> [unite]q :<C-u>MyCopen <CR>
+" nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
+" nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/async<CR>
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>

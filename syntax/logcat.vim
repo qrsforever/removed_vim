@@ -3,7 +3,7 @@ if exists("b:current_syntax")
 endif
 
 "Define colors
-hi def LogX_color ctermfg=yellow guifg=yellow
+hi def LogX_color ctermfg=blue guifg=blue
 hi def LogF_color ctermfg=white guifg=white ctermbg=red guibg=red
 hi def LogE_color ctermfg=blue guifg=blue cterm=bold gui=bold
 hi def LogW_color ctermfg=red guifg=red cterm=bold gui=bold

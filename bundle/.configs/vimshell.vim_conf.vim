@@ -9,7 +9,7 @@ let g:vimshell_disable_escape_highlight = 1
 "let g:vimshell_enable_smart_case = 1
 "let g:vimshell_interactive_update_time = 500
  
-let g:vimshell_force_overwrite_statusline = 1
+let g:vimshell_force_overwrite_statusline = 0
 let g:vimshell_split_command = 'split'
 " let g:vimshell_popup_command = 'split'
 " let g:vimshell_popup_height = 30
@@ -28,3 +28,8 @@ let g:vimshell_split_command = 'split'
 nmap <silent> \ss :lchdir %:p:h<CR>:VimShellCurrentDir -toggle -buffer-name=@ -split-command=split<CR>
 " nmap <silent> \st :VimShellTab -create -buffer-name=@<CR>
 "
+command! -nargs=* -complete=file MyShell call s:DoVimShell()
+
+func! s:DoVimShell()
+    exec "VimShellCurrentDir -toggle -buffer-name=@ -split-command=split"
+endf

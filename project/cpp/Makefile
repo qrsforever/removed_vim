@@ -33,8 +33,16 @@ EXCLUDE_SRC :=
 
 # 设置目标类型(app, ar, so), 及目标名字
 TARGET_TYPE := app
-TARGET_NAME := out/$(shell basename $(PWD))
 TARGET_TYPE := $(strip $(TARGET_TYPE))
+TARGET_NAME := out/$(shell basename $(PWD))
+
+ifeq ($(TARGET_TYPE), so)
+	TARGET_NAME := out/lib$(shell basename $(PWD).so)
+else
+	ifeq ($(TARGET_TYPE), ar)
+		TARGET_NAME := out/lib$(shell basename $(PWD).a)
+	endif
+endif
 
 # 追加搜索目录
 SRC_DIR	+= $(dir $(SPECIAL_SRC))
