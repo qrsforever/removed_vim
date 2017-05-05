@@ -5,7 +5,7 @@ function FindProxyForURL(url, host) {
         return "DIRECT";
     }
 
-    if (shExpMatch(host, "leshiren.cn"))
+    if (shExpMatch(host, "leshiren.*"))
     {
         return "DIRECT";
     }
@@ -16,7 +16,7 @@ function FindProxyForURL(url, host) {
     {
         return "DIRECT";
     }
-
+    
     // All other requests go through port 8080 of proxy.example.com.
     // should that fail to respond, go directly to the WWW:
     return "PROXY 123.125.89.214:80; DIRECT";

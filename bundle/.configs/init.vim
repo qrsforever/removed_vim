@@ -43,7 +43,9 @@ MyPlugin 'EasyMotion'
 MyPlugin 'errormarker.vim'
 MyPlugin 'grep.vim'
 MyPlugin 'Lokaltog/vim-powerline'
-"MyPlugin 'Valloric/YouCompleteMe'
+if (filereadable('/usr/bin/clang'))
+    MyPlugin 'Valloric/YouCompleteMe'
+endif
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
@@ -52,8 +54,11 @@ MyPlugin 'Shougo/neomru.vim'
 " MyPlugin 'Shougo/unite-help'
 " MyPlugin 'Shougo/unite-outline'
 " MyPlugin 'Shougo/tabpagebuffer'
-" MyPlugin 'Shougo/neocomplete.vim'
-MyPlugin 'neocomplcache'
+if (has('lua'))
+    MyPlugin 'Shougo/neocomplete.vim'
+else
+    MyPlugin 'neocomplcache'
+endif
 " MyPlugin 'Shougo/neoinclude.vim'
 " MyPlugin 'Shougo/neosnippet'
 " MyPlugin 'Shougo/neosnippet-snippets'
