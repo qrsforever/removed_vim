@@ -124,15 +124,6 @@ fi
 
 stty stop ''
 
-export JAVA_HOME=/opt/android/jdk/jdk1.8.0_73
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASSPATH=./:${JAVA_HOME}/lib:${JRE_HOME}/lib:/usr/share/tomcat6/lib
-export ECLIPSE_HOME=/opt/eclipse/Neon3
-export ANSDK_PATH=/opt/android/sdk
-export ANNDK_PATH=/opt/android/ndk/ndk-r10d
-export ANDROID_HOME=$ANSDK_PATH
-export PATH=$ANSDK_PATH/platform-tools:$JAVA_HOME/bin:$ECLIPSE_HOME:$ANSDK_PATH/tools:$ANNDK_PATH:$PATH:~/.vim/bin:$ANSDK_PATH/build-tools/23.0.2:/opt/android/mat
-
 xgr () {
     if [[ "$1"x == x ]]
     then
@@ -189,23 +180,7 @@ xlog () {
     adb shell logcat -K -b main -b events -b system -v threadtime *:V | tee /tmp/xlog/$DATEFILE/$file.logcat
 }
 
-# alias myadb='adb -s 10.57.180.91:5555'
-# mylog () {
-#     if [[ ! -d /tmp/xlog/$DATEFILE ]]
-#     then
-#         mkdir -p /tmp/xlog/$DATEFILE
-#     fi
-#     file=`date +%H%M%S`
-#     myadb wait-for-device 
-#     if [[ "$1"x == x ]]
-#     then
-#         myadb shell logcat -c 
-#     fi
-#     myadb shell logcat -v threadtime | tee /tmp/xlog/$DATEFILE/$file.txt
-# }
-
 # sudo route add -net 192.168.150.0/24  gw 192.168.150.1  
-
 
 if [ -f /data/source/.descr.sh ]; then
     . /data/source/.descr.sh 
@@ -214,5 +189,3 @@ fi
 if [ -f /system/source/.descr.sh ]; then
     . /system/source/.descr.sh 
 fi
-
-PATH=$PATH:/opt/010Editor;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 87FF8EFC-483D-BCAA-D67D-735CF60410D1 0928FB19-F8F1-27F0-BCD8-019FFC410F65
