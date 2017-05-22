@@ -1,3 +1,0 @@
-top
-  shift + p  按cpu的使用率排序 
-  shift + m  按mem的使用率排序
