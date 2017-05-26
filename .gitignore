@@ -30,6 +30,7 @@ bundle/grep.vim
 bundle/neomru.vim
 bundle/neoyank.vim
 bundle/neocomplete.vim
+bundle/neocomplcache
 bundle/neosnippet-snippets
 bundle/neosnippet
 bundle/vim-snippets
