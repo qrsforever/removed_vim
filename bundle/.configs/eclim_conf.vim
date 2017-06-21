@@ -30,6 +30,9 @@ let g:EclimValidateSortResults = 'severity'
 "Using this local history, you can view diffs against previously saved versions of your file or revert to one of those revisions.
 let g:EclimKeepLocalHistory = 1
 
+" 禁止mvn自动更新classpath文件， 可以手动更新:Mvn dependency:resolve
+let g:EclimMavenPomClasspathUpdate = 0
+
 " autocmd FileType java nmap <C-RightMouse> <esc><c-o>
 " autocmd FileType java nmap <C-LeftMouse> <esc>:JavaSearchContext -a edit<cr>
 " autocmd BufEnter *.c,*.cpp,*.h silent! unmap <C-LeftMouse>

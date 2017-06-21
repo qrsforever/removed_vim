@@ -101,5 +101,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+xpwd() 
+{
+    tt=`pwd`
+    echo $tt
+    export tt
+}
+
 alias 0vi='vim --noplugin'
 stty stop ''
