@@ -1,3 +1,5 @@
+nnoremap [eclim] <Nop>
+nmap \ [eclim]
 
 map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
 map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
@@ -270,17 +272,19 @@ command XDStop  JavaDebugStop
 command XDList  JavaDebugBreakpointsList!
 " 
 command -nargs=? J  :call DoProjectSearch(0, 0, 0)
-command -nargs=? J1 :call DoProjectSearch(1, 0, 0)
-command -nargs=? J2 :call DoProjectSearch(2, 0, 0)
-command -nargs=? J3 :call DoProjectSearch(3, 0, 0)
-command -nargs=? J4 :call DoProjectSearch(4, 0, 0)
-command -nargs=? J5 :call DoProjectSearch(5, 0, 0)
 
-command -nargs=? M1 :call DoProjectSearch(1, 1, 0)
-command -nargs=? M2 :call DoProjectSearch(2, 1, 0)
-command -nargs=? M3 :call DoProjectSearch(3, 1, 0)
-command -nargs=? M4 :call DoProjectSearch(4, 1, 0)
-command -nargs=? M5 :call DoProjectSearch(5, 1, 0)
+command -nargs=? J1 :call DoProjectSearch(1, 1, 0)
+command -nargs=? J2 :call DoProjectSearch(2, 1, 0)
+command -nargs=? J3 :call DoProjectSearch(3, 1, 0)
+command -nargs=? J4 :call DoProjectSearch(4, 1, 0)
+command -nargs=? J5 :call DoProjectSearch(5, 1, 0)
+
+command -nargs=? M1 :call DoProjectSearch(1, 0, 0)
+command -nargs=? M2 :call DoProjectSearch(2, 0, 0)
+command -nargs=? M3 :call DoProjectSearch(3, 0, 0)
+command -nargs=? M4 :call DoProjectSearch(4, 0, 0)
+command -nargs=? M5 :call DoProjectSearch(5, 0, 0)
+
 command -nargs=? S1 :call DoProjectSearch(1, 1, 1)
 command -nargs=? S2 :call DoProjectSearch(2, 1, 1)
 command -nargs=? S3 :call DoProjectSearch(3, 1, 1)
@@ -289,3 +293,5 @@ command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 
 command M J
 command S J
+
+nnoremap [eclim]e :JavaSearchContext -a edit<CR>
