@@ -1,15 +1,18 @@
 nnoremap [eclim] <Nop>
 nmap \ [eclim]
 
-map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
-map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
-map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
-map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
+" map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
+" map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
+" map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
+" map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
 
 let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimBrowser = "chromium-browser"
+" let g:EclimBrowser = "chromium-browser"
+let g:EclimBrowser= "google-chrome"
 " let g:EclimBrowser = "firefox"
 " let g:EclimPythonValidate = 0
+
+" let g:EclimMakeLCD=0
 
 let g:EclimJavaDebugStatusWinWidth = 80
 let g:EclimJavaDebugStatusWinHeight = 30
@@ -295,3 +298,4 @@ command M J
 command S J
 
 nnoremap [eclim]e :JavaSearchContext -a edit<CR>
+nnoremap [eclim]d :JavaDocSearch<CR>
