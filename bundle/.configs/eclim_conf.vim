@@ -7,8 +7,8 @@ map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
 map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
 
 let g:EclimCompletionMethod = 'omnifunc'
-" let g:EclimBrowser = "chromium-browser"
-let g:EclimBrowser = "firefox"
+let g:EclimBrowser = "chromium-browser"
+" let g:EclimBrowser = "firefox"
 " let g:EclimPythonValidate = 0
 
 let g:EclimJavaDebugStatusWinWidth = 80
