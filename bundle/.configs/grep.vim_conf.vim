@@ -50,19 +50,20 @@ func! s:InputWords()
         call writefile(outputs, s:MRUGrepWordsFile)
         unlet outputs
     endif
-    let twd = split(tmpstr, '|')
-    let len = len(twd)
-    let words=''
-    let i = 0
-    while i < len
-        if i == 0
-            let words = twd[i]
-        else
-            let words = words . '\|' . twd[i]
-        endif
-        let i = i + 1
-    endwhile
-    return words
+    return tmpstr
+    " let twd = split(tmpstr, '|')
+    " let len = len(twd)
+    " let words=''
+    " let i = 0
+    " while i < len
+    "     if i == 0
+    "         let words = twd[i]
+    "     else
+    "         let words = words . '\|' . twd[i]
+    "     endif
+    "     let i = i + 1
+    " endwhile
+    " return words
 endfunc
 
 func! s:DoSelectGrep() 
@@ -70,29 +71,30 @@ func! s:DoSelectGrep()
     echomsg ' 1. lvimgrep(current file)'
     echomsg ' 2. egrep(current file)'
     echomsg ' 3. fgrep(current file)'
-    echomsg ' 4. grep(dir)'
+    echomsg ' 4. rgrep(dir)'
     echomsg ' 5. bgrep(buffer)' 
     echomsg ' 6. cscope'
     echohl Search
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
     echohl None
-    
+
     " exec "Mark " 
     let word = s:InputWords()
+    exec "lchdir %:p:h"
+    exec "cclose"
     if select == 1
-        exec "lchdir %:p:h"
-        exec "silent! lvimgrep " . word . " " . expand('%')
+        exec "silent! lvimgrep '" . word . "' " . expand('%')
         exec "belowright lw 15"
     elseif select == 2
-        exec "Egrep " . word . " " . expand('%')
+        exec "Egrep '" . word . "' " . expand('%')
     elseif select == 3
-        exec "Fgrep " . word . " " . expand('%')
+        exec "Fgrep '" . word . "' " . expand('%')
     elseif select == 4
-        exec "Grep " . word
+        exec "Rgrep '" . word . "'"
     elseif select == 5
-        exec "Bgrep " . word
+        exec "Bgrep '" . word . "'"
     elseif select == 6
-        exec "cs find e " . word
+        exec "cs find e '" . word . "'"
         exec "belowright cw 15"
     else
         return
