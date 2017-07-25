@@ -67,11 +67,12 @@ endfunc
 
 func! s:DoSelectGrep() 
     echomsg ' Use Shift+F2 Shift+F3 (for next match pattern)'
-    echomsg ' 1. in directory'
-    echomsg ' 2. in current file'
-    echomsg ' 3. in files'
-    echomsg ' 4. in buffer' 
-    echomsg ' 5. in cscope'
+    echomsg ' 1. lvimgrep(current file)'
+    echomsg ' 2. egrep(current file)'
+    echomsg ' 3. fgrep(current file)'
+    echomsg ' 4. grep(dir)'
+    echomsg ' 5. bgrep(buffer)' 
+    echomsg ' 6. cscope'
     echohl Search
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
     echohl None
@@ -79,15 +80,17 @@ func! s:DoSelectGrep()
     " exec "Mark " 
     let word = s:InputWords()
     if select == 1
-        exec "Rgrep " . word 
-    elseif select == 2
         exec "silent! lvimgrep " . word . " " . expand('%')
         exec "belowright lw 15"
+    elseif select == 2
+        exec "Egrep " . word . " " . expand('%')
     elseif select == 3
-        exec "Grep " . word
+        exec "Fgrep " . word . " " . expand('%')
     elseif select == 4
-        exec "Bgrep " . word
+        exec "Grep " . word
     elseif select == 5
+        exec "Bgrep " . word
+    elseif select == 6
         exec "cs find e " . word
         exec "belowright cw 15"
     else
