@@ -16,15 +16,25 @@ function! s:gotoline()
 	endif
 
 	" Accept file:line:column: or file:line:column and file:line also
-	let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%(:\(\d*\):\?\)\?\)\?$')
+	" let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%(:\(\d*\):\?\)\?\)\?$')
+    " ld change accept file:line:xxx
+	let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%(:\([A-Za-z0-9_]*\):\?\)\?\)\?$')
+    " ld end
 
 	if empty(names)
 		return
 	endif
 
 	let file_name = names[1]
-	let line_num  = names[2] == ''? '0' : names[2]
-	let  col_num  = names[3] == ''? '0' : names[3]
+    let line_num  = names[2] == ''? '0' : names[2]
+	" let  col_num  = names[3] == ''? '0' : names[3]
+    " ld change 
+    let  col_num  = '0'
+    if names[3] != ''
+        let col_names =  matchlist( names[3], '\(\d*\)')
+        let col_num   = col_names[0] == ''? '0' : col_names[0]
+    endif
+    " ld end
 
 	if filereadable(file_name)
 		let l:bufn = bufnr("%")
@@ -38,8 +48,6 @@ function! s:gotoline()
         if foldlevel(line_num) > 0
             exec "normal! zv"
         endif
-
-
         exec "normal! zz"
 	endif
 
