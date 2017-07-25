@@ -80,6 +80,7 @@ func! s:DoSelectGrep()
     " exec "Mark " 
     let word = s:InputWords()
     if select == 1
+        exec "lchdir %:p:h"
         exec "silent! lvimgrep " . word . " " . expand('%')
         exec "belowright lw 15"
     elseif select == 2
