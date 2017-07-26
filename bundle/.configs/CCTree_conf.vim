@@ -204,7 +204,8 @@ func! s:CreateTagDB(root)
 endfunc
 
 func! s:BuildTagDB(root)
-    echomsg " "
+    :messages clear
+    :redraw
     echomsg "1: Build or load db"
     echomsg "2: Delete before load db" 
     echomsg "3: Only delete db"
@@ -249,7 +250,8 @@ func! s:ShowAndLoadTagDB(root)
     " 1. tags环境变量中的db (掉电不丢失)
     let dirs = vimproc#readdir(tagdir)
     let i = 0
-    echomsg " "
+    :messages clear
+    :redraw
     for subdir in dirs
         let subdir = substitute(subdir, '\/$', '', '')
         let dbfile = subdir . '/db.vim'

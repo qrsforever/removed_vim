@@ -18,15 +18,15 @@ func ListCandidateWord(A, L, P)
     return system("cat " . s:MRUGrepWordsFile)
 endfunc
 
-func! s:InputWords()
+func! s:InputWords(label)
     if ! filereadable(s:MRUGrepWordsFile)
         call writefile([], s:MRUGrepWordsFile)
     endif
     let grepwords = readfile(s:MRUGrepWordsFile)
 
-    echohl Search
-    let tmpstr = input("Search for pattern: ", expand("<cword>"), 'custom,ListCandidateWord')
-    echohl None
+    :messages clear
+    :redraw
+    let tmpstr = input('[' . a:label . '] Search for pattern: ', expand("<cword>"), 'custom,ListCandidateWord')
     if len(tmpstr) < 2
         unlet grepwords
         return ""
@@ -51,19 +51,6 @@ func! s:InputWords()
         unlet outputs
     endif
     return tmpstr
-    " let twd = split(tmpstr, '|')
-    " let len = len(twd)
-    " let words=''
-    " let i = 0
-    " while i < len
-    "     if i == 0
-    "         let words = twd[i]
-    "     else
-    "         let words = words . '\|' . twd[i]
-    "     endif
-    "     let i = i + 1
-    " endwhile
-    " return words
 endfunc
 
 func! s:DoSelectGrep() 
@@ -79,22 +66,22 @@ func! s:DoSelectGrep()
     echohl None
 
     " exec "Mark " 
-    let word = s:InputWords()
+    " let word = s:InputWords()
     exec "lchdir %:p:h"
     exec "cclose"
     if select == 1
-        exec "silent! lvimgrep '" . word . "' " . expand('%')
+        exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' " . expand('%')
         exec "belowright lw 15"
     elseif select == 2
-        exec "Egrep '" . word . "' " . expand('%')
+        exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')
     elseif select == 3
-        exec "Fgrep '" . word . "' " . expand('%')
+        exec "Fgrep '" . s:InputWords('fgrep') . "' " . expand('%')
     elseif select == 4
-        exec "Regrep '" . word . "'"
+        exec "Regrep '" . s:InputWords('regrep') . "'"
     elseif select == 5
-        exec "Bgrep '" . word . "'"
+        exec "Bgrep '" . s:InputWords('bgrep') . "'"
     elseif select == 6
-        exec "cs find e '" . word . "'"
+        exec "cs find e '" . s:InputWords('cs') . "'"
         exec "belowright cw 15"
     else
         return
