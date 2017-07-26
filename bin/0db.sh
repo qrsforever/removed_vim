@@ -36,9 +36,7 @@ echo "let g:LookupFile_TagExpr=string('$TAG_DIR/filenametags')"  > $TAG_DIR/db.v
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
 $CMD_CSCOPE -b -c -k -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
-echo ":cs kill 0" >> $TAG_DIR/db.vim
-echo ":cs kill 1" >> $TAG_DIR/db.vim
-echo ":cs kill 2" >> $TAG_DIR/db.vim
+echo ":cs kill -1" >> $TAG_DIR/db.vim
 echo ":cs reset" >> $TAG_DIR/db.vim
 echo ":cs add $TAG_DIR/cscope.out $TAG_DIR" >> $TAG_DIR/db.vim
  

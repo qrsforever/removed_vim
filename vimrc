@@ -63,6 +63,7 @@ nmap <silent> <leader>cw :belowright cw 15<CR>
 nmap <silent> <C-w>e :belowright cw 15<CR>
 "Location list windows 打开
 nmap <silent> <leader>lw :belowright lw 15<CR>
+nmap <silent> <C-w>l :belowright lw 15<CR>
 
 nmap cd :lchdir %:p:h<CR>:pwd<CR>
 

@@ -110,3 +110,9 @@ xpwd()
 
 alias 0vi='vim --noplugin'
 stty stop ''
+
+if [ -d /system/vagrant ];
+then
+    export VAGRANT_DOTFILE_PATH=/system/vagrant
+fi
+
