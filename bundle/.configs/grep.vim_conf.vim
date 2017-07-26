@@ -70,7 +70,7 @@ func! s:DoSelectGrep()
     echomsg ' Use Shift+F2 Shift+F3 (for next match pattern)'
     echomsg ' 1. lvimgrep(current file)'
     echomsg ' 2. egrep(current file)'
-    echomsg ' 3. fgrep(current file)'
+    echomsg ' 3. fegrep(current file)'
     echomsg ' 4. rgrep(dir)'
     echomsg ' 5. bgrep(buffer)' 
     echomsg ' 6. cscope'
@@ -90,7 +90,7 @@ func! s:DoSelectGrep()
     elseif select == 3
         exec "Fgrep '" . word . "' " . expand('%')
     elseif select == 4
-        exec "Rgrep '" . word . "'"
+        exec "Regrep '" . word . "'"
     elseif select == 5
         exec "Bgrep '" . word . "'"
     elseif select == 6
