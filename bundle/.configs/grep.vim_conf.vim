@@ -56,11 +56,13 @@ endfunc
 func! s:DoSelectGrep() 
     echomsg ' Use Shift+F2 Shift+F3 (for next match pattern)'
     echomsg ' 1. lvimgrep(current file)'
-    echomsg ' 2. egrep(current file)'
-    echomsg ' 3. fegrep(current file)'
-    echomsg ' 4. rgrep(dir)'
-    echomsg ' 5. bgrep(buffer)' 
-    echomsg ' 6. cscope'
+    echomsg ' 2. lvimgrep(directory)'
+    echomsg ' 3. egrep(current file)'
+    echomsg ' 4. regrep(directory)'
+    echomsg ' 5. fgrep(current file)'
+    echomsg ' 6. fgrep(directory)'
+    echomsg ' 7. bgrep(buffer)' 
+    echomsg ' 8. cscope'
     echohl Search
     let select = str2nr(input("Select Search Method: ", ' '), 10)         
     echohl None
@@ -73,14 +75,19 @@ func! s:DoSelectGrep()
         exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' " . expand('%')
         exec "belowright lw 15"
     elseif select == 2
-        exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')
+        exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' *"
+        exec "belowright lw 15"
     elseif select == 3
-        exec "Fgrep '" . s:InputWords('fgrep') . "' " . expand('%')
+        exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')
     elseif select == 4
         exec "Regrep '" . s:InputWords('regrep') . "'"
     elseif select == 5
-        exec "Bgrep '" . s:InputWords('bgrep') . "'"
+        exec "Fgrep '" . s:InputWords('fgrep') . "' " . expand('%')
     elseif select == 6
+        exec "Fgrep '" . s:InputWords('fgrep') . "' "
+    elseif select == 7
+        exec "Bgrep '" . s:InputWords('bgrep') . "'"
+    elseif select == 8
         exec "cs find e '" . s:InputWords('cs') . "'"
         exec "belowright cw 15"
     else
