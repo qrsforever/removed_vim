@@ -55,14 +55,36 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 ""7 或 f  查找本文件
 ""8 或 i  查找包含本文件的文件
 ""ctrl + o 可以返回
+
+func! CCTreeOpenFile(cmd) 
+    let pattern = expand("<cfile>")
+    if empty(pattern)
+        return
+    endif
+    let res = matchlist(getline("."), '.*' . pattern . ':\(\d*\).*$')
+    let line = 0
+    if !empty(res)
+        let line = res[1] == '' ? '0' : res[1]
+    endif
+    let buf1 = bufname("%")
+    silent! exec a:cmd . ' find f ' . pattern
+    let buf2 = bufname("%")
+    if buf1 != buf2
+        silent! exec line
+    else
+        echomsg "Not found file: " . pattern
+    endif
+endfunc
+
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <silent> <C-\>f : call CCTreeOpenFile('cs')<CR>
 "
 "window tab 
 nmap <C-\><C-\>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -70,9 +92,10 @@ nmap <C-\><C-\>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>t :tab cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>e :tab cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\><C-\>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\><C-\>i :tab cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\><C-\>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\><C-\>f :tab cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <silent> <C-\><C-\>f :call CCTreeOpenFile('tab cs')<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
 nmap <C-\>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
@@ -80,19 +103,21 @@ nmap <C-\>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\t :scs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>\f :scs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>\i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>\f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <silent> <C-\>\f :call CCTreeOpenFile('scs')<CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
-nmap <C-\>/s :vert scs cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/g :vert scs cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/c :vert scs cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/t :vert scs cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/e :vert scs cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>/f :vert scs cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>/i :vert scs cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>/d :vert scs cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>/i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>/d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-\>/f :vert scs cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <silent> <C-\>/f :call CCTreeOpenFile('vert scs')<CR>
 "
 "
 """使用方法
