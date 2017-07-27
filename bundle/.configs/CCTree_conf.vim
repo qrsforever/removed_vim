@@ -67,12 +67,10 @@ func! CCTreeOpenFile(cmd)
         let line = res[1] == '' ? '0' : res[1]
     endif
     let buf1 = bufname("%")
-    silent! exec a:cmd . ' find f ' . pattern
+    exec a:cmd . ' find f ' . pattern
     let buf2 = bufname("%")
     if buf1 != buf2
         silent! exec line
-    else
-        echomsg "Not found file: " . pattern
     endif
 endfunc
 
