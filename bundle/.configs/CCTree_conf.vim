@@ -247,11 +247,18 @@ func! s:ShowAndLoadTagDB(root)
     endif
 
     let subdirs = [ ]
-    " 1. tags环境变量中的db (掉电不丢失)
-    let dirs = vimproc#readdir(tagdir)
     let i = 0
     :messages clear
     :redraw
+
+    " 0. 标准 c/c++ tags
+    if isdirectory($HOME . '/.vim/tags')
+        echomsg ' ' . i . ' ' . 'C/C++ tags'
+        call add(subdirs, $HOME . '/.vim/tags')
+    endif
+
+    " 1. tags环境变量中的db (掉电不丢失)
+    let dirs = vimproc#readdir(tagdir)
     for subdir in dirs
         let subdir = substitute(subdir, '\/$', '', '')
         let dbfile = subdir . '/db.vim'
@@ -263,12 +270,14 @@ func! s:ShowAndLoadTagDB(root)
     endfor
 
     " 2. 临时目录下的tags
-    let dirs = split(system("dirname `find /tmp/tags/ -name .tags -type d`"), '\n')
-    for subdir in dirs
-        let i = i + 1
-        echomsg ' ' . i . ' ' . substitute(subdir, '/tmp/tags', '', '')
-        call add(subdirs, subdir . '/.tags')
-    endfor
+    if isdirectory('/tmp/tags')
+        let dirs = split(system("dirname `find /tmp/tags/ -name .tags -type d`"), '\n')
+        for subdir in dirs
+            let i = i + 1
+            echomsg ' ' . i . ' ' . substitute(subdir, '/tmp/tags', '', '')
+            call add(subdirs, subdir . '/.tags')
+        endfor
+    endif
 
     " 3. 清空原全局tags
     set tags=
@@ -284,18 +293,23 @@ func! s:ShowAndLoadTagDB(root)
     let nums = split(tmpstr, ',')
     for strn in nums 
         let n = str2nr(strn, 10)
-        if n > 0 && n < i
-            let filenametags = subdirs[n-1] . '/filenametags'
+        if n == 0
+            exec 'set tags+=' . subdirs[0] . '/libc.tags'
+            exec 'set tags+=' . subdirs[0] . '/cpp.tags'
+            continue
+        endif
+        if n > 0 && n <= i
+            let filenametags = subdirs[n] . '/filenametags'
             if filereadable(filenametags)
                 let tlufiles = tlufiles . ' ' . filenametags
             endif
 
-            let cscopeout = subdirs[n-1] . '/cscope.out'
+            let cscopeout = subdirs[n] . '/cscope.out'
             if filereadable(cscopeout)
                 exec 'cs add ' . cscopeout . ' ' . subdirs[n-1]
             endif
 
-            let tagfile = subdirs[n-1] . '/tags'
+            let tagfile = subdirs[n] . '/tags'
             if filereadable(tagfile)
                 exec 'set tags+=' . tagfile
             endif
