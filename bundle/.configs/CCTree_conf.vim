@@ -61,7 +61,7 @@ func! CCTreeOpenFile(cmd)
     if empty(pattern)
         return
     endif
-    let res = matchlist(getline("."), '.*' . pattern . ':\(\d*\).*$')
+    let res = matchlist(getline("."), '.*' . pattern . ':\~*\(\d*\).*$')
     let line = 0
     if !empty(res)
         let line = res[1] == '' ? '0' : res[1]
@@ -155,15 +155,6 @@ if has("cscope")
     set csto=1      "先使用ctags再使用cscope
     set nocscopeverbose  "不显示信息
     set notimeout
-    "if filereadable($DEFAULT_CSCOPE)
-    "    cs add $DEFAULT_CSCOPE
-    "endif
-    "if filereadable($MID_CSCOPE)
-    "    cs add $MID_CSCOPE
-    "endif
-    "if filereadable($SDK_CSCOPE)
-    "    cs add $SDK_CSCOPE
-    "endif
 endif
 """cscope和ctags的兼容问题
 "":help if_cscop.txt

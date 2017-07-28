@@ -88,7 +88,8 @@ func! s:DoSelectGrep()
     elseif select == 7
         exec "Bgrep '" . s:InputWords('bgrep') . "'"
     elseif select == 8
-        exec "cs find e '" . s:InputWords('cs') . "'"
+        exec "QuickFixClear"
+        exec "cs find e " . s:InputWords('cs')
         exec "belowright cw 15"
     else
         return
