@@ -80,7 +80,6 @@ nnoremap <silent> <leader>pi :call DoCurrentProject(0)<CR>
 " nnoremap <silent> <leader>pc :call DoCurrentProject(2)<CR>
 nnoremap <silent> <leader>pd :call DoCurrentProject(3)<CR>
 nnoremap <silent> <leader>pp :call DoSelectProjects()<CR>
-nnoremap <silent> <leader>ps :call DoProjectSearch()<CR>
 
 command -nargs=? SelectProeject :call DoSelectProjects()
 

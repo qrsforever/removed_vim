@@ -1,8 +1,8 @@
 let g:SuperTabDefaultCompletionType = "context"
-autocmd FileType *
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-p>") |
-            \ endif
+" autocmd FileType *
+            " \ if &omnifunc != '' |
+            " \   call SuperTabChain(&omnifunc, "<c-p>") |
+            " \ endif
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabContextDiscoverDiscovery =
