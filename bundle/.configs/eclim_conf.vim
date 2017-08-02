@@ -51,21 +51,15 @@ let g:EclimMavenPomClasspathUpdate = 0
 " nnoremap <silent> ;;<cr> :JavaSearchContext -a split<cr>
 " nnoremap <silent> '<cr> :JavaDocSearch<cr>
 " nnoremap <silent> ''<cr> :JavaDocPreview<cr>
-nnoremap <silent> <Leader>jv :Validate<cr>
-nnoremap <silent> <Leader>jc :JavaCorrect<cr>
-nnoremap <silent> <Leader>ji :JavaImport<cr>
-nnoremap <silent> <leader>jg :JavaImportOrganize<CR>
+nnoremap <silent> ;jv :Validate<cr>
+nnoremap <silent> ;jc :JavaCorrect<cr>
+nnoremap <silent> ;ji :JavaImport<cr>
+nnoremap <silent> ;jg :JavaImportOrganize<CR>
 " " C-S-F java_format current java file
 
 "修改powerline使之显示在底部状态栏中
 "let g:EclimProjectStatusLine = 'eclim(p=${name}, n=${natures})'
 " %{eclim#project#util#ProjectStatusLine()}%)
-
-"自动弹出补全
-"if !exists('g:neocomplcache_force_omni_patterns')
-"    let g:neocomplcache_force_omni_patterns = {}
-"endif
-"let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
 
 "功能命令缩短 
 "加个Project命令, 主要是为command状态下  :Proj<tab>方便选择
@@ -73,13 +67,9 @@ command -nargs=?
             \ -complete=customlist,eclim#project#util#CommandCompleteProject
             \ Project :call eclim#project#util#ProjectList('<args>')
 
-" nnoremap <silent> <leader>pl :ProjectList<cr>
-" nnoremap <silent> <leader>pt :ProjectTreeToggle<cr>
-nnoremap <silent> <leader>pi :call DoCurrentProject(0)<CR>
-" nnoremap <silent> <leader>po :call DoCurrentProject(1)<CR>
-" nnoremap <silent> <leader>pc :call DoCurrentProject(2)<CR>
-nnoremap <silent> <leader>pd :call DoCurrentProject(3)<CR>
-nnoremap <silent> <leader>pp :call DoSelectProjects()<CR>
+nnoremap <silent> ;pi :call DoCurrentProject(0)<CR>
+nnoremap <silent> ;pd :call DoCurrentProject(3)<CR>
+nnoremap <silent> ;pp :call DoSelectProjects()<CR>
 
 command -nargs=? SelectProeject :call DoSelectProjects()
 
@@ -243,31 +233,6 @@ func! DoProjectSearch(flag, xp, split) "{{{
     call eclim#java#search#SearchAndDisplay('java_search', params)
 endfunc"}}}
 
-" func! MyJavaSearchContext() 
-"     let search=expand('<cword>') 
-"     if len(search) == 0
-"         return
-"     endif
-"     let params=' -p ' . search . ' -t classOrInterface' . ' -x declarations -a edit'
-"     call eclim#java#search#SearchAndDisplay('java_search', params)
-" endfunc
-" 
-" func! MyJavaSearchMethod() 
-"     let search=expand('<cword>') 
-"     if len(search) == 0
-"         return
-"     endif
-"     let params=' -p ' . search . ' -t method' . ' -x declarations -a edit'
-"     call eclim#java#search#SearchAndDisplay('java_search', params)
-" endfunc
-
-" command JSC    JavaSearchContext -a edit
-" command JSCS   JavaSearchContext -a split
-" command J      JSC
-" 
-" command JDS    JavaDocSearch 
-" command JDP    JavaDocPreview
-
 "<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
 command XDStart JavaDebugStart localhost 1044
 command XDStop  JavaDebugStop 
@@ -296,5 +261,7 @@ command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 command M J
 command S J
 
-nnoremap ;c :JavaSearchContext -a edit<CR>
-nnoremap ;d :JavaDocSearch<CR>
+nnoremap ;c  :JavaSearchContext -a edit<CR>
+nnoremap ;sc :JavaSearchContext -a split<CR>
+nnoremap ;d  :JavaDocSearch<CR>
+nnoremap ;sd :JavaDocPreview<CR>
