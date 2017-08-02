@@ -1,6 +1,3 @@
-"vim8.0 999tab 问题 ---> 改为$tab, 作者已经有补丁尚没有合入master
-"https://github.com/jlanzarotta/bufexplorer/pull/56
-
 command! MyBufExplorer call s:DoBufExplorer()
 function! s:DoBufExplorer()
     let buftype = getbufvar('%', '&filetype')
