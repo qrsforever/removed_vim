@@ -91,7 +91,10 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 
 " 必须要有这个否则<c-x><c-o>不会自动弹出 
-let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+" let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+" fix eclim does't work
+let g:neocomplete#force_omni_input_patterns.java =                                                                                                     
+    \ '\%(\h\w*\|)\)\.\w*'
 
 " let g:neocomplete#sources#omni#input_patterns.php =   
             \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
