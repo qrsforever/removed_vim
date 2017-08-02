@@ -71,10 +71,14 @@ MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
+MyPlugin 'DrawIt'
+MyPlugin 'ervandew/supertab'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     MyPlugin 'local/fuzzyfinder'
-    MyPlugin 'local/eclim'
+    if isdirectory(expand('~/.vim/bundle/eclim'))
+        MyPlugin 'local/eclim'
+    endif
     MyPlugin 'local/vcscommand'
     MyPlugin 'local/ydtrans'
     MyPlugin 'local/maximizer'
@@ -93,3 +97,5 @@ else
     echomsg "---------------------------------------------"
 endif
  
+"查看映射来自哪里
+":verbose imap <tab>

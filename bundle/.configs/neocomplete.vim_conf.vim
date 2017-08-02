@@ -114,6 +114,6 @@ let g:neocomplete#force_omni_input_patterns.java =
 " \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
 " For smart TAB completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-"        \ <SID>check_back_space() ? "\<TAB>" :
-"        \ neocomplete#start_manual_complete()
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
+       " \ <SID>check_back_space() ? "\<TAB>" :
+       " \ neocomplete#start_manual_complete()
