@@ -27,6 +27,8 @@ bundle/EasyMotion
 bundle/errormarker.vim
 bundle/vimshell.vim
 bundle/grep.vim
+bundle/supertab
+bundle/eclim
 bundle/neomru.vim
 bundle/neoyank.vim
 bundle/neocomplete.vim
@@ -37,3 +39,4 @@ bundle/vim-snippets
 bundle/bufexplorer
 bundle/neoinclude.vim
 bundle/vim-powerline
+bundle/DrawIt
