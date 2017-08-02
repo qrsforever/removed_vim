@@ -1,5 +1,5 @@
-nnoremap [ycm] <Nop>
-nmap \ [ycm]
+" nnoremap [ycm] <Nop>
+" nmap ; [ycm]
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
@@ -8,9 +8,6 @@ inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-
-nnoremap [ycm]g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap [ycm]d :YcmForceCompileAndDiagnostics<CR>
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/configure/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
@@ -46,3 +43,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<S-TAB>'
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+
+nnoremap ;g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap ;b :YcmForceCompileAndDiagnostics<CR>
+

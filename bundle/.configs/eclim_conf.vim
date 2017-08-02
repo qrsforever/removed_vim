@@ -1,5 +1,5 @@
-nnoremap [eclim] <Nop>
-nmap \ [eclim]
+" nnoremap [eclim] <Nop>
+" nmap ; [eclim]
 
 " map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
 " map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
@@ -297,5 +297,5 @@ command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 command M J
 command S J
 
-nnoremap [eclim]e :JavaSearchContext -a edit<CR>
-nnoremap [eclim]d :JavaDocSearch<CR>
+nnoremap ;c :JavaSearchContext -a edit<CR>
+nnoremap ;d :JavaDocSearch<CR>
