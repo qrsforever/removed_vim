@@ -31,7 +31,7 @@ echo "SrcDir = $SRC_DIR"
 CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 
-find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path "*tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
+find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
 echo "let g:LookupFile_TagExpr=string('$TAG_DIR/filenametags')"  > $TAG_DIR/db.vim
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
