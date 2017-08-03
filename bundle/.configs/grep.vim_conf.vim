@@ -75,7 +75,12 @@ func! s:DoSelectGrep()
         exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' " . expand('%')
         exec "belowright lw 15"
     elseif select == 2
-        exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' *"
+        let word = s:InputWords('lvimgrep')
+        let startdir = input("Start searching from directory: ", getcwd(), "dir")
+        if startdir == ""
+            return
+        endif
+        exec "lvimgrep '" . word . "' " . startdir . "/**/*"
         exec "belowright lw 15"
     elseif select == 3
         exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')

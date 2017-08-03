@@ -1,18 +1,7 @@
-" nnoremap [eclim] <Nop>
-" nmap ; [eclim]
-
-" map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
-" map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
-" map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
-" map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
-
 let g:EclimCompletionMethod = 'omnifunc'
 " let g:EclimBrowser = "chromium-browser"
 let g:EclimBrowser= "google-chrome"
 " let g:EclimBrowser = "firefox"
-" let g:EclimPythonValidate = 0
-
-" let g:EclimMakeLCD=0
 
 let g:EclimJavaDebugStatusWinWidth = 80
 let g:EclimJavaDebugStatusWinHeight = 30
@@ -27,7 +16,10 @@ let g:EclimAntCompilerAdditionalErrorFormat =
             \ '\%A%.%#[xslt]\ Loading\ stylesheet\ %f,' .
             \ '\%Z%.%#[xslt]\ %.%#:%l:%c:\ %m,'
 let g:EclimAntErrorsEnabled = 1
+
 " let g:EclimJavaValidate=0
+" let g:EclimPythonValidate = 0
+" let g:EclimMakeLCD=0
 
 "severity sort: errors > warnings > info > etc.
 let g:EclimValidateSortResults = 'severity'
@@ -38,25 +30,6 @@ let g:EclimKeepLocalHistory = 1
 " 禁止mvn自动更新classpath文件， 可以手动更新:Mvn dependency:resolve
 let g:EclimMavenPomClasspathUpdate = 0
 
-" autocmd FileType java nmap <C-RightMouse> <esc><c-o>
-" autocmd FileType java nmap <C-LeftMouse> <esc>:JavaSearchContext -a edit<cr>
-" autocmd BufEnter *.c,*.cpp,*.h silent! unmap <C-LeftMouse>
-" autocmd FileType java nmap g] <esc>:JavaSearchContext -a edit<cr>
-" autocmd BufEnter *.c,*.cpp,*.h silent! unmap g]
-
-" autocmd FileType java nnoremap <silent> <C-F> :%JavaFormat<cr>
-"
-" Eclim settings
-" nnoremap <silent> ;<cr> :JavaSearchContext -a edit<cr>
-" nnoremap <silent> ;;<cr> :JavaSearchContext -a split<cr>
-" nnoremap <silent> '<cr> :JavaDocSearch<cr>
-" nnoremap <silent> ''<cr> :JavaDocPreview<cr>
-nnoremap <silent> ;jv :Validate<cr>
-nnoremap <silent> ;jc :JavaCorrect<cr>
-nnoremap <silent> ;ji :JavaImport<cr>
-nnoremap <silent> ;jg :JavaImportOrganize<CR>
-" " C-S-F java_format current java file
-
 "修改powerline使之显示在底部状态栏中
 "let g:EclimProjectStatusLine = 'eclim(p=${name}, n=${natures})'
 " %{eclim#project#util#ProjectStatusLine()}%)
@@ -66,12 +39,6 @@ nnoremap <silent> ;jg :JavaImportOrganize<CR>
 command -nargs=?
             \ -complete=customlist,eclim#project#util#CommandCompleteProject
             \ Project :call eclim#project#util#ProjectList('<args>')
-
-nnoremap <silent> ;pi :call DoCurrentProject(0)<CR>
-nnoremap <silent> ;pd :call DoCurrentProject(3)<CR>
-nnoremap <silent> ;pp :call DoSelectProjects()<CR>
-
-command -nargs=? SelectProeject :call DoSelectProjects()
 
 "通过当前编辑的文件, 打开所在的Android工程, 最终方便实现代码补全功能.
 func! DoCurrentProject(flag) "{{{
@@ -233,6 +200,29 @@ func! DoProjectSearch(flag, xp, split) "{{{
     call eclim#java#search#SearchAndDisplay('java_search', params)
 endfunc"}}}
 
+func! DoCtrlLeftMouse() "{{{
+    let word = expand("<cword>")
+    if &ft != 'java' || !eclim#EclimAvailable() 
+        exec "tag " . word
+        return
+    endif
+    " exec "JavaSearchContext -a edit"
+    let ret = eclim#java#search#SearchAndDisplay('java_search', '-a edit')
+    if ret != 1
+        exec "tag " . word
+        return
+    endif
+endfunc"}}}
+
+func! DoCtrlRightMouse() "{{{
+    if &ft != 'java' || !eclim#EclimAvailable() 
+        " ctrl-t
+        exec "silent! pop"
+        return
+    endif
+    exec 'normal! ' .  "\<c-o>"
+endfunc"}}}
+
 "<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
 command XDStart JavaDebugStart localhost 1044
 command XDStop  JavaDebugStop 
@@ -261,7 +251,27 @@ command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 command M J
 command S J
 
-nnoremap ;c  :JavaSearchContext -a edit<CR>
-nnoremap ;sc :JavaSearchContext -a split<CR>
-nnoremap ;d  :JavaDocSearch<CR>
-nnoremap ;sd :JavaDocPreview<CR>
+" nnoremap [eclim] <Nop>
+" nmap ; [eclim]
+" 
+nnoremap <silent> ;c  :JavaSearchContext -a edit<CR>
+nnoremap <silent> ;sc :JavaSearchContext -a split<CR>
+nnoremap <silent> ;d  :JavaDocSearch<CR>
+nnoremap <silent> ;sd :JavaDocPreview<CR>
+
+nnoremap <silent> ;pi :call DoCurrentProject(0)<CR>
+nnoremap <silent> ;pd :call DoCurrentProject(3)<CR>
+nnoremap <silent> ;pp :call DoSelectProjects()<CR>
+
+nnoremap <silent> ;jv :Validate<cr>
+nnoremap <silent> ;jc :JavaCorrect<cr>
+nnoremap <silent> ;ji :JavaImport<cr>
+nnoremap <silent> ;jg :JavaImportOrganize<CR>
+
+nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<cr>
+nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<cr>
+
+" map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
+" map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
+" map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
+" map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
