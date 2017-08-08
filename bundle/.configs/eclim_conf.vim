@@ -202,7 +202,7 @@ endfunc"}}}
 
 func! DoCtrlLeftMouse() "{{{
     let word = expand("<cword>")
-    if &ft != 'java' || !eclim#EclimAvailable() 
+    if &ft != 'java' || !eclim#EclimAvailable(0) 
         exec "tag " . word
         return
     endif
@@ -215,7 +215,7 @@ func! DoCtrlLeftMouse() "{{{
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{
-    if &ft != 'java' || !eclim#EclimAvailable() 
+    if &ft != 'java' || !eclim#EclimAvailable(0) 
         " ctrl-t
         exec "silent! pop"
         return
