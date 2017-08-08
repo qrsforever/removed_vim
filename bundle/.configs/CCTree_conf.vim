@@ -336,15 +336,15 @@ func! s:DoMyTags()
     exec 'lchdir %:p:h'
     let root = getcwd()
     echomsg "Use select: "
-    echomsg "   0 : Build or load database in current dir."
     echomsg "   1 : Load databases, multiple dbs delimited by ','"
+    echomsg "   2 : Build or load database in current dir."
     echohl Search
     let sel = str2nr(input("Select : ", ' '), 10)
     echohl None
-    if sel == 0
-        call s:BuildTagDB(root)
-    elseif sel == 1
+    if sel == 1
         call s:ShowAndLoadTagDB(root)
+    elseif sel == 2
+        call s:BuildTagDB(root)
     else
         return 
     endif
