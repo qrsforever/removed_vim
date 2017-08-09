@@ -21,10 +21,10 @@ nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 "nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
 " vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
 " vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
-" nnoremap <silent> s,     :FufBufferTag<CR>
-" nnoremap <silent> s.     :FufBufferTagAll<CR>
-" nnoremap <silent> s<     :FufBufferTag!<CR>
-" nnoremap <silent> s>     :FufBufferTagAll!<CR>
+nnoremap <silent> s,     :FufBufferTag<CR>
+nnoremap <silent> s<     :FufBufferTag!<CR>
+nnoremap <silent> s.     :FufBufferTagAll<CR>
+nnoremap <silent> s>     :FufBufferTagAll!<CR>
 nnoremap <silent> s]     :FufBufferTagWithCursorWord!<CR>
 nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 "vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>

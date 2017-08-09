@@ -73,6 +73,7 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'ervandew/supertab'
+MyPlugin 'skywind3000/asyncrun.vim'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     MyPlugin 'local/fuzzyfinder'

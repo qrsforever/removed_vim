@@ -142,7 +142,7 @@ nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/async<CR>
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
-nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty -no-quit grep:%<CR>
+nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=menusource menu:default<CR>
 
 let g:unite_prompt = '» '
@@ -168,6 +168,8 @@ function! s:unite_my_settings()
   inoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
   nnoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
 
+  " p		|<Plug>(unite_smart_preview)|
+
   let unite = unite#get_current_unite()
   if unite.buffer_name =~# '^search'
       nnoremap <silent><buffer><expr> r     unite#do_action('replace')
@@ -176,4 +178,3 @@ function! s:unite_my_settings()
   endif
 endfunction
 autocmd FileType unite call s:unite_my_settings()
-

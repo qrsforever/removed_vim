@@ -102,6 +102,9 @@ func! DoSelectProjects() "{{{
     endfor
 
     let tmpstr = input("Select project: ", ' ')
+    if tmpstr == '' || tmpstr == ' '
+        return 
+    endif
     let tokpos = stridx(tmpstr, ',')
     if tokpos > 0
         let select = split(tmpstr, ',')
@@ -200,18 +203,27 @@ func! DoProjectSearch(flag, xp, split) "{{{
     call eclim#java#search#SearchAndDisplay('java_search', params)
 endfunc"}}}
 
-func! DoCtrlLeftMouse() "{{{
+func! DoCtrlLeftMouse() abort "{{{
     let word = expand("<cword>")
-    if &ft != 'java' || !eclim#EclimAvailable(0) 
-        exec "tag " . word
-        return
+
+    " 1. eclim
+    if &ft == 'java' && eclim#EclimAvailable(0)
+        let ret = eclim#java#search#SearchAndDisplay('java_search', '-a edit')
+        if ret == 1
+            return
+        endif
     endif
-    " exec "JavaSearchContext -a edit"
-    let ret = eclim#java#search#SearchAndDisplay('java_search', '-a edit')
-    if ret != 1
-        exec "tag " . word
-        return
+
+    " 2. ycm
+    if exists('g:loaded_unite')
+        let result = unite#util#redir('YcmCompleter GoToDefinitionElseDeclaration')
+        if result == '' || matchstr(result, "Error") == ''
+            return
+        endif
     endif
+
+    " 3. tag
+    exec "tag " . word
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{
@@ -253,23 +265,25 @@ command S J
 
 " nnoremap [eclim] <Nop>
 " nmap ; [eclim]
-" 
-nnoremap <silent> ;c  :JavaSearchContext -a edit<CR>
-nnoremap <silent> ;sc :JavaSearchContext -a split<CR>
-nnoremap <silent> ;d  :JavaDocSearch<CR>
-nnoremap <silent> ;sd :JavaDocPreview<CR>
 
-nnoremap <silent> ;pi :call DoCurrentProject(0)<CR>
-nnoremap <silent> ;pd :call DoCurrentProject(3)<CR>
-nnoremap <silent> ;pp :call DoSelectProjects()<CR>
+nnoremap <silent> ;c  <esc>:JavaSearchContext -a edit<CR>
+nnoremap <silent> ;sc <esc>:JavaSearchContext -a split<CR>
+nnoremap <silent> ;d  <esc>:JavaDocSearch<CR>
+nnoremap <silent> ;sd <esc>:JavaDocPreview<CR>
 
-nnoremap <silent> ;jv :Validate<cr>
-nnoremap <silent> ;jc :JavaCorrect<cr>
-nnoremap <silent> ;ji :JavaImport<cr>
-nnoremap <silent> ;jg :JavaImportOrganize<CR>
+nnoremap <silent> ;pi <esc>:call DoCurrentProject(0)<CR>
+nnoremap <silent> ;pd <esc>:call DoCurrentProject(3)<CR>
+nnoremap <silent> ;pp <esc>:call DoSelectProjects()<CR>
 
-nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<cr>
-nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<cr>
+nnoremap <silent> ;jv <esc>:Validate<CR>
+nnoremap <silent> ;jc <esc>:JavaCorrect<CR>
+nnoremap <silent> ;ji <esc>:JavaImport<CR>
+nnoremap <silent> ;jg <esc>:JavaImportOrganize<CR>
+
+nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
+nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>
+nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>
+
 
 " map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
 " map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
