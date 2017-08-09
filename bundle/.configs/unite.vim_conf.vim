@@ -20,6 +20,7 @@ let g:unite_source_menu_menus = {
     \       "command_candidates" : [
     \           ["1. Open xlog dir", "NERDTree /tmp/xlog"],
     \           ["2. Open jira dir", "NERDTree ~/Downloads/jira"],
+    \           ["3. Open node dir", "NERDTree ~/workspace"],
     \       ],
     \   },
     \}
@@ -72,7 +73,7 @@ call unite#custom#profile(
     \ 'sorter_rank')
 
 call unite#custom#profile(
-    \ 'menusource',
+    \ 'leftview',
     \ 'context',
     \ {
         \ 'winwidth': 36,
@@ -143,7 +144,8 @@ nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -s
 nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty grep:%<CR>
-nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=menusource menu:default<CR>
+nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
+nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=files -profile-name=leftview -no-quit file<CR>
 
 let g:unite_prompt = '» '
 
