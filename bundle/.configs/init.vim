@@ -74,6 +74,7 @@ MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'ervandew/supertab'
 MyPlugin 'skywind3000/asyncrun.vim'
+MyPlugin 'jdevera/vim-opengrok-search'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     MyPlugin 'local/fuzzyfinder'
