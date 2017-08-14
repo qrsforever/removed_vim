@@ -42,6 +42,7 @@ command -nargs=?
 
 "通过当前编辑的文件, 打开所在的Android工程, 最终方便实现代码补全功能.
 func! DoCurrentProject(flag) "{{{
+    exec "lchdir %:p:h"
     let curdir = getcwd()
     while len(curdir) > 12 
         let children = vimproc#readdir(curdir)
@@ -272,6 +273,8 @@ nnoremap <silent> ;d  <esc>:JavaDocSearch<CR>
 nnoremap <silent> ;sd <esc>:JavaDocPreview<CR>
 
 nnoremap <silent> ;pi <esc>:call DoCurrentProject(0)<CR>
+nnoremap <silent> ;po <esc>:call DoCurrentProject(1)<CR>
+nnoremap <silent> ;pc <esc>:call DoCurrentProject(2)<CR>
 nnoremap <silent> ;pd <esc>:call DoCurrentProject(3)<CR>
 nnoremap <silent> ;pp <esc>:call DoSelectProjects()<CR>
 
