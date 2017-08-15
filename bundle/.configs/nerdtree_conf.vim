@@ -42,7 +42,7 @@ let NERDTreeWinPos='left'                            "窗口位置left
 let NERDTreeWinSize=36                               "窗口宽
 let NERDTreeStatusline=1
 let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeDirArrows=1
 " files to ignore "
 let NERDTreeIgnore = ['.*\.o$']

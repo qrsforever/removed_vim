@@ -320,7 +320,7 @@ func! s:ShowAndLoadTagDB(root)
 
             let cscopeout = subdirs[n] . '/cscope.out'
             if filereadable(cscopeout)
-                exec 'cs add ' . cscopeout . ' ' . subdirs[n-1]
+                exec 'cs add ' . cscopeout . ' ' . subdirs[n]
             endif
 
             let tagfile = subdirs[n] . '/tags'

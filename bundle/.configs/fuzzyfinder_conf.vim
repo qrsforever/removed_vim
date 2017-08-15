@@ -1,3 +1,10 @@
+" Fix: http://vim.wikia.com/wiki/Script:1984
+" For some reason the "BufDelete" autocmd is not working properly under vim 8.0 with FuzzyFinder.vim. A quick fix is to add the following line in .vim/autoload/l9/tempbuffer.vim (line 101):
+" 
+" execute printf('%dbdelete!', s:dataMap[a:bufname].bufNr)
+" "TODO: find a better/nicer solution
+" execute 'wincmd p' 
+" 
 nnoremap <silent> sj     :FufBuffer<CR>
 " nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
 " nnoremap <silent> sK     :FufFileWithFullCwd<CR>
