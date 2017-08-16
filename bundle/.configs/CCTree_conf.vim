@@ -218,8 +218,8 @@ func! s:CreateTagDB(root)
 endfunc
 
 func! s:BuildTagDB(root)
-    :messages clear
-    :redraw
+    :silent! messages clear
+    :silent! redraw
     echomsg "1: Build or load db"
     echomsg "2: Delete before load db" 
     echomsg "3: Only delete db"
