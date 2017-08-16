@@ -262,8 +262,8 @@ func! s:ShowAndLoadTagDB(root)
 
     let subdirs = [ ]
     let i = 0
-    :messages clear
-    :redraw
+    :silent! messages clear
+    :silent! redraw
 
     " 0. 标准 c/c++ tags
     if isdirectory($HOME . '/.vim/tags')
