@@ -225,6 +225,7 @@ func! DoCtrlLeftMouse() abort "{{{
 
     " 3. tag
     exec "tag " . word
+    exec "normal zt"
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{
