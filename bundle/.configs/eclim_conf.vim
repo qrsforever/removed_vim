@@ -229,12 +229,17 @@ func! DoCtrlLeftMouse() abort "{{{
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{
-    if &ft != 'java' || !eclim#EclimAvailable(0) 
-        " ctrl-t
-        exec "silent! pop"
+    if &ft == 'java' && eclim#EclimAvailable(0)
+        exec 'normal! ' .  "\<c-o>"
         return
     endif
-    exec 'normal! ' .  "\<c-o>"
+    let result = unite#util#redir('silent! pop')
+    if result != '' && matchstr(result, "Error") != ''
+        exec 'normal! ' .  "\<c-o>"
+        return
+    endif
+    " ctrl-t
+    exec "silent! pop"
 endfunc"}}}
 
 "<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
