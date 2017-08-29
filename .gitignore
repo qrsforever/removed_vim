@@ -41,3 +41,4 @@ bundle/neoinclude.vim
 bundle/vim-powerline
 bundle/DrawIt
 bundle/asyncrun.vim
+bundle/vim-markdown
