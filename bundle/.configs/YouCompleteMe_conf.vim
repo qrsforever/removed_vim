@@ -19,7 +19,8 @@ let g:ycm_min_num_identifier_candidate_chars = 5
 let g:ycm_auto_trigger = 1
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_max_diagnostics_to_display = 10
-let g:ycm_cache_omnifunc= 1
+" 如果设置为1, 补全提示会变成隔一个显示提示,可能和neocomplete.vim冲突,暂且关闭
+let g:ycm_cache_omnifunc= 0
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 2000
 let g:ycm_seed_identifiers_with_syntax = 1	
@@ -32,7 +33,6 @@ let g:ycm_filetype_blacklist = {
             \ 'files' : 1,
             \ 'qf' : 1,
             \ 'notes' : 1,
-            \ 'markdown' : 1,
             \ 'unite' : 1,
             \ 'text' : 1,
             \ 'logcat' : 1,

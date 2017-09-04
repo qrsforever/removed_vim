@@ -1,39 +1,18 @@
 
 "[normal, horizontal, vertical, context]
 let g:UltiSnipsEditSplit = "horizontal"
-" let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
-" let g:UltiSnipsSnippetDirectories =['~/.vim/bundle/vim-snippets/UltiSnips', '~/.vim/UltiSnips']
+let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+let g:UltiSnipsSnippetDirectories =['UltiSnips']
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<nul>"
 let g:UltiSnipsJumpBackwardTrigger="<nul>"
 let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsUsePythonVersion = 3
 
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
+let g:ulti_expand_or_jump_res = 0 "default value, just set once
+function! Ulti_ExpandOrJump_and_getRes()
+    call UltiSnips#ExpandSnippetOrJump()
+    return g:ulti_expand_or_jump_res
 endfunction
 
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 1
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-
-" Set <space> as primary trigger
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+inoremap <NL> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":IMAP_Jumpfunc('', 0)<CR>

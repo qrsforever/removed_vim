@@ -7,3 +7,13 @@ snippet xcenter "居中DIV" b
 
 </div>
 endsnippet
+
+snippet xhead "mark down head info" b
+---
+title: `!p snip.rv = snip.basename`$1
+date: `date +"%Y-%m-%d %H:%M"`
+tags: [ $2 ]
+categories: [ $3 ]
+---
+$0
+endsnippet
