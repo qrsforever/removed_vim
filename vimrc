@@ -226,6 +226,7 @@ set ts=4
 
 "自动缩进的时候, 缩进尺寸
 set sw=4
+set softtabstop=4
 
 "显示括号配对情况 wrong
 set sm  "smartmatch
@@ -442,8 +443,8 @@ language en_US.utf8
 "字符编码(多字节)"}}}
 
 "打开 C/C++ 风格的自动缩进 ( =a{ , gg=G 代码美化 )
-set cin
 "设置C/C++语言的具体缩进方式 eg. switch case 缩进"{{{
+set cin
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set cino=:0g0t0(sus
 "工作需要不缩进,不习惯也要习惯

@@ -208,7 +208,6 @@ func! DoCtrlLeftMouse() abort "{{{
     let word = expand("<cword>")
 
     " 1. not support ctag, return
-    echomsg "##" . &ft
     if &ft != 'c' && &ft != 'cpp' && &ft != 'python' && &ft != 'java'
         return
     endif
