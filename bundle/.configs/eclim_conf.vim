@@ -207,6 +207,11 @@ endfunc"}}}
 func! DoCtrlLeftMouse() abort "{{{
     let word = expand("<cword>")
 
+    " 1. not support ctag, return
+    if &ft != 'c' || &ft != 'cpp' || &ft != 'python' || &ft != 'java'
+        return
+    endif
+
     " 1. eclim
     if &ft == 'java' && eclim#EclimAvailable(0)
         let ret = eclim#java#search#SearchAndDisplay('java_search', '-a edit')
