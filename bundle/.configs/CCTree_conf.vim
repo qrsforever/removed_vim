@@ -74,6 +74,8 @@ func! CCTreeOpenFile(cmd)
     endif
 endfunc
 
+"局部跳转到赋值或定义处:gd, cs a 是去全局
+nmap <C-\>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -85,6 +87,7 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <C-\>f : call CCTreeOpenFile('cs')<CR>
 "
 "window tab 
+nmap <C-\><C-\>a :tab cs find a <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>s :tab cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>g :tab cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\><C-\>c :tab cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -96,6 +99,7 @@ nmap <C-\><C-\>d :tab cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <C-\><C-\>f :call CCTreeOpenFile('tab cs')<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
+nmap <C-\>\a :scs find a <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
@@ -107,6 +111,7 @@ nmap <C-\>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <C-\>\f :call CCTreeOpenFile('scs')<CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
+nmap <C-\>/a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>/s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>/g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>/c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
