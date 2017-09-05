@@ -222,16 +222,24 @@ func! DoCtrlLeftMouse() abort "{{{
 
     if exists('g:loaded_unite')
         " 2. ycm
-        let result = unite#util#redir('YcmCompleter GoToDefinitionElseDeclaration')
-        if result == '' || matchstr(result, "Error") == ''
+        try
+            let result = unite#util#redir('YcmCompleter GoToDefinitionElseDeclaration')
+            if result == '' || matchstr(result, "Error") == ''
+                return
+            endif
+        catch
             return
-        endif
+        endtry
         " 3. tag
-        let result = unite#util#redir('tag ' . word)
-        if matchstr(result, "tag not found") != ''
-            echomsg "tag not found for " . word
-            return
-        endif
+        try
+            let result = unite#util#redir('tag ' . word)
+            if matchstr(result, "tag not found") != ''
+                echomsg "tag not found for " . word
+                return
+            endif
+        catch
+            return 
+        endtry
         exec "tag " . word
         exec "normal zt"
     endif
