@@ -207,7 +207,7 @@ endfunc"}}}
 func! DoCtrlLeftMouse() abort "{{{
     let word = expand("<cword>")
 
-    " 1. not support ctag, return
+    " 0. not support ctag, return
     if &ft != 'c' && &ft != 'cpp' && &ft != 'python' && &ft != 'java'
         return
     endif
@@ -220,17 +220,21 @@ func! DoCtrlLeftMouse() abort "{{{
         endif
     endif
 
-    " 2. ycm
     if exists('g:loaded_unite')
+        " 2. ycm
         let result = unite#util#redir('YcmCompleter GoToDefinitionElseDeclaration')
         if result == '' || matchstr(result, "Error") == ''
             return
         endif
+        " 3. tag
+        let result = unite#util#redir('tag ' . word)
+        if matchstr(result, "tag not found") != ''
+            echomsg "tag not found for " . word
+            return
+        endif
+        exec "tag " . word
+        exec "normal zt"
     endif
-
-    " 3. tag
-    exec "tag " . word
-    exec "normal zt"
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{
