@@ -14,17 +14,17 @@
 "              You may map keys for the call in your vimrc file for
 "              convenience. The default keys is:
 "              Highlighting:
-"                Normal \m  mark or unmark the word under or before the cursor
-"                       \r  manually input a regular expression
-"                       \n  clear current mark (i.e. the mark under the cursor),
+"                Normal ]m  mark or unmark the word under or before the cursor
+"                       ]r  manually input a regular expression
+"                       ]n  clear current mark (i.e. the mark under the cursor),
 "                           or clear all marks
-"                Visual \m  mark or unmark a visual selection
-"                       \r  manually input a regular expression
+"                Visual ]m  mark or unmark a visual selection
+"                       ]r  manually input a regular expression
 "              Searching:
-"                Normal \*  jump to the next occurrence of current mark
-"                       \#  jump to the previous occurrence of current mark
-"                       \/  jump to the next occurrence of ANY mark
-"                       \?  jump to the previous occurrence of ANY mark
+"                Normal ]*  jump to the next occurrence of current mark
+"                       ]#  jump to the previous occurrence of current mark
+"                       ]/  jump to the next occurrence of ANY mark
+"                       ]?  jump to the previous occurrence of ANY mark
 "                        *  behaviors vary, please refer to the table on
 "                        #  line 123
 "                combined with VIM's / and ? etc.
@@ -209,7 +209,7 @@ endfunction
 
 " manually input a regular expression
 function! s:MarkRegex(...) " MarkRegex(regexp)
-	let regexp = ""
+	let regexp = expand("<cword>")
 	if a:0 > 0
 		let regexp = a:1
 	endif
