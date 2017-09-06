@@ -9,7 +9,7 @@ let Grep_Null_Device = '/dev/null'
 let Grep_Shell_Quote_Char = "'"
 let Grep_Default_Filelist = '*'
 
-command! -nargs=* -complete=file MyGrep call s:DoSelectGrep(<f-args>)
+command! MyGrep call s:DoSelectGrep()
 
 let s:MRUGrepWordsFile = expand('$HOME/.MRUGrepWordsFile')
 let s:MaxCount = 30

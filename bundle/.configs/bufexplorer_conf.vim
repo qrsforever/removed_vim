@@ -1,23 +1,12 @@
 command! MyBufExplorer call s:DoBufExplorer()
 function! s:DoBufExplorer()
     let buftype = getbufvar('%', '&filetype')
-    let buffers = ['nerdtree', 'tagbar', 'qf', 'unite']
-    for name in buffers
-        if name ==# buftype
-            echomsg "Can not use BufExplorer in " . name
-            return
+    let ret = MyFun_is_special_buffer(buftype)
+    if ret == 0
+        execute "BufExplorer"
+    else
+        if buftype ==# 'bufexplorer'
+            execute "normal q"
         endif
-    endfor
-    unlet buffers
-    execute "ToggleBufExplorer"
-    "if len(buftype) == 0
-    "    let bufname = bufname('%')
-    "    if bufname ==# "[BufExplorer]"
-    "        silent execute "keepjumps silent b "
-    "        " silent execute "keepjumps silent bwipeout "
-    "        return
-    "    endif
-    "endif
-    "let ret = call('BufExplorer', a:000)
-    "return ret
+    endif
 endfunction

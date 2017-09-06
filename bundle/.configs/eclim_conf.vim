@@ -223,7 +223,7 @@ func! DoCtrlLeftMouse() abort "{{{
     if exists('g:loaded_unite')
         " 2. ycm
         try
-            let result = unite#util#redir('YcmCompleter GoToDefinitionElseDeclaration')
+            let result = unite#util#redir('YcmCompleter GoTo')
             if result == '' || matchstr(result, "Error") == ''
                 return
             endif

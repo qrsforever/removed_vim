@@ -166,7 +166,7 @@ endif
 "":cs show
 
 "========TAG
-command! -nargs=* MyTags  call s:DoMyTags()
+command! MyTags call s:DoMyTags()
 
 func! s:LoadTagDB(force, root) 
     let flg = str2nr(a:force, 10) 

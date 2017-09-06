@@ -15,7 +15,6 @@ let g:LookupFile_DisableDefaultMap = 1 "F5
 " let g:LookupFile_EnableRemapCmd=1
 let g:LookupFile_DefaultCmd = ':LUTags'
 
-
 " Don't display binary files
 let g:LookupFile_FileFilter = '\.class$\|\.o$\|\.obj$\|\.exe$\|\.jar$\|\.zip$\|\.war$\|\.ear$\|\.bak$\|\tag$'
 let g:LookupFile_TagExpr=string('filenametags')
@@ -52,3 +51,16 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 " <C-J>: split 
 " <C-K>: vsplit
 "<C-O>       i       Same as <CR>, except that the file opens in a split
+"
+command! MyLookupFile call s:DoLookupFile()
+func! s:DoLookupFile() "{{{
+    let buftype = getbufvar('%', '&filetype')
+    let ret = MyFun_is_special_buffer(buftype)
+    if ret == 0
+        exec "LookupFile"
+    else
+        if 'lookupfile' ==# buftype
+            exec "q"
+        endif
+    endif
+endfunc"}}}

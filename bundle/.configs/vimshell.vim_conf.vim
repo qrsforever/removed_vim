@@ -28,8 +28,16 @@ let g:vimshell_split_command = 'split'
 nmap <silent> \ss :lchdir %:p:h<CR>:VimShellCurrentDir -toggle -buffer-name=@ -split-command=split<CR>
 " nmap <silent> \st :VimShellTab -create -buffer-name=@<CR>
 "
-command! -nargs=* -complete=file MyShell call s:DoVimShell()
+command! MyShell call s:DoVimShell()
 
 func! s:DoVimShell()
-    exec "VimShellCurrentDir -toggle -buffer-name=@ -split-command=split"
+    let buftype = getbufvar('%', '&filetype')
+    let ret = MyFun_is_special_buffer(buftype)
+    if ret == 0
+        exec "VimShellCurrentDir -toggle -buffer-name=@ -split-command=split"
+    else
+        if buftype ==# 'vimshell'
+            exec "VimShellCurrentDir -toggle -buffer-name=@ -split-command=split"
+        endif
+    endif
 endf

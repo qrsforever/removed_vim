@@ -44,6 +44,6 @@ let g:ycm_key_invoke_completion = '<S-TAB>'
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 
-nnoremap ;g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap ;g :YcmCompleter GoTo<CR>
 nnoremap ;b :YcmForceCompileAndDiagnostics<CR>
 

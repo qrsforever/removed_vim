@@ -37,12 +37,12 @@ augroup END
 
 au FileType c,cpp setlocal makeprg=make\ -j4
 
-command! -nargs=* -complete=file MyMake call s:DoSelectMake(<f-args>)
+command! MyMake call s:DoSelectMake()
 
 let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
 let s:MaxFileCount = 3
 
-func! s:DoSelectMake(...) "{{{
+func! s:DoSelectMake() "{{{
     if &filetype == 'python'
         exec "MyPythonRun"
         return 
@@ -164,7 +164,7 @@ func! s:DoSelectMake(...) "{{{
 endfunc"}}}
 
 "========Python
-command! -nargs=* -complete=file MyPythonRun call s:Python_Run(<f-args>)
+command! MyPythonRun call s:Python_Run()
 
 function s:Python_Run()
     let mp = &makeprg
@@ -193,7 +193,7 @@ function s:Python_Run()
     let &errorformat = ef
 endfunction
 
-command! -nargs=* MyToggleHtmlPhp call s:ToggleHtmlPhp()
+command! MyToggleHtmlPhp call s:ToggleHtmlPhp()
 
 function s:ToggleHtmlPhp()
     if &filetype == 'html'
