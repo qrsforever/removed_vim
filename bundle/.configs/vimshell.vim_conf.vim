@@ -22,7 +22,7 @@ let g:vimshell_split_command = 'split'
 "let g:vimshell_execute_file_list['pl'] = 'perl'
 "let g:vimshell_execute_file_list['py'] = 'python'
 "
-" let g:vimshell_no_default_keymappings = 0
+" let g:vimshell_no_default_keymappings = 1
 "let g:vimshell_use_terminal_command = 'gnome-terminal -e'
 
 " nmap <silent> \sv :VimShell -toggle -buffer-name=@<CR>
@@ -43,6 +43,42 @@ func! s:DoVimShell(t)
         endif
     endif
 endf
+
+" Normal mode default key mappings.
+" {lhs}			{rhs}
+" --------		-----------------------------
+" <C-p>			<Plug>(vimshell_int_previous_prompt)
+" <C-n>			<Plug>(vimshell_int_next_prompt)
+" <CR>			<Plug>(vimshell_int_execute_line)
+" <C-y>			<Plug>(vimshell_int_paste_prompt)
+" <C-z>			<Plug>(vimshell_int_restart_command)
+" <C-c>			<Plug>(vimshell_int_interrupt)
+" q			    <Plug>(vimshell_int_exit)
+" cc			<Plug>(vimshell_int_change_line)
+" dd			<Plug>(vimshell_int_delete_line)
+" I			    <Plug>(vimshell_int_insert_head)
+" A			    <Plug>(vimshell_int_append_end)
+" i			    <Plug>(vimshell_int_insert_enter)
+" a			    <Plug>(vimshell_int_append_enter)
+" <C-l>			<Plug>(vimshell_int_clear)
+
+" Insert mode default key mappings.
+" {lhs}			{rhs}
+" --------		-----------------------------
+" <C-h>			<Plug>(vimshell_int_delete_backward_char)
+" <BS>			<Plug>(vimshell_int_delete_backward_char)
+" <C-a>			<Plug>(vimshell_int_move_head)
+" <C-u>			<Plug>(vimshell_int_delete_backward_line)
+" <C-w>			<Plug>(vimshell_int_delete_backward_word)
+" <C-k>			<Plug>(vimshell_int_delete_forward_line)
+" <CR>			<Plug>(vimshell_int_execute_line)
+" <C-c>			<Plug>(vimshell_int_interrupt)
+" <C-l>			<Plug>(vimshell_int_history_unite)
+" <C-v>			<Plug>(vimshell_int_send_input)
+" <C-n>			<C-n>
+" <TAB>			Select candidate or start completion
+
+" imap <buffer><C-g> <Plug>(vimshell_history_complete)
 
 ":p		expand to full path
 ":h		head (last path component removed)

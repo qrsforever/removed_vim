@@ -80,7 +80,7 @@ func! s:DoSelectGrep()
         if startdir == ""
             return
         endif
-        exec "lvimgrep '" . word . "' " . startdir . "/**/*"
+        exec "silent! lvimgrep '" . word . "' " . startdir . "/**/*"
         exec "belowright lw 15"
     elseif select == 3
         exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')
