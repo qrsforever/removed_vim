@@ -296,7 +296,11 @@ set linebreak
 
 " 设置每行多少个字符自动换行，加上换行符
 "set textwidth=80 "有时不爽
-set textwidth=0  "总不换行
+set textwidth=130 "总不换行, 选中已有行执行 gq 可以自动换行
+" fo = formatoptions: 
+" m - 总是拆分大于255的多字节字符 
+" M - 当合并行的时候，在多字节字符的前后不加空格
+set fo+=Mm
 
 " 光标可以定位在没有实际字符的地方
 "set ve=block
