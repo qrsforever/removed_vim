@@ -1,7 +1,8 @@
-let g:vimshell_prompt = $USER."% "
-let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~")."$", "\\[]()?! ")." "'
+" let g:vimshell_prompt = $USER."% "
+" let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~")."$", "\\[]()?! ")." "'
+let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":t")."$", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+$ '
-""let g:vimshell_prompt_pattern = ''
+"let g:vimshell_prompt_pattern = ''
 "let g:vimshell_user_prompt = ''
 "let g:vimshell_max_command_history = 500
 let g:vimshell_vimshrc_path	= '~/.vim/vimshrc'
@@ -42,3 +43,9 @@ func! s:DoVimShell(t)
         endif
     endif
 endf
+
+":p		expand to full path
+":h		head (last path component removed)
+":t		tail (last path component only)
+":r		root (one extension removed)
+":e		extension only
