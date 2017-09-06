@@ -17,7 +17,7 @@ nmap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
 nmap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
 nmap <unique> <silent> <F8>  <ESC>:MyTags<CR>
 nmap <unique> <silent> <F10> <ESC>:MyMake<CR>
-nmap <unique> <silent> <F11> <ESC>:MyShell<CR>
+nmap <unique> <silent> <F11> <ESC>:MyVimShellS<CR>
 
 imap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
@@ -28,7 +28,7 @@ imap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
 imap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>  <ESC>:MyTags<CR>
 imap <unique> <silent> <F10> <ESC>:MyMake<CR>
-imap <unique> <silent> <F11> <ESC>:MyShell<CR>
+imap <unique> <silent> <F11> <ESC>:MyVimShellS<CR>
 
 map <unique> <silent> <F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
@@ -37,6 +37,8 @@ map <unique> <silent> <S-F3> <ESC>:cn<CR>
 
 map <unique> <silent> <C-F2> <ESC>:tN<CR>
 map <unique> <silent> <C-F3> <ESC>:tn<CR>
+
+map <unique> <silent> <C-F11> <ESC>:MyVimShellV<CR>
 
 "<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
 
