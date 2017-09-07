@@ -12,4 +12,18 @@ let g:tagbar_iconchars = ['▶', '▼']
 "highlight TagbarScope guifg=Green ctermfg=Green
 
 autocmd BufNewFile,BufReadPost *.aidl let b:tagbar_ignore = 1
-"autocmd BufLeave *.cpp,*.c,*.h resize
+"autocmd BufLeave *.cpp,*.c,*.h resize 
+ 
+
+" 支持markdown
+" ln -s ~/.vim/configure/ctags ~/.ctags
+let g:tagbar_type_markdown = {
+            \ 'ctagstype' : 'markdown',
+            \ 'kinds' : [
+                \ 'h:headings',
+                \ 'l:links',
+                \ 'i:images'
+            \ ],
+    \ "sort" : 0
+    \ }
+
