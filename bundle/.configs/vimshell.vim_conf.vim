@@ -36,7 +36,7 @@ func! s:DoVimShell(t)
     let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
-        exec "VimShellCurrentDir -buffer-name=RunCMD -split-command=" . a:t
+        exec "VimShellCurrentDir -buffer-name=# -split-command=" . a:t
     else
         if buftype ==# 'vimshell'
             exec "normal q"
