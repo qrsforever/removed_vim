@@ -35,3 +35,14 @@ function! MyFun_is_special_buffer(bt) "{{{
     unlet buffers
     return ret
 endfunc"}}}
+
+command!  MyColColor call s:_MyColColor()
+
+function! s:_MyColColor() "{{{
+    let cc = &colorcolumn
+    if cc != ''
+        exec "set cc=\"\""
+    else
+        exec "set cc=+1," . col(".")
+    endif
+endfunc "}}}

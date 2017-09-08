@@ -26,7 +26,7 @@ let g:vimshell_split_command = 'split'
 "let g:vimshell_use_terminal_command = 'gnome-terminal -e'
 
 " nmap <silent> \sv :VimShell -toggle -buffer-name=@<CR>
-nmap <silent> \ss :lchdir %:p:h<CR>:VimShellCurrentDir -toggle -buffer-name=@ -split-command=split<CR>
+" nmap <silent> \ss :lchdir %:p:h<CR>:VimShellCurrentDir -toggle -buffer-name=@ -split-command=split<CR>
 " nmap <silent> \st :VimShellTab -create -buffer-name=@<CR>
 "
 command! MyVimShellS :call s:DoVimShell('25split')

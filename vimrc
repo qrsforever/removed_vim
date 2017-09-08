@@ -7,13 +7,14 @@ autocmd!
 "==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
 source ~/.vim/bundle/.configs/init.vim
 
+
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
 nmap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
 nmap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
 nmap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
-" nmap <unique> <silent> <F6>  <ESC>:MyGoto<CR>
+" nmap <unique> <silent> <F6>  <ESC>:<CR>
 nmap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
 nmap <unique> <silent> <F8>  <ESC>:MyTags<CR>
 nmap <unique> <silent> <F10> <ESC>:MyMake<CR>
@@ -24,37 +25,37 @@ imap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
 imap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
-" imap <unique> <silent> <F6>  <ESC>:MyGoto<CR>
+" imap <unique> <silent> <F6>  <ESC>:<CR>
 imap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>  <ESC>:MyTags<CR>
 imap <unique> <silent> <F10> <ESC>:MyMake<CR>
 imap <unique> <silent> <F11> <ESC>:MyVimShellS<CR>
 
-map <unique> <silent> <F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
+map <unique> <silent> <F12>  <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
-map <unique> <silent> <S-F2> <ESC>:cN<CR>
-map <unique> <silent> <S-F3> <ESC>:cn<CR>
+map <unique> <silent> <S-F2>  <ESC>:cN<CR>
+map <unique> <silent> <S-F3>  <ESC>:cn<CR>
+map <unique> <silent> <S-F9>  <ESC>:MyColColor<CR>
+map <unique> <silent> <S-F11> <ESC>:MyVimShellV<CR>
 
 map <unique> <silent> <C-F2> <ESC>:tN<CR>
 map <unique> <silent> <C-F3> <ESC>:tn<CR>
 
-map <unique> <silent> <C-F11> <ESC>:MyVimShellV<CR>
-
 "<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
 
+"S-F1"
+" map     <silent>   <Esc>O1;2P <C-O>:<CR>
 "S-F2"
-map <silent><Esc>O1;2Q <C-O>:cN<CR>
-nmap <silent><Esc>O1;2Q :cN<CR>
+map     <silent>   <Esc>O1;2Q <C-O>:cN<CR>
 "S-F3"
-map <silent><Esc>O1;2R <C-O>:cn<CR>
-nmap <silent><Esc>O1;2R :cn<CR>
+map     <silent>   <Esc>O1;2R <C-O>:cn<CR>
 
+"C-F1"
+" map     <silent>   <Esc>O1;5P <C-O>:<CR>
 "C-F2"
-map <silent><Esc>O1;5Q <C-O>:tN<CR>
-nmap <silent><Esc>O1;5Q :tN<CR>
+map     <silent>   <Esc>O1;5Q <C-O>:tN<CR>
 "C-F3"
-map <silent><Esc>O1;5R <C-O>:tn<CR>
-nmap <silent><Esc>O1;5R :tn<CR>
+map     <silent>   <Esc>O1;5R <C-O>:tn<CR>
 
 "F1~F12快捷键映射"}}}
 
@@ -299,6 +300,8 @@ set linebreak
 " 设置每行多少个字符自动换行，加上换行符
 "set textwidth=80 "有时不爽
 set textwidth=130 "总不换行, 选中已有行执行 gq 可以自动换行
+"highlight column after 'textwidth'
+" set cc=+1  
 " fo = formatoptions: 
 " m - 总是拆分大于255的多字节字符 
 " M - 当合并行的时候，在多字节字符的前后不加空格
@@ -410,11 +413,15 @@ highlight PmenuThumb    ctermbg=Yellow                      guibg=Yellow
 
 "高亮 当前行(列)"{{{
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 " ctermfg : red(1) yellow(2) blue green grey brown cyan magenta 数字
 hi CursorLine   term=none cterm=underline ctermbg=none    ctermfg=none   gui=underline guibg=NONE
-hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold  guibg=NONE
+" hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold  guibg=NONE
 "高亮 当前行(列)"}}}
+ 
+" 高亮列"{{{
+hi ColorColumn ctermbg=darkgrey guibg=lightgrey
+""}}}
 
 "高亮tab标签"{{{
 "hi! TabWinNum term=bold,underline cterm=underline gui=bold,underline ctermfg=green guifg=Green ctermbg=darkgrey guibg=DarkGrey
