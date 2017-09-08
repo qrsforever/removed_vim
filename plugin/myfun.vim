@@ -23,7 +23,7 @@ function s:_MyCopen()"{{{
 endfunction"}}}
 
 function! MyFun_is_special_buffer(bt) "{{{
-    let buftype = a:bt " getbufvar('%', '&filetype')
+    let buftype = a:bt != '' ? a:bt : getbufvar('%', '&filetype')
     let buffers = ['nerdtree', 'tagbar', 'qf', 'unite', 'lookupfile', 'bufexplorer', 'marksbuffer', 'vimshell']
     let ret = 0
     for name in buffers
@@ -37,7 +37,7 @@ function! MyFun_is_special_buffer(bt) "{{{
 endfunc"}}}
 
 command!  MyColColor call s:_MyColColor()
-
+autocmd FileType nerdtree,tagbar,lookupfile set cc=""
 function! s:_MyColColor() "{{{
     let cx = &colorcolumn
     let cz = "+1," . col(".")
