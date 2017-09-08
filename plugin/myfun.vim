@@ -39,8 +39,9 @@ endfunc"}}}
 command!  MyColColor call s:_MyColColor()
 
 function! s:_MyColColor() "{{{
-    let cc = &colorcolumn
-    if cc != ''
+    let cx = &colorcolumn
+    let cz = "+1," . col(".")
+    if cx != '' && cx == cz
         exec "set cc=\"\""
     else
         exec "set cc=+1," . col(".")
