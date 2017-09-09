@@ -587,3 +587,11 @@ au BufRead,BufNewFile *logcat* set filetype=logcat
 let alternateNoDefaultAlternate = 1
 
 "按q之后按:进入histroy command
+"
+" 0~ 1~ workaround: https://github.com/vim/vim/issues/1671
+if has("unix")
+    let s:uname = system("echo -n \"$(uname)\"")
+    if !v:shell_error && s:uname == "Linux"
+        set t_BE=
+    endif
+endif
