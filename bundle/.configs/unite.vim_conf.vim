@@ -136,7 +136,7 @@ nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
 nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
 " Use fuzzyfinder plugin instead.
 " nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split file_mru<CR>
-" nnoremap <silent> [unite]q :<C-u>MyCopen <CR>
+" nnoremap <silent> [unite]q :<C-u>MyTopCopen <CR>
 " nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
 " nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>

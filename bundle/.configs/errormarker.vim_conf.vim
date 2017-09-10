@@ -183,7 +183,7 @@ function s:Python_Run()
     silent make %
     let list = getqflist()
     if len(list) > 0
-        execute "MyCopen"
+        execute "MyTopCopen"
         execute "normal G"
         execute "normal zb"
     else

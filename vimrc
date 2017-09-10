@@ -9,37 +9,37 @@ source ~/.vim/bundle/.configs/init.vim
 
 
 "F1~F12快捷键映射"{{{
-nmap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
-nmap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
-nmap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
-nmap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
-nmap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
-" nmap <unique> <silent> <F6>  <ESC>:<CR>
-nmap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
-nmap <unique> <silent> <F8>  <ESC>:MyTags<CR>
-nmap <unique> <silent> <F10> <ESC>:MyMake<CR>
-nmap <unique> <silent> <F11> <ESC>:MyVimShellS<CR>
+nmap <unique> <silent> <F1>        :MarksBrowser<CR>
+nmap <unique> <silent> <F2>        :MyBufExplorer<CR>
+nmap <unique> <silent> <F3>        :NERDTreeToggle %:p:h<CR>
+nmap <unique> <silent> <F4>        :TagbarToggle<CR>
+nmap <unique> <silent> <F5>        :MyLookupFile<CR>
+nmap <unique> <silent> <F6>        :MyMake<CR>
+nmap <unique> <silent> <F7>        :MyGrep<CR>
+nmap <unique> <silent> <F8>        :MyTags<CR>
+nmap <unique> <silent> <F10>       :MyAsyncMake<CR>
+nmap <unique> <silent> <F11>       :MyVimShellS<CR>
 
-imap <unique> <silent> <F1>  <ESC>:MarksBrowser<CR>
-imap <unique> <silent> <F2>  <ESC>:MyBufExplorer<CR>
-imap <unique> <silent> <F3>  <ESC>:NERDTreeToggle %:p:h<CR>
-imap <unique> <silent> <F4>  <ESC>:TagbarToggle<CR>
-imap <unique> <silent> <F5>  <ESC>:MyLookupFile<CR>
-" imap <unique> <silent> <F6>  <ESC>:<CR>
-imap <unique> <silent> <F7>  <ESC>:MyGrep<CR>
-imap <unique> <silent> <F8>  <ESC>:MyTags<CR>
-imap <unique> <silent> <F10> <ESC>:MyMake<CR>
-imap <unique> <silent> <F11> <ESC>:MyVimShellS<CR>
+imap <unique> <silent> <F1>   <ESC>:MarksBrowser<CR>
+imap <unique> <silent> <F2>   <ESC>:MyBufExplorer<CR>
+imap <unique> <silent> <F3>   <ESC>:NERDTreeToggle %:p:h<CR>
+imap <unique> <silent> <F4>   <ESC>:TagbarToggle<CR>
+imap <unique> <silent> <F5>   <ESC>:MyLookupFile<CR>
+imap <unique> <silent> <F6>   <ESC>:MyMake<CR>
+imap <unique> <silent> <F7>   <ESC>:MyGrep<CR>
+imap <unique> <silent> <F8>   <ESC>:MyTags<CR>
+imap <unique> <silent> <F10>  <ESC>:MyAsyncMake<CR>
+imap <unique> <silent> <F11>  <ESC>:MyVimShellS<CR>
 
-map <unique> <silent> <F12>  <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
+map <unique> <silent> <F12>   <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 map <unique> <silent> <S-F2>  <ESC>:cN<CR>
 map <unique> <silent> <S-F3>  <ESC>:cn<CR>
 map <unique> <silent> <S-F9>  <ESC>:MyColColor<CR>
 map <unique> <silent> <S-F11> <ESC>:MyVimShellV<CR>
 
-map <unique> <silent> <C-F2> <ESC>:tN<CR>
-map <unique> <silent> <C-F3> <ESC>:tn<CR>
+map <unique> <silent> <C-F2>  <ESC>:tN<CR>
+map <unique> <silent> <C-F3>  <ESC>:tn<CR>
 
 "<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
 
