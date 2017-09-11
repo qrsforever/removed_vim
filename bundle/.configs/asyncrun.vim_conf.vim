@@ -24,6 +24,7 @@ func! s:DoSyncMake()
                 endif
 
                 let filen = strpart(child, len(child) - 8)
+                exec "lchdir " . expand(curdir , ":p:h")
                 if 'Makefile' ==# filen
                     " not impl
                     exec "AsyncRun -post=MyBottomCopen make -f " . child

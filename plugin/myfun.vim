@@ -18,13 +18,20 @@ command! MyBottomCopen call s:_MyCopen(0)
 command! MyTopCopen call s:_MyCopen(1)
 function s:_MyCopen(place) "{{{
     let h = winheight(0) / 3 - 5
+    if h < 5
+        let h = ''
+    endif
     if a:place == 1
         execute "topleft copen" . h
     elseif a:place == 0
         execute "botright copen" . h
     else
         let w = winwidth(0) / 2 - 5
-        execute "vertical copen" . w
+        if w < 5
+            execute "vertical copen" . w
+        else
+            execute "vertical copen"
+        endif
     endif
 endfunction"}}}
 
