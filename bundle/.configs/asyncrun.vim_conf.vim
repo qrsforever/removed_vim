@@ -9,7 +9,7 @@ command! MyAsyncMake :call s:DoSyncMake()
 
 func! s:DoSyncMake()
     if &filetype == 'python'
-        exec "AsyncRun -post=MyBottomCopen python " . expand("%:p")
+        exec "AsyncRun -post=MyBottomCopen " . expand("%:p")
         return
     endif
     if &filetype == 'c' || &filetype == 'cpp'
