@@ -224,7 +224,7 @@ func! DoCtrlLeftMouse() abort "{{{
         " 2. ycm
         try
             let result = unite#util#redir('YcmCompleter GoTo')
-            if result == '' || matchstr(result, "Error") == ''
+            if matchstr(result, "Error") == ''
                 return
             endif
         catch
@@ -241,7 +241,7 @@ func! DoCtrlLeftMouse() abort "{{{
             return 
         endtry
         exec "tag " . word
-        exec "normal zt"
+        " exec "normal zt"
     endif
 endfunc"}}}
 
