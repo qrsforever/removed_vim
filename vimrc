@@ -17,7 +17,6 @@ nmap <unique> <silent> <F5>        :MyLookupFile<CR>
 nmap <unique> <silent> <F6>        :MyMake<CR>
 nmap <unique> <silent> <F7>        :MyGrep<CR>
 nmap <unique> <silent> <F8>        :MyTags<CR>
-nmap <unique> <silent> <F10>       :MyAsyncMake<CR>
 nmap <unique> <silent> <F11>       :MyVimShellS<CR>
 
 imap <unique> <silent> <F1>   <ESC>:MarksBrowser<CR>
@@ -28,7 +27,6 @@ imap <unique> <silent> <F5>   <ESC>:MyLookupFile<CR>
 imap <unique> <silent> <F6>   <ESC>:MyMake<CR>
 imap <unique> <silent> <F7>   <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>   <ESC>:MyTags<CR>
-imap <unique> <silent> <F10>  <ESC>:MyAsyncMake<CR>
 imap <unique> <silent> <F11>  <ESC>:MyVimShellS<CR>
 
 map <unique> <silent> <F12>   <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
