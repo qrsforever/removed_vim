@@ -71,9 +71,13 @@ func! s:DoSelectGrep()
     " let word = s:InputWords()
     exec "lchdir %:p:h"
     exec "cclose"
+    let h = winheight(0) / 2 - 5
+    if h < 5
+        let h = ''
+    endif
     if select == 1
         exec "silent! lvimgrep '" . s:InputWords('lvimgrep') . "' " . expand('%')
-        exec "belowright lw 15"
+        exec "belowright lw " . h
     elseif select == 2
         let word = s:InputWords('lvimgrep')
         let startdir = input("Start searching from directory: ", getcwd(), "dir")
@@ -81,7 +85,7 @@ func! s:DoSelectGrep()
             return
         endif
         exec "silent! lvimgrep '" . word . "' " . startdir . "/**/*"
-        exec "belowright lw 15"
+        exec "belowright lw " . h
     elseif select == 3
         exec "Egrep '" . s:InputWords('egrep') . "' " . expand('%')
     elseif select == 4
@@ -95,7 +99,7 @@ func! s:DoSelectGrep()
     elseif select == 8
         exec "QuickFixClear"
         exec "cs find e " . s:InputWords('cs')
-        exec "belowright cw 15"
+        exec "belowright cw " . h
     else
         return
     endif

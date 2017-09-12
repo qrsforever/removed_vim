@@ -1,6 +1,9 @@
 "start/stop
 ":DrawIt[!]
-map ^V... <home>
+
+" 与shift + ^冲突
+" map ^V... <home>
+  
 nmap <Esc>[161q	<s-up>
 
 "----> "ay 
