@@ -19,7 +19,6 @@ nmap <unique> <silent> <F7>         :MyGrep<CR>
 nmap <unique> <silent> <F8>         :MyTags<CR>
 nmap <unique> <silent> <F9>         :MyVimShellS<CR>
 nmap <unique> <silent> <F10>        :MyMarkColor<CR>
-nmap <unique> <silent> <F12>        :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
@@ -31,18 +30,19 @@ imap <unique> <silent> <F7>    <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>    <ESC>:MyTags<CR>
 imap <unique> <silent> <F9>    <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <F10>   <ESC>:MyMarkColor<CR>
-imap <unique> <silent> <F12>   <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 " "Shift"
 nmap <unique> <silent> <S-F2>       :cN<CR>
 nmap <unique> <silent> <S-F3>       :cn<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellV<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
+nmap <unique> <silent> <S-F12>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <S-F2>  <ESC>:cN<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cn<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellV<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
+imap <unique> <silent> <S-F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F2>       :tN<CR>
@@ -572,9 +572,9 @@ set dictionary=~/.vim/dict/wordlist.txt
 "打开文件后自动回到上一次最后编辑的地方"{{{
 "如果不起作用查看 ~/.viminfo 文件属性
 au BufReadPost *
- \ if line("'\"") > 1 && line("'\"") <= line("$") |
- \ exe "normal! g'\"" |
- \ endif
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \ exe "normal! g'\"" |
+            \ endif
 "打开文件后自动回到上一次最后编辑的地方"}}}
 
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"{{{
