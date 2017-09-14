@@ -73,8 +73,8 @@ endfunction
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -83,17 +83,11 @@ endif
 "使用默认
 "let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
 let g:neocomplete#sources#omni#input_patterns.ruby = ''
-" let g:neocomplete#sources#omni#input_patterns.python = ''
+let g:neocomplete#sources#omni#input_patterns.python = ''
 
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
-
-" 必须要有这个否则<c-x><c-o>不会自动弹出 
-" let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
-" fix eclim does't work
-let g:neocomplete#force_omni_input_patterns.java =                                                                                                     
-    \ '\%(\h\w*\|)\)\.\w*'
 
 " let g:neocomplete#sources#omni#input_patterns.php =   
             \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
@@ -111,6 +105,12 @@ let g:neocomplete#force_omni_input_patterns.java =
 " https://github.com/c9s/perlomni.vim
 " let g:neocomplete#sources#omni#input_patterns.perl =
 " \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+" 必须要有这个否则<c-x><c-o>不会自动弹出 
+" let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+" fix eclim does't work
+let g:neocomplete#force_omni_input_patterns.java =                                                                                                     
+    \ '\%(\h\w*\|)\)\.\w*'
 
 " For smart TAB completion.
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :

@@ -44,3 +44,4 @@ bundle/asyncrun.vim
 bundle/vim-markdown
 bundle/tagbar-markdown
 bundle/tocdown
+bundle/CompleteParameter.vim
