@@ -60,3 +60,8 @@ function! s:_MyColColor() "{{{
         exec "set cc=+1," . col(".")
     endif
 endfunc "}}}
+
+command! MyMarkColor call s:_MyMarkColor()
+function! s:_MyMarkColor() "{{{
+    exec "Mark " . expand("<cword>")
+endfunc "}}}
