@@ -1,4 +1,4 @@
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+inoremap <silent><expr> ( complete_parameter#pre_complete("(")
 " smap <s-tab> <Plug>(complete_parameter#goto_next_parameter)
 " imap <s-tab> <Plug>(complete_parameter#goto_next_parameter)
 " smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)

@@ -43,6 +43,9 @@ imap <unique> <silent> <F8>    <ESC>:MyTags<CR>
 imap <unique> <silent> <F9>    <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <F10>   <ESC>:MyMarkColor<CR>
 
+
+vmap <unique> <silent> <F12>        "ay
+
 " "Shift"
 nmap <unique> <silent> <S-F2>       :cN<CR>
 nmap <unique> <silent> <S-F3>       :cn<CR>
