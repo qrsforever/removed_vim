@@ -26,9 +26,10 @@ let g:ycm_disable_for_files_larger_than_kb = 2000
 let g:ycm_seed_identifiers_with_syntax = 1	
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:syntastic_always_populate_loc_list = 1
+" 对lvimgrep dir搜索有影响, 暂时注释
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:syntastic_always_populate_loc_list = 1
 let g:ycm_semantic_triggers = {
             \   'c' : ['->', '    ', '.', ' ', '(', '[', '&'],
             \     'cpp,objcpp' : ['->', '.', ' ', '(', '[', '&', '::'],
