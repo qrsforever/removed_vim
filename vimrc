@@ -5,8 +5,20 @@ autocmd!
 :mapclear
 
 "==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
-source ~/.vim/bundle/.configs/init.vim
 
+" 插件依赖设置
+"{{{
+"打开关键字色
+syntax on
+
+"载入文件类型插件
+filetype plugin on
+
+"为特定文件类型载入相关缩进文件
+filetype indent on
+"}}}
+
+source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>         :MarksBrowser<CR>
@@ -115,20 +127,9 @@ noremap <C-W>s <C-W>s<C-W>j
 "窗口配置"}}}
 
 "简单配置"{{{
-"打开语法色彩
-syntax enable
-
-"打开关键字色
-syntax on
 
 "侦测文件类型
 filetype on
-
-"载入文件类型插件
-filetype plugin on
-
-"为特定文件类型载入相关缩进文件
-filetype indent on
 
 "设置终端支持256颜色
 set t_Co=256
@@ -349,6 +350,9 @@ set display=lastline
 set splitbelow
 " vert split new windows to right of current
 set splitright
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*.sh,*.png,.git\*,.hg\*,.svn\*
 
 "简单配置"}}}
 

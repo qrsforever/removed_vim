@@ -45,3 +45,4 @@ bundle/vim-markdown
 bundle/tagbar-markdown
 bundle/tocdown
 bundle/CompleteParameter.vim
+bundle/jedi-vim

@@ -72,8 +72,9 @@ MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
+" MyPlugin 'davidhalter/jedi-vim'
 " MyPlugin 'skywind3000/asyncrun.vim'
-" MyPlugin 'tenfyzhong/CompleteParameter.vim'
+MyPlugin 'tenfyzhong/CompleteParameter.vim'
 
 
 if isdirectory(expand('~/.vim/bundle/L9'))

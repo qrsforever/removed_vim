@@ -35,9 +35,9 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
+    " return neocomplete#close_popup() . "\<CR>"
     " For no inserting <CR> key.
-    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
 " " <TAB>: completion.
@@ -56,9 +56,11 @@ endfunction
 "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
 "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
 " Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
+let g:neocomplete#enable_cursor_hold_i = 1
 " Or set this.
 "let g:neocomplete#enable_insert_char_pre = 1
+
+let g:neocomplete#cursor_hold_i_time = 1000
 
 " AutoComplPop like behavior.
 " let g:neocomplete#enable_auto_select = 1
@@ -68,6 +70,10 @@ endfunction
 "let g:neocomplete#enable_auto_select = 1
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+let g:neocomplete#force_overwrite_completefunc=1 
+let g:neocomplete#sources#buffer#cache_limit_size = 1000000
+let g:neocomplete#sources#tags#cache_limit_size   = 30000000
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -83,14 +89,7 @@ endif
 "使用默认
 "let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
 let g:neocomplete#sources#omni#input_patterns.ruby = ''
-let g:neocomplete#sources#omni#input_patterns.python = ''
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-" let g:neocomplete#sources#omni#input_patterns.php =   
-            \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
+" let g:neocomplete#sources#omni#input_patterns.python = ''
 
 "let g:neocomplete#sources#omni#input_patterns.php =
 "           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
@@ -105,6 +104,17 @@ endif
 " https://github.com/c9s/perlomni.vim
 " let g:neocomplete#sources#omni#input_patterns.perl =
 " \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+" let g:neocomplete#sources#omni#input_patterns.php =   
+            \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
+
+" support python2.7
+" let g:neocomplete#force_omni_input_patterns.python = 
+            " \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " 必须要有这个否则<c-x><c-o>不会自动弹出 
 " let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
