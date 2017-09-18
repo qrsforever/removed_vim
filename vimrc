@@ -107,6 +107,24 @@ imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
 "非F1~F12快捷键"}}}
 
+"UML特殊字符映射 {{{
+" set digraph
+" ▲
+" △
+" 
+" ▶
+" ▷
+" 
+" ▼
+" ▽
+" 
+" ◀ 
+" ◁
+" 
+" ◆
+" ◇
+"}}}
+
 "自己定义的命令 "{{{
 command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
