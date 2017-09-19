@@ -110,31 +110,35 @@ imap \\ <C-x><C-o>
 "UML特殊字符映射 "{{{
 " set digraph
   
-nmap `<Up>          i△<Esc>
-nmap `<Down>        i▽<Esc>
-nmap `<Left>        i◁<Esc>
-nmap `<Right>       i▷<Esc>
-
-nmap `<PageUp>      i▲<Esc>
-nmap `<PageDown>    i▼<Esc>
-nmap `<Home>        i▶<Esc>
-nmap `<End>         i◀<Esc>
- 
-nmap `<Insert>      i◇<Esc>
-nmap `<Delete>      i◆<Esc>
+nmap `<Up>               i△<Esc>
+nmap `<Down>             i▽<Esc>
+nmap `<Left>             i◁<Esc>
+nmap `<Right>            i▷<Esc>
+nmap `<PageUp>           i▲<Esc>
+nmap `<PageDown>         i▼<Esc>
+nmap `<Home>             i◀<Esc>
+nmap `<End>              i▶<Esc>
+nmap `<Insert>           i◇<Esc>
+nmap `<Delete>           i◆<Esc>
+nmap `<kPlus>            i♡<Esc>
+nmap `<KMinus>           i♫<Esc>
+nmap `<KMultiply>        i★<Esc>
+nmap `<KDivide>          i☺<Esc>
 
 imap `<Up>          <Esc>i△<Esc>
 imap `<Down>        <Esc>i▽<Esc>
 imap `<Left>        <Esc>i◁<Esc>
 imap `<Right>       <Esc>i▷<Esc>
-
 imap `<PageUp>      <Esc>i▲<Esc>
 imap `<PageDown>    <Esc>i▼<Esc>
-imap `<Home>        <Esc>i▶<Esc>
-imap `<End>         <Esc>i◀<Esc>
- 
+imap `<Home>        <Esc>i◀<Esc>
+imap `<End>         <Esc>i▶<Esc>
 imap `<Insert>      <Esc>i◇<Esc>
 imap `<Delete>      <Esc>i◆<Esc>
+imap `<kPlus>       <Esc>i♡<Esc>
+imap `<KMinus>      <Esc>i♫<Esc>
+imap `<KMultiply>   <Esc>i★<Esc>
+imap `<KDivide>     <Esc>i☺<Esc>
 
 "}}}
 
