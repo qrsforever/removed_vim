@@ -107,22 +107,35 @@ imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
 "非F1~F12快捷键"}}}
 
-"UML特殊字符映射 {{{
+"UML特殊字符映射 "{{{
 " set digraph
-" ▲
-" △
-" 
-" ▶
-" ▷
-" 
-" ▼
-" ▽
-" 
-" ◀ 
-" ◁
-" 
-" ◆
-" ◇
+  
+nmap `<Up>          i△<Esc>
+nmap `<Down>        i▽<Esc>
+nmap `<Left>        i◁<Esc>
+nmap `<Right>       i▷<Esc>
+
+nmap `<PageUp>      i▲<Esc>
+nmap `<PageDown>    i▼<Esc>
+nmap `<Home>        i▶<Esc>
+nmap `<End>         i◀<Esc>
+ 
+nmap `<Insert>      i◇<Esc>
+nmap `<Delete>      i◆<Esc>
+
+imap `<Up>          <Esc>i△<Esc>
+imap `<Down>        <Esc>i▽<Esc>
+imap `<Left>        <Esc>i◁<Esc>
+imap `<Right>       <Esc>i▷<Esc>
+
+imap `<PageUp>      <Esc>i▲<Esc>
+imap `<PageDown>    <Esc>i▼<Esc>
+imap `<Home>        <Esc>i▶<Esc>
+imap `<End>         <Esc>i◀<Esc>
+ 
+imap `<Insert>      <Esc>i◇<Esc>
+imap `<Delete>      <Esc>i◆<Esc>
+
 "}}}
 
 "自己定义的命令 "{{{
