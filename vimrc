@@ -120,10 +120,10 @@ nmap `<Home>             r◀<Esc>
 nmap `<End>              r▶<Esc>
 nmap `<Insert>           r◇<Esc>
 nmap `<Delete>           r◆<Esc>
-nmap `<kPlus>            r♡<Esc>
-nmap `<KMinus>           r♫<Esc>
+nmap `<kPlus>            r☞<Esc>
+nmap `<KMinus>           r☜<Esc>
 nmap `<KMultiply>        r★<Esc>
-nmap `<KDivide>          r☺<Esc>
+nmap `<KDivide>          r♡<Esc>
 
 imap `<Up>          <Esc>r△<Esc>
 imap `<Down>        <Esc>r▽<Esc>
@@ -135,10 +135,12 @@ imap `<Home>        <Esc>r◀<Esc>
 imap `<End>         <Esc>r▶<Esc>
 imap `<Insert>      <Esc>r◇<Esc>
 imap `<Delete>      <Esc>r◆<Esc>
-imap `<kPlus>       <Esc>r♡<Esc>
-imap `<KMinus>      <Esc>r♫<Esc>
+imap `<kPlus>       <Esc>r☞<Esc>
+imap `<KMinus>      <Esc>r☜<Esc>
 imap `<KMultiply>   <Esc>r★<Esc>
-imap `<KDivide>     <Esc>r☺<Esc>
+imap `<KDivide>     <Esc>r♡<Esc>
+
+
 
 "}}}
 
