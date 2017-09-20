@@ -77,5 +77,3 @@ function! s:_MyMarksBrowser() "{{{
     endif
     exec "MarksBrowser"
 endfunction "}}}
-
-

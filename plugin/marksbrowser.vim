@@ -61,7 +61,7 @@ fun! s:ShowMarksWin(winNo)
         else
             "lidong cha
             " exec "to sp" . escape(s:win_title, ' ')
-            exec "aboveleft 12sp" . escape(s:win_title, ' ')
+            exec "aboveleft sp" . escape(s:win_title, ' ')
             "lidong end
             let s:bufNo = bufnr('%')
         endif
