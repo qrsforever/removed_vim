@@ -21,7 +21,7 @@ filetype indent on
 source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
-nmap <unique> <silent> <F1>         :MarksBrowser<CR>
+nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
 nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
 nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>         :TagbarToggle<CR>

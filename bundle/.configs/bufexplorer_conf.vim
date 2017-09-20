@@ -1,3 +1,4 @@
+" let g:bufExplorerSplitHorzSize = 30
 command! MyBufExplorer call s:DoBufExplorer()
 function! s:DoBufExplorer()
     let buftype = getbufvar('%', '&filetype')
