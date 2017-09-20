@@ -31,6 +31,7 @@ nmap <unique> <silent> <F7>         :MyGrep<CR>
 nmap <unique> <silent> <F8>         :MyTags<CR>
 nmap <unique> <silent> <F9>         :MyVimShellS<CR>
 nmap <unique> <silent> <F10>        :MyMarkColor<CR>
+nmap <unique> <silent> <F11>        :MaximizerToggle<CR>
 nmap <unique> <silent> <F12>        ,ra
 
 imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
@@ -43,6 +44,7 @@ imap <unique> <silent> <F7>    <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>    <ESC>:MyTags<CR>
 imap <unique> <silent> <F9>    <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <F10>   <ESC>:MyMarkColor<CR>
+imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
 imap <unique> <silent> <F12>   <ESC>,ra
 
 vmap <unique> <silent> <F12>        "ay
