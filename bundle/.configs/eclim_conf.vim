@@ -223,7 +223,10 @@ func! DoCtrlLeftMouse() abort "{{{
     if exists('g:loaded_unite')
         " 2. ycm
         try
-            let result = unite#util#redir('YcmCompleter GoTo')
+            " let result = unite#util#redir('YcmCompleter GoTo')
+            redir => result
+            silent! execute 'YcmCompleter GoTo'
+            redir END
             if matchstr(result, "Error") == ''
                 return
             endif
@@ -232,7 +235,10 @@ func! DoCtrlLeftMouse() abort "{{{
         endtry
         " 3. tag
         try
-            let result = unite#util#redir('tag ' . word)
+            " let result = unite#util#redir('tag ' . word)
+            redir => result
+            silent! execute 'tag ' . word
+            redir END
             if matchstr(result, "tag not found") != ''
                 echomsg "tag not found for " . word
                 return
