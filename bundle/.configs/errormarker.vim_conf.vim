@@ -52,7 +52,7 @@ func! s:DoSelectMake() "{{{
     endif
 
     if ! filereadable(s:MakefileDirsFile)
-        call writefile(["#Makefile director"], s:MakefileDirsFile)
+        call writefile(["# Makefile director"], s:MakefileDirsFile)
     endif
     let makefileDirsList = readfile(s:MakefileDirsFile)
     let incount = 0
@@ -64,7 +64,8 @@ func! s:DoSelectMake() "{{{
             endif
             let makefile = i . '/Makefile'
             let antfile = i . '/build.xml'
-            if filereadable(makefile) || filereadable(antfile)
+            let pomfile = i . '/pom.xml'
+            if filereadable(makefile) || filereadable(antfile) || filereadable(pomfile)
                 call add(infiles, i)
             endif
         endif
@@ -85,38 +86,40 @@ func! s:DoSelectMake() "{{{
 
     let inputdir = ""
     let select = str2nr(input("Select Makefile in dirs: ", ''), 10)         
+    
+    if select == 0 || select > i 
+        let select = 1
+    endif
 
-    if select ==0 || select > i 
-        echomsg " "
-        echomsg "Select error!"
-        return 
-    elseif select == i
+    if select == i
+        let flg = 0
         let inputdir = substitute(input("Input dir: ", getcwd(), "dir"), '\/$', '', '')
-        let makefile = inputdir . '/Makefile'
-        let antfile = inputdir . '/build.xml'
-        if filereadable(makefile) || filereadable(antfile)
-            let addflg = 1
+        while len(inputdir) > 12 
+            let makefile = inputdir . '/Makefile'
+            let antfile = inputdir . '/build.xml'
+            let pomfile = inputdir . '/pom.xml'
+            if filereadable(makefile) || filereadable(antfile) || filereadable(pomfile)
+                let flg = 1
+                break
+            endif
+            let pathpos = strridx(inputdir, '/')
+            let inputdir = strpart(inputdir, 0, pathpos)
+        endwhile
+        if flg == 1
+            call add(outfiles, inputdir)
+            let outcount += 1
             for dir in infiles
-                if dir == inputdir
-                    let addflg = 0
+                if dir != inputdir
+                    call add(outfiles, dir)
+                    let outcount += 1
+                    if outcount > s:MaxFileCount
+                        break
+                    endif
                 endif
             endfor
-            if addflg
-                let outcount += 1
-                call add(outfiles, inputdir)
-            endif
-            for dir in infiles
-                call add(outfiles, dir)
-                let outcount += 1
-                if outcount > s:MaxFileCount
-                    break
-                endif
-            endfor
-            if addflg
-                call writefile(outfiles, s:MakefileDirsFile)
-            endif
-        else 
-            let inputdir = ""
+            call writefile(outfiles, s:MakefileDirsFile)
+        else
+            let inputdir = ''
         endif
     else 
         let select -= 1
@@ -145,19 +148,19 @@ func! s:DoSelectMake() "{{{
 
     let makefile = inputdir . '/Makefile'
     let antfile = inputdir . '/build.xml'
+    let pomfile = inputdir . '/pom.xml'
     if inputdir != ""
-        exec "cd " . inputdir
         if filereadable(makefile)
-            setlocal makeprg=make\ -j4
-            exec "make"
+            silent exec "AsyncRun -post=MyBottomCopen make -f " . makefile
         elseif filereadable(antfile)
-         silent exec "Ant clean"
-         silent exec "Ant debug"
+            silent exec "AsyncRun -post=MyBottomCopen ant -f " . antfile
+        elseif filereadable(pomfile)
+            silent exec "AsyncRun -post=MyBottomCopen mvn compile -f " . pomfile
         else
             echomsg "No configure file found!"
         endif
-        exec "silent! cd -"
     else 
+        echomsg " "
         echomsg "Input is empty!"
         return 
     endif
@@ -183,7 +186,7 @@ function s:Python_Run()
     silent make %
     let list = getqflist()
     if len(list) > 0
-        execute "MyTopCopen"
+        execute "MyBottomCopen"
         execute "normal G"
         execute "normal zb"
     else

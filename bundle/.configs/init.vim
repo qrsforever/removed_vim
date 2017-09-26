@@ -73,7 +73,7 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 " MyPlugin 'davidhalter/jedi-vim'
-" MyPlugin 'skywind3000/asyncrun.vim'
+MyPlugin 'skywind3000/asyncrun.vim'
 MyPlugin 'tenfyzhong/CompleteParameter.vim'
 
 

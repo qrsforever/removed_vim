@@ -51,11 +51,13 @@ vmap <unique> <silent> <F12>        "ay
 " "Shift"
 nmap <unique> <silent> <S-F2>       :cN<CR>
 nmap <unique> <silent> <S-F3>       :cn<CR>
+nmap <unique> <silent> <S-F6>       :MyAsyncRun<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
 
 imap <unique> <silent> <S-F2>  <ESC>:cN<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cn<CR>
+imap <unique> <silent> <S-F6>  <ESC>:MyAsyncRun<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
 
