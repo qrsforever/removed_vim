@@ -29,8 +29,7 @@ nmap <unique> <silent> <F5>         :MyLookupFile<CR>
 nmap <unique> <silent> <F6>         :MyMake<CR>
 nmap <unique> <silent> <F7>         :MyGrep<CR>
 nmap <unique> <silent> <F8>         :MyTags<CR>
-nmap <unique> <silent> <F9>         :MyVimShellS<CR>
-nmap <unique> <silent> <F10>        :MyMarkColor<CR>
+nmap <unique> <silent> <F9>         :MyMarkColor<CR>
 nmap <unique> <silent> <F11>        :MaximizerToggle<CR>
 nmap <unique> <silent> <F12>        ,ra
 
@@ -42,8 +41,7 @@ imap <unique> <silent> <F5>    <ESC>:MyLookupFile<CR>
 imap <unique> <silent> <F6>    <ESC>:MyMake<CR>
 imap <unique> <silent> <F7>    <ESC>:MyGrep<CR>
 imap <unique> <silent> <F8>    <ESC>:MyTags<CR>
-imap <unique> <silent> <F9>    <ESC>:MyVimShellS<CR>
-imap <unique> <silent> <F10>   <ESC>:MyMarkColor<CR>
+imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
 imap <unique> <silent> <F12>   <ESC>,ra
 
@@ -53,21 +51,23 @@ vmap <unique> <silent> <F12>        "ay
 " "Shift"
 nmap <unique> <silent> <S-F2>       :cN<CR>
 nmap <unique> <silent> <S-F3>       :cn<CR>
-nmap <unique> <silent> <S-F9>       :MyVimShellV<CR>
+nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
 
 imap <unique> <silent> <S-F2>  <ESC>:cN<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cn<CR>
-imap <unique> <silent> <S-F9>  <ESC>:MyVimShellV<CR>
+imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F2>       :tN<CR>
 nmap <unique> <silent> <C-F3>       :tn<CR>
+nmap <unique> <silent> <C-F9>       :MyVimShellV<CR>
 nmap <unique> <silent> <C-F12>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <C-F2>  <ESC>:tN<CR>
 imap <unique> <silent> <C-F3>  <ESC>:tn<CR>
+imap <unique> <silent> <C-F9>  <ESC>:MyVimShellV<CR>
 imap <unique> <silent> <C-F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 "<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
