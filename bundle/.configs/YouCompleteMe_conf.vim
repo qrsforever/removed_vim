@@ -2,8 +2,9 @@
 " nmap ; [ycm]
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
+" neocomplete do it alreay!
+" inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
@@ -54,9 +55,12 @@ let g:ycm_filetype_blacklist = {
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
 let g:ycm_goto_buffer_command = 'same-buffer'
 let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_key_invoke_completion = '<S-TAB>'
+
+"youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+" 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
+let g:ycm_key_invoke_completion = '<M-;>'
 
 nnoremap ;g :YcmCompleter GoTo<CR>
 nnoremap ;b :YcmForceCompileAndDiagnostics<CR>

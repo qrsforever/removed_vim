@@ -158,12 +158,6 @@ noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
-"插入模式下的<C-k>系统特殊字符digraphs冲突
-imap <C-j> <esc><C-W>j
-imap <C-k> <esc><C-W>k
-imap <C-h> <esc><C-W>h
-imap <C-l> <esc><C-W>l
-
 noremap <C-W>v <C-W>v<C-W>l
 noremap <C-W>s <C-W>s<C-W>j
 "窗口配置"}}}
