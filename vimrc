@@ -6,8 +6,8 @@ autocmd!
 
 "==========很多插件，可能进行过修改， 若感觉不爽，可以在.vim搜索lidong， 进行还原===================
 
-" 插件依赖设置
-"{{{
+" 插件依赖设置 "{{{
+
 "打开关键字色
 syntax on
 
@@ -150,8 +150,6 @@ imap `<KDivide>     <Esc>r♡<Esc>
 command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge         "消除文件中的^M字符
-command XHTML set ft=html
-command XPHP  set ft=php
 "自己定义的命令 "}}}
 
 "窗口配置"{{{
@@ -515,8 +513,8 @@ endif
 language en_US.utf8
 "字符编码(多字节)"}}}
 
-"打开 C/C++ 风格的自动缩进 ( =a{ , gg=G 代码美化 )
 "设置C/C++语言的具体缩进方式 eg. switch case 缩进"{{{
+"打开 C/C++ 风格的自动缩进 ( =a{ , gg=G 代码美化 )
 set cin
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set cino=:0g0t0(sus
@@ -634,22 +632,29 @@ au BufReadPost *
 set completeopt=longest,menu
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"}}}
 
-" 设置Logcat文件类型
+" 设置Logcat文件类型"{{{
 au BufRead,BufNewFile *logcat* set filetype=logcat 
+"}}}
 
-"----------------------
-"利用 插件 丰富 功能
-"----------------------
-
-"a.vim实现源文件与头文件切换
+"a.vim实现源文件与头文件切换"{{{
 let alternateNoDefaultAlternate = 1
+"}}}
+ 
+"auto {{{
+au FileType c,cpp   setlocal makeprg=make\ -j4
+au FileType python  setlocal makeprg=python3\ -u
+
+augroup QFix
+    au BufReadPost quickfix silent! nmap <buffer> q :cclose<CR>
+augroup END
+"}}}
 
 "按q之后按:进入histroy command
-"
+ 
 " 0~ 1~ workaround: https://github.com/vim/vim/issues/1671
-if has("unix")
+if has("unix")"{{{
     let s:uname = system("echo -n \"$(uname)\"")
     if !v:shell_error && s:uname == "Linux"
         set t_BE=
     endif
-endif
+endif"}}}

@@ -41,7 +41,7 @@ let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
 let s:MaxFileCount = 3
 func! s:DoSelectMake() "{{{
     if &filetype == 'python'
-        exec "MyPythonRun"
+        exec "MyAsyncRun"
         return 
     elseif &filetype == 'qf'
         exec 'cclose'
@@ -163,34 +163,34 @@ func! s:DoSelectMake() "{{{
     endif
 endfunc"}}}
 
-command! MyPythonRun call s:Python_Run()
-function s:Python_Run() "{{{
-    let mp = &makeprg
-    let ef = &errorformat
-    let exeFile = expand("%:t")
-    setlocal makeprg=python3\ -u
-    setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-                "\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
-                "\%C\ \ \ \ %.%#,
-                "\%+Z%.%#Error\:\ %.%#,
-                "\%A\ \ File\ \"%f\"\\\,\ line\ %l,
-                "\%+C\ \ %.%#,
-                "\%-C%p^,
-                "\%Z%m,
-                "\%-G%.%#
-    silent make %
-    " let list = getqflist()
-    " if len(list) > 0
-    "     execute "MyBottomCopen"
-    "     execute "normal G"
-    "     execute "normal zb"
-    " else
-    "     echomsg "SUCCESS!"
-    " endif
-    let &makeprg     = mp
-    let &errorformat = ef
-endfunction
-"}}}
+" command! MyPythonRun call s:Python_Run()
+" function s:Python_Run() "{{{
+"     let mp = &makeprg
+"     let ef = &errorformat
+"     let exeFile = expand("%:t")
+"     setlocal makeprg=python3\ -u
+"     setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+"                 "\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+"                 "\%C\ \ \ \ %.%#,
+"                 "\%+Z%.%#Error\:\ %.%#,
+"                 "\%A\ \ File\ \"%f\"\\\,\ line\ %l,
+"                 "\%+C\ \ %.%#,
+"                 "\%-C%p^,
+"                 "\%Z%m,
+"                 "\%-G%.%#
+"     silent make %
+"     " let list = getqflist()
+"     " if len(list) > 0
+"     "     execute "MyBottomCopen"
+"     "     execute "normal G"
+"     "     execute "normal zb"
+"     " else
+"     "     echomsg "SUCCESS!"
+"     " endif
+"     let &makeprg     = mp
+"     let &errorformat = ef
+" endfunction
+" "}}}
 
 command! MyToggleHtmlPhp call s:ToggleHtmlPhp()
 function s:ToggleHtmlPhp()"{{{
