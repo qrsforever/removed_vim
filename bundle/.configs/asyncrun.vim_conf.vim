@@ -7,14 +7,17 @@ let g:asyncrun_exit = 'call DoAfterFinished()'
 "
 command! MyAsyncRun :call s:DoSyncRun()
 func! s:DoSyncRun() "{{{
+    let ef = &errorformat
     if &filetype == 'python'
-        exec "AsyncRun -post=MyBottomCopen python3 %"
+        setlocal errorformat+=\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+        exec "AsyncRun -post=MyBelowCopen python3 %"
     elseif &filetype == 'sh'
-        exec "AsyncRun -post=MyBottomCopen bash %"
+        exec "AsyncRun -post=MyBelowCopen bash %"
     elseif &filetype == 'c'
-        exec "AsyncRun -post=MyBottomCopen gcc % -o %<"
+        exec "AsyncRun -post=MyBelowCopen gcc % -o %<"
     elseif &filetype == 'cpp'
-        exec "AsyncRun -post=MyBottomCopen g++ -O3 % -o %< -lpthread"
+        exec "AsyncRun -post=MyBelowCopen g++ -O3 % -o %< -lpthread"
     endif
+    let &errorformat = ef
 endfunc
 "}}}
