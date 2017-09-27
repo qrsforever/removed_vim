@@ -1,3 +1,4 @@
+" Setup {{{
 nmap <silent> <unique> `<space> :ErrorAtCursor<CR>
 " hi ErrorMsg cterm=bold ctermbg=DarkRed gui=bold guibg=DarkRed
 " hi WarningMsg cterm=bold ctermbg=LightRed gui=bold guibg=LightRed
@@ -11,37 +12,33 @@ let errormarker_warninggroup = "Todo"
 "f:file l:line c:column t:warningtypes m:message
 let errormarker_erroricon = "/usr/share/icons/gnome/16x16/status/dialog-error.png"   "gvim
 let errormarker_warningicon = "/usr/share/icons/gnome/16x16/status/dialog-warning.png" "gvim
-
-function QfSearchError(pattern)
-    let h = winheight(0) / 2
-    execute "topleft copen" . h
-    execute "redraw"
-    let results = []
-    execute "silent! g/" . a:pattern . "/call add(results, getline('.'))"
-    if !empty(results)
-        execute "normal G"
-        execute "normal zb"
-    else 
-        echomsg "no error!"
-        execute "cclose"
-    endif
-endfunction
+"}}}
+ 
+" function QfSearchError(pattern) "{{{
+"     let h = winheight(0) / 2
+"     execute "topleft copen" . h
+"     execute "redraw"
+"     let results = []
+"     execute "silent! g/" . a:pattern . "/call add(results, getline('.'))"
+"     if !empty(results)
+"         execute "normal G"
+"         execute "normal zb"
+"     else 
+"         echomsg "no error!"
+"         execute "cclose"
+"     endif
+" endfunction
+" 
+" augroup QFix
+"     " au QuickFixCmdPre make execute "silent! lchdir %:p:h"
+"     " au QuickfixCmdPost make call QfSearchError("error:")
+" augroup END
+"}}}
 
 "CTRL-W <Enter>  垂直打开
-
-augroup QFix
-    au BufReadPost quickfix silent! nmap <buffer> q :cclose<CR>
-    " au QuickFixCmdPre make execute "silent! lchdir %:p:h"
-    " au QuickfixCmdPost make call QfSearchError("error:")
-augroup END
-
-au FileType c,cpp setlocal makeprg=make\ -j4
-
 command! MyMake call s:DoSelectMake()
-
 let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
 let s:MaxFileCount = 3
-
 func! s:DoSelectMake() "{{{
     if &filetype == 'python'
         exec "MyPythonRun"
@@ -166,39 +163,37 @@ func! s:DoSelectMake() "{{{
     endif
 endfunc"}}}
 
-"========Python
 command! MyPythonRun call s:Python_Run()
-
-function s:Python_Run()
+function s:Python_Run() "{{{
     let mp = &makeprg
     let ef = &errorformat
     let exeFile = expand("%:t")
     setlocal makeprg=python3\ -u
-    setlocal errorformat=
-                \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
-                \%C\ \ \ \ %.%#,
-                \%+Z%.%#Error\:\ %.%#,
-                \%A\ \ File\ \"%f\"\\\,\ line\ %l,
-                \%+C\ \ %.%#,
-                \%-C%p^,
-                \%Z%m,
-                \%-G%.%#
+    setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+                "\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+                "\%C\ \ \ \ %.%#,
+                "\%+Z%.%#Error\:\ %.%#,
+                "\%A\ \ File\ \"%f\"\\\,\ line\ %l,
+                "\%+C\ \ %.%#,
+                "\%-C%p^,
+                "\%Z%m,
+                "\%-G%.%#
     silent make %
-    let list = getqflist()
-    if len(list) > 0
-        execute "MyBottomCopen"
-        execute "normal G"
-        execute "normal zb"
-    else
-        echomsg "no error!"
-    endif
+    " let list = getqflist()
+    " if len(list) > 0
+    "     execute "MyBottomCopen"
+    "     execute "normal G"
+    "     execute "normal zb"
+    " else
+    "     echomsg "SUCCESS!"
+    " endif
     let &makeprg     = mp
     let &errorformat = ef
 endfunction
+"}}}
 
 command! MyToggleHtmlPhp call s:ToggleHtmlPhp()
-
-function s:ToggleHtmlPhp()
+function s:ToggleHtmlPhp()"{{{
     if &filetype == 'html'
         echomsg "Current filetype set PHP"
         set ft=php
@@ -207,4 +202,4 @@ function s:ToggleHtmlPhp()
         set ft=html
     endif
 endfunction
-
+"}}}

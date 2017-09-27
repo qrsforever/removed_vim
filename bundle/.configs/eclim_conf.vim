@@ -1,4 +1,5 @@
-let g:EclimCompletionMethod = 'omnifunc'
+" Setup "{{{
+let g:EclimCompletionMethod = 'omnifunc' 
 " let g:EclimBrowser = "chromium-browser"
 let g:EclimBrowser= "google-chrome"
 " let g:EclimBrowser = "firefox"
@@ -40,8 +41,10 @@ command -nargs=?
             \ -complete=customlist,eclim#project#util#CommandCompleteProject
             \ Project :call eclim#project#util#ProjectList('<args>')
 
-"通过当前编辑的文件, 打开所在的Android工程, 最终方便实现代码补全功能.
+"}}}
+
 func! DoCurrentProject(flag) "{{{
+    "通过当前编辑的文件, 打开所在的Android工程, 最终方便实现代码补全功能.
     exec "lchdir %:p:h"
     let curdir = getcwd()
     while len(curdir) > 12 
@@ -265,11 +268,7 @@ func! DoCtrlRightMouse() "{{{
     exec "silent! pop"
 endfunc"}}}
 
-"<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
-command XDStart JavaDebugStart localhost 1044
-command XDStop  JavaDebugStop 
-command XDList  JavaDebugBreakpointsList!
-" 
+" Command "{{{
 command -nargs=? J  :call DoProjectSearch(0, 0, 0)
 
 command -nargs=? J1 :call DoProjectSearch(1, 1, 0)
@@ -292,10 +291,14 @@ command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 
 command M J
 command S J
+"}}}
 
-" nnoremap [eclim] <Nop>
-" nmap ; [eclim]
+" Abbrev"{{{
+cabbrev JH  JavaHierarchy 
+cabbrev JC  JavaCallHierarchy -s project
+"}}}
 
+" Map "{{{
 nnoremap <silent> ;c  <esc>:JavaSearchContext -a edit<CR>
 nnoremap <silent> ;sc <esc>:JavaSearchContext -a split<CR>
 nnoremap <silent> ;d  <esc>:JavaDocSearch<CR>
@@ -314,10 +317,23 @@ nnoremap <silent> ;jg <esc>:JavaImportOrganize<CR>
 
 nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
 nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>
-nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>
+nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>"}}}
 
-
+" Debug Step"{{{
+"<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
+" command XDStart JavaDebugStart localhost 1044
+" command XDStop  JavaDebugStop 
+" command XDList  JavaDebugBreakpointsList!
+" 
 " map <unique> <silent> <S-F5> <ESC>:JavaDebugBreakpointToggle!<CR>
 " map <unique> <silent> <S-F6> <ESC>:JavaDebugStep over<CR>
 " map <unique> <silent> <S-F7> <ESC>:JavaDebugStep into<CR>
 " map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
+" "}}}
+
+" Temporary buffer key bindings"{{{
+" <cr> - open the type using the (default action) 
+" E - open the type via :edit
+" S - open the type via :split
+" T - open the type via :tabnew
+" ? - view help buffer"}}}
