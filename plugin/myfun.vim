@@ -29,15 +29,21 @@ endfunction"}}}
 
 command! MyBottomCopen  call s:_MyCopen(0)
 command! MyTopCopen     call s:_MyCopen(1)
+command! MyBelowCopen   call s:_MyCopen(2)
+command! MyAboveCopen   call s:_MyCopen(3)
 function s:_MyCopen(place) "{{{
-    let h = winheight(0) / 3 - 5
+    let h = winheight(0) / 2
     if h < 5
         let h = ''
     endif
-    if a:place == 1
-        execute "topleft copen" . h
-    elseif a:place == 0
+    if a:place == 0
         execute "botright copen" . h
+    elseif a:place == 1
+        execute "topleft copen" . h
+    elseif a:place == 2
+        execute "belowright copen" . h
+    elseif a:place == 3
+        execute "aboveleft copen" . h
     else
         let w = winwidth(0) / 2 - 5
         if w < 5
