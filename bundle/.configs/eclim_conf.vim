@@ -5,13 +5,25 @@ let g:EclimBrowser= "google-chrome"
 " let g:EclimBrowser = "firefox"
 
 let g:EclimJavaDebugStatusWinWidth = 80
-let g:EclimJavaDebugStatusWinHeight = 30
+let g:EclimJavaDebugStatusWinHeight = 40
 " let g:EclimJavaDebugLineSignText = "^"
 
 "open:使用浏览器打开, lopen就vim打开
 let g:EclimJavaDocSearchSingleResult = "open" 
 
 let g:EclimLocationListHeight = 24
+
+" Temporary buffer key bindings"{{{
+" <cr> - open the type using the (default action) 
+" E - open the type via :edit
+" S - open the type via :split
+" T - open the type via :tabnew
+" ? - view help buffer"}}}
+let g:EclimJavaHierarchyDefaultAction = 'edit'
+let g:EclimJavaCallHierarchyDefaultAction = 'edit'
+
+let g:EclimQuickFixOpen = 'botright copen'
+let g:EclimQuickFixHeight = 24
 
 let g:EclimAntCompilerAdditionalErrorFormat =
             \ '\%A%.%#[xslt]\ Loading\ stylesheet\ %f,' .
@@ -331,9 +343,3 @@ nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>"}}}
 " map <unique> <silent> <S-F8> <ESC>:JavaDebugStep return<CR>
 " "}}}
 
-" Temporary buffer key bindings"{{{
-" <cr> - open the type using the (default action) 
-" E - open the type via :edit
-" S - open the type via :split
-" T - open the type via :tabnew
-" ? - view help buffer"}}}
