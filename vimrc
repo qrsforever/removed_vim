@@ -634,12 +634,12 @@ au BufRead,BufNewFile *logcat* set filetype=logcat
 let alternateNoDefaultAlternate = 1
 "}}}
  
-"auto {{{
+"autocmd {{{
 au FileType c,cpp   setlocal makeprg=make\ -j4
 au FileType python  setlocal makeprg=python3\ -u
 
 augroup QFix
-    au BufReadPost quickfix silent! nmap <buffer> q :cclose<CR>
+    au BufReadPost quickfix silent! nmap <buffer> q :silent! q<CR>
 augroup END
 "}}}
 
