@@ -299,21 +299,21 @@ cabbrev JC  JavaCallHierarchy -s project
 "}}}
 
 " Map "{{{
-nnoremap <silent> ;c  <esc>:JavaSearchContext -a edit<CR>
-nnoremap <silent> ;sc <esc>:JavaSearchContext -a split<CR>
-nnoremap <silent> ;d  <esc>:JavaDocSearch<CR>
-nnoremap <silent> ;sd <esc>:JavaDocPreview<CR>
+nnoremap <silent> ,c  <esc>:JavaSearchContext -a edit<CR>
+nnoremap <silent> ,sc <esc>:JavaSearchContext -a split<CR>
+nnoremap <silent> ,d  <esc>:JavaDocSearch<CR>
+nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
 
-nnoremap <silent> ;pi <esc>:call DoCurrentProject(0)<CR>
-nnoremap <silent> ;po <esc>:call DoCurrentProject(1)<CR>
-nnoremap <silent> ;pc <esc>:call DoCurrentProject(2)<CR>
-nnoremap <silent> ;pd <esc>:call DoCurrentProject(3)<CR>
-nnoremap <silent> ;pp <esc>:call DoSelectProjects()<CR>
+nnoremap <silent> ,pi <esc>:call DoCurrentProject(0)<CR>
+nnoremap <silent> ,po <esc>:call DoCurrentProject(1)<CR>
+nnoremap <silent> ,pc <esc>:call DoCurrentProject(2)<CR>
+nnoremap <silent> ,pd <esc>:call DoCurrentProject(3)<CR>
+nnoremap <silent> ,pp <esc>:call DoSelectProjects()<CR>
 
-nnoremap <silent> ;jv <esc>:Validate<CR>
-nnoremap <silent> ;jc <esc>:JavaCorrect<CR>
-nnoremap <silent> ;ji <esc>:JavaImport<CR>
-nnoremap <silent> ;jg <esc>:JavaImportOrganize<CR>
+nnoremap <silent> ,jv <esc>:Validate<CR>
+nnoremap <silent> ,jc <esc>:JavaCorrect<CR>
+nnoremap <silent> ,ji <esc>:JavaImport<CR>
+nnoremap <silent> ,jg <esc>:JavaImportOrganize<CR>
 
 nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
 nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>
