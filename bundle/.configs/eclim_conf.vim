@@ -311,10 +311,10 @@ cabbrev JC  JavaCallHierarchy -s project
 "}}}
 
 " Map "{{{
-nnoremap <silent> ,c  <esc>:JavaSearchContext -a edit<CR>
-nnoremap <silent> ,sc <esc>:JavaSearchContext -a split<CR>
-nnoremap <silent> ,d  <esc>:JavaDocSearch<CR>
-nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
+" nnoremap <silent> ,c  <esc>:JavaSearchContext -a edit<CR>
+" nnoremap <silent> ,sc <esc>:JavaSearchContext -a split<CR>
+" nnoremap <silent> ,d  <esc>:JavaDocSearch<CR>
+" nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
 
 nnoremap <silent> ,pi <esc>:call DoCurrentProject(0)<CR>
 nnoremap <silent> ,po <esc>:call DoCurrentProject(1)<CR>
