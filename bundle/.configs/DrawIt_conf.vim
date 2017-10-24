@@ -7,3 +7,16 @@
 nmap <Esc>[161q	<s-up>
 
 "----> "ay 
+"----> ,ra
+
+vmap <unique> <silent> <F12>  :<c-u>call <SID>_Yank2Register()<CR>
+function! s:_Yank2Register() 
+    let start = virtcol("'<") 
+    let end = virtcol("'>")
+    " 当Drawit功能开启后, 点击leftmouse, 总是先进入virtual模式
+    if start == end
+        exec 'norm! \<esc>'
+        return
+    endif
+    exec 'norm! gv"ay'
+endfunction

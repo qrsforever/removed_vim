@@ -45,8 +45,6 @@ imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
 imap <unique> <silent> <F12>   <ESC>,ra
 
-vmap <unique> <silent> <F12>        "ay
-
 
 " "Shift"
 nmap <unique> <silent> <S-F2>       :cN<CR>
@@ -54,23 +52,25 @@ nmap <unique> <silent> <S-F3>       :cn<CR>
 nmap <unique> <silent> <S-F6>       :MyAsyncRun<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
+nmap <unique> <silent> <S-F12>      :MyUMLCharConvert<CR> 
 
 imap <unique> <silent> <S-F2>  <ESC>:cN<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cn<CR>
 imap <unique> <silent> <S-F6>  <ESC>:MyAsyncRun<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
+imap <unique> <silent> <S-F12> <ESC>:MyUMLCharConvert<CR> 
 
 " "Ctrl"
 nmap <unique> <silent> <C-F2>       :tN<CR>
 nmap <unique> <silent> <C-F3>       :tn<CR>
 nmap <unique> <silent> <C-F9>       :MyVimShellV<CR>
-nmap <unique> <silent> <C-F12>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
+nmap <unique> <silent> <C-F10>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <C-F2>  <ESC>:tN<CR>
 imap <unique> <silent> <C-F3>  <ESC>:tn<CR>
 imap <unique> <silent> <C-F9>  <ESC>:MyVimShellV<CR>
-imap <unique> <silent> <C-F12> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
+imap <unique> <silent> <C-F10> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 "<S-F5> -to- <S-F8> used for eclim step debug, see bundle/eclim/conf.vim
 
@@ -110,41 +110,6 @@ nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
 "非F1~F12快捷键"}}}
-
-"UML特殊字符映射 "{{{
-" set digraph
-  
-nmap `<Up>               r△<Esc>
-nmap `<Down>             r▽<Esc>
-nmap `<Left>             r◁<Esc>
-nmap `<Right>            r▷<Esc>
-nmap `<PageUp>           r▲<Esc>
-nmap `<PageDown>         r▼<Esc>
-nmap `<Home>             r◀<Esc>
-nmap `<End>              r▶<Esc>
-nmap `<Insert>           r◇<Esc>
-nmap `<Delete>           r◆<Esc>
-nmap `<kPlus>            r☞<Esc>
-nmap `<KMinus>           r☜<Esc>
-nmap `<KMultiply>        r★<Esc>
-nmap `<KDivide>          r♡<Esc>
-
-imap `<Up>          <Esc>r△<Esc>
-imap `<Down>        <Esc>r▽<Esc>
-imap `<Left>        <Esc>r◁<Esc>
-imap `<Right>       <Esc>r▷<Esc>
-imap `<PageUp>      <Esc>r▲<Esc>
-imap `<PageDown>    <Esc>r▼<Esc>
-imap `<Home>        <Esc>r◀<Esc>
-imap `<End>         <Esc>r▶<Esc>
-imap `<Insert>      <Esc>r◇<Esc>
-imap `<Delete>      <Esc>r◆<Esc>
-imap `<kPlus>       <Esc>r☞<Esc>
-imap `<KMinus>      <Esc>r☜<Esc>
-imap `<KMultiply>   <Esc>r★<Esc>
-imap `<KDivide>     <Esc>r♡<Esc>
-
-"}}}
 
 "自己定义的命令 "{{{
 command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
