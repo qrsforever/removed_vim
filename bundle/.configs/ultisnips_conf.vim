@@ -6,7 +6,7 @@ let g:UltiSnipsSnippetDirectories =['UltiSnips']
 let g:UltiSnipsExpandTrigger="<c-h>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsListSnippets="<null>"
 let g:UltiSnipsUsePythonVersion = 3
 
 " " Set <space> as primary trigger

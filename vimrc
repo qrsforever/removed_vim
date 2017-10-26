@@ -103,6 +103,9 @@ nmap <silent> <C-w>l :belowright lw 15<CR>
 
 nmap cd :lchdir %:p:h<CR>:pwd<CR>
 
+" Insert模式下<C-L>清楚后面所有的字符, 类似Normal模式下的d$动作
+imap <unique> <silent> <C-L> <Esc><Esc>ld$a
+
 "单手保存 ctrl+s 在BASH中,是Lock the console, 解锁ctrl+q, 解决方法是在.bashrc中添加stty stop '' 或者 alias vim="stty stop ''; vim"
 " nmap <C-s> :update<CR>:echo expand('%:p')<CR>
 " imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
