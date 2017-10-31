@@ -100,11 +100,13 @@ nmap <silent> <C-w>e :belowright cw 15<CR>
 "Location list windows 打开
 nmap <silent> <leader>lw :belowright lw 15<CR>
 nmap <silent> <C-w>l :belowright lw 15<CR>
+nmap <silent> <C-w>d :belowright lw 15<CR>
 
 nmap cd :lchdir %:p:h<CR>:pwd<CR>
 
-" Insert模式下<C-L>清楚后面所有的字符, 类似Normal模式下的d$动作
-imap <unique> <silent> <C-L> <Esc><Esc>ld$a
+" Insert模式下<C-L>清楚后面所有的字符直到), 类似Normal模式下的d$动作, C-u清楚前面的字符直到(
+imap <unique> <silent> <C-l> <Esc><Esc>l<C-v>f)hdi
+imap <unique> <silent> <C-u> <Esc><Esc>l<C-v>F(ldi
 
 "单手保存 ctrl+s 在BASH中,是Lock the console, 解锁ctrl+q, 解决方法是在.bashrc中添加stty stop '' 或者 alias vim="stty stop ''; vim"
 " nmap <C-s> :update<CR>:echo expand('%:p')<CR>
@@ -126,6 +128,7 @@ noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
+" <C-W>r --> 交换窗口
 noremap <C-W>v <C-W>v<C-W>l
 noremap <C-W>s <C-W>s<C-W>j
 "窗口配置"}}}
