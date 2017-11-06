@@ -53,7 +53,7 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 let s:ToggleFlag = 0
 command! MyLookupFile call s:DoLookupFile()
 func! s:DoLookupFile() "{{{
-    let buftype = getbufvar('%', '&filetype')
+let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
         " 如果Eclimd启动,并没有设置LookupFile_TagExpr, 使用eclimd
@@ -65,7 +65,7 @@ func! s:DoLookupFile() "{{{
                         exec "LocateFile"
                     else 
                         let s:ToggleFlag = 0
-                        exec "silent! close"
+                        " exec "cclose"
                     endif
                 endif
             endif
