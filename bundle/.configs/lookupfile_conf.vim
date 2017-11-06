@@ -46,18 +46,33 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
 " let g:LookupFile_LookupAcceptFunc = 'xxx'
 
-" 插件已被修改, 在buff模式下, 映射关系如下:
-" <C-L>: tabedit 有冲突 使用<C-H>
-" <C-J>: split 
-" <C-K>: vsplit
-"<C-O>       i       Same as <CR>, except that the file opens in a split
-"
+" <C-T>: tabedit
+" <C-S>: split 
+" <C-V>: vsplit
+
+let s:ToggleFlag = 0
 command! MyLookupFile call s:DoLookupFile()
 func! s:DoLookupFile() "{{{
     let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
-        exec "LookupFile"
+        " 如果Eclimd启动,并没有设置LookupFile_TagExpr, 使用eclimd
+        if g:LookupFile_TagExpr == "'filenametags'"
+            if isdirectory(expand('~/.vim/bundle/eclim'))
+                if eclim#EclimAvailable(0)
+                    if s:ToggleFlag != 1
+                        let s:ToggleFlag = 1
+                        exec "LocateFile"
+                    else 
+                        let s:ToggleFlag = 0
+                        exec "silent! close"
+                    endif
+                endif
+            endif
+            return 
+        else
+            exec "LookupFile"
+        endif
     else
         if 'lookupfile' ==# buftype
             exec "q"

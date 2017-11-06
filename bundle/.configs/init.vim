@@ -78,10 +78,10 @@ MyPlugin 'tenfyzhong/CompleteParameter.vim'
 
 
 if isdirectory(expand('~/.vim/bundle/L9'))
-    MyPlugin 'local/fuzzyfinder'
     if isdirectory(expand('~/.vim/bundle/eclim'))
         MyPlugin 'local/eclim'
     endif
+    MyPlugin 'local/fuzzyfinder'
     MyPlugin 'local/vcscommand'
     MyPlugin 'local/ydtrans'
     MyPlugin 'local/maximizer'

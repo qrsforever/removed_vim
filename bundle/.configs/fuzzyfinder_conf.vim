@@ -67,8 +67,7 @@ nnoremap <silent> se     :FufEditDataFile<CR>
 "    16 |:FufHelp|         - Help mode (|fuf-help-mode|)
 " 4.介绍
 "   <c-n> :向下选择匹配      <c-p> :向上选择匹配
-"   <c-j> :水平分割选中项    <c-k> :垂直分割选中项    <c-l>:tab打开选中项 <cr> :直接跳到选中项
-"   <c-t> :切换到下一个模式  <c-y> :切换到上一个模式
+"   <c-s> :水平分割选中项    <c-v> :垂直分割选中项    <c-t>:tab打开选中项 <cr> :直接跳到选中项
 "   <c-]> :delete select item
 "   <c-\><c-\> :fuzzy matching 和 partial matching匹配模式切换 ( 模糊查找 与 部分查找 : 前者输入关键字错误时也可显示, 后者输入的部分关键字一定正确 )
 let g:fuf_previewHeight = 0     "预览高度
@@ -80,6 +79,5 @@ let g:fuf_autoPreview = 0
 
 let g:fuf_mrufile_maxItem = 200
 let g:fuf_mrucmd_maxItem = 100
-let g:fuf_keyOpenTabpage = '<C-h>'
 
 let g:fuf_mrufile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'

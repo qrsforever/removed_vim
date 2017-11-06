@@ -151,10 +151,9 @@ function! s:SetupBuf()
   inoremap <silent> <buffer> <expr> <CR> <SID>AcceptFile(0, "\<CR>")
   inoremap <silent> <buffer> <expr> <C-O> <SID>AcceptFile(1, "\<C-O>")
   " lidong add
-  inoremap <silent> <buffer> <expr> <C-L> <SID>AcceptFile(1, "\<C-L>")
-  inoremap <silent> <buffer> <expr> <C-H> <SID>AcceptFile(1, "\<C-H>")
-  inoremap <silent> <buffer> <expr> <C-J> <SID>AcceptFile(2, "\<C-J>")
-  inoremap <silent> <buffer> <expr> <C-K> <SID>AcceptFile(3, "\<C-K>")
+  inoremap <silent> <buffer> <expr> <C-T> <SID>AcceptFile(1, "\<C-T>")
+  inoremap <silent> <buffer> <expr> <C-S> <SID>AcceptFile(2, "\<C-S>")
+  inoremap <silent> <buffer> <expr> <C-V> <SID>AcceptFile(3, "\<C-V>")
   nnoremap <buffer> <Esc><Esc> <C-W>q
   inoremap <buffer> <Esc><Esc> <Esc><C-W>q
   " lidong end
@@ -171,6 +170,12 @@ function! s:SetupBuf()
         \ "\"\\<Lt>C-N>\"")
   inoremap <buffer> <expr> <silent> <Up> <SID>GetCommand(1, 1, "\<C-P>",
         \ "\"\\<Lt>C-P>\"")
+  " lidong add
+  inoremap <buffer> <expr> <silent> <C-J> <SID>GetCommand(1, 1, "\<C-N>",
+        \ "\"\\<Lt>C-N>\"")
+  inoremap <buffer> <expr> <silent> <C-K> <SID>GetCommand(1, 1, "\<C-P>",
+        \ "\"\\<Lt>C-P>\"")
+  " lidong end
   inoremap <buffer> <expr> <silent> <PageDown> <SID>GetCommand(1, 0,
         \ "\<PageDown>", '')
   inoremap <buffer> <expr> <silent> <PageUp> <SID>GetCommand(1, 0,

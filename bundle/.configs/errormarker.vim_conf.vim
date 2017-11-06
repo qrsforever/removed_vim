@@ -82,10 +82,10 @@ func! s:DoSelectMake() "{{{
     echomsg " " . i ". Input manually"
 
     let inputdir = ""
-    let select = str2nr(input("Select Makefile in dirs: ", ''), 10)         
+    let select = str2nr(input("Select Makefile in dirs: ", '1'), 10)         
     
     if select == 0 || select > i 
-        let select = 1
+        return
     endif
 
     if select == i

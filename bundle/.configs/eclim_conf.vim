@@ -11,7 +11,16 @@ let g:EclimJavaDebugStatusWinHeight = 40
 "open:使用浏览器打开, lopen就vim打开
 let g:EclimJavaDocSearchSingleResult = "open" 
 
+" 文件搜索
+" : LocateFile [file_pattern]
+"   <ctrl>e - open the selected file via :edit
+"   <ctrl>s - open the selected file via :split
+"   <ctrl>t - open the selected file via :tabnew
+"   <ctrl>l - switch the locate scope
+"   <ctrl>h - toggle the help buffer
 let g:EclimLocationListHeight = 24
+let g:EclimLocateFileDefaultAction = 'edit'
+
 
 " Temporary buffer key bindings"{{{
 " <cr> - open the type using the (default action) 

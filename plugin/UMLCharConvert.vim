@@ -55,8 +55,8 @@ function! s:_Digraph2Char() "{{{
     :silent! %s/◆\ /c2/g
 endfunction "}}}
 
-command! MyUMLCharConvert call s:_CharConvertToogle()
-function! s:_CharConvertToogle() "{{{
+command! MyUMLCharConvert call s:CharConvertToogle()
+function! s:CharConvertToogle() "{{{
     if s:ConvertState != 1
         call s:_Char2Digraph()
         let s:ConvertState = 1
