@@ -95,10 +95,8 @@ nmap <silent> ga :A<CR>
 nmap <silent> <leader>tt :tabnew<CR>
 
 "Quickfix 编译出错信息调试很有用
-nmap <silent> <leader>cw :belowright cw 15<CR>
 nmap <silent> <C-w>e :belowright cw 15<CR>
 "Location list windows 打开
-nmap <silent> <leader>lw :belowright lw 15<CR>
 nmap <silent> <C-w>l :belowright lw 15<CR>
 nmap <silent> <C-w>d :belowright lw 15<CR>
 

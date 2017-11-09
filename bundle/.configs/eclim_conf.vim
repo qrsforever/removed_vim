@@ -3,7 +3,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " let g:EclimBrowser = "chromium-browser"
 let g:EclimBrowser= "google-chrome"
 " let g:EclimBrowser = "firefox"
-
+ 
 let g:EclimJavaDebugStatusWinWidth = 80
 let g:EclimJavaDebugStatusWinHeight = 40
 " let g:EclimJavaDebugLineSignText = "^"
@@ -31,7 +31,7 @@ let g:EclimLocateFileScope = 'workspace'
 let g:EclimJavaHierarchyDefaultAction = 'edit'
 let g:EclimJavaCallHierarchyDefaultAction = 'edit'
 
-let g:EclimQuickFixOpen = 'botright copen'
+let g:EclimQuickFixOpen = 'belowright copen'
 let g:EclimQuickFixHeight = 24
 
 let g:EclimAntCompilerAdditionalErrorFormat =
