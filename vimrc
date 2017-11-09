@@ -23,8 +23,8 @@ source ~/.vim/bundle/.configs/init.vim
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
 nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
-nmap <unique> <silent> <F3>         :TagbarToggle<CR>
-nmap <unique> <silent> <F4>         :NERDTreeToggle %:p:h<CR>
+nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
+nmap <unique> <silent> <F4>         :TagbarToggle<CR>
 nmap <unique> <silent> <F5>         :MyLookupFile<CR>
 nmap <unique> <silent> <F6>         :MyMake<CR>
 nmap <unique> <silent> <F7>         :MyGrep<CR>
