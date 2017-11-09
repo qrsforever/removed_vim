@@ -140,12 +140,12 @@ nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd dire
 " nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
 " nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
-nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/async<CR>
-nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
-nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
+nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
+" nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
+" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
-nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=files -profile-name=leftview -no-quit file<CR>
+nnoremap <silent> [unite]w :<C-u>UniteResume<CR>
 
 let g:unite_prompt = '» '
 
@@ -165,10 +165,12 @@ function! s:unite_my_settings()
   nmap <buffer> '     <Plug>(unite_quick_match_default_action)
   nmap <buffer> <C-r> <Plug>(unite_redraw)
   imap <buffer> <C-r> <Plug>(unite_redraw)
-  inoremap <silent><buffer><expr> <C-j> unite#do_action('split')
-  nnoremap <silent><buffer><expr> <C-j> unite#do_action('split')
-  inoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
-  nnoremap <silent><buffer><expr> <C-k> unite#do_action('vsplit')
+  inoremap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+  nnoremap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+  inoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  nnoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  nnoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 
   " p		|<Plug>(unite_smart_preview)|
 

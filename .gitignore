@@ -46,3 +46,4 @@ bundle/tagbar-markdown
 bundle/tocdown
 bundle/CompleteParameter.vim
 bundle/jedi-vim
+bundle/taglist.vim

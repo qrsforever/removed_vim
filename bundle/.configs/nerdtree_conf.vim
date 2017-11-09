@@ -38,7 +38,7 @@ let NERDTreeShowBookmarks=1                          "默认显示书签列表
 let NERDTreeShowFiles=1                              "默认显示文件
 let NERDTreeShowHidden=0                             "默认not显示隐藏文件
 let NERDTreeShowLineNumbers=0                        "默认是否显示行号
-let NERDTreeWinPos='left'                            "窗口位置left
+let NERDTreeWinPos='right'                            "窗口位置left
 let NERDTreeWinSize=36                               "窗口宽
 let NERDTreeStatusline=1
 let NERDTreeChDirMode=2
@@ -78,7 +78,7 @@ let NERDTreeIgnore += ['tags']
 " O.......递归打开所选目录
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
 
-nmap <silent> <leader>no :NERDTreeFind<CR>
+nmap <silent> so :<C-u>NERDTreeFind<CR>
 
 " 打开一个空文件时自动开启
 " autocmd StdinReadPre * let s:std_in=1
