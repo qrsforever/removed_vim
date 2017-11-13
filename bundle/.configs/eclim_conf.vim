@@ -21,6 +21,8 @@ let g:EclimJavaDocSearchSingleResult = "open"
 let g:EclimLocationListHeight = 24
 let g:EclimLocateFileDefaultAction = 'edit'
 let g:EclimLocateFileScope = 'workspace'
+let g:EclimLocateFileFuzzy = 1
+let g:EclimLocateFileCaseInsensitive = 'never'
 
 " Temporary buffer key bindings"{{{
 " <cr> - open the type using the (default action) 
