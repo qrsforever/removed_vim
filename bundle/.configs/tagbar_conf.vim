@@ -15,6 +15,7 @@ autocmd BufNewFile,BufReadPost *.aidl let b:tagbar_ignore = 1
 "autocmd BufLeave *.cpp,*.c,*.h resize 
 
 " autoload/tagbar.vim: 366左右(BufEnter造成), 下面的代码会导致, Fuf启动buffer窗口后, 有异常
+" 暂时没有很好的解决方案, 可以去掉BufEnter
 " autocmd BufReadPost,BufEnter,CursorHold,FileType * call
 "     \ s:AutoUpdate(fnamemodify(expand('<afile>'), ':p'), 0)
 
