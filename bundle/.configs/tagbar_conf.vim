@@ -13,7 +13,10 @@ let g:tagbar_iconchars = ['▶', '▼']
 
 autocmd BufNewFile,BufReadPost *.aidl let b:tagbar_ignore = 1
 "autocmd BufLeave *.cpp,*.c,*.h resize 
- 
+
+" autoload/tagbar.vim: 366左右(BufEnter造成), 下面的代码会导致, Fuf启动buffer窗口后, 有异常
+" autocmd BufReadPost,BufEnter,CursorHold,FileType * call
+"     \ s:AutoUpdate(fnamemodify(expand('<afile>'), ':p'), 0)
 
 " 支持markdown
 " ln -s ~/.vim/configure/ctags ~/.ctags

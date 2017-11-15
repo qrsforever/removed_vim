@@ -59,9 +59,9 @@ if (has('lua'))
 else
     MyPlugin 'neocomplcache'
 endif
-" MyPlugin 'Shougo/neoinclude.vim'
 " MyPlugin 'Shougo/neosnippet'
 " MyPlugin 'Shougo/neosnippet-snippets'
+" MyPlugin 'Shougo/neoinclude.vim'
 " MyPlugin 'tsukkee/unite-tag'
 " MyPlugin 'osyo-manga/unite-quickfix'
 MyPlugin 'SirVer/ultisnips'

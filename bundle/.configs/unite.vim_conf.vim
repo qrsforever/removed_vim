@@ -8,11 +8,15 @@ let g:unite_source_rec_min_cache_files = 120
 let g:unite_source_buffer_time_format = "(%Y-%m-%d %H:%M:%S) "
 let g:unite_force_overwrite_statusline = 0
 " let g:unite_ignore_source_files = []
-" let g:unite_data_directory = "~/.cache/unite"
-" let g:unite_source_bookmark_directory = '~/.cache/unite/bookmark'
+let g:unite_data_directory = "~/.cache/unite"
+let g:unite_source_bookmark_directory = '~/.cache/unite/bookmark'
 let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
 let g:unite_source_grep_default_opts = '-iRHn'
+
+" tag
+let g:unite_source_tag_max_name_length = 26
+let g:unite_source_tag_max_kind_length = 8
 
 let g:unite_source_menu_menus = {
     \   "default" : {
@@ -33,12 +37,14 @@ let s:my_mrufilter = {
     \   "description" : "Add my mru filter"
     \ }
 function! s:my_mrufilter.filter(candidates, context)
+    let i = 1
     for candidate in filter(copy(a:candidates), "!has_key(v:val, 'abbr')")
         let path = candidate.action__path
-        let filename = fnamemodify(path, ":p:t") 
-        let candidate.abbr = strftime(g:unite_source_buffer_time_format, getftime(candidate.action__path))
-        let candidate.abbr .= fnamemodify(path, ":p:t") 
-        let candidate.abbr .= "\t" . path
+        let candidate.abbr = printf("%3d: ", i)
+        let candidate.abbr .= "(" . fnamemodify(path, ":t") . ")"
+        let candidate.abbr .= "  " . path . " "
+        let candidate.abbr .= strftime(g:unite_source_buffer_time_format, getftime(path))
+        let i = i + 1
     endfor
     return a:candidates
 endfunction
@@ -133,12 +139,13 @@ nmap s [unite]
 
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
+" see fuzzyfinder plugin.
+nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
 nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
-" Use fuzzyfinder plugin instead.
-" nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru -no-split file_mru<CR>
-" nnoremap <silent> [unite]q :<C-u>MyTopCopen <CR>
-" nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
-" nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+
+nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
+nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
 " nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>

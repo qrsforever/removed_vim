@@ -357,6 +357,7 @@ function fuf#launch(modeName, initialPattern, partialMatching)
     echoerr 'This mode is not available: ' . a:modeName
     return
   endif
+  echomsg '#####' . a:modeName
   let s:runningHandler = fuf#{a:modeName}#createHandler(copy(s:handlerBase))
   let s:runningHandler.stats = fuf#loadDataFile(s:runningHandler.getModeName(), 'stats')
   let s:runningHandler.partialMatching = a:partialMatching
@@ -384,8 +385,15 @@ function fuf#launch(modeName, initialPattern, partialMatching)
     autocmd CursorMovedI <buffer>        call s:runningHandler.onCursorMovedI()
     autocmd InsertLeave  <buffer> nested call s:runningHandler.onInsertLeave()
   augroup END
+  " lidong add, 规避tagbar导致在Taglist窗口打开文件, 牺牲垂直打开
+  if a:modeName == "buffertag"
+      let open_type = s:OPEN_TYPE_VSPLIT
+  else
+      let open_type = s:OPEN_TYPE_CURRENT
+  endif
+  " lidong end
   for [key, func] in [
-        \   [ g:fuf_keyOpen          , 'onCr(' . s:OPEN_TYPE_CURRENT . ')' ],
+        \   [ g:fuf_keyOpen          , 'onCr(' . open_type . ')' ],
         \   [ g:fuf_keyOpenSplit     , 'onCr(' . s:OPEN_TYPE_SPLIT   . ')' ],
         \   [ g:fuf_keyOpenVsplit    , 'onCr(' . s:OPEN_TYPE_VSPLIT  . ')' ],
         \   [ g:fuf_keyOpenTabpage   , 'onCr(' . s:OPEN_TYPE_TAB     . ')' ],
