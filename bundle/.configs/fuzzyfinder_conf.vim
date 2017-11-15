@@ -15,12 +15,12 @@
 " nnoremap <silent> sd     :FufDirWithCurrentBufferDir<CR>
 " noremap <silent> sD     :FufDirWithFullCwd<CR>
 " nnoremap <silent> s<C-d> :FufDir<CR>
-" nnoremap <silent> sn     :FufMruFile<CR>
-"nnoremap <silent> sN     :FufMruFileInCwd<CR>
+nnoremap <silent> sn     :FufMruFile<CR>
+nnoremap <silent> sN     :FufMruFileInCwd<CR>
 nnoremap <silent> sc     :FufMruCmd<CR>
-" nnoremap <silent> su     :FufBookmarkFile<CR>
-" nnoremap <silent> sU     :FufBookmarkFileAdd<CR>
-"vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+nnoremap <silent> su     :FufBookmarkFile<CR>
+nnoremap <silent> sU     :FufBookmarkFileAdd<CR>
+" vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
 nnoremap <silent> si     :FufBookmarkDir<CR>
 nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 " nnoremap <silent> st     :FufTag<CR>
@@ -73,7 +73,7 @@ nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 let g:fuf_previewHeight = 0     "预览高度
 let g:fuf_enumeratingLimit = 100 "符合条件的最多显示20个
 " 'file' 'dir' 'buffer' 'line',
-let g:fuf_modesDisable = ['buffer', 'bookmarkfile', 'tag', 'help', 'taggedfile', 'coveragefile', 'jumplist', 'changelist', 'line', 'file', 'dir', 'mrufile', 'quickfix'] 
+let g:fuf_modesDisable = ['buffer', 'tag', 'help', 'taggedfile', 'coveragefile', 'jumplist', 'changelist', 'line', 'file', 'dir', 'quickfix'] 
 let g:fuf_maxMenuWidth = 200
 let g:fuf_autoPreview = 0
 

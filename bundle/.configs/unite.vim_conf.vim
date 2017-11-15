@@ -140,11 +140,11 @@ nmap s [unite]
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
 " see fuzzyfinder plugin.
-nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
-nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
+" nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
+" nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
 
-nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
-nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
+" nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
