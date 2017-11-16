@@ -96,7 +96,7 @@ call unite#custom#source(
 call unite#custom#source(
     \ 'file_mru, directory_mru',
     \ 'max_candidates', 
-    \ 500)
+    \ 120)
 
 call unite#custom#source(
     \ 'buffer, file_rec, file_rec/git',
@@ -137,22 +137,24 @@ call unite#custom#source(
 nnoremap [unite]   <Nop>
 nmap s [unite]
 
-nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split -start-insert source<CR>
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer -no-split buffer<CR>
-" see fuzzyfinder plugin.
-" nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
-" nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
+nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
 
-" nnoremap <silent> [unite]U :<C-u>UniteBookmarkAdd %<CR>
-" nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" see fuzzyfinder plugin.
+nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=mru file_mru<CR>
+nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
+
+nnoremap <silent> [unite]Y :<C-u>UniteBookmarkAdd %<CR>
+nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
-" nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
-" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
 nnoremap <silent> [unite]w :<C-u>UniteResume<CR>
+
+" nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
+" nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
+" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
 
 let g:unite_prompt = '» '
 

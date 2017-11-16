@@ -5,7 +5,7 @@
 " "TODO: find a better/nicer solution
 " execute 'wincmd p' 
 " 
-" nnoremap <silent> sj     :FufBuffer<CR>
+nnoremap <silent> sb     :FufBuffer<CR>
 " nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
 " nnoremap <silent> sK     :FufFileWithFullCwd<CR>
 " nnoremap <silent> s<C-k> :FufFile<CR>
@@ -23,8 +23,8 @@ nnoremap <silent> sU     :FufBookmarkFileAdd<CR>
 " vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
 nnoremap <silent> si     :FufBookmarkDir<CR>
 nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
-" nnoremap <silent> st     :FufTag<CR>
-" nnoremap <silent> sT     :FufTag!<CR>
+nnoremap <silent> st     :FufTag<CR>
+nnoremap <silent> sT     :FufTag!<CR>
 "nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
 " vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
 " vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
@@ -39,11 +39,11 @@ nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 " nnoremap <silent> sg     :FufTaggedFile<CR>
 " nnoremap <silent> sG     :FufTaggedFile!<CR>
 "nnoremap <silent> so     :FufJumpList<CR>
-"nnoremap <silent> sp     :FufChangeList<CR>
-" nnoremap <silent> sq     :FufQuickfix<CR>
+nnoremap <silent> sp     :FufChangeList<CR>
+nnoremap <silent> sq     :FufQuickfix<CR>
 " nnoremap <silent> sy     :FufLine<CR>
 "nnoremap <silent> sh     :FufHelp<CR>
-" nnoremap <silent> se     :FufEditDataFile<CR>
+nnoremap <silent> se     :FufEditDataFile<CR>
 "nnoremap <silent> sr     :FufRenewCache<CR>
 
 " 1.FuzzyFinder 下载:http://www.vim.org/scripts/script.php?script_id=1984
@@ -65,19 +65,19 @@ nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
 "    14 |:FufQuickfix|     - Quickfix mode (|fuf-quickfix-mode|)
 "    15 |:FufLine|         - Line mode (|fuf-line-mode|)
 "    16 |:FufHelp|         - Help mode (|fuf-help-mode|)
-" 4.介绍
+" 4.介绍 (已经修改)
 "   <c-n> :向下选择匹配      <c-p> :向上选择匹配
 "   <c-s> :水平分割选中项    <c-v> :垂直分割选中项    <c-t>:tab打开选中项 <cr> :直接跳到选中项
 "   <c-]> :delete select item
 "   <c-\><c-\> :fuzzy matching 和 partial matching匹配模式切换 ( 模糊查找 与 部分查找 : 前者输入关键字错误时也可显示, 后者输入的部分关键字一定正确 )
 let g:fuf_previewHeight = 0     "预览高度
 let g:fuf_enumeratingLimit = 100 "符合条件的最多显示20个
-" 'file' 'dir' 'buffer' 'line',
-let g:fuf_modesDisable = ['buffer', 'tag', 'help', 'taggedfile', 'coveragefile', 'jumplist', 'changelist', 'line', 'file', 'dir', 'quickfix'] 
+" 'file' 'dir' 'buffer' 'line','changelist',  'tag', 'help', 'taggedfile', 'coveragefile', 'jumplist'
+let g:fuf_modesDisable = ['help', 'taggedfile', 'coveragefile', 'jumplist', 'line', 'file', 'dir'] 
 let g:fuf_maxMenuWidth = 200
 let g:fuf_autoPreview = 0
 
-let g:fuf_mrufile_maxItem = 200
+let g:fuf_mrufile_maxItem = 120
 let g:fuf_mrucmd_maxItem = 100
 
 let g:fuf_mrufile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
