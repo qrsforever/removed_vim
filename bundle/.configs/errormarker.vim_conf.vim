@@ -7,11 +7,11 @@ let errormarker_warningtext = "WW"
 let errormarker_warningtypes = "wW"
 let errormarker_errorgroup = "ErrorMsg"
 let errormarker_warninggroup = "Todo"
-"let &errorformat="%f:%l:%c: %t %n: %m," . &errorformat
-"let &errorformat="%f:%l:%c: %t%*[^:]:%m," . &errorformat
+" let &errorformat="%f:%l:%c: %t %n: %m," . &errorformat
+" let &errorformat="%f:%l:%c: %t%*[^:]:%m," . &errorformat
 "f:file l:line c:column t:warningtypes m:message
-let errormarker_erroricon = "/usr/share/icons/gnome/16x16/status/dialog-error.png"   "gvim
-let errormarker_warningicon = "/usr/share/icons/gnome/16x16/status/dialog-warning.png" "gvim
+let errormarker_erroricon = expand("$HOME/.vim/res/icons/dialog-error.png") 
+let errormarker_warningicon = expand("$HOME/.vim/res/icons/dialog-warning.png")
 "}}}
  
 " function QfSearchError(pattern) "{{{
