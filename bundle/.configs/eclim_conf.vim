@@ -328,6 +328,7 @@ command S J
 " Abbrev"{{{
 cabbrev JH  JavaHierarchy 
 cabbrev JC  JavaCallHierarchy -s project
+cabbrev LF  LocateFile
 "}}}
 
 " Map "{{{
