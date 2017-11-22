@@ -39,6 +39,14 @@ $CMD_CSCOPE -b -c -k -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
 echo ":cs kill -1" >> $TAG_DIR/db.vim
 echo ":cs reset" >> $TAG_DIR/db.vim
 echo ":cs add $TAG_DIR/cscope.out $TAG_DIR" >> $TAG_DIR/db.vim
+
+result=`ctags --version | grep Universal`
+if [[ x$result != x ]]
+then
+    t="s"
+else
+    t=""
+fi
  
-$CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra=+q -L $TAG_DIR/cscope.files -o $TAG_DIR/tags
+$CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/cscope.files -o $TAG_DIR/tags
 echo "set tags+=$TAG_DIR/tags" >> $TAG_DIR/db.vim

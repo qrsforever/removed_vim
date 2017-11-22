@@ -8,6 +8,8 @@ let g:tagbar_compact = 1
 let g:tagbar_expand = 0
 let g:tagbar_singleclick = 0
 let g:tagbar_iconchars = ['▶', '▼']
+let g:tagbar_ctags_bin = "ctags"
+
 " let g:tagbar_updateonsave_maxlines = 10000
 "highlight TagbarScope guifg=Green ctermfg=Green
 

@@ -588,7 +588,7 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zC' : 'zO')<CR>
 "ctrl+x ctrl+k
 "apt-get install wordlist
 set dictionary=~/.vim/dict/wordlist.txt
-" set cpt=.,b,t,k
+set cpt=.,w,b,u,t,k,i
 " set cpt=.
 "    .	scan the current buffer ('wrapscan' is ignored)
 "    w	scan buffers from other windows

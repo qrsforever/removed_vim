@@ -246,35 +246,44 @@ func! DoCtrlLeftMouse() abort "{{{
         endif
     endif
 
-    if exists('g:loaded_unite')
-        " 2. ycm
-        try
-            " let result = unite#util#redir('YcmCompleter GoTo')
-            redir => result
-            silent! execute 'YcmCompleter GoTo'
-            redir END
-            if matchstr(result, "Error") == ''
-                return
-            endif
-        catch
-            return
-        endtry
-        " 3. tag
-        try
-            " let result = unite#util#redir('tag ' . word)
-            redir => result
-            silent! execute 'tag ' . word
-            redir END
-            if matchstr(result, "tag not found") != ''
-                echomsg "tag not found for " . word
-                return
-            endif
-        catch
-            return 
-        endtry
-        exec "tag " . word
-        " exec "normal zt"
+    " 2. ycm
+    if &ft == 'python'
+        silent! execute 'YcmCompleter GoTo'
+        return
     endif
+
+    " 3. tag
+    silent! execute 'tag ' . word
+
+    " if exists('g:loaded_unite')
+    "   " 2. ycm
+    "   try
+    "       " let result = unite#util#redir('YcmCompleter GoTo')
+    "       redir => result
+    "       silent! execute 'YcmCompleter GoTo'
+    "       redir END
+    "       if matchstr(result, "Error") == ''
+    "           return
+    "       endif
+    "   catch
+    "       return
+    "   endtry
+    "   " 3. tag
+    "   try
+    "       " let result = unite#util#redir('tag ' . word)
+    "       redir => result
+    "       silent! execute 'tag ' . word
+    "       redir END
+    "       if matchstr(result, "tag not found") != ''
+    "           echomsg "tag not found for " . word
+    "           return
+    "       endif
+    "   catch
+    "       return 
+    "   endtry
+    "   exec "tag " . word
+    "   " exec "normal zt"
+    " endif
 endfunc"}}}
 
 func! DoCtrlRightMouse() "{{{

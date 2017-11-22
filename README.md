@@ -11,3 +11,5 @@ Use:
 5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行./install.py --clang-completer or --all (时间比较久)
 
 6. jedi补全sudo pip3 install -u jedi
+
+7. 使用universal-ctags, https://github.com/universal-ctags/ctags 下载编译
