@@ -50,9 +50,21 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 " <C-S>: split 
 " <C-V>: vsplit
 
+let s:timeID = 0
 let s:ToggleFlag = 0
+func! s:RestoreToogleFlag(timeid) abort "{{{
+    if s:timeID != a:timeid
+        echomsg "fix me"
+    endif
+    if s:timeID != 0
+        call timer_stop(s:timeID)
+        let s:timeID = 0
+    endif
+    let s:ToggleFlag = 0
+endfunc 
+
 command! MyLookupFile call s:DoLookupFile()
-func! s:DoLookupFile() "{{{
+func! s:DoLookupFile() abort
     let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
@@ -61,18 +73,22 @@ func! s:DoLookupFile() "{{{
             if isdirectory(expand('~/.vim/bundle/eclim'))
                 if eclim#EclimAvailable(0)
                     if s:ToggleFlag != 1
-                        let s:ToggleFlag = 1
                         exec "LocateFile"
+                        let s:ToggleFlag = 1
+                        if has('lambda')
+                            if s:timeID == 0
+                                " 5秒恢复状态, 从eclim那里拿不到Locatefile窗口的状态
+                                let s:timeID = timer_start(5000, function('s:RestoreToogleFlag'))
+                            endif
+                        endif
                     else 
-                        let s:ToggleFlag = 0
-                        " exec "cclose"
+                        call s:RestoreToogleFlag(s:timeID)
                     endif
+                    return 
                 endif
             endif
-            return 
-        else
-            exec "LookupFile"
         endif
+        exec "LookupFile"
     else
         if 'lookupfile' ==# buftype
             exec "q"

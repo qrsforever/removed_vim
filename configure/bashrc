@@ -116,6 +116,10 @@ then
     export VAGRANT_DOTFILE_PATH=/system/vagrant
 fi
 
+if [ ! -d /tmp/xlog ]
+then
+    mkdir -p /tmp/xlog
+fi
 
 # added by Anaconda3 4.4.0 installer
 # export PATH="/home/lidong/anaconda3/bin:$PATH"

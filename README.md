@@ -1,6 +1,6 @@
 Use:
 
-1. 要求vim版本：vim7.5 or high 
+1. 要求vim版本：vim8.0 or high 
 
 2. 管理插件: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 

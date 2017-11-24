@@ -7,7 +7,7 @@ let g:trv_grep = "grep"       "搜索的命令
 let g:trv_grepOptions = "-i"    "Grep命令参数忽略大小写
 let g:trv_dictionary = "~/.vim/dict/toefl_eng.txt"  "Grep搜索单词的文件 toefl_eng.txt: 托福4000多个单词
 
-func! GetTransLoc() 
+func! GetTransLoc()  "{{{
     let word = input("Dict: ", expand("<cword>"), "buffer")
     if (word == "")
         echo "No word can translate!"
@@ -23,6 +23,6 @@ func! GetTransLoc()
         let len1 = len(result)
         echomsg word . " ==> " . result[len0+1:len1-2]
     endif
-endfunc
+endfunc "}}}
 
 nmap <silent> <leader>tr :call GetTransLoc()<CR>

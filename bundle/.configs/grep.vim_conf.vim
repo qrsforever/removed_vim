@@ -18,7 +18,7 @@ func ListCandidateWord(A, L, P)
     return system("cat " . s:MRUGrepWordsFile)
 endfunc
 
-func! s:InputWords(label)
+func! s:InputWords(label) "{{{
     if ! filereadable(s:MRUGrepWordsFile)
         call writefile([], s:MRUGrepWordsFile)
     endif
@@ -51,9 +51,9 @@ func! s:InputWords(label)
         unlet outputs
     endif
     return tmpstr
-endfunc
+endfunc "}}}
 
-func! s:DoSelectGrep() 
+func! s:DoSelectGrep()  "{{{
     echomsg ' Use Shift+F2 Shift+F3 (for next match pattern)'
     echomsg ' 1. lvimgrep(current file)'
     echomsg ' 2. lvimgrep(directory)'
@@ -105,4 +105,4 @@ func! s:DoSelectGrep()
     endif
     " exec "Mark " . word 
     exec "redraw"
-endfunc
+endfunc "}}}
