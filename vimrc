@@ -127,10 +127,9 @@ nmap <silent> ga :A<CR>
 nmap <silent> <leader>tt :tabnew<CR>
 
 "Quickfix 编译出错信息调试很有用
-nmap <silent> <C-w>e :belowright cw 15<CR>
+nmap <silent> <C-w>e :MyBelowCopen<CR>
 "Location list windows 打开
-nmap <silent> <C-w>l :belowright lw 15<CR>
-nmap <silent> <C-w>d :belowright lw 15<CR>
+nmap <silent> <C-w>d :MyBelowLopen<CR>
 
 nmap cd :lchdir %:p:h<CR>:pwd<CR>
 
@@ -640,7 +639,7 @@ au FileType c,cpp   setlocal makeprg=make\ -j4
 au FileType python  setlocal makeprg=python3\ -u
 
 augroup QFix
-    au BufReadPost quickfix silent! nmap <buffer> q :silent! q<CR>
+    au BufReadPost quickfix silent! nmap <silent> <buffer> q :silent! q<CR>
 augroup END
 "}}}
 

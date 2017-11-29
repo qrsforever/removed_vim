@@ -8,8 +8,23 @@ Use:
 
 4. cd bundle/vimproc.vim; make -f make_unix.mk
 
-5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行./install.py --clang-completer or --all (时间比较久)
+5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行./install.sh --clang-completer or --all (时间比较久)
+    python3: 修改一下install.sh
 
-6. jedi补全sudo pip3 install -u jedi
+6. jedi补全sudo pip3 install -U jedi
+    git clone https://github.com/davidhalter/jedi
+    sudo python setup.py install
+    or
+    (推荐)
+    sudo pip3 install -e git://github.com/davidhalter/jedi.git#egg=jedi
+
+    安装numpydoc:
+    sudo apt-get install python-numpydoc
+    sudo apt-get install python3-numpydoc (ubuntu16)
+
+    补全(某些)时有个错误:
+    docscrape.py:140: UserWarning: Unknown section Note
+    打开文件加一个"Note" Section
+
 
 7. 使用universal-ctags, https://github.com/universal-ctags/ctags 下载编译

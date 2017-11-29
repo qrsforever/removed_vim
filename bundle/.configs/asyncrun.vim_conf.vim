@@ -1,12 +1,13 @@
-"Set up {{{
+"{{{ Set up 
 function!  DoAfterFinished() 
         " Not impl
 endfunc
 let g:asyncrun_exit = 'call DoAfterFinished()'
 "}}}
-"
+ 
+"{{{ MyAsyncRun 
 command! MyAsyncRun :call s:DoSyncRun()
-func! s:DoSyncRun() "{{{
+func! s:DoSyncRun()
     let ef = &errorformat
     if &filetype == 'python'
         setlocal errorformat+=\%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,

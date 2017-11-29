@@ -1,4 +1,4 @@
-" Setup {{{
+"{{{ Setup 
 nmap <silent> <unique> `<space> :ErrorAtCursor<CR>
 " hi ErrorMsg cterm=bold ctermbg=DarkRed gui=bold guibg=DarkRed
 " hi WarningMsg cterm=bold ctermbg=LightRed gui=bold guibg=LightRed
@@ -35,16 +35,17 @@ let errormarker_warningicon = expand("$HOME/.vim/res/icons/dialog-warning.png")
 " augroup END
 "}}}
 
+"{{{ MyMake
 "CTRL-W <Enter>  垂直打开
 command! MyMake call s:DoSelectMake()
 let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
 let s:MaxFileCount = 3
-func! s:DoSelectMake() "{{{
-    if &filetype == 'python'
+func! s:DoSelectMake()
+    exec 'silent! cclose'
+    if &filetype == 'python' || &filetype == 'sh'
         exec "MyAsyncRun"
         return 
     elseif &filetype == 'qf'
-        exec 'cclose'
         return
     endif
 
@@ -163,8 +164,9 @@ func! s:DoSelectMake() "{{{
     endif
 endfunc"}}}
 
+"{{{ MyPythonRun
 " command! MyPythonRun call s:Python_Run()
-" function s:Python_Run() "{{{
+" function s:Python_Run()
 "     let mp = &makeprg
 "     let ef = &errorformat
 "     let exeFile = expand("%:t")
@@ -192,8 +194,9 @@ endfunc"}}}
 " endfunction
 " "}}}
 
+"{{{ MyToggleHtmlPhp 
 command! MyToggleHtmlPhp call s:ToggleHtmlPhp()
-function s:ToggleHtmlPhp()"{{{
+function s:ToggleHtmlPhp()
     if &filetype == 'html'
         echomsg "Current filetype set PHP"
         set ft=php

@@ -10,10 +10,11 @@ function! MyFun_is_special_buffer(bt) "{{{
     endfor
     unlet buffers
     return ret
-endfunc"}}}
+endfunc "}}}
 
-command! MyScroll call s:_MyScrollBinder()
-function s:_MyScrollBinder() "{{{
+"{{{ MyScroll
+command! MyScroll call s:_MyScrollBinder() 
+function s:_MyScrollBinder() 
     echomsg " Ver(1) Hor(2) Cancel(0) "
     let select = str2nr(input("Select: ", " " ), 10)
     if select == 1
@@ -25,38 +26,45 @@ function s:_MyScrollBinder() "{{{
     else
         set noscrollbind
     endif
-endfunction"}}}
+endfunction "}}}
 
-command! MyBottomCopen  call s:_MyCopen(0)
-command! MyTopCopen     call s:_MyCopen(1)
-command! MyBelowCopen   call s:_MyCopen(2)
-command! MyAboveCopen   call s:_MyCopen(3)
-function s:_MyCopen(place) "{{{
+ "{{{ MyCLopen
+command! MyBottomCopen  call s:_MyCLopen('cwindow', 0)
+command! MyTopCopen     call s:_MyCLopen('cwindow', 1)
+command! MyBelowCopen   call s:_MyCLopen('cwindow', 2)
+command! MyAboveCopen   call s:_MyCLopen('cwindow', 3)
+command! MyBottomLopen  call s:_MyCLopen('lwindow', 0)
+command! MyTopLopen     call s:_MyCLopen('lwindow', 1)
+command! MyBelowLopen   call s:_MyCLopen('lwindow', 2)
+command! MyAboveLopen   call s:_MyCLopen('lwindow', 3)
+function s:_MyCLopen(cmd, place)
     let h = winheight(0) / 2
     if h < 5
         let h = ''
     endif
     if a:place == 0
-        execute "botright copen" . h
+        execute "botright " . a:cmd . " " . h
     elseif a:place == 1
-        execute "topleft copen" . h
+        execute "topleft " . a:cmd . " " . h
     elseif a:place == 2
-        execute "belowright copen" . h
+        execute "belowright " . a:cmd . " " . h
     elseif a:place == 3
-        execute "aboveleft copen" . h
+        execute "aboveleft " . a:cmd . " " . h
     else
         let w = winwidth(0) / 2 - 5
         if w < 5
-            execute "vertical copen" . w
+            execute "vertical " . a:cmd . " ". w
         else
-            execute "vertical copen"
+            execute "vertical " . a:cmd
         endif
     endif
-endfunction"}}}
+endfunction
+"}}}
 
+"{{{ MyColColor
 autocmd FileType nerdtree,tagbar,lookupfile set cc=""
 command! MyColColor call s:_MyColColor()
-function! s:_MyColColor() "{{{
+function! s:_MyColColor()
     let cx = &colorcolumn
     let cz = "+1," . col(".")
     if cx != '' && cx == cz
@@ -64,15 +72,19 @@ function! s:_MyColColor() "{{{
     else
         exec "set cc=+1," . col(".")
     endif
-endfunc "}}}
+endfunc 
+"}}}
 
+"{{{ MyMarkColor 
 command! MyMarkColor call s:_MyMarkColor()
-function! s:_MyMarkColor() "{{{
+function! s:_MyMarkColor() 
     exec "Mark " . expand("<cword>")
-endfunc "}}}
+endfunc 
+"}}}
 
+"{{{ MyMarksBrowser 
 command! MyMarksBrowser call s:_MyMarksBrowser()
-function! s:_MyMarksBrowser() "{{{
+function! s:_MyMarksBrowser()
     let buftype = getbufvar('%', '&filetype')
     if 'marksbuffer' == buftype 
         exec "MarksBrowser"
@@ -82,4 +94,5 @@ function! s:_MyMarksBrowser() "{{{
         return
     endif
     exec "MarksBrowser"
-endfunction "}}}
+endfunction 
+"}}}
