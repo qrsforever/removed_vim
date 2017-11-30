@@ -44,7 +44,8 @@ MyPlugin 'errormarker.vim'
 MyPlugin 'grep.vim'
 MyPlugin 'Lokaltog/vim-powerline'
 if (filereadable('/usr/bin/clang'))
-    MyPlugin 'Valloric/YouCompleteMe'
+    " 等待YCM集成jedi, 参数补全
+    " MyPlugin 'Valloric/YouCompleteMe'
 endif
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
@@ -73,7 +74,9 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'davidhalter/jedi-vim'
+" MyPlugin 'zchee/deoplete-jedi'
 MyPlugin 'skywind3000/asyncrun.vim'
+" 对参数提示功能, 没有jedi做的完善
 " MyPlugin 'tenfyzhong/CompleteParameter.vim'
 
 

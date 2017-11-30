@@ -1,7 +1,6 @@
+" YCM Setup {{{
 " nnoremap [ycm] <Nop>
 " nmap ; [ycm]
-
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 
 " neocomplete do it alreay!
 " inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
@@ -20,19 +19,17 @@ let g:ycm_min_num_identifier_candidate_chars = 5
 let g:ycm_auto_trigger = 1
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_max_diagnostics_to_display = 10
-" 如果设置为1, 补全提示会变成隔一个显示提示,可能和neocomplete.vim冲突,没有复现
 let g:ycm_cache_omnifunc= 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 2000
 let g:ycm_seed_identifiers_with_syntax = 1	
 let g:ycm_complete_in_comments = 1
+" 文件路径补全等
 let g:ycm_complete_in_strings = 1
-" 对lvimgrep dir搜索有影响
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:syntastic_always_populate_loc_list = 1
 let g:ycm_semantic_triggers = {
-			\   'c' : ['->', '    ', '.', ' ', '(', '[', '&'],
+            \   'c' : ['->', '    ', '.', ' ', '(', '[', '&'],
             \   'cpp,objcpp' : ['->', '.', ' ', '(', '[', '&', '::'],
             \   'perl' : ['->', '::', ' '],
             \   'php' : ['->', '::', '.'],
@@ -41,6 +38,7 @@ let g:ycm_semantic_triggers = {
             \   'lua' : ['.', ':'],
             \   'vim' : ['$', '&', 're![\w&$<-][\w:#<>-]*']
             \ }
+" Fixme: 这种类型下的补全功能, 隔一个弹出一次
 let g:ycm_filetype_blacklist = {
             \ 'tagbar' : 1,
             \ 'nerdtree' : 1,
@@ -49,26 +47,27 @@ let g:ycm_filetype_blacklist = {
             \ 'qf' : 1,
             \ 'notes' : 1,
             \ 'unite' : 1,
-            \ 'text' : 1,
             \ 'logcat' : 1,
             \}
 
+" 如果python使用neocomplete, 这里需要把python加进来
 let g:ycm_filetype_specific_completion_to_disable = {
     \ 'gitcommit': 1,
     \ 'html': 1,
-    \ 'css': 1
-\}
+    \ 'css': 1,
+    \}
 
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
 let g:ycm_goto_buffer_command = 'same-buffer'
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = 'python3'
 
 "youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
-let g:ycm_key_invoke_completion = '<M-;>'
+" let g:ycm_key_invoke_completion = '<M-;>'
 
-nnoremap ;g :YcmCompleter GoTo<CR>
-nnoremap ;b :YcmForceCompileAndDiagnostics<CR>
-
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
+nnoremap <silent> ;g :silent! YcmCompleter GoTo<CR>
+nnoremap <silent> ;b :silent! YcmForceCompileAndDiagnostics<CR>
+"}}}

@@ -4,18 +4,33 @@
 " https://github.com/davidhalter/jedi/issues/372
 if exists(':NeoCompleteEnable')
     let g:jedi#popup_on_dot = 0
+    let g:jedi#completions_enabled = 0
+    let g:jedi#smart_auto_mappings = 0
 endif
-let g:jedi#auto_initialization = 0
+
+if exists(':YcmCompleter')
+    let g:jedi#auto_initialization = 0
+endif
+
+let g:jedi#force_py_version = 3
 " 1: buffer 2: cmdline(set cmdheight=2)
 let g:jedi#show_call_signatures = 1
-let g:jedi#auto_vim_configuration = 0
+" 如果大于0, (后空格才提示补全, Fixme
 let g:jedi#show_call_signatures_delay = 0
+
+" let g:jedi#completions_command = "<C-N>"
+let g:jedi#goto_command = ''
+let g:jedi#goto_assignments_command = ';a'
+let g:jedi#goto_definitions_command = ';d'
+let g:jedi#usages_command = ''
+let g:jedi#rename_command = ''
+
 if &rtp =~ '\<jedi\>'
     augroup JediSetup
         au!
         au FileType python
-            \ setlocal omnifunc=jedi#completions  |
-            \ call jedi#configure_call_signatures()
+                    \ setlocal omnifunc=jedi#completions  |
+                    \ call jedi#configure_call_signatures()
     augroup END
 endif
 " }}}

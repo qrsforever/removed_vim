@@ -13,7 +13,8 @@ let g:syntastic_style_error_symbol = '✍'
 let g:syntastic_style_warning_symbol = '✍'
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_show_warnings = 1
-let g:syntastic_always_populate_loc_list = 1
+" 导致lvimgrep - location widow不能显示
+" let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["go", "html"] }
 let g:syntastic_python_checkers=['python', 'pyflakes']

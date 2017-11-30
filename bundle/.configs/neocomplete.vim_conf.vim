@@ -72,16 +72,21 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType python setlocal omnifunc=python3complete#Complete
+if has('python3')
+    autocmd FileType python setlocal omnifunc=python3complete#Complete
+else
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+endif
+    
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"使用默认
-"let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
-let g:neocomplete#sources#omni#input_patterns.ruby = ''
-" let g:neocomplete#sources#omni#input_patterns.python = ''
+
+" let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
+" let g:neocomplete#sources#omni#input_patterns.ruby = ''
+let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
 
 "let g:neocomplete#sources#omni#input_patterns.php =
 "           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
@@ -99,11 +104,12 @@ endif
 " let g:neocomplete#sources#omni#input_patterns.php =   
             \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
 
-" support python2.7
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import\)\w*'
-
 " 必须要有这个否则<c-x><c-o>不会自动弹出 
 " let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
 " fix eclim does't work
 let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
+" jedi
+let g:neocomplete#force_omni_input_patterns.python =
+            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
 " }}}
