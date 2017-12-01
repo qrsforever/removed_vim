@@ -248,7 +248,11 @@ func! DoCtrlLeftMouse() abort "{{{
 
     " 2. ycm
     if &ft == 'python'
-        silent! execute 'YcmCompleter GoTo'
+        if exists(':YcmCompleter')
+            silent! execute 'normal ;g'
+        else
+            silent! execute 'normal ;d'
+        endif
         return
     endif
 
@@ -284,21 +288,27 @@ func! DoCtrlLeftMouse() abort "{{{
     "   exec "tag " . word
     "   " exec "normal zt"
     " endif
-endfunc"}}}
+endfunc "}}}
 
 func! DoCtrlRightMouse() "{{{
     if &ft == 'java' && eclim#EclimAvailable(0)
-        exec 'normal! ' .  "\<c-o>"
+        exec 'normal! ' .  '\<c-o>'
         return
     endif
-    let result = unite#util#redir('silent! pop')
-    if result != '' && matchstr(result, "Error") != ''
-        exec 'normal! ' .  "\<c-o>"
-        return
+
+    " ctrl-t, redir 总会引起, 莫名其妙的问题, Fix
+    redir => s:rr
+    silent execute 'tags'
+    redir END
+    let cnt = len(split(s:rr, '\n'))
+    " if s:rr != '' && matchstr(s:rr, "Error") != ''
+    if cnt < 3
+        exec 'normal! ' .  '\<c-o>'
+    else 
+        silent execute 'silent! pop'
     endif
-    " ctrl-t
-    exec "silent! pop"
-endfunc"}}}
+    exec "normal zz"
+endfunc "}}}
 
 " Command "{{{
 command -nargs=? J  :call DoProjectSearch(0, 0, 0)
