@@ -38,6 +38,7 @@ call vundle#begin()
 
 MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
+" MyPlugin 'VimIM'
 MyPlugin 'CCTree'
 MyPlugin 'EasyMotion'
 MyPlugin 'errormarker.vim'
