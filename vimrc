@@ -45,7 +45,8 @@ imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
 imap <unique> <silent> <F12>   <ESC>,ra
 
-vmap <unique> <silent> <F6>    <ESC>:<c-u>call MyMake('v')<CR>
+vmap <unique> <silent> <F6>         :<c-u>call MyMake('v')<CR>
+vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 
 " "Shift"
 nmap <unique> <silent> <S-F1>       :lnext<CR>
@@ -652,5 +653,7 @@ if has("unix")"{{{
     let s:uname = system("echo -n \"$(uname)\"")
     if !v:shell_error && s:uname == "Linux"
         set t_BE=
+        " 影响R concose
+        set t_SH=
     endif
 endif"}}}

@@ -10,7 +10,7 @@ func! MyMake(mode)
     elseif &filetype == 'r'
         if a:mode == 'v'
             " call feedkeys("\<Plug>(RDSendSelection)")
-            call SendSelectionToR("silent", "stay")
+            call SendSelectionToR("silent", "down")
         elseif a:mode == 'n'
             " call feedkeys("\<Plug>(RDSendLine)")
             call SendLineToR("stay")

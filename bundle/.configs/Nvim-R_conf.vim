@@ -18,7 +18,8 @@
 " . Show/Update                                        \ro (Objects Show)
 
 " xterm / gnome-terminal
-let R_term = "gnome-terminal"
+" let R_term = "gnome-terminal"
+
 " disable: _ replace <-
 let R_assign = 0
 
@@ -26,10 +27,12 @@ let R_objbr_place = "script,left"
 let R_objbr_w = 35
 let R_objbr_h = 35
 
-let R_args = ['--no-save', '--quiet']
-let R_start_libs = "base,stats,graphics,grDevices,utils,methods"
+" let R_args = ['--no-save', '--quiet']
+" let R_start_libs = "base,stats,graphics,grDevices,utils,methods"
 
-" let R_rconsole_width = 40
+" let R_rconsole_width = 65
+" let R_min_editor_width = 65
+" autocmd VimResized * let R_rconsole_width = winwidth(0) / 2
 
 " \ra: 显示method参数
 let R_listmethods = 1
