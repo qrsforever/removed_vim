@@ -79,6 +79,8 @@ MyPlugin 'davidhalter/jedi-vim'
 MyPlugin 'skywind3000/asyncrun.vim'
 " 对参数提示功能, 没有jedi做的完善
 " MyPlugin 'tenfyzhong/CompleteParameter.vim'
+" R
+MyPlugin 'jalvesaq/Nvim-R'
 
 
 if isdirectory(expand('~/.vim/bundle/L9'))
