@@ -1,0 +1,2 @@
+grDevices::X11.options(width = 12, height = 8, ypos = 200,
+    xpos = 300, pointsize = 10)

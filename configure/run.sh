@@ -12,5 +12,6 @@ __mklink bashrc ~/.bashrc
 __mklink profile ~/.profile
 __mklink tmux.conf ~/.tmux.conf
 __mklink eclimrc ~/.eclimrc
+__mklink Rprofile ~/.Rprofile 
 __mklink ctags ~/.ctags
 __mklink terminator.conf ~/.config/terminator/config

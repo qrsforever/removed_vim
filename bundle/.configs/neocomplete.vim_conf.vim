@@ -77,7 +77,6 @@ if has('python3')
 else
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 endif
-    
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -87,7 +86,6 @@ endif
 " let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
 " let g:neocomplete#sources#omni#input_patterns.ruby = ''
 let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
-
 "let g:neocomplete#sources#omni#input_patterns.php =
 "           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 "
@@ -96,6 +94,9 @@ let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
 "            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
 " let g:neocomplete#sources#omni#input_patterns.cpp =
 "             \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+ 
+" R
+let g:neocomplete#sources#omni#input_patterns.r = '[[:alnum:].\\]\+'
 
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}

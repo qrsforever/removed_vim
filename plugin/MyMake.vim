@@ -11,7 +11,7 @@ func! MyMake(mode)
         if a:mode == 'v'
             " call feedkeys("\<Plug>(RDSendSelection)")
             call SendSelectionToR("silent", "down")
-        elseif a:mode == 'n'
+        else
             " call feedkeys("\<Plug>(RDSendLine)")
             call SendLineToR("stay")
         endif
