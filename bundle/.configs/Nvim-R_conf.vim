@@ -61,7 +61,7 @@ function! RPrintRObject()
         return ""
     endif
     let arr = split(line, "=")
-    if len(arr) == 2
+    if len(arr) >= 2
         call PrintRObject(substitute(arr[0], '\s\+$', '', 'g'))
     endif
 endfunction

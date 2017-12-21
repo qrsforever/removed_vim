@@ -257,7 +257,7 @@ func! DoCtrlLeftMouse() abort "{{{
     endif
 
     " 3. tag
-    silent! execute 'tag ' . word
+    execute 'tag ' . word
 
     " if exists('g:loaded_unite')
     "   " 2. ycm
