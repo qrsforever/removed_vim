@@ -15,3 +15,4 @@ __mklink eclimrc ~/.eclimrc
 __mklink Rprofile ~/.Rprofile 
 __mklink ctags ~/.ctags
 __mklink terminator.conf ~/.config/terminator/config
+__mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername
