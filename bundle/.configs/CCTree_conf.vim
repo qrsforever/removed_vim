@@ -40,6 +40,10 @@ let g:CCTreeMinVisibleDepth = 3 "Maximum visible(unfolded) level,
 " let g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree
 " let g:CCTreeKeyDepthPlus = '<C-\>='
 " let g:CCTreeKeyDepthMinus = '<C-\>-'
+ 
+nmap <C-\>> :CCTreeTraceForward <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>< :CCTreeTraceReverse <C-R>=expand("<cword>")<CR><CR>
+
 "  
 "当查看源码是使用 -- 插件 : Cscope_map.vim
 "是否使用 quickfix 窗口来显示 cscope 结果
