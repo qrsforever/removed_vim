@@ -39,7 +39,6 @@ call vundle#begin()
 MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
 " MyPlugin 'VimIM'
-MyPlugin 'CCTree'
 MyPlugin 'EasyMotion'
 MyPlugin 'errormarker.vim'
 MyPlugin 'grep.vim'
@@ -87,6 +86,7 @@ if isdirectory(expand('~/.vim/bundle/L9'))
     if isdirectory(expand('~/.vim/bundle/eclim'))
         MyPlugin 'local/eclim'
     endif
+    MyPlugin 'local/CCTree'
     MyPlugin 'local/fuzzyfinder'
     MyPlugin 'local/vcscommand'
     MyPlugin 'local/ydtrans'

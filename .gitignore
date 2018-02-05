@@ -21,7 +21,6 @@ bundle/syntastic
 bundle/nerdtree
 bundle/nerdcommenter
 bundle/tagbar
-bundle/CCTree
 bundle/YouCompleteMe
 bundle/EasyMotion
 bundle/errormarker.vim

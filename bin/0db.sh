@@ -30,6 +30,7 @@ echo "SrcDir = $SRC_DIR"
 
 CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
+CMD_CCGLUE=`which ccglue`
 
 find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
 echo "let g:LookupFile_TagExpr=string('$TAG_DIR/filenametags')"  > $TAG_DIR/db.vim
@@ -39,7 +40,11 @@ $CMD_CSCOPE -b -c -k -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
 echo ":cs kill -1" >> $TAG_DIR/db.vim
 echo ":cs reset" >> $TAG_DIR/db.vim
 echo ":cs add $TAG_DIR/cscope.out $TAG_DIR" >> $TAG_DIR/db.vim
-
+if [[ x$CCGLUE_FLAG == x"1" ]]
+then
+    $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
+    echo ":CCTreeLoadXRefDBFromDisk $TAG_DIR/cctree.out" >> $TAG_DIR/db.vim
+fi
 result=`ctags --version | grep Universal`
 if [[ x$result != x ]]
 then

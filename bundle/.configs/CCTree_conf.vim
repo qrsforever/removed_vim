@@ -32,16 +32,15 @@ let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,
 let g:CCTreeMinVisibleDepth = 3 "Maximum visible(unfolded) level, 
 
 "默认设置:
-"let g:CCTreeKeyTraceForwardTree = '<C-\>>' "该函数调用其他函数
-"let g:CCTreeKeyTraceReverseTree = '<C-\><' "该函数被谁调用
-"g:CCTreeKeyHilightTree = '<C-l>'        " Static highlighting
-
-"g:CCTreeKeySaveWindow = '<C-\>y'
-"g:CCTreeKeyToggleWindow = '<C-\>w'
-"g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree
-"g:CCTreeKeyDepthPlus = '<C-\>='
-"g:CCTreeKeyDepthMinus = '<C-\>-'
-"
+" let g:CCTreeKeyTraceForwardTree = '<C-\>>' "该函数调用其他函数
+" let g:CCTreeKeyTraceReverseTree = '<C-\><' "该函数被谁调用
+" let g:CCTreeKeyHilightTree = '<C-l>'        " Static highlighting
+" let g:CCTreeKeySaveWindow = '<C-\>y'
+" let g:CCTreeKeyToggleWindow = '<C-\>w'
+" let g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree
+" let g:CCTreeKeyDepthPlus = '<C-\>='
+" let g:CCTreeKeyDepthMinus = '<C-\>-'
+"  
 "当查看源码是使用 -- 插件 : Cscope_map.vim
 "是否使用 quickfix 窗口来显示 cscope 结果
 set cscopequickfix=s-,c-,d-,i-,t-,e-

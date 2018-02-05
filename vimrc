@@ -415,7 +415,7 @@ if has("gui_running")
    " set guioptions+=b   " 底边滚动条
    " set guioptions+=l   " 左边滚动条
    "set guioptions+=L   " 垂直分隔窗口左边滚动条
-   set guioptions+=r   " 右边滚动条
+   " set guioptions+=r   " 右边滚动条
    "set guioptions+=R   " 垂直分隔窗口右边滚动条
     set mousemodel=popup
     map! <S-Insert> <MiddleMouse>
