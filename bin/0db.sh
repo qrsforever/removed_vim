@@ -36,14 +36,19 @@ find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! 
 echo "let g:LookupFile_TagExpr=string('$TAG_DIR/filenametags')"  > $TAG_DIR/db.vim
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
-$CMD_CSCOPE -b -c -k -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
+if [[ x$CCGLUE_FLAG != x"1" ]]
+then
+    KERNEL_FLAG="-k"
+fi
+
+$CMD_CSCOPE -b -c $KERNEL_FLAG -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
 echo ":cs kill -1" >> $TAG_DIR/db.vim
 echo ":cs reset" >> $TAG_DIR/db.vim
 echo ":cs add $TAG_DIR/cscope.out $TAG_DIR" >> $TAG_DIR/db.vim
 if [[ x$CCGLUE_FLAG == x"1" ]]
 then
     $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
-    echo ":CCTreeLoadXRefDBFromDisk $TAG_DIR/cctree.out" >> $TAG_DIR/db.vim
+    echo ":silent! CCTreeLoadXRefDBFromDisk $TAG_DIR/cctree.out" >> $TAG_DIR/db.vim
 fi
 result=`ctags --version | grep Universal`
 if [[ x$result != x ]]

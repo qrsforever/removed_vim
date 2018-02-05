@@ -158,6 +158,11 @@ func! s:ShowAndLoadTagDB(root) "{{{
                 exec 'cs add ' . cscopeout . ' ' . subdirs[n]
             endif
 
+            let cctreeout = subdirs[n] . '/cctree.out'
+            if filereadable(cctreeout)
+                exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout 
+            endif
+
             let tagfile = subdirs[n] . '/tags'
             if filereadable(tagfile)
                 exec 'set tags+=' . tagfile
