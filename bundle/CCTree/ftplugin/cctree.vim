@@ -2818,9 +2818,12 @@ au!
 " This is a bug in Vim 7.2, a patch needs to be applied to the runtime c
 " syntax files
 " For now, use this hack to make *.h files work
-autocmd FileType *   if &ft == 'c'|| &ft == 'cpp' |
-                   \ call s:CCTreeBufferKeyMappingsCreate(s:CCTreeKeyMappings)|
-                   \ endif
+" lidong change
+autocmd FileType *  call s:CCTreeBufferKeyMappingsCreate(s:CCTreeKeyMappings)
+
+"autocmd FileType *   if &ft == 'c'|| &ft == 'cpp' |
+"                   \ call s:CCTreeBufferKeyMappingsCreate(s:CCTreeKeyMappings)|
+"                   \ endif
 augroup END
 
 

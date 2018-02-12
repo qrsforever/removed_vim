@@ -13,6 +13,8 @@ let g:syntastic_style_error_symbol = '✍'
 let g:syntastic_style_warning_symbol = '✍'
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_show_warnings = 1
+let g:syntastic_shell = "/bin/bash"
+" let g:syntastic_c_include_dirs = []
 " 导致lvimgrep - location widow不能显示
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_rust_checkers = ['rustc']

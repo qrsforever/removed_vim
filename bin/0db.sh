@@ -33,7 +33,6 @@ CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
 
 find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
-echo "let g:LookupFile_TagExpr=string('$TAG_DIR/filenametags')"  > $TAG_DIR/db.vim
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
 if [[ x$CCGLUE_FLAG != x"1" ]]
@@ -41,14 +40,10 @@ then
     KERNEL_FLAG="-k"
 fi
 
-$CMD_CSCOPE -b -c $KERNEL_FLAG -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
-echo ":cs kill -1" >> $TAG_DIR/db.vim
-echo ":cs reset" >> $TAG_DIR/db.vim
-echo ":cs add $TAG_DIR/cscope.out $TAG_DIR" >> $TAG_DIR/db.vim
+$CMD_CSCOPE -bqc $KERNEL_FLAG -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
 if [[ x$CCGLUE_FLAG == x"1" ]]
 then
     $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
-    echo ":silent! CCTreeLoadXRefDBFromDisk $TAG_DIR/cctree.out" >> $TAG_DIR/db.vim
 fi
 result=`ctags --version | grep Universal`
 if [[ x$result != x ]]
@@ -57,6 +52,5 @@ then
 else
     t=""
 fi
- 
 $CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/cscope.files -o $TAG_DIR/tags
-echo "set tags+=$TAG_DIR/tags" >> $TAG_DIR/db.vim
+dirname `find $SRC_DIR -name "*.h" -or -name "*.H" ` | sort -u > $TAG_DIR/include_dirs.txt

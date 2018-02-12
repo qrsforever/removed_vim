@@ -8,18 +8,14 @@ func! s:LoadTagDB(force, root) "{{{
     if flg == 0
         return
     endif
-    if empty(dbfile)
-        let dbfile = s:CreateTagDB(a:root)
-    endif
-    exec 'source ' . dbfile
-    exec "redraw"
-    echomsg "Use TagDB: " . dbfile
+    let tagdirs = s:CreateTagDB(a:root)
+    call s:Loading(tagdirs)
 endfunc "}}}
 
 func! s:FindTagDB(root) "{{{
     let path = a:root
     while 1 < len(path)
-        let dbfile = '/tmp/tags' . path . '/.tags/db.vim'
+        let dbfile = '/tmp/tags' . path . '/.tags/tags'
         if filereadable(dbfile)
             return dbfile
         endif
@@ -49,7 +45,7 @@ func! s:CreateTagDB(root) "{{{
     endif
     echomsg "Build TagDB: " . inputdir
     exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
-    return tagsdir . '/db.vim'
+    return [tagsdir]
 endfunc "}}}
 
 func! s:BuildTagDB(root) "{{{
@@ -70,6 +66,44 @@ func! s:BuildTagDB(root) "{{{
     else
         return
     endif
+endfunc "}}}
+
+func! s:Loading(tagdirs) "{{{
+    let tlufiles=''
+    let tIncfiles=[]
+    for item in a:tagdirs
+        let filenametags = item . '/filenametags'
+        if filereadable(filenametags)
+            let tlufiles = tlufiles . ' ' . filenametags
+        endif
+
+        let include_dirs = item . '/include_dirs.txt'
+        if filereadable(include_dirs)
+            for incdir in split(system("cat ". include_dirs), '\n')
+                call add(tIncfiles, incdir)
+            endfor
+        endif
+
+        let cscopeout = item . '/cscope.out'
+        if filereadable(cscopeout)
+            exec 'cs add ' . cscopeout . ' ' . item
+        endif
+
+        let cctreeout = item . '/cctree.out'
+        if filereadable(cctreeout)
+            exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout 
+        endif
+
+        let tagfile = item . '/tags'
+        if filereadable(tagfile)
+            exec 'set tags+=' . tagfile
+        endif
+    endfor
+    let g:LookupFile_TagExpr=string(tlufiles)
+    let g:syntastic_c_include_dirs = tIncfiles
+
+    unlet tlufiles
+    unlet tIncfiles
 endfunc "}}}
 
 func! s:ShowAndLoadTagDB(root) "{{{
@@ -96,17 +130,18 @@ func! s:ShowAndLoadTagDB(root) "{{{
     endif
 
     let subdirs = [ ]
+    let tagdirs = [ ]
     let i = 0
     :silent! messages clear
     :silent! redraw
 
-    " 0. 标准 c/c++ tags
+    " 1. 标准 c/c++ tags
     if isdirectory($HOME . '/.vim/tags')
         echomsg ' ' . i . ' ' . 'C/C++ tags'
         call add(subdirs, $HOME . '/.vim/tags')
     endif
 
-    " 1. tags环境变量中的db (掉电不丢失)
+    " 2. tags环境变量中的db (掉电不丢失)
     let dirs = vimproc#readdir(tagdir)
     for subdir in dirs
         let subdir = substitute(subdir, '\/$', '', '')
@@ -118,22 +153,15 @@ func! s:ShowAndLoadTagDB(root) "{{{
         endif
     endfor
 
-    " 2. 临时目录下的tags
+    " 3. 临时目录下的tags
     if isdirectory('/tmp/tags')
-        let dirs = split(system("dirname `find /tmp/tags/ -name .tags -type d`"), '\n')
-        for subdir in dirs
+        let s:dirs = split(system("dirname `find /tmp/tags/ -name .tags -type d`"), '\n')
+        for subdir in s:dirs
             let i = i + 1
             echomsg ' ' . i . ' ' . substitute(subdir, '/tmp/tags', '', '')
             call add(subdirs, subdir . '/.tags')
         endfor
     endif
-
-    " 3. 清空原全局tags
-    set tags=
-    :cs kill -1
-    :cs reset
-    let g:LookupFile_TagExpr=string('filenametags')
-    let tlufiles=''
 
     " 4. 选择并设置tags
     echohl Search
@@ -148,28 +176,15 @@ func! s:ShowAndLoadTagDB(root) "{{{
             continue
         endif
         if n > 0 && n <= i
-            let filenametags = subdirs[n] . '/filenametags'
-            if filereadable(filenametags)
-                let tlufiles = tlufiles . ' ' . filenametags
-            endif
-
-            let cscopeout = subdirs[n] . '/cscope.out'
-            if filereadable(cscopeout)
-                exec 'cs add ' . cscopeout . ' ' . subdirs[n]
-            endif
-
-            let cctreeout = subdirs[n] . '/cctree.out'
-            if filereadable(cctreeout)
-                exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout 
-            endif
-
-            let tagfile = subdirs[n] . '/tags'
-            if filereadable(tagfile)
-                exec 'set tags+=' . tagfile
-            endif
+            call add(tagdirs, subdirs[n])
         endif
     endfor
-    let g:LookupFile_TagExpr=string(tlufiles)
+
+    " 5. 加载
+    call s:Loading(tagdirs)
+
+    unlet tagdirs
+    unlet subdirs
 endfunc "}}}
 
 func! MyTags(mode) "{{{
@@ -181,6 +196,13 @@ func! MyTags(mode) "{{{
     echohl Search
     let sel = str2nr(input("Select : ", ' '), 10)
     echohl None
+
+    " 清空原全局tags
+    set tags=
+    :cs kill -1
+    :cs reset
+    let g:LookupFile_TagExpr=string('filenametags')
+
     if sel == 1
         call s:ShowAndLoadTagDB(root)
     elseif sel == 2

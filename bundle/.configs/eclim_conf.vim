@@ -257,7 +257,12 @@ func! DoCtrlLeftMouse() abort "{{{
     endif
 
     " 3. tag
-    execute 'tag ' . word
+    try 
+        execute 'tag ' . word
+    catch
+        echomsg "tag ". word . " error!"
+        return 
+    endtry
 
     " if exists('g:loaded_unite')
     "   " 2. ycm
