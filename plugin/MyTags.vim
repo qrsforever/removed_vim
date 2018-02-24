@@ -145,7 +145,7 @@ func! s:ShowAndLoadTagDB(root) "{{{
     let dirs = vimproc#readdir(tagdir)
     for subdir in dirs
         let subdir = substitute(subdir, '\/$', '', '')
-        let dbfile = subdir . '/db.vim'
+        let dbfile = subdir . '/tags'
         if filereadable(dbfile)
             let i = i + 1
             echomsg ' ' . i . ' ' . subdir
