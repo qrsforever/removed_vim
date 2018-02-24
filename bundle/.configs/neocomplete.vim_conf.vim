@@ -26,25 +26,12 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" <CR>: close popup and save indent."{{{
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? "\<C-y>" : "\<CR>"
-    "
-    " 回车总是有问题, 暂时的处理方式
-    " if pumvisible() 
-    "     call neocomplete#close_popup()
-    "     return "\<Space>"
-    " else
-    "     return "\<CR>"
-    " endif
 endfunction
-"}}}
-
-" <TAB>: completion."{{{
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
@@ -54,7 +41,6 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-"}}}
 
 " Or set this.
 let g:neocomplete#enable_cursor_hold_i = 1
@@ -64,8 +50,8 @@ let g:neocomplete#enable_cursor_hold_i = 1
 let g:neocomplete#cursor_hold_i_time = 1000
 
 let g:neocomplete#force_overwrite_completefunc=1 
-let g:neocomplete#sources#buffer#cache_limit_size = 1000000
-let g:neocomplete#sources#tags#cache_limit_size   = 30000000
+let g:neocomplete#sources#buffer#cache_limit_size = 500000
+let g:neocomplete#sources#tags#cache_limit_size   = 500000
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -89,11 +75,11 @@ let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
 "let g:neocomplete#sources#omni#input_patterns.php =
 "           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 "
-" omnicppcomte插件已包含
-" let g:neocomplete#sources#omni#input_patterns.c =
-"            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-" let g:neocomplete#sources#omni#input_patterns.cpp =
-"             \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" omnicppcomplete插件已包含
+let g:neocomplete#sources#omni#input_patterns.c =
+           \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
  
 " R
 let g:neocomplete#sources#omni#input_patterns.r = '[[:alnum:].\\]\+'
