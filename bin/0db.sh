@@ -32,15 +32,16 @@ CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
 
-find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
+find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
+cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$' > $TAG_DIR/cscope.tag.files
 if [[ x$CCGLUE_FLAG != x"1" ]]
 then
     KERNEL_FLAG="-k"
 fi
 
-$CMD_CSCOPE -bqc $KERNEL_FLAG -i $TAG_DIR/cscope.files -f $TAG_DIR/cscope.out
+$CMD_CSCOPE -bqc $KERNEL_FLAG -i $TAG_DIR/cscope.tag.files -f $TAG_DIR/cscope.out
 if [[ x$CCGLUE_FLAG == x"1" ]]
 then
     $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
@@ -52,5 +53,5 @@ then
 else
     t=""
 fi
-$CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/cscope.files -o $TAG_DIR/tags
+$CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/cscope.tag.files -o $TAG_DIR/tags
 dirname `find $SRC_DIR -name "*.h" -or -name "*.H" ` | sort -u > $TAG_DIR/include_dirs.txt
