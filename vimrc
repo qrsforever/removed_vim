@@ -264,10 +264,10 @@ set ruler
 set laststatus=2 "always show
 
 "当光标达到上端或下端时 翻滚的行数
-set scrolljump=2
+set scrolljump=0
 
 "当光标达到水平极端时 移动的列数
-set sidescroll=20
+set sidescroll=0
 
 "当光标距离极端(上,下,左,右)多少时发生窗口滚动
 set scrolloff=2
@@ -637,7 +637,7 @@ set completeopt=longest,menu
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"}}}
 
 " 设置Logcat文件类型"{{{
-au BufRead,BufNewFile *logcat* set filetype=logcat 
+" au BufRead,BufNewFile *logcat* set filetype=logcat 
 "}}}
 
 "a.vim实现源文件与头文件切换"{{{

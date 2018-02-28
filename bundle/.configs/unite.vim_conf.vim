@@ -148,8 +148,9 @@ nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<
 
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
-nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep -no-empty grep:%<CR>
+nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
+nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=change change<CR>
 nnoremap <silent> [unite]w :<C-u>UniteResume<CR>
 
 " nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
