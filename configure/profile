@@ -24,3 +24,7 @@ fi
 if [ -f /data/opt/env.sh ]; then
     . /data/opt/env.sh
 fi
+
+if [ -f "/opt/mermaid/bin/0init" ]; then
+    . "/opt/mermaid/bin/0init"
+fi
