@@ -109,6 +109,7 @@ xpwd()
 }
 
 alias 0vi='vim --noplugin'
+alias vi='vim'
 stty stop ''
 
 if [ -d /system/vagrant ];

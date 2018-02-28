@@ -13,7 +13,16 @@ func! s:InputWords(label) "{{{
 
     :messages clear
     :redraw
-    let tmpstr = input('[' . a:label . '] Search for pattern: ', expand("<cword>"), 'custom,ListCandidateWord')
+    let word = expand("<cword>")
+    if len(word) < 3 || len(word) > 48
+        " get word from clipboard
+        let word = getreg('+')
+        if len(word) < 3 || len(word) > 48
+            let word = ''
+        endif
+    endif
+
+    let tmpstr = input('[' . a:label . '] Search for pattern: ', word, 'custom,ListCandidateWord')
     if len(tmpstr) < 2
         unlet grepwords
         return ""
@@ -85,7 +94,7 @@ func! MyGrep(mode)  "{{{
         exec "Bgrep '" . s:InputWords('bgrep') . "'"
     elseif select == 8
         exec "QuickFixClear"
-        exec "cs find e " . s:InputWords('cs')
+        exec "silent! cs find e " . s:InputWords('cs')
         exec "belowright cw " . h
     else
         return
