@@ -106,26 +106,14 @@ func! s:Loading(tagdirs) "{{{
     unlet tIncfiles
 endfunc "}}}
 
-func! s:ShowAndLoadTagDB(root) "{{{
+func! s:ShowAndLoadTagDB(root, tagdir) "{{{
     if !vimshell#util#has_vimproc()
         echomsg "Need vimproc plugin supported!"
         return
     endif
 
-    let tagdir = $tags
-    if len(tagdir) == 0
+    if len(a:tagdir) == 0
         echomsg 'You must add envirenment tags, export tags=your_fix_tagdirs in ~/.profile file'
-        " echomsg 'set env tags dir, you can add export tags=your_tag_dir into ~/.profile'
-        " echomsg ' 1. 创建一个专门存放不同工程总Tag的目录 '
-        " echomsg '    eg. mkdir -p /home/lidong/Workspace/tags '
-        " echomsg ' 2. 设置系统环境变量tags指向总Tag的目录'
-        " echomsg '    eg. export tags=/home/lidong/Workspace/tags (可以写到~/.profile) '
-        " echomsg ' 3. 增加需要创建Tag的不同工程的目录 '
-        " echomsg '    eg. mkdir -p /home/lidong/Workspace/tags/myproject1 '
-        " echomsg ' 4. 在工程目录中创建db.sh, 指定工程源码路径即可'
-        " echomsg '    db.sh内容可参考~/.vim/bin/db.sh '
-        " echomsg ' 5. 在工程目录里, 执行./db.sh生成需要的tags, filenametags, cscope'
-        " echomsg '    eg. cd /home/lidong/Workspace/tags/myproject1; ./db.sh '
         return
     endif
 
@@ -142,7 +130,7 @@ func! s:ShowAndLoadTagDB(root) "{{{
     endif
 
     " 2. tags环境变量中的db (掉电不丢失)
-    let dirs = vimproc#readdir(tagdir)
+    let dirs = vimproc#readdir(a:tagdir)
     for subdir in dirs
         let subdir = substitute(subdir, '\/$', '', '')
         let dbfile = subdir . '/tags'
@@ -187,12 +175,43 @@ func! s:ShowAndLoadTagDB(root) "{{{
     unlet subdirs
 endfunc "}}}
 
+func! s:UpdateTagDB(root, tagdir) "{{{
+    if len(a:tagdir) == 0
+        echomsg 'You must add envirenment tags, export tags=your_fix_tagdirs in ~/.profile file'
+        return
+    endif
+    let flg = 0
+    let tmpdir = a:root
+    while len(tmpdir) > 12 
+        let gitdir = tmpdir . '/.git'
+        let svndir = tmpdir . '/.svn'
+        if isdirectory(gitdir) || isdirectory(svndir)
+            let flg = 1
+            break
+        endif
+        let pathpos = strridx(tmpdir, '/')
+        let tmpdir = strpart(tmpdir, 0, pathpos)
+    endwhile
+    if flg == 1 
+        let proname = fnamemodify(tmpdir, ":t")
+        let prorun = a:tagdir . "/" . proname . '/db.sh'
+        if filereadable(prorun)
+            :silent! messages clear
+            :redraw
+            echomsg " Update ..."
+            call system(prorun)
+            echomsg " Update done."
+        endif 
+    endif
+endfunc "}}}
+
 func! MyTags(mode) "{{{
     exec 'lchdir %:p:h'
     let root = getcwd()
     echomsg "Use select: "
     echomsg "   1 : Load databases, multiple dbs delimited by ','"
     echomsg "   2 : Build or load database in current dir."
+    echomsg "   3 : Update current project tags(git,svn)."
     echohl Search
     let sel = str2nr(input("Select : ", ' '), 10)
     echohl None
@@ -203,10 +222,19 @@ func! MyTags(mode) "{{{
     :cs reset
     let g:LookupFile_TagExpr=string('filenametags')
 
+    let tagdir = $tags
+    if len(tagdir) == 0
+        if isdirectory('/projects/tags')
+            let tagdir = '/projects/tags'
+        endif
+    endif
+
     if sel == 1
-        call s:ShowAndLoadTagDB(root)
+        call s:ShowAndLoadTagDB(root, tagdir)
     elseif sel == 2
         call s:BuildTagDB(root)
+    elseif sel == 3
+        call s:UpdateTagDB(root, tagdir)
     else
         return 
     endif
