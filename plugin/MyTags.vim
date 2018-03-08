@@ -106,7 +106,7 @@ func! s:Loading(tagdirs) "{{{
     unlet tIncfiles
 endfunc "}}}
 
-func! s:ShowAndLoadTagDB(root, tagdir) "{{{
+func! s:LoadTagDB(root, tagdir) "{{{
     if !vimshell#util#has_vimproc()
         echomsg "Need vimproc plugin supported!"
         return
@@ -175,7 +175,7 @@ func! s:ShowAndLoadTagDB(root, tagdir) "{{{
     unlet subdirs
 endfunc "}}}
 
-func! s:UpdateTagDB(root, tagdir) "{{{
+func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
     if len(a:tagdir) == 0
         echomsg 'You must add envirenment tags, export tags=your_fix_tagdirs in ~/.profile file'
         return
@@ -200,7 +200,8 @@ func! s:UpdateTagDB(root, tagdir) "{{{
             :redraw
             echomsg " Update ..."
             call system(prorun)
-            echomsg " Update done."
+            call s:Loading([a:tagdir . "/" . proname])
+            echomsg " Done..."
         endif 
     endif
 endfunc "}}}
@@ -211,7 +212,7 @@ func! MyTags(mode) "{{{
     echomsg "Use select: "
     echomsg "   1 : Load databases, multiple dbs delimited by ','"
     echomsg "   2 : Build or load database in current dir."
-    echomsg "   3 : Update current project tags(git,svn)."
+    echomsg "   3 : Update and load project tags(git,svn)."
     echohl Search
     let sel = str2nr(input("Select : ", ' '), 10)
     echohl None
@@ -230,11 +231,11 @@ func! MyTags(mode) "{{{
     endif
 
     if sel == 1
-        call s:ShowAndLoadTagDB(root, tagdir)
+        call s:LoadTagDB(root, tagdir)
     elseif sel == 2
         call s:BuildTagDB(root)
     elseif sel == 3
-        call s:UpdateTagDB(root, tagdir)
+        call s:UpdateAndLoadTagDB(root, tagdir)
     else
         return 
     endif
