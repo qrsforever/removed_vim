@@ -28,3 +28,6 @@ Use:
 
 
 7. 使用universal-ctags, https://github.com/universal-ctags/ctags 下载编译
+
+8. 使用markdown, 并根据对应的配置里面的说明进行修改
+    `npm -g install instant-markdown-d`
