@@ -24,6 +24,8 @@
 "     padding: 30px;
 "   }
 "
+" 如果想使用GFM(git favorate markdown), see /opt/mermaid/etc/instant-markdown-d/instant-markdown-d
+"
 let g:instant_markdown_autostart = 0
 let g:instant_markdown_slow = 1
 "}}}

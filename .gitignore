@@ -51,4 +51,6 @@ bundle/taglist.vim
 bundle/VimIM
 bundle/Nvim-R
 bundle/vim-instant-markdown
+bundle/vim-markdown-toc
 bundle/Vundle.vim/README_ZH_CN.md
+extern

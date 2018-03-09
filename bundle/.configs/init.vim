@@ -81,6 +81,7 @@ MyPlugin 'skywind3000/asyncrun.vim'
 " R
 MyPlugin 'jalvesaq/Nvim-R'
 MyPlugin 'jackiehan/vim-instant-markdown'
+MyPlugin 'mzlogin/vim-markdown-toc'
 
 
 if isdirectory(expand('~/.vim/bundle/L9'))
