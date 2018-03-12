@@ -82,7 +82,7 @@ MyPlugin 'skywind3000/asyncrun.vim'
 MyPlugin 'jalvesaq/Nvim-R'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
-
+MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     if isdirectory(expand('~/.vim/bundle/eclim'))
