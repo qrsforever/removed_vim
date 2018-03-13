@@ -1,4 +1,4 @@
-func! s:LoadTagDB(force, root) "{{{
+func! s:TmpLoadTagDB(force, root) "{{{
     let flg = str2nr(a:force, 10) 
     if flg == 1
         let dbfile = s:FindTagDB(a:root)
@@ -43,6 +43,8 @@ func! s:CreateTagDB(root) "{{{
     if !isdirectory(tagsdir)
         call mkdir(tagsdir, 'p')
     endif
+    :silent! messages clear
+    :silent! redraw
     echomsg "Build TagDB: " . inputdir
     exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
     return [tagsdir]
@@ -58,11 +60,11 @@ func! s:BuildTagDB(root) "{{{
     let res = str2nr(input("Select OP: ", ' '), 10)
     echohl None
     if res == 1
-       call s:LoadTagDB(1, a:root)
+       call s:TmpLoadTagDB(1, a:root)
     elseif res == 2
-       call s:LoadTagDB(2, a:root)
+       call s:TmpLoadTagDB(2, a:root)
     elseif res == 3
-       call s:LoadTagDB(0, a:root)
+       call s:TmpLoadTagDB(0, a:root)
     else
         return
     endif

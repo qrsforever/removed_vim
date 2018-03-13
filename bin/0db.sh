@@ -54,4 +54,4 @@ else
     t=""
 fi
 $CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/cscope.tag.files -o $TAG_DIR/tags
-dirname `find $SRC_DIR -name "*.h" -or -name "*.H" ` | sort -u > $TAG_DIR/include_dirs.txt
+dirname `find $SRC_DIR -name "*.h" -or -name "*.H" ` 2>/dev/null | sort -u > $TAG_DIR/include_dirs.txt
