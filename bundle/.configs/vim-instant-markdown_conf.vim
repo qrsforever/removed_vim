@@ -10,5 +10,10 @@ function! <SID>_InstantMarkdownPreview()
     exec "silent! InstantMarkdownPreview"
 endfunction
 
-command! -nargs=0 XM :call <SID>_InstantMarkdownPreview()
+function! <SID>_InstantHexoblogPreview()
+    call system("vim-hexo-go &>/dev/null &")
+endfunction
+
+command! -nargs=0 XMark :call <SID>_InstantMarkdownPreview()
+command! -nargs=0 XHexo :call <SID>_InstantHexoblogPreview()
 "}}}
