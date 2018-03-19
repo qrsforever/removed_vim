@@ -10,10 +10,15 @@ function! <SID>_InstantMarkdownPreview()
     exec "silent! InstantMarkdownPreview"
 endfunction
 
-function! <SID>_InstantHexoblogPreview()
-    call system("vim-hexo-go &>/dev/null &")
+function! <SID>_InstantHexoblogPreview(cleanflag)
+    let flag = a:cleanflag
+    if flag == ''
+        call system("hexo-go " . expand('%:p') . " &>/dev/null &")
+    else
+        call system("hexo-go clean &>/dev/null &")
+    endif
 endfunction
 
 command! -nargs=0 XMark :call <SID>_InstantMarkdownPreview()
-command! -nargs=0 XHexo :call <SID>_InstantHexoblogPreview()
+command! -nargs=? XHexo :call <SID>_InstantHexoblogPreview(<q-args>)
 "}}}
