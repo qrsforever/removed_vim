@@ -195,14 +195,14 @@ func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
         let tmpdir = strpart(tmpdir, 0, pathpos)
     endwhile
     if flg == 1 
-        let proname = fnamemodify(tmpdir, ":t")
-        let prorun = a:tagdir . "/" . proname . '/db.sh'
-        if filereadable(prorun)
+        let tag_dir = a:tagdir . "/" . fnamemodify(tmpdir, ":t")
+        let prorun = 'cd ' . tag_dir . '; ./db.sh'
+        if filereadable(tag_dir . '/db.sh')
             :silent! messages clear
             :redraw
             echomsg " Update ..."
             call system(prorun)
-            call s:Loading([a:tagdir . "/" . proname])
+            call s:Loading([tag_dir])
             echomsg " Done..."
         endif 
     endif
