@@ -44,7 +44,10 @@ fi
 $CMD_CSCOPE -bqc $KERNEL_FLAG -i $TAG_DIR/cscope.tag.files -f $TAG_DIR/cscope.out
 if [[ x$CCGLUE_FLAG == x"1" ]]
 then
-    $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
+    if [[ x$CMD_CCGLUE != x ]]
+    then
+        $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
+    fi
 fi
 result=`ctags --version | grep Universal`
 if [[ x$result != x ]]

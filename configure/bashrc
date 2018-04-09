@@ -122,5 +122,9 @@ then
     mkdir -p /tmp/xlog
 fi
 
+# wine 中文乱码
+alias wine='env LANG=zh_CN.UTF-8  wine '
+alias wine64='env LANG=zh_CN.UTF-8  wine64 '
+
 # added by Anaconda3 4.4.0 installer
 # export PATH="/home/lidong/anaconda3/bin:$PATH"

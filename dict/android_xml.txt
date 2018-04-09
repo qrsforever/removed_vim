@@ -150,7 +150,6 @@ android:typeface = "monospace" 字型，normal, sans, serif, monospace
 android:background = "@null" 空间背景，这里没有，指透明
 android:layout_weight = "1" 权重，控制控件之间的地位,在控制控件显示的大小时蛮有用的。
 android:editable = "false" 设置EditText不可编辑
-android:
 android:autoLink 设置是否当文本为URL链接/email/电话号码/map时，文本显示为可点击的链接。可选值(none/web/email/phone/map/all)
 android:autoText 如果设置，将自动执行输入值的拼写纠正。此处无效果，在显示输入法并输入的时候起作用。
 android:bufferType 指定getText()方式取得的文本类别。android:capitalize设置英文字母大写类型。此处无效果，需要弹出输入法才能看得到，参见EditView此属性说明。
