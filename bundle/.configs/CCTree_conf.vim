@@ -28,8 +28,8 @@ let g:CCTreeHilightCallTree = 1  " 高亮, 太耀眼.
 let g:CCTreeEnhancedSymbolProcessing = 0 
 let g:CCTreeOrientation = "rightbelow" "Orientation of window(standard vim options for split: [right|left][above|below])
 
-let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,   
-let g:CCTreeMinVisibleDepth = 3 "Maximum visible(unfolded) level, 
+let g:CCTreeRecursiveDepth  = 6 "Maximum call levels,   
+let g:CCTreeMinVisibleDepth = 3 "Minimum visible(unfolded) level, 
 
 "默认设置: (版本问题, 若出现功能错误, 把cctree.out第#0及下一行删除
 " let g:CCTreeKeyTraceForwardTree = '<C-\>>' "该函数调用其他函数
