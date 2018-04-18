@@ -104,6 +104,7 @@ func! s:Loading(tagdirs) "{{{
     let g:LookupFile_TagExpr=string(tlufiles)
     let g:syntastic_c_include_dirs = tIncfiles
 
+    echomsg "ok!"
     unlet tlufiles
     unlet tIncfiles
 endfunc "}}}
