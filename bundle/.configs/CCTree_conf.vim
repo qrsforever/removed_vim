@@ -31,7 +31,7 @@ let g:CCTreeOrientation = "rightbelow" "Orientation of window(standard vim optio
 let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,   
 let g:CCTreeMinVisibleDepth = 3 "Maximum visible(unfolded) level, 
 
-"默认设置:
+"默认设置: (版本问题, 若出现功能错误, 把cctree.out第#0及下一行删除
 " let g:CCTreeKeyTraceForwardTree = '<C-\>>' "该函数调用其他函数
 " let g:CCTreeKeyTraceReverseTree = '<C-\><' "该函数被谁调用
 " let g:CCTreeKeyHilightTree = '<C-l>'        " Static highlighting

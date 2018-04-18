@@ -50,16 +50,16 @@ vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 
 " "Shift"
 nmap <unique> <silent> <S-F1>       :lnext<CR>
-nmap <unique> <silent> <S-F2>       :cnext<CR>
-nmap <unique> <silent> <S-F3>       :tnext<CR>
+nmap <unique> <silent> <S-F2>       :cprevious<CR>
+nmap <unique> <silent> <S-F3>       :cnext<CR>
 nmap <unique> <silent> <S-F6>       :MyAsyncRun<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
 nmap <unique> <silent> <S-F12>      :MyUMLCharConvert<CR> 
 
 imap <unique> <silent> <S-F1>  <ESC>:lnext<CR>
-imap <unique> <silent> <S-F2>  <ESC>:cnext<CR>
-imap <unique> <silent> <S-F3>  <ESC>:tnext<CR>
+imap <unique> <silent> <S-F2>  <ESC>:cprevious<CR>
+imap <unique> <silent> <S-F3>  <ESC>:cnext<CR>
 imap <unique> <silent> <S-F6>  <ESC>:MyAsyncRun<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
@@ -67,14 +67,14 @@ imap <unique> <silent> <S-F12> <ESC>:MyUMLCharConvert<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F1>       :lprevious<CR>
-nmap <unique> <silent> <C-F2>       :cprevious<CR>
-nmap <unique> <silent> <C-F3>       :tprevious<CR>
+nmap <unique> <silent> <C-F2>       :tprevious<CR>
+nmap <unique> <silent> <C-F3>       :tnext<CR>
 nmap <unique> <silent> <C-F9>       :MyVimShellV<CR>
 nmap <unique> <silent> <C-F10>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <C-F1>  <ESC>:lprevious<CR>
-imap <unique> <silent> <C-F2>  <ESC>:cprevious<CR>
-imap <unique> <silent> <C-F3>  <ESC>:tprevious<CR>
+imap <unique> <silent> <C-F2>  <ESC>:tprevious<CR>
+imap <unique> <silent> <C-F3>  <ESC>:tnext<CR>
 imap <unique> <silent> <C-F9>  <ESC>:MyVimShellV<CR>
 imap <unique> <silent> <C-F10> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
