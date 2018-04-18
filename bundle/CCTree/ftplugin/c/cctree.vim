@@ -2133,7 +2133,10 @@ function! s:CCTreeXrefDbEntry.mCreate(fname, type) dict
     unlet xrefdbent.mCreate
 
     let xrefdbent.type = a:type
-    let xrefdbent.fname = simplify(getcwd().'/'.a:fname)
+" lidong change
+    " let xrefdbent.fname = simplify(getcwd().'/'.a:fname)
+    let xrefdbent.fname = a:fname
+" lidong end
     let xrefdbent.fsize = getfsize(a:fname)
     let xrefdbent.fdate = strftime("%c", getftime(a:fname))
     return xrefdbent

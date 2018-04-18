@@ -47,6 +47,8 @@ then
     if [[ x$CMD_CCGLUE != x ]]
     then
         $CMD_CCGLUE -S $TAG_DIR/cscope.out -o $TAG_DIR/cctree.out
+        # line 5,6 is invalid, delete.
+        sed -i '5,6d' $TAG_DIR/cctree.out
     fi
 fi
 result=`ctags --version | grep Universal`
