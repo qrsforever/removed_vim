@@ -32,7 +32,14 @@ CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
 
-find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\)' ! -path "*git*" -and ! -path "*svn*" -and ! -path ".tags*" -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
+find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\)' \
+    ! -path "*git*" -and \
+    ! -path "*svn*" -and \
+    ! -path ".tags*" -and \
+    ! -path "*out*" -and \
+    ! -path "*output*" -and \
+    ! -path "*bin*" -and \
+    -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
 cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$' > $TAG_DIR/cscope.tag.files
