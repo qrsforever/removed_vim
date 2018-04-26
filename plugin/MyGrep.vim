@@ -94,7 +94,7 @@ func! MyGrep(mode)  "{{{
         exec "Bgrep '" . s:InputWords('bgrep') . "'"
     elseif select == 8
         exec "QuickFixClear"
-        exec "silent! cs find e " . s:InputWords('cs')
+        exec "silent! cs find e '" . s:InputWords('cs') + "'"
         exec "belowright cw " . h
     else
         return

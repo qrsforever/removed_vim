@@ -71,6 +71,12 @@ func! s:BuildTagDB(root) "{{{
 endfunc "}}}
 
 func! s:Loading(tagdirs) "{{{
+    " 清空原全局tags
+    set tags=
+    :cs kill -1
+    :cs reset
+    let g:LookupFile_TagExpr=string('filenametags')
+
     let tlufiles=''
     let tIncfiles=[]
     for item in a:tagdirs
@@ -219,12 +225,6 @@ func! MyTags(mode) "{{{
     echohl Search
     let sel = str2nr(input("Select : ", ' '), 10)
     echohl None
-
-    " 清空原全局tags
-    set tags=
-    :cs kill -1
-    :cs reset
-    let g:LookupFile_TagExpr=string('filenametags')
 
     let tagdir = $tags
     if len(tagdir) == 0
