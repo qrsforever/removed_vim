@@ -114,10 +114,15 @@ function! s:_MyGoAlternate()
             try
                 exec "cs find f " . basename . "." . ext
                 return
-            catch
-                echo "nofind"
+            catch /^Vim\%((\a\+)\)\?:E567/
+                " no connect
+                return
+            catch /^Vim\%((\a\+)\)\?:E259/
+                " no found
+                continue
             endtry
         endfor
+        echo "Not found " . basename . ".* file!"
     endtry
 endfunction
 "}}}
