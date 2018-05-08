@@ -13,8 +13,8 @@ function! MyFun_is_special_buffer(bt) "{{{
 endfunc "}}}
 
 "{{{ MyScroll
-command! MyScroll call s:_MyScrollBinder() 
-function s:_MyScrollBinder() 
+command! MyScroll call s:_MyScrollBinder()
+function s:_MyScrollBinder()
     echomsg " Ver(1) Hor(2) Cancel(0) "
     let select = str2nr(input("Select: ", " " ), 10)
     if select == 1
@@ -72,21 +72,21 @@ function! s:_MyColColor()
     else
         exec "set cc=+1," . col(".")
     endif
-endfunc 
+endfunc
 "}}}
 
-"{{{ MyMarkColor 
+"{{{ MyMarkColor
 command! MyMarkColor call s:_MyMarkColor()
-function! s:_MyMarkColor() 
+function! s:_MyMarkColor()
     exec "Mark " . expand("<cword>")
-endfunc 
+endfunc
 "}}}
 
-"{{{ MyMarksBrowser 
+"{{{ MyMarksBrowser
 command! MyMarksBrowser call s:_MyMarksBrowser()
 function! s:_MyMarksBrowser()
     let buftype = getbufvar('%', '&filetype')
-    if 'marksbuffer' == buftype 
+    if 'marksbuffer' == buftype
         exec "MarksBrowser"
         return
     endif
@@ -94,5 +94,30 @@ function! s:_MyMarksBrowser()
         return
     endif
     exec "MarksBrowser"
-endfunction 
+endfunction
+"}}}
+
+"{{{ MyGoAlternate 如果A发现不了, 使用cs find
+command! MyGoAlternate call s:_MyGoAlternate()
+function! s:_MyGoAlternate()
+    try
+        exec "A"
+    catch
+        let allinfo = v:exception
+        let info = split(allinfo, ' ')
+        if len(info) != 2
+            return
+        endif
+        let basename = info[0]
+        let extensions = info[1]
+        for ext in split(extensions, ',')
+            try
+                exec "cs find f " . basename . "." . ext
+                return
+            catch
+                echo "nofind"
+            endtry
+        endfor
+    endtry
+endfunction
 "}}}

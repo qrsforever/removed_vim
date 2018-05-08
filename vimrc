@@ -126,7 +126,7 @@ map! <Esc>[24;5~ <C-F12>
 "F1~F12快捷键映射"}}}
 
 "非F1~F12快捷键"{{{
-nmap <silent> ga :A<CR>
+nmap <silent> ga :MyGoAlternate<CR>
 nmap <silent> <leader>tt :tabnew<CR>
 
 "Quickfix 编译出错信息调试很有用

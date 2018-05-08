@@ -27,6 +27,10 @@ let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
 " let g:syntastic_quiet_messages = { "level": "warnings" }
 " let g:syntastic_python_pylint_quiet_messages = { "level" : [] }
 
+" 添加对c++11的支持
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
 " from https://github.com/oblitum/dotfiles/blob/2166c92b76892b8f9c4124dbba6675f2e95053da/.vimrc#L498-L514
 " gets background of a highlighting group with fallback to SignColumn group
 function! s:getbg(group)

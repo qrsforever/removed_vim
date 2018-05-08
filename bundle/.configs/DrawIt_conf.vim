@@ -19,3 +19,11 @@ function! MyYank2Reg(mode) "{{{
     endif
     exec 'norm! gv"ay'
 endfunction"}}}
+
+function! <SID>_DrawitCanvasLines()
+    " avoid nerdcommenter mapping
+    exec 'norm ,c'
+    exec 'norm \<esc>'
+endfunction
+
+command! -nargs=0 XLines :call <SID>_DrawitCanvasLines()

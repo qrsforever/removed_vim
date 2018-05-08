@@ -441,7 +441,7 @@ endfunction
 "            + Moved some code into a separate function, minor optimization
 "            + rework to favor files in memory based on complete enumeration of
 "              all files extensions and paths
-function! AlternateFile(splitWindow, ...)
+function! AlternateFile(splitWindow, ...) abort
   let extension   = DetermineExtension(expand("%:p"))
   let baseName    = substitute(expand("%:t"), "\." . extension . '$', "", "")
   let currentPath = expand("%:p:h")
@@ -485,13 +485,27 @@ function! AlternateFile(splitWindow, ...)
         endwhile
 
         if (bestScore == 0 && g:alternateNoDefaultAlternate == 1)
-           echo "No existing alternate available"
+            "lidong add begin
+            if (has_key(g:alternateExtensionsDict, extension))
+                let extSpec = g:alternateExtensionsDict[extension]
+                throw baseName . " " . extSpec
+            else
+                echo "No existing alternate available"
+            endif
+            " lidong add end
         else
            call <SID>FindOrCreateBuffer(bestFile, a:splitWindow, 1)
            let b:AlternateAllFiles = allfiles
         endif
      else
-        echo "No alternate file/buffer available"
+         "lidong add begin
+         if (has_key(g:alternateExtensionsDict, extension))
+             let extSpec = g:alternateExtensionsDict[extension]
+             throw baseName . " " . extSpec
+         else
+             echo "No alternate file/buffer available"
+         endif
+         " lidong add end
      endif
    endif
 endfunction
