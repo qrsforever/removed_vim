@@ -50,11 +50,15 @@ endif
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
-MyPlugin 'Shougo/neoyank.vim'
 MyPlugin 'Shougo/neomru.vim'
+MyPlugin 'digitalrounin/vim-yaml-folds'
+
+" 最新vim可能导致退出错误 neoyank.vim
+" MyPlugin 'Shougo/neoyank.vim'
 " MyPlugin 'Shougo/unite-help'
 " MyPlugin 'Shougo/unite-outline'
 " MyPlugin 'Shougo/tabpagebuffer'
+" MyPlugin 'zchee/deoplete-jedi'
 if (has('lua'))
     MyPlugin 'Shougo/neocomplete.vim'
 else
@@ -74,7 +78,6 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'davidhalter/jedi-vim'
-" MyPlugin 'zchee/deoplete-jedi'
 MyPlugin 'skywind3000/asyncrun.vim'
 " 对参数提示功能, 没有jedi做的完善
 " MyPlugin 'tenfyzhong/CompleteParameter.vim'

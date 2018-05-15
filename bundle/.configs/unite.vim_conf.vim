@@ -1,5 +1,5 @@
 " Enable history yank source
-let g:unite_source_history_yank_enable = 1
+let g:unite_source_history_yank_enable = 0
 let g:unite_enable_split_vertically = 0
 
 let g:unite_source_file_rec_max_cache_files = 0

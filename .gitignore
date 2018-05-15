@@ -55,3 +55,5 @@ bundle/vim-markdown-toc
 bundle/Vundle.vim/README_ZH_CN.md
 bundle/DoxygenToolkit.vim/
 extern
+bundle/ctags
+bundle/vim-yaml-folds

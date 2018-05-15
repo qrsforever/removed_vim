@@ -111,7 +111,8 @@ func! s:Loading(tagdirs) "{{{
     let g:syntastic_c_include_dirs = tIncfiles
     let g:syntastic_cpp_include_dirs = tIncfiles
 
-    echomsg "ok!"
+    echomsg " "
+    exec "set tag"
     unlet tlufiles
     unlet tIncfiles
 endfunc "}}}

@@ -15,5 +15,5 @@ function! <SID>_DoxygenCommentFunc()
     exec "delmarks d"
 endfunction
 
-command! -nargs=0 XD :call <SID>_DoxygenCommentFunc()
+command! -nargs=0 XDoxy :call <SID>_DoxygenCommentFunc()
 "}}}

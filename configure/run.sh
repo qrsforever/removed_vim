@@ -11,6 +11,16 @@ __mklink(){
             rm -f $2
         fi
     fi
+    if [[ -f $2 ]]
+    then
+	    echo "$2 exist, delete(y/n)"
+	    read input
+	    if [[ x$input == xy ]]
+	    then
+		    echo "rm -f $2"
+		    rm -f $2
+	    fi
+    fi
     echo "ln -s $cur_dir/$1 $2"
     ln -s $cur_dir/$1 $2 2>/dev/null
 }
@@ -25,3 +35,4 @@ __mklink eclimrc ~/.eclimrc 1
 __mklink ctags ~/.ctags 1
 __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
+
