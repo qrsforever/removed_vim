@@ -51,7 +51,7 @@ MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
 MyPlugin 'Shougo/neomru.vim'
-MyPlugin 'digitalrounin/vim-yaml-folds'
+" MyPlugin 'digitalrounin/vim-yaml-folds'
 
 " 最新vim可能导致退出错误 neoyank.vim
 " MyPlugin 'Shougo/neoyank.vim'
