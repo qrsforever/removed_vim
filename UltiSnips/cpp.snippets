@@ -9,3 +9,17 @@ snippet xhead "cpp header" b
 
 $0
 endsnippet
+
+snippet xdefh "c/cpp header file define" b
+#ifndef __`!p snip.rv = snip.basename`_H__
+#define __`!p snip.rv = snip.basename`_H__
+
+$0
+
+#ifdef __cplusplus
+
+
+#endif /* __cplusplus */
+
+#endif /* __`!p snip.rv = snip.basename`_H__ */
+endsnippet

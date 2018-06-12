@@ -664,3 +664,5 @@ if has("unix")"{{{
         set t_SH=
     endif
 endif"}}}
+
+" gu gU 大小写互转
