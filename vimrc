@@ -521,7 +521,7 @@ language en_US.utf8
 "打开 C/C++ 风格的自动缩进 ( =a{ , gg=G 代码美化 )
 set cin
 set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
-set cino=:0g0t0(sus
+set cino=:4g0t0(sus
 "工作需要不缩进,不习惯也要习惯
 " set cino=:0g0t0(sus
 " :0  -- switch 语句之下的 case 语句缩进 0 个空格
