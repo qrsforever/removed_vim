@@ -102,6 +102,16 @@ func! s:Loading(tagdirs) "{{{
             exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout 
         endif
 
+        let ctags = item . '/libc.tags'
+        if filereadable(ctags)
+            exec 'set tags+=' . ctags
+        endif
+
+        let cpptags = item . '/cpp.tags'
+        if filereadable(cpptags)
+            exec 'set tags+=' . cpptags
+        endif
+
         let tagfile = item . '/tags'
         if filereadable(tagfile)
             exec 'set tags+=' . tagfile
@@ -170,8 +180,7 @@ func! s:LoadTagDB(root, tagdir) "{{{
     for strn in nums 
         let n = str2nr(strn, 10)
         if n == 0
-            exec 'set tags+=' . subdirs[0] . '/libc.tags'
-            exec 'set tags+=' . subdirs[0] . '/cpp.tags'
+            call add(tagdirs, subdirs[0])
             continue
         endif
         if n > 0 && n <= i
