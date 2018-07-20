@@ -558,7 +558,7 @@ set cino=:4g0t0(sus
 "zj  到下一折叠的开始处 ( 我喜欢 )
 "zk  到上一折叠的末尾   ( 我喜欢 )
 "set foldmethod=indent
-"set foldmarker={,}
+" set foldmarker={{{,}}}
 "set foldmethod=marker
 "要想在{  } 代码块中折叠，按空格键
 "syntax 与 c.vim 中的 \cc 注释功能冲突
