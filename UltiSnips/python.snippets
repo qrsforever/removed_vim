@@ -23,3 +23,27 @@ Notes
 
 """
 endsnippet
+
+######################
+###  matplotlib
+######################
+
+snippet xplt-import
+
+import matplotlib.pyplot as plt
+
+$0
+plt.style.use('ggplot')
+plt.rcParams['font.sans-serif'] = 'monospace'
+plt.rcParams['axes.unicode_minus'] = False
+endsnippet
+
+snippet xplt-box
+${1:pd} = plt.boxplot(x = ${2:data}, whis=1.5, patch_artist = True, showmeans = True,
+	boxprops = {'color':'black','facecolor':'#9999ff'},
+	flierprops = {'marker':'o','markerfacecolor':'red','color':'black'},
+	meanprops = {'marker':'D','markerfacecolor':'indianred'},
+	medianprops = {'linestyle':'--','color':'orange'}
+	)
+$0
+endsnippet
