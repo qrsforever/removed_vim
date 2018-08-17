@@ -78,11 +78,12 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'davidhalter/jedi-vim'
+MyPlugin 'wmvanvliet/jupyter-vim'
 MyPlugin 'skywind3000/asyncrun.vim'
 " 对参数提示功能, 没有jedi做的完善
 " MyPlugin 'tenfyzhong/CompleteParameter.vim'
 " R
-MyPlugin 'jalvesaq/Nvim-R'
+" MyPlugin 'jalvesaq/Nvim-R'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
