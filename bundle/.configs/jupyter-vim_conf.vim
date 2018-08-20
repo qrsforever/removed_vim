@@ -27,3 +27,23 @@ command Jupyter JupyterRunFile
 " <localleader>b 		Insert a breakpoint at the current line.
 " 
 " --------------------------------------------------------------------------------
+
+" 
+" https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html
+
+" jupyter 集成 vim
+" sudo pip3 install jupyter_contrib_nbextensions
+" jupyter nbextensions_configurator enable --user
+"
+" # You may need the following to create the directoy
+" mkdir -p $(jupyter --data-dir)/nbextensions
+" # Now clone the repository
+" cd $(jupyter --data-dir)/nbextensions
+" git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
+" chmod -R go-w vim_binding
+" jupyter nbextension enable vim_binding/vim_binding
+"
+
+" 配置jupyter
+" jupyter notebook --generate-config
+" jupyter notebook password
