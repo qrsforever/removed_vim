@@ -666,3 +666,4 @@ if has("unix")"{{{
 endif"}}}
 
 " gu gU 大小写互转
+" gitm89$
