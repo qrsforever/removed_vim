@@ -3,7 +3,8 @@ let g:jupyter_runflags='-i'
 let g:jupyter_auto_connect=0
 let g:jupyter_verbose=0
 let g:jupyter_mapkeys=1
-let g:jupyter_monitor_console=0
+let g:jupyter_monitor_console=1
+let g:jupyter_vsplit=1
 "}}}
 
 command Jupyter JupyterRunFile
