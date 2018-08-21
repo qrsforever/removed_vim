@@ -7,7 +7,7 @@ let g:jupyter_monitor_console=1
 let g:jupyter_vsplit=1
 "}}}
 
-command Jupyter JupyterRunFile
+command Jupyter JupyterConnect
 "
 " --------------------------------------------------------------------------------
 " MAPPINGS					*jupyter-vim-mappings*
