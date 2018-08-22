@@ -9,13 +9,6 @@ let g:jupyter_vsplit=1
 
 command Jupyter JupyterConnect
 
-func! _CleaJupyterBuffer() "{{{
-    let term_buf = '__jupyter_term__'
-    exec "bwipeout! " . term_buf
-    exec "JupyterUpdateVShell"
-endfunc
-
-nnoremap <silent> <localleader>c : call _CleaJupyterBuffer()<CR>
 "}}}
 
 "
