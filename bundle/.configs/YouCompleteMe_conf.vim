@@ -9,8 +9,12 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/configure/ycm_extra_conf.py'
+let g:ycm_log_level = 'debug'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/configure/ycm_extra_conf.py'
+" 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
 let g:ycm_confirm_extra_conf = 0
+" 关闭YCM的诊断信息，这样就可以使用其他静态检查插件
+let g:ycm_show_diagnostics_ui = 0
 " 如果tags文件很大, ycmd有存在内存泄露, 未解, 暂时关闭
 let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -19,15 +23,16 @@ let g:ycm_min_num_identifier_candidate_chars = 5
 let g:ycm_auto_trigger = 1
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_max_diagnostics_to_display = 10
-let g:ycm_cache_omnifunc= 1
+let g:ycm_cache_omnifunc = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 2000
 let g:ycm_seed_identifiers_with_syntax = 1	
 let g:ycm_complete_in_comments = 1
 " 文件路径补全等
 let g:ycm_complete_in_strings = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 0
 let g:ycm_semantic_triggers = {
             \   'c' : ['->', '    ', '.', ' ', '(', '[', '&'],
             \   'cpp,objcpp' : ['->', '.', ' ', '(', '[', '&', '::'],
@@ -52,20 +57,28 @@ let g:ycm_filetype_blacklist = {
 
 " 如果python使用neocomplete, 这里需要把python加进来
 let g:ycm_filetype_specific_completion_to_disable = {
-    \ 'gitcommit': 1,
-    \ 'html': 1,
-    \ 'css': 1,
-    \}
+            \ 'gitcommit': 1,
+            \ 'html': 1,
+            \ 'css': 1,
+            \}
+
+let g:ycm_filetype_whitelist = {
+            \ "c":1,
+            \ "cpp":1,
+            \ "sh":1,
+            \ "python":1,
+            \ }
 
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
 let g:ycm_goto_buffer_command = 'same-buffer'
-let g:ycm_python_binary_path = 'python3'
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_interpreter_path = '/usr/bin/python3'
 
 "youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-" 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
-" let g:ycm_key_invoke_completion = '<M-;>'
+" 修改对C函数的补全快捷键，默认是CTRL + space，修改为Ctrl + z;
+let g:ycm_key_invoke_completion = '<C-z>'
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 nnoremap <silent> ;g :silent! YcmCompleter GoTo<CR>

@@ -8,7 +8,7 @@ Use:
 
 4. cd bundle/vimproc.vim; make -f make_unix.mk
 
-5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行./install.sh --clang-completer or --all (时间比较久)
+5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行python3 ./install.py --clang-completer or --all (时间比较久)
     python3: 修改一下install.sh
 
 6. jedi补全sudo pip3 install -U jedi

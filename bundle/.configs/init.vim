@@ -38,37 +38,47 @@ call vundle#begin()
 
 MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
-" MyPlugin 'VimIM'
-MyPlugin 'EasyMotion'
-MyPlugin 'errormarker.vim'
-MyPlugin 'grep.vim'
-MyPlugin 'Lokaltog/vim-powerline'
-if (filereadable('/usr/bin/clang'))
-    " 等待YCM集成jedi, 参数补全
-    " MyPlugin 'Valloric/YouCompleteMe'
-endif
-MyPlugin 'Shougo/unite.vim'
-MyPlugin 'Shougo/vimproc.vim'
-MyPlugin 'Shougo/vimshell.vim'
-MyPlugin 'Shougo/neomru.vim'
-" MyPlugin 'digitalrounin/vim-yaml-folds'
 
+" MyPlugin 'digitalrounin/vim-yaml-folds'
 " 最新vim可能导致退出错误 neoyank.vim
 " MyPlugin 'Shougo/neoyank.vim'
 " MyPlugin 'Shougo/unite-help'
 " MyPlugin 'Shougo/unite-outline'
 " MyPlugin 'Shougo/tabpagebuffer'
 " MyPlugin 'zchee/deoplete-jedi'
-if (has('lua'))
-    MyPlugin 'Shougo/neocomplete.vim'
-else
-    MyPlugin 'neocomplcache'
-endif
-" MyPlugin 'Shougo/neosnippet'
-" MyPlugin 'Shougo/neosnippet-snippets'
 " MyPlugin 'Shougo/neoinclude.vim'
 " MyPlugin 'tsukkee/unite-tag'
 " MyPlugin 'osyo-manga/unite-quickfix'
+" MyPlugin 'jalvesaq/Nvim-R'
+" 对参数提示功能, 没有jedi做的完善
+" MyPlugin 'tenfyzhong/CompleteParameter.vim'
+" MyPlugin 'Shougo/deoplete.nvim'
+" if !has('nvim')
+"     MyPlugin 'roxma/nvim-yarp'
+"     MyPlugin 'roxma/vim-hug-neovim-rpc'
+" endif
+" MyPlugin 'Shougo/neosnippet.vim'
+" MyPlugin 'Shougo/neosnippet-snippets'
+
+MyPlugin 'EasyMotion'
+MyPlugin 'errormarker.vim'
+MyPlugin 'grep.vim'
+MyPlugin 'Lokaltog/vim-powerline'
+if (filereadable('/usr/bin/clang'))
+    MyPlugin 'Valloric/YouCompleteMe'
+    MyPlugin 'davidhalter/jedi-vim'
+else
+    if (has('lua'))
+        MyPlugin 'Shougo/neocomplete.vim'
+    else
+        MyPlugin 'neocomplcache'
+    endif
+endif
+
+MyPlugin 'Shougo/unite.vim'
+MyPlugin 'Shougo/vimproc.vim'
+MyPlugin 'Shougo/vimshell.vim'
+MyPlugin 'Shougo/neomru.vim'
 MyPlugin 'SirVer/ultisnips'
 MyPlugin 'honza/vim-snippets'
 MyPlugin 'scrooloose/syntastic'
@@ -77,17 +87,11 @@ MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
-MyPlugin 'davidhalter/jedi-vim'
-" MyPlugin 'wmvanvliet/jupyter-vim'
-MyPlugin 'qrsforever/jupyter-vim'
 MyPlugin 'skywind3000/asyncrun.vim'
-" 对参数提示功能, 没有jedi做的完善
-" MyPlugin 'tenfyzhong/CompleteParameter.vim'
-" R
-" MyPlugin 'jalvesaq/Nvim-R'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
+MyPlugin 'qrsforever/jupyter-vim'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     if isdirectory(expand('~/.vim/bundle/eclim'))
