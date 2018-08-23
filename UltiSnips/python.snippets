@@ -30,7 +30,6 @@ endsnippet
 
 snippet xim-numpy
 import numpy as np
-$0
 endsnippet
 
 ######################
@@ -38,9 +37,7 @@ endsnippet
 ######################
 
 snippet xim-pandas
-from pandas import Series, DataFrame
 import pandas as pd
-$0
 endsnippet
 
 
@@ -49,13 +46,14 @@ endsnippet
 ######################
 
 snippet xim-plt
-
 import matplotlib.pyplot as plt
+endsnippet
 
-$0
+snippet xplt-style
 plt.style.use('ggplot')
 plt.rcParams['font.sans-serif'] = 'monospace'
 plt.rcParams['axes.unicode_minus'] = False
+$0
 endsnippet
 
 snippet xplt-box
