@@ -67,6 +67,8 @@ let g:ycm_filetype_whitelist = {
             \ "cpp":1,
             \ "sh":1,
             \ "python":1,
+            \ "vim":1,
+            \ "java":1,
             \ }
 
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
@@ -75,8 +77,8 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_python_interpreter_path = '/usr/bin/python3'
 
 "youcompleteme  默认tab  s-tab 和 ultisnips 冲突
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+" let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为Ctrl + z;
 let g:ycm_key_invoke_completion = '<C-z>'
 
