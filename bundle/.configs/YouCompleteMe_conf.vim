@@ -67,6 +67,7 @@ let g:ycm_filetype_whitelist = {
             \ "cpp":1,
             \ "sh":1,
             \ "python":1,
+            \ "markdown":1,
             \ "vim":1,
             \ "java":1,
             \ }
