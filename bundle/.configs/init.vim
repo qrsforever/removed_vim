@@ -88,10 +88,14 @@ MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'DrawIt'
 MyPlugin 'skywind3000/asyncrun.vim'
-MyPlugin 'jackiehan/vim-instant-markdown'
-MyPlugin 'mzlogin/vim-markdown-toc'
 MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
 MyPlugin 'qrsforever/jupyter-vim'
+
+" Markdown
+MyPlugin 'vim-pandoc/vim-pandoc'
+MyPlugin 'vim-pandoc/vim-pandoc-syntax'
+MyPlugin 'jackiehan/vim-instant-markdown'
+MyPlugin 'mzlogin/vim-markdown-toc'
 
 if isdirectory(expand('~/.vim/bundle/L9'))
     if isdirectory(expand('~/.vim/bundle/eclim'))

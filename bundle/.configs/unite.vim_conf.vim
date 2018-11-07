@@ -23,8 +23,6 @@ let g:unite_source_menu_menus = {
     \       "description" : "shortcut for unite-menu",
     \       "command_candidates" : [
     \           ["1. Open xlog dir", "NERDTree /tmp/xlog"],
-    \           ["2. Open jira dir", "NERDTree ~/Downloads/jira"],
-    \           ["3. Open node dir", "NERDTree ~/workspace"],
     \       ],
     \   },
     \}

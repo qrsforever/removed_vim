@@ -52,9 +52,11 @@ bundle/VimIM
 bundle/Nvim-R
 bundle/vim-instant-markdown
 bundle/vim-markdown-toc
+bundle/vim-pandoc-syntax/
+bundle/vim-pandoc/
 bundle/jupyter-vim
 bundle/Vundle.vim/README_ZH_CN.md
 bundle/DoxygenToolkit.vim/
-extern
 bundle/ctags
 bundle/vim-yaml-folds
+extern

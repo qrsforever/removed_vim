@@ -596,7 +596,8 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zC' : 'zO')<CR>
 "单词列表匹配"{{{
 "ctrl+x ctrl+k
 "apt-get install wordlist
-set dictionary=~/.vim/dict/wordlist.txt
+set dictionary=~/.vim/dict/math.txt
+set dictionary+=~/.vim/dict/wordlist.txt
 set cpt=.,w,b,u,t,k,i
 " set cpt=.
 "    .	scan the current buffer ('wrapscan' is ignored)
