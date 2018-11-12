@@ -130,3 +130,17 @@ alias wine64='env LANG=zh_CN.UTF-8  wine64 '
 
 # added by Anaconda3 4.4.0 installer
 # export PATH="/home/lidong/anaconda3/bin:$PATH"
+# adb connect 10.75.200.36
+export http_proxy=''
+export https_proxy=''
+export ftp_proxy=''
+export socks_proxy=''
+
+alias adb8='adb -s 192.168.124.8:5555'
+alias adb16='adb -s 192.168.124.16:5555'
+alias adb15='adb -s 192.168.124.15:5555'
+alias adb14='adb -s 192.168.124.14:5555'
+alias adb21='adb -s 192.168.124.21:5555'
+# alias adb11='adb -s 192.168.124.11:5555'
+
+# svn co https://github.com/qrsforever/workspace/trunk/

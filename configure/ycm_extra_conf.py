@@ -96,6 +96,20 @@ def GetCompilationInfoForFile( filename ):
     return None
   return database.GetCompilationInfoForFile( filename )
 
+# ld add begin, put this file to your project root dir, rename .ycm_extra_conf.py
+SRC_DIR = [
+        'your project subdir-1',
+        'your project subdir-2/subdir-3',
+        ]
+
+def SearchHeaderDirs(path):
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if IsHeaderFile(file):
+                flags.append('-I')
+                flags.append(root)
+                break
+# ld add end
 
 def FlagsForFile( filename, **kwargs ):
   if database:
@@ -109,6 +123,10 @@ def FlagsForFile( filename, **kwargs ):
       compilation_info.compiler_flags_,
       compilation_info.compiler_working_dir_ )
   else:
+    # ld add begin
+    for dir in SRC_DIR:
+        SearchHeaderDirs(dir)
+    # ld add end
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
