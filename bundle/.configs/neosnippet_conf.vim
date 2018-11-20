@@ -1,5 +1,5 @@
 " Plugin key-mappings.
-" TODO 输入模式下c-k默认为组合特殊字符(:digraphs), 应为使用比较少, 覆盖映射
+" TODO 输入模式下c-k默认为组合特殊字符(:digraphs), 因为使用比较少, 覆盖映射
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
