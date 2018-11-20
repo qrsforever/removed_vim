@@ -102,13 +102,19 @@ SRC_DIR = [
         'your project subdir-2/subdir-3',
         ]
 
-def SearchHeaderDirs(path):
+def SearchHeaderDirs(path, working_directory):
+    if not path.startswith( '/' ):
+        path = os.path.join(working_directory, path)
     for root, dirs, files in os.walk(path):
-        for file in files:
-            if IsHeaderFile(file):
-                flags.append('-I')
-                flags.append(root)
-                break
+        if os.path.basename(root) in ['include', 'inc', 'Include', 'Inc']: 
+            flags.append('-I')
+            flags.append(root)
+        else:
+            for file in files:
+                if IsHeaderFile(file):
+                    flags.append('-I')
+                    flags.append(root)
+                    break
 # ld add end
 
 def FlagsForFile( filename, **kwargs ):
@@ -123,11 +129,11 @@ def FlagsForFile( filename, **kwargs ):
       compilation_info.compiler_flags_,
       compilation_info.compiler_working_dir_ )
   else:
+    relative_to = DirectoryOfThisScript()
     # ld add begin
     for dir in SRC_DIR:
-        SearchHeaderDirs(dir)
+        SearchHeaderDirs(dir, relative_to)
     # ld add end
-    relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
   return { 'flags': final_flags }

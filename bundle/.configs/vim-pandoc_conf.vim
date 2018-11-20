@@ -24,5 +24,5 @@ function! <SID>_CallPandoc(o)
     endif
 endfunction
 
-command! -nargs=0 XPandoc :call <SID>_CallPandoc(0)
+command! -nargs=0 XPandoc  :call <SID>_CallPandoc(0)
 command! -nargs=0 XPandoc2 :call <SID>_CallPandoc(1)

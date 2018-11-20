@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if (( $# != 1 ))
+if (( $# != 2 ))
 then
     exit 0
 fi
@@ -11,6 +11,8 @@ fileME=`basename $fullpath`
 current_dir=`dirname ${BASH_SOURCE[0]}`
 current_dir=`cd $current_dir; pwd`
 
+log_file=/tmp/hexo-go.log
+
 # randnum=`date +%s%N`
 
 destdir="$current_dir/../extern/git-blog-setting"
@@ -18,16 +20,8 @@ drafts="source/_drafts"
 
 if [ ! -d "${destdir}/${drafts}" ]
 then
-    echo "mkdir -p ${destdir}/${drafts}" >> /tmp/log.txt
+    echo "mkdir -p ${destdir}/${drafts}" > $log_file
     mkdir -p ${destdir}/${drafts}
-fi
-
-echo "$fullpath" > /tmp/log.txt
-if [[ x"clean" == x$fullpath ]]
-then
-    echo "rm -rf ${destdir}/${drafts}/*"  >> /tmp/log.txt
-    rm -rf ${destdir}/${drafts}/* | tee -a /tmp/log.txt
-    exit 0
 fi
 
 if [[ x"md" != x${fileME##*.} ]]
@@ -45,23 +39,27 @@ fi
 cd $destdir
 killall hexo
 
-rm -rf "${destdir}/${drafts}/${fileME}"
+if [[ $2 == 2 ]]
+then
+    $HEXO_CMD clean
+    rm -rf "${destdir}/${drafts}/*"
+    exit 0
+else
+    rm -rf "${destdir}/${drafts}/${fileME}"
+fi
 ln -s $fullpath ${destdir}/${drafts}/${fileME}
-
-# if [[ ! -L "${destdir}/${drafts}/${pathdir}/${fileME}" ]]
-# then
-#     mkdir -p ${destdir}/${drafts}/${pathdir}
-#     ln -s $fullpath ${destdir}/${drafts}/${pathdir}/${fileME}
-# fi
 
 $HEXO_CMD g --silent --draft
 $HEXO_CMD s --silent --draft &
 sleep 3
-# 10.58.82.240
-ip=`ifconfig | grep -a1 "eth0" | grep "inet addr" | cut -d\: -f2 | cut -d\  -f1`
-if [[ x$ip == x ]]
+if [[ $2 == 1 ]]
 then
-    ip="localhost"
+    # 10.58.82.240
+    ip=`ifconfig | grep -a1 "eth0" | grep "inet addr" | cut -d\: -f2 | cut -d\  -f1`
+    if [[ x$ip == x ]]
+    then
+        ip="localhost"
+    fi
+    xdg-open http://${ip}:4000
 fi
-xdg-open http://${ip}:4000
 cd - >/dev/null

@@ -4,7 +4,9 @@ dot
 hat
 tilde
 ddot
+cdots
 check
+approx
 
 sin
 cos
@@ -13,6 +15,9 @@ arccos
 frac
 pmod
 bmod
+prod
+qquad 
+limits
 
 mathrm
 nabla
@@ -46,3 +51,7 @@ mathit
 mathcal
 
 binomial
+infty
+overset
+underset
+longrightarrow
