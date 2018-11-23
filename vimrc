@@ -508,10 +508,9 @@ hi DebugBreak   term=bold   cterm=bold    ctermbg=cyan      ctermbg=none    gui=
 
 "字符编码(多字节)"{{{
 if has("multi_byte")
-    set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+    set fileencodings=ucs-bom,utf-8,gb18030,gbk,gb2312,chinese,big5,latin1,cp936
     set termencoding=utf-8
     set encoding=utf-8
-    set fileencodings=ucs-bom,utf-8,gb18030,gbk,gb2312,chinese,big5,latin1,cp936
 endif
 "VIM中显示信息都为英文的.
 language en_US.utf8

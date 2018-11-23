@@ -16,7 +16,7 @@ frac
 pmod
 bmod
 prod
-qquad 
+qquad
 limits
 
 mathrm
@@ -28,7 +28,7 @@ int
 alpha
 beta
 gamma
-delta 
+delta
 epsilon
 zeta
 theta

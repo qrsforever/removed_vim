@@ -65,16 +65,14 @@ MyPlugin 'errormarker.vim'
 MyPlugin 'grep.vim'
 MyPlugin 'Lokaltog/vim-powerline'
 if (filereadable('/usr/bin/clang'))
+    let g:youcompleteme_enable = 1
     MyPlugin 'Valloric/YouCompleteMe'
     MyPlugin 'davidhalter/jedi-vim'
-else
-    if (has('lua'))
-        MyPlugin 'Shougo/neocomplete.vim'
-    else
-        MyPlugin 'neocomplcache'
-    endif
 endif
 
+if (has('lua'))
+    MyPlugin 'Shougo/neocomplete.vim'
+endif
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
@@ -86,10 +84,10 @@ MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'
-MyPlugin 'DrawIt'
 MyPlugin 'skywind3000/asyncrun.vim'
 MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
 MyPlugin 'qrsforever/jupyter-vim'
+MyPlugin 'qrsforever/DrawIt'
 
 " Markdown
 MyPlugin 'vim-pandoc/vim-pandoc'
