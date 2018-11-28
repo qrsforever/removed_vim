@@ -13,6 +13,8 @@ current_dir=`cd $current_dir; pwd`
 
 log_file=/tmp/hexo-go.log
 
+echo "" > $log_file
+
 # randnum=`date +%s%N`
 
 destdir="$current_dir/../extern/git-blog-setting"
@@ -26,6 +28,7 @@ fi
 
 if [[ x"md" != x${fileME##*.} ]]
 then
+    echo "file not md: $fileME" >> $log_file
     exit 0
 fi
 
@@ -33,6 +36,7 @@ HEXO_CMD=`which hexo`
 
 if [[ x$HEXO_CMD == x ]]
 then
+    echo "cmd not found: hexo" >> $log_file
     exit 0
 fi
 
@@ -41,15 +45,22 @@ killall hexo
 
 if [[ $2 == 2 ]]
 then
+    echo "hexo clean" >> $log_file
     $HEXO_CMD clean
-    rm -rf "${destdir}/${drafts}/*"
+    rm -rf ${destdir}/${drafts}/*
     exit 0
 else
     rm -rf "${destdir}/${drafts}/${fileME}"
+    rm -rf ${destdir}/${drafts}/asset
 fi
 ln -s $fullpath ${destdir}/${drafts}/${fileME}
 
-$HEXO_CMD g --silent --draft
+if [[ -d $pathdir/asset ]]
+then
+    ln -s $pathdir/asset ${destdir}/${drafts}/asset
+fi
+
+$HEXO_CMD g --draft 2>&1 | tee -a $log_file
 $HEXO_CMD s --silent --draft &
 sleep 3
 if [[ $2 == 1 ]]
