@@ -12,6 +12,7 @@ endfunction
 
 function! <SID>_InstantHexoblogPreview(flag)
     if a:flag == 0
+        exec "w!"
         call system("hexo-go " . expand('%:p') . " 0 &>/dev/null &")
     elseif a:flag == 1
         call system("hexo-go " . expand('%:p') . " 1 &>/dev/null &")
@@ -21,9 +22,9 @@ function! <SID>_InstantHexoblogPreview(flag)
 
 endfunction
 
-command! -nargs=0 XMark  :call <SID>_InstantMarkdownPreview()
-command! -nargs=0 XHexo  :call <SID>_InstantHexoblogPreview(0)
-command! -nargs=0 XHexo2 :call <SID>_InstantHexoblogPreview(1)
+command! -nargs=0 XMark  :silent! call <SID>_InstantMarkdownPreview()
+command! -nargs=0 XHexo  :silent! call <SID>_InstantHexoblogPreview(0)
+command! -nargs=0 XHexo2 :silent! call <SID>_InstantHexoblogPreview(1)
 
 autocmd VimLeavePre * call <SID>_InstantHexoblogPreview(2)
 

@@ -91,7 +91,7 @@ MyPlugin 'qrsforever/DrawIt'
 
 " Markdown
 MyPlugin 'vim-pandoc/vim-pandoc'
-MyPlugin 'vim-pandoc/vim-pandoc-syntax'
+" MyPlugin 'vim-pandoc/vim-pandoc-syntax'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 

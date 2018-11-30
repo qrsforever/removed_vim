@@ -70,6 +70,7 @@ let g:ycm_filetype_whitelist = {
             \ "python":1,
             \ "vim":1,
             \ "java":1,
+            \ "markdown":1,
             \ }
 
 " ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']

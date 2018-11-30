@@ -9,6 +9,7 @@ let g:pandoc#modules#disabled = ["folding", "executors", "metadata", "menu",  "k
 let g:pandoc#formatting#textwidth = 86
 " let g:pandoc#command#latex_engine = "xelatex"
 let g:pandoc#command#path = "/usr/bin/pandoc"
+let g:pandoc#command#use_message_buffers = 0
 
 "}}}
 
@@ -18,6 +19,7 @@ let g:pandoc#command#path = "/usr/bin/pandoc"
 "Pandoc --output=/tmp/vim-pandoc-gen.html
 
 function! <SID>_CallPandoc(o)
+    exec "silent! w!"
     exec "Pandoc --output=/tmp/vim-pandoc-gen.html"
     if a:o == 1
         call system("firefox /tmp/vim-pandoc-gen.html")
