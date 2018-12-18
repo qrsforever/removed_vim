@@ -40,6 +40,10 @@ $0
 endsnippet
 
 snippet xnb
-{% asset_jupyter python3 asset/${1:`!p snip.rv = snip.basename`.ipynb} %}
+{% asset_jupyter python3 notebook/${1:`!p snip.rv = snip.basename`.ipynb} %}
 $0
+endsnippet
+
+snippet ximg
+![${1:title}](https://raw.githubusercontent.com/qrsforever/assets/master/${2:path})
 endsnippet
