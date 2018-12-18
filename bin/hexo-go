@@ -8,6 +8,7 @@ fi
 fullpath=$1
 pathdir=`dirname $fullpath`
 fileME=`basename $fullpath`
+filePP=`echo "${fileME}" | cut -d. -f1`
 current_dir=`dirname ${BASH_SOURCE[0]}`
 current_dir=`cd $current_dir; pwd`
 
@@ -51,13 +52,20 @@ then
     exit 0
 else
     rm -rf "${destdir}/${drafts}/${fileME}"
-    rm -rf ${destdir}/${drafts}/asset
+    rm -rf ${destdir}/${drafts}/notebook
+    rm -rf ${destdir}/${drafts}/${filePP}
 fi
 ln -s $fullpath ${destdir}/${drafts}/${fileME}
 
-if [[ -d $pathdir/asset ]]
+if [[ -d $pathdir/notebook ]]
 then
-    ln -s $pathdir/asset ${destdir}/${drafts}/asset
+    ln -s $pathdir/notebook ${destdir}/${drafts}/notebook
+fi
+
+# pathdir
+if [[ -d $pathdir/${filePP} ]]
+then
+    ln -s $pathdir/${filePP} ${destdir}/${drafts}/${filePP}
 fi
 
 $HEXO_CMD g --draft 2>&1 | tee -a $log_file
