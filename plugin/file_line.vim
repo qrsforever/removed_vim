@@ -17,8 +17,8 @@ function! s:gotoline()
 
 	" Accept file:line:column: or file:line:column and file:line also
 	" let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%(:\(\d*\):\?\)\?\)\?$')
-    " ld change accept file:line:xxx
-	let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%(:\([A-Za-z0-9_]*\):\?\)\?\)\?$')
+    " ld change accept file:line:xxx or file:line.xxx
+	let names =  matchlist( file, '\(.\{-1,}\):\%(\(\d\+\)\%([:\.]\([A-Za-z0-9_]*\):\?\)\?\)\?$')
     " ld end
 
 	if empty(names)
