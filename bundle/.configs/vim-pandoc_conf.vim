@@ -6,7 +6,7 @@ let g:pandoc#compiler#arguments = '-s --mathjax=https://cdnjs.cloudflare.com/aja
 " let g:pandoc#modules#disabled = ["folding", "executors", "metadata", "menu",  "keyboard", "chdir", "spell", "hypertext", "bibliographies"]
 let g:pandoc#modules#enabled = ['yaml', 'completion', 'command', 'formatting', 'indent', 'toc']
 " because formatting will set textwidth if mode = 's' (h, a, A, s)
-let g:pandoc#formatting#mode = 'ha'
+let g:pandoc#formatting#mode = 'hA'
 let g:pandoc#formatting#textwidth = 86
 
 " let g:pandoc#command#autoexec_on_writes = 1
