@@ -355,7 +355,7 @@ set history=500
 set linebreak
 
 " 设置每行多少个字符自动换行，加上换行符
-"set textwidth=80 "有时不爽
+" set textwidth=80 "有时不爽
 set textwidth=130 "总不换行, 选中已有行执行 gq 可以自动换行
 "highlight column after 'textwidth'
 " set cc=+1  
@@ -644,15 +644,6 @@ set completeopt=longest,menu
 let alternateNoDefaultAlternate = 1
 "}}}
  
-"autocmd {{{
-au FileType c,cpp   setlocal makeprg=make\ -j4
-au FileType python  setlocal makeprg=python3\ -u
-
-augroup QFix
-    au BufReadPost quickfix silent! nmap <silent> <buffer> q :silent! q<CR>
-augroup END
-"}}}
-
 "按q之后按:进入histroy command
  
 " 0~ 1~ workaround: https://github.com/vim/vim/issues/1671

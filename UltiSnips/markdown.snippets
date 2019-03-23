@@ -2,8 +2,8 @@ snippet xmore "<!-- more -->" b
 <!-- more -->
 endsnippet
 
-snippet xcenter "center DIV" b
-<div align=center>$0</div>
+snippet xxcenter "center DIV" b
+<div align='center'>$0</div>
 endsnippet
 
 snippet xhead "mark down head info" b
@@ -18,32 +18,56 @@ categories: [$3]
 $0
 endsnippet
 
-snippet xjump "span anchor"
+snippet xxjump "span anchor"
 <span id="${1:id}"></span>
 endsnippet
 
-snippet xline
+snippet xxline
 -----------------------------------------------------------------
 $0
 endsnippet
 
-snippet xalignat
+snippet xxalignat "begin{alignat"
 \begin{alignat}{$1} 
 $0
 \end{alignat}
 endsnippet
 
-snippet xali
+snippet xxali "begin{align*}"
 \begin{align*} 
 $0
 \end{align}
 endsnippet
 
-snippet xnb
+snippet xxnb "asset_jupyter"
 {% asset_jupyter python3 notebook/${1:`!p snip.rv = snip.basename`.ipynb} %}
 $0
 endsnippet
 
-snippet ximg
+snippet xximg "githubusercontent asset images"
 ![${1:title}](https://raw.githubusercontent.com/qrsforever/assets/master/${2:path})
+endsnippet
+
+snippet xxblock "blockquote"
+{% blockquote ${1:[author[, source]]} ${2:[link]} ${3:[source_link_title]} %}
+
+$0
+
+{% endblockquote %}
+endsnippet
+
+snippet xxcode "codeblock"
+{% codeblock ${1:[title]} ${2:[lang:language]} ${3:[url]} ${4:[link text]} %}
+
+$0
+
+{% endcodeblock %}
+endsnippet
+
+snippet xxpost_ln "post_link"
+{% post_link ${1:filepath} ${2:[optional text]} %}
+endsnippet
+
+snippet xxasset_img "asset_img, only self post asset"
+{% asset_img ${1:slug} ${2:[title]} %}
 endsnippet

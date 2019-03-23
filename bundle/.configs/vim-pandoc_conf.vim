@@ -3,10 +3,14 @@ let g:pandoc#filetypes#handled = ["markdown"]
 let g:pandoc#filetypes#pandoc_markdown = 0
 let g:pandoc#modules#warn_disabled = 0
 let g:pandoc#compiler#arguments = '-s --mathjax=https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'
-let g:pandoc#modules#disabled = ["folding", "executors", "metadata", "menu",  "keyboard", "chdir", "spell", "hypertext", "bibliographies"]
+" let g:pandoc#modules#disabled = ["folding", "executors", "metadata", "menu",  "keyboard", "chdir", "spell", "hypertext", "bibliographies"]
+let g:pandoc#modules#enabled = ['yaml', 'completion', 'command', 'formatting', 'indent', 'toc']
+" because formatting will set textwidth if mode = 's' (h, a, A, s)
+let g:pandoc#formatting#mode = 'ha'
+let g:pandoc#formatting#textwidth = 86
+
 " let g:pandoc#command#autoexec_on_writes = 1
 " let b:pandoc_command_autoexec_command = "Pandoc --output=/tmp/vim-pandoc-gen.html"
-let g:pandoc#formatting#textwidth = 86
 " let g:pandoc#command#latex_engine = "xelatex"
 let g:pandoc#command#path = "/usr/bin/pandoc"
 let g:pandoc#command#use_message_buffers = 0

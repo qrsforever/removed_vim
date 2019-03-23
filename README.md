@@ -31,3 +31,7 @@ Use:
 
 8. 使用markdown, 并根据对应的配置里面的说明进行修改
     `npm -g install instant-markdown-d`
+
+9. Js
+   `cd bundle/tern_for_vim; npm install`
+    sudo npm i -g eslint eslint-plugin-vue

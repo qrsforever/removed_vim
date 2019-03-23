@@ -90,15 +90,22 @@ MyPlugin 'qrsforever/jupyter-vim'
 MyPlugin 'qrsforever/DrawIt'
 
 " Markdown
+" vim-pandoc 修改textwidth
 MyPlugin 'vim-pandoc/vim-pandoc'
 " MyPlugin 'vim-pandoc/vim-pandoc-syntax'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 
+" Html, eclim会影响html缩进，可以去除eclim对html的缩进
+MyPlugin 'mattn/emmet-vim'
+MyPlugin 'ternjs/tern_for_vim'
+MyPlugin 'othree/html5.vim'
+MyPlugin 'posva/vim-vue'
+
 if isdirectory(expand('~/.vim/bundle/L9'))
-    if isdirectory(expand('~/.vim/bundle/eclim'))
-        MyPlugin 'local/eclim'
-    endif
+    " if isdirectory(expand('~/.vim/bundle/eclim'))
+        " MyPlugin 'local/eclim'
+    " endif
     MyPlugin 'local/CCTree'
     MyPlugin 'local/fuzzyfinder'
     MyPlugin 'local/vcscommand'

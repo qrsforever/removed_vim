@@ -75,7 +75,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias sl='ls'
 alias rm='rm -i'
-alias minicom='cd ~/Templates; sudo minicom'
+alias minicom='cd ~/Downloads; sudo minicom'
 alias eclimd='cd ~/Templates; eclimd'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=tags'
@@ -136,11 +136,17 @@ export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
-alias adb8='adb -s 192.168.124.8:5555'
-alias adb16='adb -s 192.168.124.16:5555'
-alias adb15='adb -s 192.168.124.15:5555'
-alias adb14='adb -s 192.168.124.14:5555'
-alias adb21='adb -s 192.168.124.21:5555'
-# alias adb11='adb -s 192.168.124.11:5555'
-
+# alias adb='/system/source/mainline/m848/out/host/linux-x86/bin/adb'
+alias adb='/data/opt/android/sdk/platform-tools/adb'
 # svn co https://github.com/qrsforever/workspace/trunk/
+
+# export LC_ALL=C
+
+alias cadb1='adb disconnect; adb connect 10.58.89.70; adb root; adb remount'
+alias cadb2='adb disconnect; adb connect 192.168.1.106; adb root; adb remount'
+
+export m848=/system/source/mainline/m848
+export m648=/system/source/mainline/m648
+export out=/system/source/mainline/m848/out/target/product/sugarcane
+alias accessory='adb shell am start -n com.stv.globalsetting/.activity.AccessoryActivity'
+export PATH=$PATH:$out

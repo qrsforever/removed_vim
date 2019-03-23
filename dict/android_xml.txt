@@ -56,7 +56,7 @@ Include 包括
 
 """基本布局属性
 android:layout_width = "fill_parent|match_parent|wrap_content"
-android:layout_height = "fill_parent|match_parent_wrap_content"
+android:layout_height = "fill_parent|match_parent|wrap_content"
 android:layout_gravity = "top|bottom|right|left|center_vertical|center_horizontal|fill_vertical|fill_horizontal|center|fill|clip_vertical|clip_horizontal":重力
 android:layout_centerHrizontal = "true|false" 水平居中
 android:layout_centerVertical = "true|false" 垂直居中
