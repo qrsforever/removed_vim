@@ -59,4 +59,5 @@ bundle/Vundle.vim/README_ZH_CN.md
 bundle/DoxygenToolkit.vim/
 bundle/ctags
 bundle/vim-yaml-folds
+bundle/fzf
 extern

@@ -35,3 +35,6 @@ Use:
 9. Js
    `cd bundle/tern_for_vim; npm install`
     sudo npm i -g eslint eslint-plugin-vue
+
+10. fzf
+    cd ./bundle/fzf/; ./install --all
