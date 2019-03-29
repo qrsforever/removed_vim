@@ -10,7 +10,7 @@ let g:fzf_action = {
             \ 'ctrl-v': 'vsplit' }
 
 " 窗口显示位置: down / up / left / right
-let g:fzf_layout = { 'down': '50%' }
+let g:fzf_layout = { 'down': '100%' }
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler

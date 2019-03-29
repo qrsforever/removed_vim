@@ -12,7 +12,18 @@ let g:unite_data_directory = "~/.cache/unite"
 let g:unite_source_bookmark_directory = '~/.cache/unite/bookmark'
 let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
-let g:unite_source_grep_default_opts = '-iRHn'
+
+if executable('ag')
+  " Use ag (the silver searcher)
+  " https://github.com/ggreer/the_silver_searcher
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '-i --vimgrep --hidden --ignore ' .
+  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+else
+    let g:unite_source_grep_default_opts = '-iRHn'
+endif
 
 " tag
 let g:unite_source_tag_max_name_length = 26
@@ -50,7 +61,7 @@ call unite#define_filter(s:my_mrufilter)
 unlet s:my_mrufilter
 
 let s:open_dir = {'is_selectable' : 1}
-function! open_dir.func(candidates)
+function! s:open_dir.func(candidates)
     execute NERDTree fnameescape(a:candidate.word)
 endfunction
 call unite#custom#action('directory_mru', 'switch', s:open_dir)
@@ -65,7 +76,7 @@ call unite#custom#profile(
     \ 'default', 
     \ 'context', 
     \ {
-        \ 'winheight': 50,
+        \ 'winheight': 30,
         \ 'winwidth': 80,
         \ 'direction': 'dynamictop',
         \ 'verbose': 1,
@@ -144,13 +155,12 @@ nmap s [unite]
 
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
 
-" see fuzzyfinder plugin.
-" nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=mru file_mru<CR>
 " see fuzzfinder: su sU, si, sI
 " nnoremap <silent> [unite]Y :<C-u>UniteBookmarkAdd %<CR>
 " nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
 " nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
-nnoremap <silent> [unite]f :<C-u>FZF<CR>
+nnoremap <silent> [unite]f :<C-u>Files<CR>
+nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
 nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>

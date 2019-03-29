@@ -38,3 +38,11 @@ Use:
 
 10. fzf
     cd ./bundle/fzf/; ./install --all
+    sudo  apt-get install silversearcher-ag
+
+    sudo apt-get install ripgrep (ubuntu18.10)
+    or
+    git clone https://github.com/BurntSushi/ripgrep
+    cd ripgrep ; cargo build --release; ./target/release/rg --version
+    or 
+    cargo install ripgrep

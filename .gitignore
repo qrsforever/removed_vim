@@ -60,4 +60,5 @@ bundle/DoxygenToolkit.vim/
 bundle/ctags
 bundle/vim-yaml-folds
 bundle/fzf
+bundle/fzf.vim
 extern

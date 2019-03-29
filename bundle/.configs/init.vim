@@ -62,6 +62,7 @@ MyPlugin 'L9'
 
 MyPlugin 'EasyMotion'
 MyPlugin 'errormarker.vim'
+"rg or ag 可以取代grep.vim
 MyPlugin 'grep.vim'
 MyPlugin 'Lokaltog/vim-powerline'
 if (filereadable('/usr/bin/clang'))
@@ -73,15 +74,16 @@ endif
 if (has('lua'))
     MyPlugin 'Shougo/neocomplete.vim'
 endif
+MyPlugin 'scrooloose/syntastic'
+MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
 MyPlugin 'Shougo/neomru.vim'
 MyPlugin 'SirVer/ultisnips'
 MyPlugin 'honza/vim-snippets'
-MyPlugin 'scrooloose/syntastic'
-MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'junegunn/fzf'
+MyPlugin 'junegunn/fzf.vim'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'jlanzarotta/bufexplorer'

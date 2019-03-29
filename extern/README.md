@@ -9,3 +9,8 @@
 -----------
 1. git clone git@github.com:qrsforever/git-blog-setting.git
 2. npm install
+
+ripgrep
+-------
+
+git clone https://github.com/BurntSushi/ripgrep
