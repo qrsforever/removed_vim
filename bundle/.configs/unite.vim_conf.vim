@@ -49,6 +49,13 @@ endfunction
 call unite#define_filter(s:my_mrufilter)
 unlet s:my_mrufilter
 
+let s:open_dir = {'is_selectable' : 1}
+function! open_dir.func(candidates)
+    execute NERDTree fnameescape(a:candidate.word)
+endfunction
+call unite#custom#action('directory_mru', 'switch', s:open_dir)
+unlet s:open_dir
+
 call unite#custom#source(
     \ 'file_mru, directory_mru',
     \ 'converters', 
@@ -58,7 +65,7 @@ call unite#custom#profile(
     \ 'default', 
     \ 'context', 
     \ {
-        \ 'winheight': 15,
+        \ 'winheight': 50,
         \ 'winwidth': 80,
         \ 'direction': 'dynamictop',
         \ 'verbose': 1,
@@ -138,14 +145,14 @@ nmap s [unite]
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
 
 " see fuzzyfinder plugin.
-nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=mru file_mru<CR>
-nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=lcd directory_mru<CR>
-
-nnoremap <silent> [unite]Y :<C-u>UniteBookmarkAdd %<CR>
-nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
-
+" nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=mru file_mru<CR>
+" see fuzzfinder: su sU, si, sI
+" nnoremap <silent> [unite]Y :<C-u>UniteBookmarkAdd %<CR>
+" nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
+nnoremap <silent> [unite]f :<C-u>FZF<CR>
+nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
 nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
-nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
 nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
 nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
 nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=change change<CR>
