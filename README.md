@@ -46,3 +46,6 @@ Use:
     cd ripgrep ; cargo build --release; ./target/release/rg --version
     or 
     cargo install ripgrep
+
+11. LeaderF
+    cd ./bundle/LeaderF; ./install.sh

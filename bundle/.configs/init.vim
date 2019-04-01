@@ -9,7 +9,8 @@ endif
 
 let allconfs = []
 
-func! s:_AddPlugin(plgname) 
+"{{{ 定义方法
+func! s:_AddPlugin(plgname)
     let ss = split(a:plgname, '\/')
     let ballpath = expand('$HOME/.vim/bundle')
     if ss[0] ==# 'local'
@@ -33,12 +34,59 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
+"}}}
 
 call vundle#begin()
 
+"{{{ 必须类
 MyPlugin 'VundleVim/Vundle.vim'
 MyPlugin 'L9'
+"}}}
 
+"{{{ 基础类
+MyPlugin 'EasyMotion'
+MyPlugin 'errormarker.vim'
+MyPlugin 'scrooloose/nerdtree'
+MyPlugin 'scrooloose/nerdcommenter'
+MyPlugin 'Shougo/vimproc.vim'
+MyPlugin 'Shougo/vimshell.vim'
+MyPlugin 'majutsushi/tagbar'
+MyPlugin 'Lokaltog/vim-powerline'
+" 可用LeaderBuffer取代之
+" MyPlugin 'jlanzarotta/bufexplorer'
+"}}}
+
+"{{{ 搜索类
+" LeaderF 取代grep.vim
+" MyPlugin 'grep.vim'
+" MyPlugin 'junegunn/fzf'
+" MyPlugin 'junegunn/fzf.vim'
+MyPlugin 'Yggdroot/LeaderF'
+" MyPlugin 'Shougo/unite.vim'
+" MyPlugin 'Shougo/neomru.vim'
+"}}}
+
+"{{{ 补全类
+if executable('clang')
+    let g:youcompleteme_enable = 1
+    MyPlugin 'Valloric/YouCompleteMe'
+    MyPlugin 'davidhalter/jedi-vim'
+endif
+
+if (has('lua'))
+    MyPlugin 'Shougo/neocomplete.vim'
+endif
+
+MyPlugin 'SirVer/ultisnips'
+MyPlugin 'honza/vim-snippets'
+"}}}
+
+"{{{ 工具类
+MyPlugin 'vim-scripts/DoxygenToolkit.vim'
+MyPlugin 'qrsforever/DrawIt'
+"}}}
+
+"{{{ 淘汰类
 " MyPlugin 'digitalrounin/vim-yaml-folds'
 " 最新vim可能导致退出错误 neoyank.vim
 " MyPlugin 'Shougo/neoyank.vim'
@@ -59,40 +107,28 @@ MyPlugin 'L9'
 " endif
 " MyPlugin 'Shougo/neosnippet.vim'
 " MyPlugin 'Shougo/neosnippet-snippets'
+"}}}
 
-MyPlugin 'EasyMotion'
-MyPlugin 'errormarker.vim'
-"rg or ag 可以取代grep.vim
-MyPlugin 'grep.vim'
-MyPlugin 'Lokaltog/vim-powerline'
-if (filereadable('/usr/bin/clang'))
-    let g:youcompleteme_enable = 1
-    MyPlugin 'Valloric/YouCompleteMe'
-    MyPlugin 'davidhalter/jedi-vim'
-endif
+"{{{ 本地类
+" if isdirectory(expand('~/.vim/bundle/eclim'))
+    " MyPlugin 'local/eclim'
+" endif
+MyPlugin 'local/CCTree'
+" LeaderF 取代之部分功能
+MyPlugin 'local/fuzzyfinder'
+MyPlugin 'local/vcscommand'
+MyPlugin 'local/ydtrans'
+MyPlugin 'local/maximizer'
+MyPlugin 'local/lookupfile'
+"}}}
 
-if (has('lua'))
-    MyPlugin 'Shougo/neocomplete.vim'
-endif
+"{{{ 未定义类
 MyPlugin 'scrooloose/syntastic'
-MyPlugin 'scrooloose/nerdtree'
-MyPlugin 'Shougo/unite.vim'
-MyPlugin 'Shougo/vimproc.vim'
-MyPlugin 'Shougo/vimshell.vim'
-MyPlugin 'Shougo/neomru.vim'
-MyPlugin 'SirVer/ultisnips'
-MyPlugin 'honza/vim-snippets'
-MyPlugin 'junegunn/fzf'
-MyPlugin 'junegunn/fzf.vim'
-MyPlugin 'scrooloose/nerdcommenter'
-MyPlugin 'majutsushi/tagbar'
-MyPlugin 'jlanzarotta/bufexplorer'
 MyPlugin 'skywind3000/asyncrun.vim'
-MyPlugin 'vim-scripts/DoxygenToolkit.vim'  
 MyPlugin 'qrsforever/jupyter-vim'
-MyPlugin 'qrsforever/DrawIt'
+"}}}
 
-" Markdown
+"{{{ Markdown&Html
 " vim-pandoc 修改textwidth
 MyPlugin 'vim-pandoc/vim-pandoc'
 " MyPlugin 'vim-pandoc/vim-pandoc-syntax'
@@ -103,31 +139,23 @@ MyPlugin 'mzlogin/vim-markdown-toc'
 MyPlugin 'mattn/emmet-vim'
 MyPlugin 'ternjs/tern_for_vim'
 MyPlugin 'othree/html5.vim'
-MyPlugin 'posva/vim-vue'
+" MyPlugin 'posva/vim-vue'
+"}}}
 
-if isdirectory(expand('~/.vim/bundle/L9'))
-    " if isdirectory(expand('~/.vim/bundle/eclim'))
-        " MyPlugin 'local/eclim'
-    " endif
-    MyPlugin 'local/CCTree'
-    MyPlugin 'local/fuzzyfinder'
-    MyPlugin 'local/vcscommand'
-    MyPlugin 'local/ydtrans'
-    MyPlugin 'local/maximizer'
-    MyPlugin 'local/lookupfile'
-    call vundle#end()
+call vundle#end()
 
-    for ifile in allconfs
-        exec 'source ' . ifile
-    endfor
-    unlet allconfs
-else
+for ifile in allconfs
+    exec 'source ' . ifile
+endfor
+unlet allconfs
+
+if ! isdirectory(expand('~/.vim/bundle/L9'))
     echomsg "---------------------------------------------"
     echomsg "   Plugins is not downloads!!!"
     echomsg "   Open vim, then exec :PluginInstall"
     echomsg "   Restart vim at last."
     echomsg "---------------------------------------------"
 endif
- 
+
 "查看映射来自哪里
 ":verbose imap <tab>

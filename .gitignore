@@ -2,7 +2,7 @@
 *.swp
 .netrwhist
 .VimballRecord
-doc/tags
+**/**/doc/tags
 configure/eclimrc
 configure/bashrc
 bundle/.vundle
@@ -61,4 +61,5 @@ bundle/ctags
 bundle/vim-yaml-folds
 bundle/fzf
 bundle/fzf.vim
+bundle/LeaderF
 extern

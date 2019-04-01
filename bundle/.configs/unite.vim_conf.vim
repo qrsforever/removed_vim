@@ -7,7 +7,7 @@ let g:unite_source_rec_max_cache_files = 0
 let g:unite_source_rec_min_cache_files = 120
 let g:unite_source_buffer_time_format = "(%Y-%m-%d %H:%M:%S) "
 let g:unite_force_overwrite_statusline = 0
-" let g:unite_ignore_source_files = []
+let g:unite_ignore_source_files = []
 let g:unite_data_directory = "~/.cache/unite"
 let g:unite_source_bookmark_directory = '~/.cache/unite/bookmark'
 let g:unite_enable_auto_select = 1
@@ -149,28 +149,24 @@ call unite#custom#source(
     \ 'white_globs',
     \ ['R.class'])
 
-" The prefix key.
-nnoremap [unite]   <Nop>
-nmap s [unite]
+nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
 
-nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
-
+" Warning conflict with LeaderF and fuzzfinder
 " see fuzzfinder: su sU, si, sI
-" nnoremap <silent> [unite]Y :<C-u>UniteBookmarkAdd %<CR>
-" nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
-" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
-nnoremap <silent> [unite]f :<C-u>Files<CR>
-nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=mru file_mru<CR>
-nnoremap <silent> [unite]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
-nnoremap <silent> [unite]v :<C-u>Unite -buffer-name=keymap mapping<CR>
-nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
-nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
-nnoremap <silent> [unite]x :<C-u>Unite -buffer-name=change change<CR>
-nnoremap <silent> [unite]w :<C-u>UniteResume<CR>
+" nnoremap <silent> [search]Y :<C-u>UniteBookmarkAdd %<CR>
+" nnoremap <silent> [search]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
+" nnoremap <silent> [search]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
+" nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
+" nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
+nnoremap <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
+nnoremap <silent> [search]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
+nnoremap <silent> [search]w :<C-u>UniteResume<CR>
 
-" nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
-" nnoremap <silent> [unite]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
-" nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=find find:.<CR>
+" nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
+" nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
+" nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
+" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
 
 let g:unite_prompt = '» '
 

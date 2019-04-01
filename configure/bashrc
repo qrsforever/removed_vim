@@ -143,7 +143,7 @@ alias adb='/data/opt/android/sdk/platform-tools/adb'
 # export LC_ALL=C
 
 alias cadb1='adb disconnect; adb connect 10.58.90.55; adb root; adb remount'
-alias cadb2='adb disconnect; adb connect 192.168.1.103; adb root; adb remount'
+alias cadb2='adb disconnect; adb connect 192.168.1.100; adb root; adb remount'
 
 export m848=/system/source/mainline/m848
 export m648=/system/source/mainline/m648
