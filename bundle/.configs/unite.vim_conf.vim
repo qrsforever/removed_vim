@@ -13,6 +13,45 @@ let g:unite_source_bookmark_directory = '~/.cache/unite/bookmark'
 let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
 
+" 很多功能已由Leaderf取而代之
+let g:unite_ignore_source_files = [
+    \ "action.vim",
+    \ "alias.vim",
+    \ "bookmark.vim",
+    \ "buffer.vim",
+    \ "change.vim",
+    \ "command.vim",
+    \ "directory.vim",
+    \ "file.vim",
+    \ "file_list.vim",
+    \ "file_point.vim",
+    \ "find.vim",
+    \ "function.vim",
+    \ "grep.vim",
+    \ "grep_git.vim",
+    \ "history_input.vim",
+    \ "history_unite.vim",
+    \ "interactive.vim",
+    \ "jump.vim",
+    \ "jump_point.vim",
+    \ "launcher.vim",
+    \ "line.vim",
+    \ "output.vim",
+    \ "output_shellcmd.vim",
+    \ "process.vim",
+    \ "rec.vim",
+    \ "register.vim",
+    \ "resume.vim",
+    \ "runtimepath.vim",
+    \ "script.vim",
+    \ "tab.vim",
+    \ "vimgrep.vim",
+    \ "window.vim",
+    \ "window_gui.vim",
+\]
+
+"[ "source.vim", "mapping.vim", "menu.vim"]
+
 if executable('ag')
   " Use ag (the silver searcher)
   " https://github.com/ggreer/the_silver_searcher
@@ -149,8 +188,6 @@ call unite#custom#source(
     \ 'white_globs',
     \ ['R.class'])
 
-nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
-
 " Warning conflict with LeaderF and fuzzfinder
 " see fuzzfinder: su sU, si, sI
 " nnoremap <silent> [search]Y :<C-u>UniteBookmarkAdd %<CR>
@@ -159,16 +196,17 @@ nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR
 " nnoremap <silent> [search]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
 " nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
 " nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
+" nnoremap <silent> [search]w :<C-u>UniteResume<CR>
+nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
 nnoremap <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <silent> [search]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
-nnoremap <silent> [search]w :<C-u>UniteResume<CR>
 
 " nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
 " nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
 " nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 " nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
 
-let g:unite_prompt = '» '
+let g:unite_prompt = '>>> '
 
 function! s:unite_my_settings()
   nmap <buffer> <ESC> <Plug>(unite_exit)

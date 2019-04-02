@@ -101,21 +101,27 @@ command! MyBufExplorer call s:DoBufExplorer()
 nnoremap <unique> <silent> [search]b :<C-U>Leaderf! --fullScreen --nameOnly --nowrap buffer<CR>
 nnoremap <unique> <silent> [search]c :<C-U>Leaderf! cmdHistory<CR>
 
+" 搜索[当前目录]中的文件
 nnoremap <unique> <silent> [search]f :<C-U>LeaderfFile<CR>
 nnoremap <unique> <silent> [search]F :<C-U>MyLeaderfFile<CR>
 
+" 搜索[当前字符]最近文件
 nnoremap <unique> <silent> [search]n :<C-U>Leaderf! mru<CR>
 nnoremap <unique> <silent> [search]N :<C-U>Leaderf! --cword mru<CR>
 
+" 查找[所有]buffer中某个函数名或变量
 nnoremap <unique> <silent> [search], :<C-U>Leaderf! --cword bufTag<CR>
 nnoremap <unique> <silent> [search]< :<C-U>Leaderf! bufTag<CR>
 
-nnoremap <unique> <silent> [search]. :<C-U>Leaderf! --cword bufTag --all<CR>
-nnoremap <unique> <silent> [search]> :<C-U>Leaderf! bufTag --all<CR>
+" 查找[所有]buffer中的某个函数
+nnoremap <unique> <silent> [search]. :<C-U>Leaderf! --cword function --all<CR>
+nnoremap <unique> <silent> [search]> :<C-U>Leaderf! function --all<CR>
 
-nnoremap <unique> <silent> [search]] :<C-U>Leaderf! --nowrap tag<CR>
-nnoremap <unique> <silent> [search]} :<C-U>Leaderf! --cword --nowrap tag<CR>
+" 从Tag文件中查找某个函数或变量名 (], }留给YCM使用
+nnoremap <unique> <silent> [search][ :<C-U>Leaderf! --cword --nowrap tag<CR>
+nnoremap <unique> <silent> [search]{ :<C-U>Leaderf! --nowrap tag<CR>
 
+" 搜索字符串
 nnoremap <unique> <silent> [search]/ :<C-U><C-R>=printf("Leaderf! --nowrap rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 nnoremap <unique> <silent> [search]g :<C-U><C-R>=printf("Leaderf! --nowrap rg -e %s ", expand("<cword>"))<CR><CR>
 nnoremap <unique> <silent> [search]+ :<C-U><C-R>=printf("Leaderf! --nowrap rg --append -e %s ", expand("<cword>"))<CR><CR>

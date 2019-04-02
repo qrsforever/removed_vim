@@ -62,7 +62,7 @@ MyPlugin 'Lokaltog/vim-powerline'
 " MyPlugin 'junegunn/fzf'
 " MyPlugin 'junegunn/fzf.vim'
 MyPlugin 'Yggdroot/LeaderF'
-" MyPlugin 'Shougo/unite.vim'
+MyPlugin 'Shougo/unite.vim'
 " MyPlugin 'Shougo/neomru.vim'
 "}}}
 
@@ -136,9 +136,9 @@ MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 
 " Html, eclim会影响html缩进，可以去除eclim对html的缩进
-MyPlugin 'mattn/emmet-vim'
-MyPlugin 'ternjs/tern_for_vim'
-MyPlugin 'othree/html5.vim'
+" MyPlugin 'mattn/emmet-vim'
+" MyPlugin 'ternjs/tern_for_vim'
+" MyPlugin 'othree/html5.vim'
 " MyPlugin 'posva/vim-vue'
 "}}}
 

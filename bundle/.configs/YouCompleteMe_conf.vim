@@ -2,6 +2,8 @@
 " nnoremap [ycm] <Nop>
 " nmap ; [ycm]
 
+let g:EclimFileTypeValidate = 0
+
 " neocomplete do it alreay!
 " inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
@@ -9,7 +11,7 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
-let g:ycm_log_level = 'debug'
+let g:ycm_log_level = 'info'
 " let g:ycm_global_ycm_extra_conf = '~/.vim/configure/ycm_extra_conf.py'
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
 let g:ycm_confirm_extra_conf = 0
@@ -28,6 +30,7 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 2000
 let g:ycm_seed_identifiers_with_syntax = 1	
 let g:ycm_complete_in_comments = 1
+let g:ycm_use_clangd = 1
 " 文件路径补全等
 let g:ycm_complete_in_strings = 1
 " let g:ycm_add_preview_to_completeopt = 0
@@ -84,7 +87,11 @@ let g:ycm_python_interpreter_path = '/usr/bin/python3'
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为Ctrl + z;
 let g:ycm_key_invoke_completion = '<C-z>'
 
+let g:ycm_error_symbol = 'E>'
+let g:ycm_warning_symbol = 'W>'
+
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
-nnoremap <silent> ;g :silent! YcmCompleter GoTo<CR>
-nnoremap <silent> ;b :silent! YcmForceCompileAndDiagnostics<CR>
+
+nnoremap <unique> <silent> [search]] :silent! YcmCompleter GoTo<CR>
+nnoremap <unique> <silent> [search]} :silent! YcmForceCompileAndDiagnostics<CR>
 "}}}
