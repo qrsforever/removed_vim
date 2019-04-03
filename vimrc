@@ -19,7 +19,7 @@ filetype indent on
 "}}}
 
 " The search prefix key.
-nnoremap [search]   <Nop>
+nnoremap [search] <Nop>
 nmap s [search]
 
 source ~/.vim/bundle/.configs/init.vim

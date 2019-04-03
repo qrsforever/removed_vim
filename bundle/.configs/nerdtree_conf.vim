@@ -78,7 +78,7 @@ let NERDTreeIgnore += ['tags']
 " O.......递归打开所选目录
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
 
-nmap <silent> so :<C-u>NERDTreeFind<CR>
+nmap <silent> so :<C-u>NERDTreeCWD<CR>
 
 " 打开一个空文件时自动开启
 " autocmd StdinReadPre * let s:std_in=1

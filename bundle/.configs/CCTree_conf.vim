@@ -27,6 +27,7 @@ let g:CCTreeKeyToggleWindow = '<C-\>w'  "打开关闭窗口
 let g:CCTreeHilightCallTree = 1  " 高亮, 太耀眼.
 let g:CCTreeEnhancedSymbolProcessing = 0 
 let g:CCTreeOrientation = "rightbelow" "Orientation of window(standard vim options for split: [right|left][above|below])
+let g:CCTreeUseUTF8Symbols = 1 
 
 let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,   
 let g:CCTreeMinVisibleDepth = 3 "Minimum visible(unfolded) level, 

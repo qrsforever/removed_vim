@@ -128,30 +128,10 @@ fi
 alias wine='env LANG=zh_CN.UTF-8  wine '
 alias wine64='env LANG=zh_CN.UTF-8  wine64 '
 
-# added by Anaconda3 4.4.0 installer
-# export PATH="/home/lidong/anaconda3/bin:$PATH"
-# adb connect 10.75.200.36
 export http_proxy=''
 export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
-# alias adb='/system/source/mainline/m848/out/host/linux-x86/bin/adb'
-alias adb='/data/opt/android/sdk/platform-tools/adb'
-# svn co https://github.com/qrsforever/workspace/trunk/
-
-# export LC_ALL=C
-
-alias cadb1='adb disconnect; adb connect 10.58.90.55; adb root; adb remount'
-alias cadb2='adb disconnect; adb connect 192.168.1.100; adb root; adb remount'
-
-export m848=/system/source/mainline/m848
-export m648=/system/source/mainline/m648
-export out=/system/source/mainline/m848/out/target/product/sugarcane
-alias accessory='adb shell am start -n com.stv.globalsetting/.activity.AccessoryActivity'
-export PATH=$PATH:$out
-export PATH=$PATH:$HOME/.cargo/bin
-
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})'"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.tmp.bash ] && source ~/.tmp.bash

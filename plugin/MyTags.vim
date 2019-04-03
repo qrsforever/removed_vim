@@ -38,14 +38,14 @@ endfunc "}}}
 
 func! s:CreateTagDB(root) "{{{
     let dbrun = '~/.vim/bin/0db.sh'
-    let inputdir = substitute(input("TagDB dir: ", a:root, "dir"), '\/$', '', '')
+    let inputdir = substitute(input("source dir:", a:root, "dir"), '\/$', '', '')
     let tagsdir = '/tmp/tags' . inputdir . '/.tags'
     if !isdirectory(tagsdir)
         call mkdir(tagsdir, 'p')
     endif
     :silent! messages clear
     :silent! redraw
-    echomsg "Build TagDB: " . inputdir
+    echomsg "build db: " . inputdir
     exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
     return [tagsdir]
 endfunc "}}}
@@ -53,18 +53,16 @@ endfunc "}}}
 func! s:BuildTagDB(root) "{{{
     :silent! messages clear
     :silent! redraw
-    echomsg "1: Build or load db"
-    echomsg "2: Delete before load db" 
-    echomsg "3: Only delete db"
-    echohl Search
-    let res = str2nr(input("Select OP: ", ' '), 10)
-    echohl None
+    let res = str2nr(input("Select(1.build 2.rebuild 3.delete): ", ''), 10)
     if res == 1
-       call s:TmpLoadTagDB(1, a:root)
+        " build or load
+        call s:TmpLoadTagDB(1, a:root)
     elseif res == 2
-       call s:TmpLoadTagDB(2, a:root)
+        " delete and load
+        call s:TmpLoadTagDB(2, a:root)
     elseif res == 3
-       call s:TmpLoadTagDB(0, a:root)
+        " delete
+        call s:TmpLoadTagDB(0, a:root)
     else
         return
     endif
@@ -121,8 +119,6 @@ func! s:Loading(tagdirs) "{{{
     let g:syntastic_c_include_dirs = tIncfiles
     let g:syntastic_cpp_include_dirs = tIncfiles
 
-    echomsg " "
-    exec "set tag"
     unlet tlufiles
     unlet tIncfiles
 endfunc "}}}
@@ -173,9 +169,7 @@ func! s:LoadTagDB(root, tagdir) "{{{
     endif
 
     " 4. 选择并设置tags
-    echohl Search
-    let tmpstr = input("Select TagDB(,): ", ' ')
-    echohl None
+    let tmpstr = input("Select(,): ", '')
     let nums = split(tmpstr, ',')
     for strn in nums 
         let n = str2nr(strn, 10)
@@ -229,13 +223,7 @@ endfunc "}}}
 func! MyTags(mode) "{{{
     exec 'lchdir %:p:h'
     let root = getcwd()
-    echomsg "Use select: "
-    echomsg "   1 : Load databases, multiple dbs delimited by ','"
-    echomsg "   2 : Build or load database in current dir."
-    echomsg "   3 : Update and load project tags(git,svn)."
-    echohl Search
-    let sel = str2nr(input("Select : ", ' '), 10)
-    echohl None
+    let sel = str2nr(input("Select(1.load 2.create):", ''), 10)
 
     let tagdir = $tags
     if len(tagdir) == 0

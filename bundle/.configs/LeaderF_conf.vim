@@ -92,6 +92,37 @@ function! s:DoBufExplorer()
 endfunc
 command! MyBufExplorer call s:DoBufExplorer()
 
+function! s:DoLeaderfRgWithPath(nwrap, cbuf, icase, append)
+    let key = expand("<cword>")
+    if key == "" || len(key) < 2
+        let key = input("Searching pattern: ", "")
+    endif
+    if key == ""
+        return
+    endif
+    let tmpstr = ''
+    let dirstr = ''
+    if a:nwrap == 1
+        let tmpstr = tmpstr . ' --nowrap'
+    endif
+    if a:icase == 1
+        let tmpstr = tmpstr . ' --ignore-case'
+    endif
+    if a:append == 1
+        let tmpstr = tmpstr . ' --append'
+    endif
+    if a:cbuf == 1
+        let tmpstr = tmpstr . ' --current-buffer'
+    else
+        let dirstr = input("Searching from: ", getcwd(), "dir")
+        if dirstr == ""
+            return
+        endif
+    endif
+    exec 'Leaderf! rg' . tmpstr . ' -e ' key . ' ' . dirstr
+endfunc
+command! -bar -nargs=0 MyLeaderfRg call s:DoLeaderfRgWithPath()
+
 " usage: Leaderf[!] [-h] [--reverse] [--stayOpen] [--input <INPUT> | --cword]
 " [--top | --bottom | --left | --right | --belowright | --aboveleft | --fullScreen]
 " [--nameOnly | --fullPath | --fuzzy | --regexMode] [--nowrap]
@@ -111,20 +142,20 @@ nnoremap <unique> <silent> [search]N :<C-U>Leaderf! --cword mru<CR>
 
 " 查找[所有]buffer中某个函数名或变量
 nnoremap <unique> <silent> [search], :<C-U>Leaderf! --cword bufTag<CR>
-nnoremap <unique> <silent> [search]< :<C-U>Leaderf! bufTag<CR>
+nnoremap <unique> <silent> [search]< :<C-U>Leaderf bufTag<CR>
 
 " 查找[所有]buffer中的某个函数
 nnoremap <unique> <silent> [search]. :<C-U>Leaderf! --cword function --all<CR>
-nnoremap <unique> <silent> [search]> :<C-U>Leaderf! function --all<CR>
+nnoremap <unique> <silent> [search]> :<C-U>Leaderf function --all<CR>
 
 " 从Tag文件中查找某个函数或变量名 (], }留给YCM使用
 nnoremap <unique> <silent> [search][ :<C-U>Leaderf! --cword --nowrap tag<CR>
-nnoremap <unique> <silent> [search]{ :<C-U>Leaderf! --nowrap tag<CR>
+nnoremap <unique> <silent> [search]{ :<C-U>Leaderf --nowrap tag<CR>
 
-" 搜索字符串
-nnoremap <unique> <silent> [search]/ :<C-U><C-R>=printf("Leaderf! --nowrap rg --current-buffer -e %s ", expand("<cword>"))<CR><CR>
-nnoremap <unique> <silent> [search]g :<C-U><C-R>=printf("Leaderf! --nowrap rg -e %s ", expand("<cword>"))<CR><CR>
-nnoremap <unique> <silent> [search]+ :<C-U><C-R>=printf("Leaderf! --nowrap rg --append -e %s ", expand("<cword>"))<CR><CR>
-nnoremap <unique> <silent> [search]w :<C-U>Leaderf! rg --stayOpen --recall<CR><CR>
+" 搜索字符串 parameter(--nowrap --current-buffer --ignore-case --append)
+nnoremap <unique> <silent> [search]/ :call <SID>DoLeaderfRgWithPath(1, 1, 1, 0)<CR>
+nnoremap <unique> <silent> [search]? :call <SID>DoLeaderfRgWithPath(1, 0, 1, 0)<CR>
+nnoremap <unique> <silent> [search]+ :call <SID>DoLeaderfRgWithPath(1, 1, 1, 1)<CR>
+nnoremap <unique> <silent> [search]w :Leaderf! rg --nowrap --stayOpen --recall<CR><CR>
 
 "}}}

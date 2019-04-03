@@ -28,3 +28,11 @@ fi
 if [ -f "/opt/mermaid/bin/0init" ]; then
     . "/opt/mermaid/bin/0init"
 fi
+
+if [ -d "$HOME/.cargo/bin" ]; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [ -d "$HOME/anaconda3/bin ]; then
+    PATH="$HOME/anaconda3/bin:$PATH"
+fi

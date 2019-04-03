@@ -62,4 +62,9 @@ bundle/vim-yaml-folds
 bundle/fzf
 bundle/fzf.vim
 bundle/LeaderF
+bundle/vcscommand.vim
+bundle/vim-maximizer
+bundle/dict.vim
+bundle/CCTree
+bundle/FuzzyFinder
 extern

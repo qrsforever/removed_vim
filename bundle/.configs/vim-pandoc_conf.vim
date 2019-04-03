@@ -17,6 +17,8 @@ let g:pandoc#command#use_message_buffers = 0
 
 "}}}
 
+" vim-pandoc 修改textwidth
+
 "pandoc test.md -o test.docx
 "pandoc --pdf-engine=xelatex test.md -o test.pdf
 

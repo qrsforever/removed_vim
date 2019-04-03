@@ -14,3 +14,9 @@ ripgrep
 -------
 
 git clone https://github.com/BurntSushi/ripgrep
+
+
+ycm-generator
+-------------
+
+git clone https://github.com/rdnetto/YCM-Generator.git

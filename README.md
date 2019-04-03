@@ -37,6 +37,7 @@ Use:
     sudo npm i -g eslint eslint-plugin-vue
 
 10. fzf
+    把export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})'" 放到~/.fzf.bash
     cd ./bundle/fzf/; ./install --all
     sudo  apt-get install silversearcher-ag
 

@@ -1,10 +1,11 @@
+"{{{
 " Fix: http://vim.wikia.com/wiki/Script:1984
 " For some reason the "BufDelete" autocmd is not working properly under vim 8.0 with FuzzyFinder.vim. A quick fix is to add the following line in .vim/autoload/l9/tempbuffer.vim (line 101):
-" 
+"
 " execute printf('%dbdelete!', s:dataMap[a:bufname].bufNr)
 " "TODO: find a better/nicer solution
-" execute 'wincmd p' 
-" 
+" execute 'wincmd p'
+"
 " nnoremap <silent> sb     :FufBuffer<CR>
 " nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
 " nnoremap <silent> sK     :FufFileWithFullCwd<CR>
@@ -76,13 +77,39 @@ let g:fuf_enumeratingLimit = 100 "符合条件的最多显示20个
 " 'buffertag', 'help', 'taggedfile', 'coveragefile', 'jumplist', 'mrufile', 'buffertag']
 let g:fuf_modesDisable = [
      \ 'file', 'dir', 'buffer', 'line', 'mrucmd', 'quickfix',
-     \ 'tag', 'buffertag', 'help', 'taggedfile', 
+     \ 'tag', 'buffertag', 'help', 'taggedfile',
      \ 'coveragefile', 'jumplist', 'mrufile', 'changelist'
 \ ]
 let g:fuf_maxMenuWidth = 200
 let g:fuf_autoPreview = 0
+let g:fuf_promptHighlight = 'Question'
+let g:fuf_ignoreCase = 1
+let g:fuf_timeFormat = '(%Y-%m-%d %H:%M:%S)'
 
 let g:fuf_mrufile_maxItem = 120
 let g:fuf_mrucmd_maxItem = 100
 
+let g:fuf_keyOpen = '<CR>'
+let g:fuf_keyOpenSplit = '<C-s>'
+let g:fuf_keyOpenVsplit = '<C-v>'
+let g:fuf_keyOpenTabpage = '<C-t>'
+
 let g:fuf_mrufile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
+
+let listener = {}
+
+function listener.onComplete(item, method)
+  echo "Item: " . a:item . "\nMethod: " . a:method
+endfunction
+
+function listener.onAbort()
+  echo "Abort"
+endfunction
+
+" Find a file from current working directory.
+call fuf#callbackfile#launch('', 0, '>', '', listener)
+
+" Find a file from home directory.
+call fuf#callbackfile#launch('~/', 0, '>', '', listener)
+<
+"}}}
