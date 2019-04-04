@@ -10,23 +10,15 @@
 " nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
 " nnoremap <silent> sK     :FufFileWithFullCwd<CR>
 " nnoremap <silent> s<C-k> :FufFile<CR>
-" nnoremap <silent> sl     :FufCoverageFile<CR>
-" nnoremap <silent> sL     :FufCoverageFileChange<CR>
-" nnoremap <silent> s<C-l> :FufCoverageFileRegister<CR>
 " nnoremap <silent> sd     :FufDirWithCurrentBufferDir<CR>
-" noremap <silent> sD     :FufDirWithFullCwd<CR>
+" noremap <silent> sD      :FufDirWithFullCwd<CR>
 " nnoremap <silent> s<C-d> :FufDir<CR>
-
 " nnoremap <silent> sn     :FufMruFile<CR>
 " nnoremap <silent> sN     :FufMruFileInCwd<CR>
 " nnoremap <silent> sc     :FufMruCmd<CR>
-nnoremap <silent> su     :FufBookmarkFile<CR>
-nnoremap <silent> sU     :FufBookmarkFileAdd<CR>
-nnoremap <silent> si     :FufBookmarkDir<CR>
-nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 " nnoremap <silent> st     :FufTag<CR>
 " nnoremap <silent> sT     :FufTag!<CR>
-"nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
+" nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
 " vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
 " vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
 " nnoremap <silent> s,     :FufBufferTag<CR>
@@ -35,18 +27,16 @@ nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 " nnoremap <silent> s>     :FufBufferTagAll!<CR>
 " nnoremap <silent> s]     :FufBufferTagWithCursorWord!<CR>
 " nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
-"vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
-"vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
+" vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
+" vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
 " nnoremap <silent> sg     :FufTaggedFile<CR>
 " nnoremap <silent> sG     :FufTaggedFile!<CR>
-"nnoremap <silent> so     :FufJumpList<CR>
+" nnoremap <silent> so     :FufJumpList<CR>
 " nnoremap <silent> sp     :FufChangeList<CR>
-" nnoremap <silent> sq     :FufQuickfix<CR>
 " nnoremap <silent> sy     :FufLine<CR>
-"nnoremap <silent> sh     :FufHelp<CR>
-" nnoremap <silent> se     :FufEditDataFile<CR>
-"nnoremap <silent> sr     :FufRenewCache<CR>
-
+" nnoremap <silent> sh     :FufHelp<CR>
+" nnoremap <silent> sr     :FufRenewCache<CR>
+"
 " 1.FuzzyFinder 下载:http://www.vim.org/scripts/script.php?script_id=1984
 " 2.vim-l9.vim 下载: http://www.vim.org/scripts/script.php?script_id=3252  "FuzzyFinder依赖该插件
 " 3.模式
@@ -66,7 +56,7 @@ nnoremap <silent> sI     :FufBookmarkDirAdd<CR>
 "    14 |:FufQuickfix|     - Quickfix mode (|fuf-quickfix-mode|)
 "    15 |:FufLine|         - Line mode (|fuf-line-mode|)
 "    16 |:FufHelp|         - Help mode (|fuf-help-mode|)
-" 4.介绍 (已经修改)
+" 4.介绍
 "   <c-n> :向下选择匹配      <c-p> :向上选择匹配
 "   <c-s> :水平分割选中项    <c-v> :垂直分割选中项    <c-t>:tab打开选中项 <cr> :直接跳到选中项
 "   <c-]> :delete select item
@@ -76,9 +66,9 @@ let g:fuf_enumeratingLimit = 100 "符合条件的最多显示20个
 " ['file', 'dir', 'buffer', 'line', 'changelist',  'tag', 'mrucmd', 'quickfix', \
 " 'buffertag', 'help', 'taggedfile', 'coveragefile', 'jumplist', 'mrufile', 'buffertag']
 let g:fuf_modesDisable = [
-     \ 'file', 'dir', 'buffer', 'line', 'mrucmd', 'quickfix',
+     \ 'file', 'dir', 'buffer', 'line', 'mrucmd',
      \ 'tag', 'buffertag', 'help', 'taggedfile',
-     \ 'coveragefile', 'jumplist', 'mrufile', 'changelist'
+     \ 'jumplist', 'mrufile', 'changelist'
 \ ]
 let g:fuf_maxMenuWidth = 200
 let g:fuf_autoPreview = 0
@@ -90,26 +80,19 @@ let g:fuf_mrufile_maxItem = 120
 let g:fuf_mrucmd_maxItem = 100
 
 let g:fuf_keyOpen = '<CR>'
-let g:fuf_keyOpenSplit = '<C-s>'
-let g:fuf_keyOpenVsplit = '<C-v>'
-let g:fuf_keyOpenTabpage = '<C-t>'
+let g:fuf_keyOpenSplit = '<C-X>'
+let g:fuf_keyOpenVsplit = '<C-V>'
+let g:fuf_keyOpenTabpage = '<C-T>'
 
-let g:fuf_mrufile_exclude = '\v\~$|\.(o|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
-
-let listener = {}
-
-function listener.onComplete(item, method)
-  echo "Item: " . a:item . "\nMethod: " . a:method
-endfunction
-
-function listener.onAbort()
-  echo "Abort"
-endfunction
-
-" Find a file from current working directory.
-call fuf#callbackfile#launch('', 0, '>', '', listener)
-
-" Find a file from home directory.
-call fuf#callbackfile#launch('~/', 0, '>', '', listener)
-<
+let g:fuf_mrufile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
+let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 "}}}
+
+nnoremap <unique> <silent> [search]l  :FufCoverageFileChange<CR>
+nnoremap <unique> <silent> [search]L  :FufCoverageFileRegister<CR>
+nnoremap <unique> <silent> [search]u  :FufBookmarkFile<CR>
+nnoremap <unique> <silent> [search]U  :FufBookmarkFileAdd<CR>
+nnoremap <unique> <silent> [search]i  :FufBookmarkDir<CR>
+nnoremap <unique> <silent> [search]I  :FufBookmarkDirAdd<CR>
+nnoremap <unique> <silent> [search]q  :FufQuickfix<CR>
+nnoremap <unique> <silent> [search]e  :FufEditDataFile<CR>

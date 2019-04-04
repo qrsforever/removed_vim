@@ -1,3 +1,4 @@
+"{{{ Setup
 " Enable history yank source
 let g:unite_source_history_yank_enable = 0
 let g:unite_enable_split_vertically = 0
@@ -19,7 +20,6 @@ let g:unite_ignore_source_files = [
     \ "alias.vim",
     \ "bookmark.vim",
     \ "buffer.vim",
-    \ "change.vim",
     \ "command.vim",
     \ "directory.vim",
     \ "file.vim",
@@ -40,7 +40,6 @@ let g:unite_ignore_source_files = [
     \ "output_shellcmd.vim",
     \ "process.vim",
     \ "rec.vim",
-    \ "register.vim",
     \ "resume.vim",
     \ "runtimepath.vim",
     \ "script.vim",
@@ -50,7 +49,13 @@ let g:unite_ignore_source_files = [
     \ "window_gui.vim",
 \]
 
-"[ "source.vim", "mapping.vim", "menu.vim"]
+"""
+  " \ "change.vim",
+  " \ "source.vim",
+  " \ "mapping.vim",
+  " \ "menu.vim",
+  " \ "register.vim",
+"""
 
 if executable('ag')
   " Use ag (the silver searcher)
@@ -108,12 +113,12 @@ unlet s:open_dir
 
 call unite#custom#source(
     \ 'file_mru, directory_mru',
-    \ 'converters', 
+    \ 'converters',
     \ ['my_mru_filter'])
 
 call unite#custom#profile(
-    \ 'default', 
-    \ 'context', 
+    \ 'default',
+    \ 'context',
     \ {
         \ 'winheight': 30,
         \ 'winwidth': 80,
@@ -145,12 +150,12 @@ call unite#custom#profile(
 
 call unite#custom#source(
     \ 'file_rec, file_rec/async, file_rec/git',
-    \ 'max_candidates', 
+    \ 'max_candidates',
     \ 1000)
 
 call unite#custom#source(
     \ 'file_mru, directory_mru',
-    \ 'max_candidates', 
+    \ 'max_candidates',
     \ 120)
 
 call unite#custom#source(
@@ -160,7 +165,7 @@ call unite#custom#source(
 
 call unite#custom#source(
     \ 'file_rec/async',
-    \ 'matchers', 
+    \ 'matchers',
     \ ['converter_relative_word', 'matcher_default'])
 
 call unite#custom#source(
@@ -174,8 +179,8 @@ call unite#custom#source(
     \ 2)
 
 call unite#custom#source(
-    \ 'file_rec', 
-    \ 'sorters', 
+    \ 'file_rec',
+    \ 'sorters',
     \ 'sorter_length')
 
 call unite#custom#source(
@@ -197,39 +202,34 @@ call unite#custom#source(
 " nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
 " nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
 " nnoremap <silent> [search]w :<C-u>UniteResume<CR>
-nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
-nnoremap <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
-nnoremap <silent> [search]m :<C-u>Unite -buffer-name=unitemenu -profile-name=leftview menu:default<CR>
-
 " nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
 " nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
 " nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 " nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
-
 let g:unite_prompt = '>>> '
 
 function! s:unite_my_settings()
   nmap <buffer> <ESC> <Plug>(unite_exit)
   imap <buffer> <ESC> <Plug>(unite_exit)
-  nmap <buffer> <C-c> <Plug>(unite_exit)
-  imap <buffer> <C-c> <Plug>(unite_exit)
-  imap <buffer> jj  <Plug>(unite_insert_leave)
+  nmap <buffer> <C-C> <Plug>(unite_exit)
+  imap <buffer> <C-C> <Plug>(unite_exit)
+  " imap <buffer> jj  <Plug>(unite_insert_leave)
   imap <buffer> <TAB> <Plug>(unite_insert_leave)
-  nmap <buffer> <TAB>   <Plug>(unite_loop_cursor_down)
-  nmap <buffer> <S-TAB> <Plug>(unite_loop_cursor_up)
-  imap <buffer> <c-a> <Plug>(unite_choose_action)
-  imap <buffer> <C-w> <Plug>(unite_delete_backward_word)
-  imap <buffer> <C-u> <Plug>(unite_delete_backward_path)
-  imap <buffer> '     <Plug>(unite_quick_match_default_action)
-  nmap <buffer> '     <Plug>(unite_quick_match_default_action)
-  nmap <buffer> <C-r> <Plug>(unite_redraw)
-  imap <buffer> <C-r> <Plug>(unite_redraw)
-  inoremap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-  nnoremap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-  inoremap <silent><buffer><expr> <C-s> unite#do_action('split')
-  nnoremap <silent><buffer><expr> <C-s> unite#do_action('split')
-  inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  nnoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  " nmap <buffer> <TAB>   <Plug>(unite_loop_cursor_down)
+  " nmap <buffer> <S-TAB> <Plug>(unite_loop_cursor_up)
+  imap <buffer> <C-A> <Plug>(unite_choose_action)
+  imap <buffer> <C-U> <Plug>(unite_delete_backward_word)
+  imap <buffer> <C-U> <Plug>(unite_delete_backward_path)
+  " imap <buffer> '     <Plug>(unite_quick_match_default_action)
+  " nmap <buffer> '     <Plug>(unite_quick_match_default_action)
+  nmap <buffer> <C-R> <Plug>(unite_redraw)
+  imap <buffer> <C-U> <Plug>(unite_redraw)
+  inoremap <silent><buffer><expr> <C-T> unite#do_action('tabopen')
+  nnoremap <silent><buffer><expr> <C-T> unite#do_action('tabopen')
+  inoremap <silent><buffer><expr> <C-X> unite#do_action('split')
+  nnoremap <silent><buffer><expr> <C-X> unite#do_action('split')
+  inoremap <silent><buffer><expr> <C-V> unite#do_action('vsplit')
+  nnoremap <silent><buffer><expr> <C-V> unite#do_action('vsplit')
 
   " p		|<Plug>(unite_smart_preview)|
 
@@ -241,3 +241,11 @@ function! s:unite_my_settings()
   endif
 endfunction
 autocmd FileType unite call s:unite_my_settings()
+"}}}
+
+nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
+nnoremap <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
+nnoremap <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
+nnoremap <silent> [search]r :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
+

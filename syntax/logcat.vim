@@ -34,3 +34,5 @@ hi def link LogW LogW_color
 " hi def link LogI LogI_color
 " hi def link LogD LogD_color
 " hi def link LogV LogV_color
+
+let b:current_syntax = 'logcat'

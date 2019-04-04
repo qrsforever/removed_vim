@@ -515,7 +515,8 @@ hi Folded       term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=
 hi FoldColumn   term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
 hi SignColumn   term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
 hi VertSplit    term=none   cterm=bold    ctermbg=none      ctermfg=none    gui=bold    guibg=NONE
-hi DebugBreak   term=bold   cterm=bold    ctermbg=cyan      ctermbg=none    gui=bold    guibg=magenta  guifg=NONE
+hi DebugBreak   term=bold   cterm=bold    ctermbg=cyan      ctermfg=none    gui=bold    guibg=magenta  guifg=NONE
+hi Cursor       term=none   cterm=bold    ctermbg=white     ctermfg=none
 "高亮 其他"}}}
 
 "字符编码(多字节)"{{{

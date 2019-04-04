@@ -91,7 +91,7 @@ let g:ycm_error_symbol = 'E>'
 let g:ycm_warning_symbol = 'W>'
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
+"}}}
 
 nnoremap <unique> <silent> [search]] :silent! YcmCompleter GoTo<CR>
 nnoremap <unique> <silent> [search]} :silent! YcmForceCompileAndDiagnostics<CR>
-"}}}
