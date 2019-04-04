@@ -67,4 +67,5 @@ bundle/vim-maximizer
 bundle/dict.vim
 bundle/CCTree
 bundle/FuzzyFinder
+bundle/lookupfile
 extern

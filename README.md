@@ -9,6 +9,7 @@ Use:
 4. cd bundle/vimproc.vim; make -f make_unix.mk
 
 5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行python3 ./install.py --clang-completer --clangd-completer or --all (时间比较久)
+    ./install.py --clangd-completer --clang-completer --go-completer --ts-completer --java-completer
     python3: 修改一下install.sh
 
 6. jedi补全sudo pip3 install -U jedi
@@ -39,14 +40,14 @@ Use:
 10. fzf
     把export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})'" 放到~/.fzf.bash
     cd ./bundle/fzf/; ./install --all
-    sudo  apt-get install silversearcher-ag
+    sudo apt-get install silversearcher-ag
 
     sudo apt-get install ripgrep (ubuntu18.10)
     or
     git clone https://github.com/BurntSushi/ripgrep
     cd ripgrep ; cargo build --release; ./target/release/rg --version
     or 
-    cargo install ripgrep
+    cargo install ripgrep (推荐)
 
 11. LeaderF
     cd ./bundle/LeaderF; ./install.sh
