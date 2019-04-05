@@ -44,7 +44,7 @@ MyPlugin 'L9'
 "}}}
 
 "{{{ 基础类
-MyPlugin 'EasyMotion'
+MyPlugin 'vim-scripts/EasyMotion'
 MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'Shougo/vimproc.vim'
@@ -56,6 +56,8 @@ MyPlugin 'Lokaltog/vim-powerline'
 "{{{ 搜索类
 MyPlugin 'Yggdroot/LeaderF'
 MyPlugin 'Shougo/unite.vim'
+MyPlugin 'qrsforever/lookupfile'
+MyPlugin 'vim-scripts/FuzzyFinder'
 "}}}
 
 "{{{ 补全类
@@ -75,10 +77,8 @@ MyPlugin 'honza/vim-snippets'
 
 "{{{ 工具类
 MyPlugin 'qrsforever/DrawIt'
-MyPlugin 'qrsforever/lookupfile'
 MyPlugin 'qrsforever/jupyter-vim'
-MyPlugin 'FuzzyFinder'
-MyPlugin 'vcscommand.vim'
+MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'
 MyPlugin 'iamcco/dict.vim'
 MyPlugin 'scrooloose/syntastic'
