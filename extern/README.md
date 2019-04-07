@@ -20,3 +20,11 @@ ycm-generator
 -------------
 
 git clone https://github.com/rdnetto/YCM-Generator.git
+
+
+fzf
+-----
+
+git clone --depth 1 https://github.com/junegunn/fzf.git
+cd ./fzf ; ./install --all
+` export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})'" >> ~/.fzf.bash `
