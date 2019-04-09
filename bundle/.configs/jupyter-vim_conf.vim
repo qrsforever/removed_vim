@@ -9,11 +9,15 @@ let g:jupyter_mapkeys = 0
 
 " 关闭终端窗口
 " bufexists({expr})
-function! s:DoToggleWindow()
+function! s:DoToggleWindow(flag)
     if bufexists('__jupyter_term__')
         exec 'silent! bwipeout __jupyter_term__'
     else
-        exec 'JupyterUpdateShell'
+        if a:flag == 1
+            exec 'JupyterUpdateVShell'
+        else
+            exec 'JupyterUpdateShell'
+        endif
     endif
 endfunction
 command Jupyter silent! JupyterConnect
@@ -27,6 +31,8 @@ nnoremap <buffer> <silent> <leader>ji :PythonImportThisFile<CR>
 nnoremap <buffer> <silent> <leader>jb :PythonSetBreak<CR>
 nnoremap <buffer> <silent> <leader>jc :JupyterSendCell<CR>
 nnoremap <buffer> <silent> <leader>jj :JupyterSendCount<CR>
-nnoremap <buffer> <silent> <leader>jw :call <SID>DoToggleWindow()<CR>
+nnoremap <buffer> <silent> <leader>jw :call <SID>DoToggleWindow(1)<CR>
+nnoremap <buffer> <silent> <leader>jW :call <SID>DoToggleWindow(0)<CR>
 
 " nnoremap <buffer> <silent> <leader>ju :JupyterUpdateShell<CR>
+" nnoremap <buffer> <silent> <leader>jU :JupyterUpdateVShell<CR>
