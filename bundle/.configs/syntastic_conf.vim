@@ -18,6 +18,8 @@ let g:syntastic_shell = "/bin/bash"
 " 导致lvimgrep - location widow不能显示
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_rust_checkers = ['rustc']
+" ycm instead
+let g:syntastic_java_checkers = []
 let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["go", "html", "java"] }
 let g:syntastic_python_checkers=['python', 'pyflakes']
 let g:syntastic_python_python_exec = '/usr/bin/python3'

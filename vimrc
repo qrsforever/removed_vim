@@ -1,5 +1,4 @@
-let mapleader=","
-let g:mapleader=","
+let g:mapleader = ","
 
 autocmd!
 :mapclear
@@ -21,6 +20,9 @@ filetype indent on
 " The search prefix key.
 nnoremap [search] <Nop>
 nmap s [search]
+
+nnoremap [tool] <Nop>
+nmap [ [tool]
 
 source ~/.vim/bundle/.configs/init.vim
 
@@ -141,14 +143,14 @@ nmap <silent> <C-w>d :MyBelowLopen<CR>
 nmap cd :lchdir %:p:h<CR>:pwd<CR>
 
 " Insert模式下<C-L>清楚后面所有的字符直到), 类似Normal模式下的d$动作, C-u清楚前面的字符直到(
-imap <unique> <silent> <C-l> <Esc><Esc>l<C-v>f)hdi
-imap <unique> <silent> <C-u> <Esc><Esc>l<C-v>F(ldi
+" imap <unique> <silent> <C-l> <Esc><Esc>l<C-v>f)hdi
+" imap <unique> <silent> <C-u> <Esc><Esc>l<C-v>F(ldi
 
 "单手保存 ctrl+s 在BASH中,是Lock the console, 解锁ctrl+q, 解决方法是在.bashrc中添加stty stop '' 或者 alias vim="stty stop ''; vim"
 " nmap <C-s> :update<CR>:echo expand('%:p')<CR>
-" imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
+imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
 nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
-imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
+" imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
 "非F1~F12快捷键"}}}
 

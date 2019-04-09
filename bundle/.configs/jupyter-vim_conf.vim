@@ -1,53 +1,32 @@
 "{{{ Base
-let g:jupyter_runflags='-i'
-let g:jupyter_auto_connect=0
-let g:jupyter_verbose=0
-let g:jupyter_mapkeys=1
-let g:jupyter_monitor_console=1
-let g:jupyter_vsplit=1
+let g:jupyter_runflags = '-i'
+let g:jupyter_auto_connect = 0
+let g:jupyter_verbose = 0
+let g:jupyter_mapkeys = 1
+let g:jupyter_monitor_console = 1
+let g:jupyter_vsplit = 1
+let g:jupyter_mapkeys = 0
+
+" 关闭终端窗口
+" bufexists({expr})
+function! s:DoToggleWindow()
+    if bufexists('__jupyter_term__')
+        exec 'silent! bwipeout __jupyter_term__'
+    else
+        exec 'JupyterUpdateShell'
+    endif
+endfunction
+command Jupyter silent! JupyterConnect
 "}}}
 
-command Jupyter JupyterConnect
+nnoremap <buffer> <silent> <leader>jr :JupyterRunFile<CR>
+nnoremap <buffer> <silent> <leader>jd :JupyterCd %:p:h<CR>
+nmap     <buffer> <silent> <leader>je <Plug>JupyterRunTextObj
+vmap     <buffer> <silent> <leader>je <Plug>JupyterRunVisual
+nnoremap <buffer> <silent> <leader>ji :PythonImportThisFile<CR>
+nnoremap <buffer> <silent> <leader>jb :PythonSetBreak<CR>
+nnoremap <buffer> <silent> <leader>jc :JupyterSendCell<CR>
+nnoremap <buffer> <silent> <leader>jj :JupyterSendCount<CR>
+nnoremap <buffer> <silent> <leader>jw :call <SID>DoToggleWindow()<CR>
 
-"}}}
-
-"
-" --------------------------------------------------------------------------------
-" MAPPINGS					*jupyter-vim-mappings*
-" 
-" <LocalLeader>R 		Run the current file (see |:JupyterRunFile|).
-" <LocalLeader>I 		Import the current file (see |:JupyterImportThisFile|).
-" <localleader>d 		Change to the directory of the current file (see |:JupyterCd|).
-" <localleader>X 		Execute the current cell (see |:JupyterSendCell|).
-" <localleader>E 		Execute the current line (see |:JupyterSendRange|).
-" 
-" <localleader>e 		Execute vim text |objects|
-" {Visual}<localleader>e  Execute the |visual| selection
-" 
-" <localleader>U          Update the kernel I/O messages in the pseudo console.
-" 			Open up a split for display if it is not already open 
-" 			(see |:JupyterUpdateShell|).
-" 
-" <localleader>b 		Insert a breakpoint at the current line.
-" 
-" --------------------------------------------------------------------------------
-
-" 
-" https://jupyter-notebook.readthedocs.io/en/stable/config_overview.html
-
-" jupyter 集成 vim
-" sudo pip3 install jupyter_contrib_nbextensions
-" jupyter nbextensions_configurator enable --user
-"
-" # You may need the following to create the directoy
-" mkdir -p $(jupyter --data-dir)/nbextensions
-" # Now clone the repository
-" cd $(jupyter --data-dir)/nbextensions
-" git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
-" chmod -R go-w vim_binding
-" jupyter nbextension enable vim_binding/vim_binding
-"
-
-" 配置jupyter
-" jupyter notebook --generate-config
-" jupyter notebook password
+" nnoremap <buffer> <silent> <leader>ju :JupyterUpdateShell<CR>

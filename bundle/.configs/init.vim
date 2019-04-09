@@ -81,9 +81,9 @@ MyPlugin 'qrsforever/jupyter-vim'
 MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'
 MyPlugin 'iamcco/dict.vim'
-MyPlugin 'scrooloose/syntastic'
 MyPlugin 'hari-rangarajan/CCTree'
 MyPlugin 'vim-scripts/DoxygenToolkit.vim'
+MyPlugin 'scrooloose/syntastic'
 "}}}
 
 "{{{ Markdown&Html

@@ -51,3 +51,18 @@ Use:
 
 11. LeaderF
     cd ./bundle/LeaderF; ./install.sh
+
+12. jupyter
+    ```
+    sudo pip3 install jupyter_contrib_nbextensions
+    jupyter nbextensions_configurator enable --user
+    # Now clone the repository
+    cd $(jupyter --data-dir)/nbextensions
+    git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
+    chmod -R go-w vim_binding
+    jupyter nbextension enable vim_binding/vim_binding
+
+    配置jupyter
+    jupyter notebook --generate-config
+    jupyter notebook password
+    ```

@@ -57,6 +57,7 @@ let g:Lf_StlPalette = {
 \}
 
 let g:Lf_CommandMap = {
+    \ '<C-X>': ['<C-S>'],
     \ '<C-]>': ['<C-V>'],
     \ '<C-J>': ['<C-N>'],
     \ '<C-K>': ['<C-P>'],
@@ -129,8 +130,8 @@ function! s:DoLeaderfRgWithPath(cwd, nwrap, cbuf, icase, append)
         if dirstr == ""
             return
         endif
-        let tmpstr = tmpstr . ' --stayOpen'
     endif
+    let tmpstr = tmpstr . ' --stayOpen'
     exec 'Leaderf! rg' . tmpstr . ' -e ' key . ' ' . dirstr
 endfunc
 "}}}

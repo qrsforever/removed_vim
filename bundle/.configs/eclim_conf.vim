@@ -1,8 +1,8 @@
 " Setup "{{{
 let g:EclimCompletionMethod = 'omnifunc' 
 " let g:EclimBrowser = "chromium-browser"
-let g:EclimBrowser= "google-chrome"
-" let g:EclimBrowser = "firefox"
+" let g:EclimBrowser= "google-chrome"
+let g:EclimBrowser = "firefox"
  
 let g:EclimJavaDebugStatusWinWidth = 80
 let g:EclimJavaDebugStatusWinHeight = 40
@@ -316,34 +316,34 @@ func! DoCtrlRightMouse() "{{{
 endfunc "}}}
 
 " Command "{{{
-command -nargs=? J  :call DoProjectSearch(0, 0, 0)
+" command -nargs=? J  :call DoProjectSearch(0, 0, 0)
 
-command -nargs=? J1 :call DoProjectSearch(1, 1, 0)
-command -nargs=? J2 :call DoProjectSearch(2, 1, 0)
-command -nargs=? J3 :call DoProjectSearch(3, 1, 0)
-command -nargs=? J4 :call DoProjectSearch(4, 1, 0)
-command -nargs=? J5 :call DoProjectSearch(5, 1, 0)
+" command -nargs=? J1 :call DoProjectSearch(1, 1, 0)
+" command -nargs=? J2 :call DoProjectSearch(2, 1, 0)
+" command -nargs=? J3 :call DoProjectSearch(3, 1, 0)
+" command -nargs=? J4 :call DoProjectSearch(4, 1, 0)
+" command -nargs=? J5 :call DoProjectSearch(5, 1, 0)
 
-command -nargs=? M1 :call DoProjectSearch(1, 0, 0)
-command -nargs=? M2 :call DoProjectSearch(2, 0, 0)
-command -nargs=? M3 :call DoProjectSearch(3, 0, 0)
-command -nargs=? M4 :call DoProjectSearch(4, 0, 0)
-command -nargs=? M5 :call DoProjectSearch(5, 0, 0)
+" command -nargs=? M1 :call DoProjectSearch(1, 0, 0)
+" command -nargs=? M2 :call DoProjectSearch(2, 0, 0)
+" command -nargs=? M3 :call DoProjectSearch(3, 0, 0)
+" command -nargs=? M4 :call DoProjectSearch(4, 0, 0)
+" command -nargs=? M5 :call DoProjectSearch(5, 0, 0)
 
-command -nargs=? S1 :call DoProjectSearch(1, 1, 1)
-command -nargs=? S2 :call DoProjectSearch(2, 1, 1)
-command -nargs=? S3 :call DoProjectSearch(3, 1, 1)
-command -nargs=? S4 :call DoProjectSearch(4, 1, 1)
-command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
+" command -nargs=? S1 :call DoProjectSearch(1, 1, 1)
+" command -nargs=? S2 :call DoProjectSearch(2, 1, 1)
+" command -nargs=? S3 :call DoProjectSearch(3, 1, 1)
+" command -nargs=? S4 :call DoProjectSearch(4, 1, 1)
+" command -nargs=? S5 :call DoProjectSearch(5, 1, 1)
 
-command M J
-command S J
+" command M J
+" command S J
 "}}}
 
 " Abbrev"{{{
-cabbrev JH  JavaHierarchy 
-cabbrev JC  JavaCallHierarchy -s project
-cabbrev LF  LocateFile
+" cabbrev JH  JavaHierarchy 
+" cabbrev JC  JavaCallHierarchy -s project
+" cabbrev LF  LocateFile
 "}}}
 
 " Map "{{{
@@ -352,20 +352,20 @@ cabbrev LF  LocateFile
 " nnoremap <silent> ,d  <esc>:JavaDocSearch<CR>
 " nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
 
-nnoremap <silent> ,pi <esc>:call DoCurrentProject(0)<CR>
-nnoremap <silent> ,po <esc>:call DoCurrentProject(1)<CR>
-nnoremap <silent> ,pc <esc>:call DoCurrentProject(2)<CR>
-nnoremap <silent> ,pd <esc>:call DoCurrentProject(3)<CR>
-nnoremap <silent> ,pp <esc>:call DoSelectProjects()<CR>
+" nnoremap <silent> ,pi <esc>:call DoCurrentProject(0)<CR>
+" nnoremap <silent> ,po <esc>:call DoCurrentProject(1)<CR>
+" nnoremap <silent> ,pc <esc>:call DoCurrentProject(2)<CR>
+" nnoremap <silent> ,pd <esc>:call DoCurrentProject(3)<CR>
+" nnoremap <silent> ,pp <esc>:call DoSelectProjects()<CR>
 
-nnoremap <silent> ,jv <esc>:Validate<CR>
-nnoremap <silent> ,jc <esc>:JavaCorrect<CR>
-nnoremap <silent> ,ji <esc>:JavaImport<CR>
-nnoremap <silent> ,jg <esc>:JavaImportOrganize<CR>
+" nnoremap <silent> ,jv <esc>:Validate<CR>
+" nnoremap <silent> ,jc <esc>:JavaCorrect<CR>
+" nnoremap <silent> ,ji <esc>:JavaImport<CR>
+" nnoremap <silent> ,jg <esc>:JavaImportOrganize<CR>
 
-nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
-nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>
-nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>"}}}
+" nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
+" nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>
+" nnoremap <silent> g]  <esc>:call DoCtrlLeftMouse()<CR>"}}}
 
 " Debug Step"{{{
 "<jvmarg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044"/> 
