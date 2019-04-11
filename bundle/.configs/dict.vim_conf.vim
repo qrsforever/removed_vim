@@ -32,6 +32,8 @@ func! GetTransLoc()  "{{{
     endif
 endfunc "}}}
 
+"}}}
+
 nmap <unique> <silent> <leader>tr :call GetTransLoc()<CR>
 nmap <unique> <silent> <leader>td <Plug>DictSearch
 vmap <unique> <silent> <leader>td <Plug>DictVSearch
@@ -39,5 +41,3 @@ nmap <unique> <silent> <leader>tw <Plug>DictWSearch
 vmap <unique> <silent> <leader>tw <Plug>DictWVSearch
 nmap <unique> <silent> <leader>tR <Plug>DictRSearch
 vmap <unique> <silent> <leader>tR <Plug>DictRVSearch
-
-"}}}

@@ -1,3 +1,4 @@
+"{{{ Setup
 "-----------------------------------------------------------------
 " plugin - NERD_tree.vim 以树状方式浏览系统中的文件和目录
 " :ERDtree 打开NERD_tree         :NERDtreeClose    关闭NERD_tree
@@ -77,8 +78,9 @@ let NERDTreeIgnore += ['tags']
 " gs......类似s, 但光标仍然停留在NERD_tree
 " O.......递归打开所选目录
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
+"}}}
 
-nmap <silent> so :<C-u>NERDTreeCWD<CR>
+nmap <silent> so :<C-u>NERDTreeFind<CR>
 
 " 打开一个空文件时自动开启
 " autocmd StdinReadPre * let s:std_in=1
