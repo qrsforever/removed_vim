@@ -361,8 +361,7 @@ set history=500
 set linebreak
 
 " 设置每行多少个字符自动换行，加上换行符
-" set textwidth=80 "有时不爽
-set textwidth=130 "总不换行
+set textwidth=86
 " 选中已有行执行 gq 可以自动换行 或者 gq=G 或者 gggqG
 "highlight column after 'textwidth'
 " set cc=+1  
