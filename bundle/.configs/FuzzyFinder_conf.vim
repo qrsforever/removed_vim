@@ -40,11 +40,10 @@ let g:priv_fuf_current_item = ''
 function! <SID>_CallCoverageFile()
     exec ':FufCoverageFileChange ' . g:priv_fuf_current_item
 endfunction
-command! -nargs=0 MyFufCoverageFile :call <SID>_CallCoverageFile()
 "}}}
 "
 
-nnoremap <unique> <silent> [search]l  :MyFufCoverageFile<CR>
+nnoremap <unique> <silent> [search]l  :call <SID>_CallCoverageFile()<CR>
 nnoremap <unique> <silent> [search]L  :FufCoverageFileChange<CR>
 nnoremap <unique> <silent> [search]u  :FufBookmarkFile<CR>
 nnoremap <unique> <silent> [search]U  :FufBookmarkFileAdd<CR>
