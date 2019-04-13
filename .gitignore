@@ -5,6 +5,7 @@
 **/**/doc/tags
 configure/eclimrc
 configure/bashrc
+bundle/*_diff
 bundle/.vundle
 bundle/powerline/Powerline_default_solarized256_unicode.cache
 bundle/L9

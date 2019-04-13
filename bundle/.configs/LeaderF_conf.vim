@@ -168,8 +168,8 @@ nnoremap <unique> <silent> [search]{ :<C-U>Leaderf tag --nowrap --stayOpen<CR>
 
 " 搜索字符串 parameter(--cword --nowrap --current-buffer --ignore-case --append)
 nnoremap <unique> <silent> [search]g :call <SID>DoLeaderfRgWithPath(1, 1, 1, 1, 0)<CR>
-nnoremap <unique> <silent> [search]G :call <SID>DoLeaderfRgWithPath(1, 1, 0, 1, 0)<CR>
+nnoremap <unique> <silent> [search]G :call <SID>DoLeaderfRgWithPath(0, 1, 1, 1, 0)<CR>
 nnoremap <unique> <silent> [search]+ :call <SID>DoLeaderfRgWithPath(1, 1, 1, 1, 1)<CR>
-nnoremap <unique> <silent> [search]/ :call <SID>DoLeaderfRgWithPath(0, 1, 1, 1, 0)<CR>
+nnoremap <unique> <silent> [search]/ :call <SID>DoLeaderfRgWithPath(1, 1, 0, 1, 0)<CR>
 nnoremap <unique> <silent> [search]? :call <SID>DoLeaderfRgWithPath(0, 1, 0, 1, 0)<CR>
 nnoremap <unique> <silent> [search]w :Leaderf! rg --nowrap --stayOpen --recall<CR><CR>

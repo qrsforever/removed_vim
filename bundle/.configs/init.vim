@@ -1,3 +1,13 @@
+" 专门用来对比源插件更新path和入
+let g:update_and_diff = 0
+let g:fork_maps = {
+    \ 'qrsforever/lookupfile': 'vim-scripts/lookupfile',
+    \ 'qrsforever/FuzzyFinder': 'vim-scripts/FuzzyFinder',
+    \ 'qrsforever/vim-pandoc': 'vim-pandoc/vim-pandoc',
+    \ 'qrsforever/DrawIt': 'vim-scripts/DrawIt',
+    \ 'qrsforever/jupyter-vim': 'broesler/jupyter-vim',
+\}
+
 " For load plugins
 
 if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
@@ -7,28 +17,33 @@ if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
     finish
 endif
 
-let allconfs = []
+let g:allconfs = []
+let g:ballpath = expand('$HOME/.vim/bundle')
 
 "{{{ 定义方法
 func! s:_AddPlugin(plgname)
     let ss = split(a:plgname, '\/')
-    let ballpath = expand('$HOME/.vim/bundle')
-    if ss[0] ==# 'local'
-        exec 'set rtp+=' . ballpath . '/' . ss[1]
+    if len(ss) == 2
+        let filename = ss[1]
+    else
+        let filename = ss[0]
+    endif
+    if g:update_and_diff
+        if has_key(g:fork_maps, a:plgname)
+            let name = g:fork_maps[a:plgname]
+            Plugin name, {'name': join([filename, 'diff'], '_')}
+        else
+            Plugin a:plgname
+        endif
     else
         Plugin a:plgname
     endif
-    if len(ss) == 2
-        let conf = ss[1]
-    else
-        let conf = ss[0]
-    endif
-    let inifile = ballpath . '/.configs/' . conf . '_conf.vim'
+    let inifile = g:ballpath . '/.configs/' . filename . '_conf.vim'
     if filereadable(inifile)
          call add(g:allconfs, inifile)
     endif
 endfunction
-com! -nargs=*  -bar MyPlugin :call s:_AddPlugin(<args>)
+com! -nargs=*  -bar MyPlugin :call <SID>_AddPlugin(<args>)
 
 set nocompatible
 filetype off
@@ -40,7 +55,7 @@ call vundle#begin()
 
 "{{{ 必须类
 MyPlugin 'VundleVim/Vundle.vim'
-MyPlugin 'L9'
+MyPlugin 'vim-scripts/L9'
 "}}}
 
 "{{{ 基础类
@@ -57,7 +72,7 @@ MyPlugin 'Lokaltog/vim-powerline'
 MyPlugin 'Yggdroot/LeaderF'
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'qrsforever/lookupfile'
-MyPlugin 'vim-scripts/FuzzyFinder'
+MyPlugin 'qrsforever/FuzzyFinder'
 "}}}
 
 "{{{ 补全类
@@ -87,7 +102,7 @@ MyPlugin 'scrooloose/syntastic'
 "}}}
 
 "{{{ Markdown&Html
-MyPlugin 'vim-pandoc/vim-pandoc'
+MyPlugin 'qrsforever/vim-pandoc'
 MyPlugin 'jackiehan/vim-instant-markdown'
 MyPlugin 'mzlogin/vim-markdown-toc'
 "}}}
@@ -127,7 +142,7 @@ MyPlugin 'mzlogin/vim-markdown-toc'
 "
 " {{{本地类
 " if isdirectory(expand('~/.vim/bundle/eclim'))
-    " MyPlugin 'local/eclim'
+    " MyPlugin 'qrsforever/eclim'
 " endif}}}
 "
 "{{{ markdown&html
@@ -147,6 +162,9 @@ for ifile in allconfs
     exec 'source ' . ifile
 endfor
 unlet allconfs
+unlet ballpath
+unlet update_and_diff
+unlet fork_maps
 
 if ! isdirectory(expand('~/.vim/bundle/L9'))
     echomsg "---------------------------------------------"

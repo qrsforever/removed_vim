@@ -23,6 +23,7 @@ let g:fuf_keyOpenSplit = '<C-S>'
 let g:fuf_keyOpenVsplit = '<C-V>'
 let g:fuf_keyOpenTabpage = '<C-T>'
 
+" 替换默认的快捷键
 let g:fuf_keyPrevMode = '<C-(>'
 let g:fuf_keyNextMode = '<C-)>'
 let g:fuf_keyPrevPattern = '<C-_>'
@@ -31,10 +32,20 @@ let g:fuf_keyPreview = '<C-@>'
 
 let g:fuf_mrufile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-"}}}
+let g:fuf_coveragefile_globPatterns = ['**/.*', '**/*']
 
-nnoremap <unique> <silent> [search]l  :FufCoverageFileChange<CR>
-nnoremap <unique> <silent> [search]L  :FufCoverageFileRegister<CR>
+let g:priv_fuf_dir_openmode = 'NERDTreeFind'
+let g:priv_fuf_current_item = ''
+
+function! <SID>_CallCoverageFile()
+    exec ':FufCoverageFileChange ' . g:priv_fuf_current_item
+endfunction
+command! -nargs=0 MyFufCoverageFile :call <SID>_CallCoverageFile()
+"}}}
+"
+
+nnoremap <unique> <silent> [search]l  :MyFufCoverageFile<CR>
+nnoremap <unique> <silent> [search]L  :FufCoverageFileChange<CR>
 nnoremap <unique> <silent> [search]u  :FufBookmarkFile<CR>
 nnoremap <unique> <silent> [search]U  :FufBookmarkFileAdd<CR>
 nnoremap <unique> <silent> [search]i  :FufBookmarkDir<CR>
@@ -47,37 +58,6 @@ nnoremap <unique> <silent> [search]e  :FufEditDataFile<CR>
 " execute printf('%dbdelete!', s:dataMap[a:bufname].bufNr)
 " "TODO: find a better/nicer solution
 " execute 'wincmd p'
-"
-" nnoremap <silent> sb     :FufBuffer<CR>
-" nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
-" nnoremap <silent> sK     :FufFileWithFullCwd<CR>
-" nnoremap <silent> s<C-k> :FufFile<CR>
-" nnoremap <silent> sd     :FufDirWithCurrentBufferDir<CR>
-" noremap <silent> sD      :FufDirWithFullCwd<CR>
-" nnoremap <silent> s<C-d> :FufDir<CR>
-" nnoremap <silent> sn     :FufMruFile<CR>
-" nnoremap <silent> sN     :FufMruFileInCwd<CR>
-" nnoremap <silent> sc     :FufMruCmd<CR>
-" nnoremap <silent> st     :FufTag<CR>
-" nnoremap <silent> sT     :FufTag!<CR>
-" nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
-" vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
-" vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
-" nnoremap <silent> s,     :FufBufferTag<CR>
-" nnoremap <silent> s<     :FufBufferTag!<CR>
-" nnoremap <silent> s.     :FufBufferTagAll<CR>
-" nnoremap <silent> s>     :FufBufferTagAll!<CR>
-" nnoremap <silent> s]     :FufBufferTagWithCursorWord!<CR>
-" nnoremap <silent> s}     :FufBufferTagAllWithCursorWord!<CR>
-" vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
-" vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
-" nnoremap <silent> sg     :FufTaggedFile<CR>
-" nnoremap <silent> sG     :FufTaggedFile!<CR>
-" nnoremap <silent> so     :FufJumpList<CR>
-" nnoremap <silent> sp     :FufChangeList<CR>
-" nnoremap <silent> sy     :FufLine<CR>
-" nnoremap <silent> sh     :FufHelp<CR>
-" nnoremap <silent> sr     :FufRenewCache<CR>
 "
 " 1.FuzzyFinder 下载:http://www.vim.org/scripts/script.php?script_id=1984
 " 2.vim-l9.vim 下载: http://www.vim.org/scripts/script.php?script_id=3252  "FuzzyFinder依赖该插件
