@@ -69,4 +69,6 @@ bundle/dict.vim
 bundle/CCTree
 bundle/FuzzyFinder
 bundle/lookupfile
+bundle/html5.vim
+bundle/vim-vue
 extern
