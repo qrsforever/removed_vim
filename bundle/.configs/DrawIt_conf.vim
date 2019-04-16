@@ -27,3 +27,5 @@ function! <SID>_DrawitCanvasLines()
 endfunction
 
 command! -nargs=0 XLines :call <SID>_DrawitCanvasLines()
+
+nmap <unique> <silent> <leader>dl :XLines<CR>

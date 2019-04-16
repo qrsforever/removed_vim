@@ -34,7 +34,7 @@ let g:fuf_mrufile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|sw[po])$|^(\/\
 let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 let g:fuf_coveragefile_globPatterns = ['**/.*', '**/*']
 
-let g:priv_fuf_dir_openmode = 'NERDTreeFind'
+let g:priv_fuf_dir_openmode = 'NERDTree'
 let g:priv_fuf_current_item = ''
 
 function! <SID>_CallCoverageFile()

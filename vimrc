@@ -152,6 +152,18 @@ imap <C-s> <ESC>:<c-u>update<CR>:echo expand('%:p')<CR>
 nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 " imap <C-s> <ESC>:<c-u>silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
+
+" 标签跳转页面
+nmap g1 1gt
+nmap g2 2gt
+nmap g3 3gt
+nmap g4 4gt
+nmap g5 5gt
+nmap g6 6gt
+nmap g7 7gt
+nmap g8 8gt
+nmap g9 9gt
+
 "非F1~F12快捷键"}}}
 
 "自己定义的命令 "{{{
@@ -455,19 +467,6 @@ if has("gui_running")
     map! <M-7> <esc>7gt
     map! <M-8> <esc>8gt
     map! <M-9> <esc>9gt
-    " set guitabtooltip=%{GuiTabToolTip()}
-    " set guitablabel=%{GuiTabLabel()}
-else
-    " set tabline=%!MyTabLine()  " custom tab pages line
-    nmap g1 1gt
-    nmap g2 2gt
-    nmap g3 3gt
-    nmap g4 4gt
-    nmap g5 5gt
-    nmap g6 6gt
-    nmap g7 7gt
-    nmap g8 8gt
-    nmap g9 9gt
 endif
 "Gui选项 放到.gvimrc"}}}
 
