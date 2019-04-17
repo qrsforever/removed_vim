@@ -96,7 +96,6 @@ function! s:DoLeaderfFileWithPath()
     endif
     exec 'LeaderfFile ' . dirstr
 endfunc
-command! -bar -nargs=0 MyLeaderfFile call s:DoLeaderfFileWithPath()
 
 function! s:DoBufExplorer()
     exec 'normal \<esc>'
@@ -124,14 +123,15 @@ function! s:DoLeaderfRgWithPath(cwd, nwrap, cbuf, icase, append)
         let tmpstr = tmpstr . ' --append'
     endif
     if a:cbuf == 1
+        exec "lchdir %:p:h"
         let tmpstr = tmpstr . ' --current-buffer'
     else
         let dirstr = input("Searching from: ", getcwd(), "dir")
         if dirstr == ""
             return
         endif
+        let tmpstr = tmpstr . ' --stayOpen'
     endif
-    let tmpstr = tmpstr . ' --stayOpen'
     exec 'Leaderf! rg' . tmpstr . ' -e ' key . ' ' . dirstr
 endfunc
 "}}}
@@ -148,11 +148,11 @@ nnoremap <unique> <silent> [search]s :<C-U>Leaderf! searchHistory<CR>
 
 " 搜索[当前目录]中的文件
 nnoremap <unique> <silent> [search]f :<C-U>LeaderfFile<CR>
-nnoremap <unique> <silent> [search]F :<C-U>MyLeaderfFile<CR>
+nnoremap <unique> <silent> [search]F :call <SID>DoLeaderfFileWithPath()<CR>
 
 " 搜索[当前字符]最近文件
 nnoremap <unique> <silent> [search]n :<C-U>Leaderf! mru --nowrap<CR>
-nnoremap <unique> <silent> [search]N :<C-U>Leaderf! mru --cword --nowrap<CR>
+nnoremap <unique> <silent> [search]N :<C-U>Leaderf mru --cword --regexMode --nowrap<CR>
 
 " 查找[所有]buffer中某个函数名或变量
 nnoremap <unique> <silent> [search], :<C-U>Leaderf bufTag --nowrap --stayOpen<CR>
@@ -162,8 +162,8 @@ nnoremap <unique> <silent> [search]< :<C-U>Leaderf bufTag --all --nowrap --stayO
 nnoremap <unique> <silent> [search]. :<C-U>Leaderf function --nowrap --stayOpen<CR>
 nnoremap <unique> <silent> [search]> :<C-U>Leaderf function --all --nowrap --stayOpen<CR>
 
-" 从Tag文件中查找某个函数或变量名 (], }留给YCM使用
-nnoremap <unique> <silent> [search][ :<C-U>Leaderf tag --cword --nowrap<CR>
+" 从Tag文件中查找某个函数或变量名 (], })留给YCM使用
+nnoremap <unique> <silent> [search][ :<C-U>Leaderf tag --cword --regexMode --nowrap<CR>
 nnoremap <unique> <silent> [search]{ :<C-U>Leaderf tag --nowrap --stayOpen<CR>
 
 " 搜索字符串 parameter(--cword --nowrap --current-buffer --ignore-case --append)

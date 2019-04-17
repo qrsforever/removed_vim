@@ -28,7 +28,10 @@ func! s:InputWords(label) "{{{
     let word = expand("<cword>")
     if len(word) < 3 || len(word) > 48
         " get word from clipboard
-        let word = getreg('+')
+        " '+' 右击复制的数据
+        " let word = getreg('+')
+        " '*' 双击复制的数据
+        let word = getreg('*')
         if len(word) < 3 || len(word) > 48
             let word = ''
         endif

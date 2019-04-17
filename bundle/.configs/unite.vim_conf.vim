@@ -249,3 +249,16 @@ nnoremap <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview
 nnoremap <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
 
+" 寄存器:help reg
+"
+" Read-only registers ":, ". and "%
+	".	Contains the last inserted text
+	"%	Contains the name of the current file!ls.
+	":	Contains the most recent executed command-line.
+    
+" Alternate file register "#
+"    Contains the name of the alternate file for the current window 
+
+" Selection and drop registers "*, "+ and "~ 
+    " '+' 右击复制的数据
+    " '*' 双击复制的数据
