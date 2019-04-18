@@ -61,7 +61,6 @@ func! CCTreeOpenFile(cmd, flag) "{{{
         catch
             " echomsg "len: " . len(res)
         endtry
-        return
         if !empty(res) && res[1] != '' && res[2] != ''
             let pattern = res[1]
             let line = res[2]
@@ -164,7 +163,7 @@ nmap <unique> <silent> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('cs', 0)<CR>
+nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('tab cs', 0)<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
 nmap <unique> <silent> <C-\>]a :scs find a <C-R>=expand("<cword>")<CR><CR>
@@ -197,4 +196,4 @@ nmap <unique> <silent> <C-\><C-\>t :cs find t <C-R>=expand(getreg("*"))<CR><CR>
 nmap <unique> <silent> <C-\><C-\>e :cs find e <C-R>=expand(getreg("*"))<CR><CR>
 nmap <unique> <silent> <C-\><C-\>i :cs find i ^<C-R>=expand(getreg("*"))<CR>$<CR>
 nmap <unique> <silent> <C-\><C-\>d :cs find d <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile('cs', 1)<CR>
+nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile('tab cs', 1)<CR>
