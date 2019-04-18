@@ -25,12 +25,12 @@ let g:CCTreeWindowMinWidth = 40  " 最小窗口
 let g:CCTreeUseUTF8Symbols = 1   " 为了在终端模式下显示符号
 let g:CCTreeKeyToggleWindow = '<C-\>w'  "打开关闭窗口
 let g:CCTreeHilightCallTree = 1  " 高亮, 太耀眼.
-let g:CCTreeEnhancedSymbolProcessing = 0 
+let g:CCTreeEnhancedSymbolProcessing = 0
 let g:CCTreeOrientation = "rightbelow" "Orientation of window(standard vim options for split: [right|left][above|below])
-let g:CCTreeUseUTF8Symbols = 1 
+let g:CCTreeUseUTF8Symbols = 1
 
-let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,   
-let g:CCTreeMinVisibleDepth = 3 "Minimum visible(unfolded) level, 
+let g:CCTreeRecursiveDepth  = 3 "Maximum call levels,
+let g:CCTreeMinVisibleDepth = 3 "Minimum visible(unfolded) level,
 
 "默认设置: (版本问题, 若出现功能错误, 把cctree.out第#0及下一行删除
 " let g:CCTreeKeyTraceForwardTree = '<C-\>>' "该函数调用其他函数
@@ -41,38 +41,58 @@ let g:CCTreeMinVisibleDepth = 3 "Minimum visible(unfolded) level,
 " let g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree
 " let g:CCTreeKeyDepthPlus = '<C-\>='
 " let g:CCTreeKeyDepthMinus = '<C-\>-'
- 
+
 "当查看源码是使用 -- 插件 : Cscope_map.vim
 "是否使用 quickfix 窗口来显示 cscope 结果
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 "echo "export CSCOPE_DB=/home/tags/cscope.out" >> ~/.bashrc
 func! CCTreeOpenFile(cmd, flag) "{{{
+    let line = ''
     if a:flag == 1
         let pattern = getreg("*")
-    else
-        " let pattern = expand("<cfile>")
-        let pattern = expand("<cword>")
-    endif
-    if len(pattern) < 3 || len(pattern) > 48
-        echomsg "file is too short/long"
-        return
-    endif
-    let res = matchlist(getline("."), '.*' . pattern . ':\~*\(\d*\).*$')
-    let line = ''
-    if !empty(res)
-        " let line = res[1] == '' ? '0' : res[1]
-        if res[1] != ''
-            let line = res[1]
+        if len(pattern) < 3 || len(pattern) > 48
+            echomsg "file is too short/long[1]"
+            return
         endif
+        " res[0]是匹配的字符串, res[1]/res[2]匹配的正则表达式内容
+        try
+            let res = matchlist(pattern, '\s*\([^:]\+\):\~*\(\d*\).*$')
+            " echomsg "res[1] " . res[1] . "  res[2]: " . res[2]
+        catch
+            " echomsg "len: " . len(res)
+        endtry
+        return
+        if !empty(res) && res[1] != '' && res[2] != ''
+            let pattern = res[1]
+            let line = res[2]
+        endif
+    else
+        let pattern = expand("<cword>")
+        if len(pattern) < 3 || len(pattern) > 48
+            echomsg "file is too short/long[2]"
+            return
+        endif
+        " <cword>不含有文件后缀
+        " 区分: path1.path2.file and file.function
+        " help \v: very magic, 有些不需用'\'进行转义了.
+        " accept file:line:xxx or file:line.xxx
+        " ';' matchlist有没有匹配都会返回10个, 这个';'可以抑制个数不对的错误
+        try
+            let [_, pattern, line; __] = matchlist(getline("."), '\v.*(' . expand('<cfile>') . ')\s*:\~*(\d*).*$')
+            " echomsg "file1: " . pattern . "  line:" . line
+        catch
+            " echomsg "file2: " . pattern . "  line:" . line
+        endtry
     endif
-    let buf1 = bufname("%")
-    try 
+    " let buf1 = bufname("%")
+    try
         exec a:cmd . ' find f ' . pattern
     catch
         echomsg "[".  pattern . "] not found!"
     endtry
-    let buf2 = bufname("%")
-    if buf1 != buf2 && line != ''
+    " let buf2 = bufname("%")
+    " if buf1 != buf2 && line != ''
+    if line != ''
         exec line
     endif
 endfunc "}}}
@@ -122,7 +142,7 @@ endif
 "------- 下面是对cscope_map.vim文件的部分翻译
 ""0 或 s  查找C语言符号，即查找函数名、宏、枚举值等出现的地方 (可以跳过注释)
 ""1 或 g  查找本定义 --可以到函数的定义处
-""2 或 d  查找本函数调用的函数 
+""2 或 d  查找本函数调用的函数
 ""3 或 c  查找调用本函数的函数 --该函数被谁调用
 ""4 或 t  查找本字符串
 ""6 或 e  查找本 egrep 模式
@@ -147,26 +167,26 @@ nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('cs', 0)<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>\a :scs find a <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <unique> <silent> <C-\>\d :scs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>\f :call CCTreeOpenFile('scs', 0)<CR>
+nmap <unique> <silent> <C-\>]a :scs find a <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]g :scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]c :scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]t :scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]e :scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <unique> <silent> <C-\>]d :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile('scs', 0)<CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>/a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <unique> <silent> <C-\>/d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>/f :call CCTreeOpenFile('vert scs', 0)<CR>
+nmap <unique> <silent> <C-\>[a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <unique> <silent> <C-\>[d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile('vert scs', 0)<CR>
 
 "" using selection register
 nmap <unique> <silent> <C-\><C-\>a :cs find a <C-R>=expand(getreg("*"))<CR><CR>
