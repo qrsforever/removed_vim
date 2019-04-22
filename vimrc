@@ -21,9 +21,6 @@ filetype indent on
 nnoremap [search] <Nop>
 nmap s [search]
 
-nnoremap [tool] <Nop>
-nmap [ [tool]
-
 source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
@@ -490,7 +487,7 @@ set cursorline
 hi CursorLine   term=none cterm=underline ctermbg=none    ctermfg=none   gui=underline guibg=NONE
 " hi CursorColumn term=none cterm=bold      ctermbg=none    ctermfg=none   gui=bold  guibg=NONE
 "高亮 当前行(列)"}}}
- 
+
 " 高亮列"{{{
 hi ColorColumn ctermbg=darkgrey guibg=lightgrey
 ""}}}

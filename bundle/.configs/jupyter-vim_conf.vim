@@ -54,7 +54,14 @@ function! s:DoUpdateWindow(flag)
     endif
 endfunction
 
-command Jupyter JupyterConnect
+function! s:DoCreateAndConnect()
+    exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
+    " call system("sleep 0.5")
+    exec 'redraw!'
+    exec 'JupyterConnect'
+endfunction
+
+command Jupyter call <SID>DoCreateAndConnect()
 "}}}
 
 nnoremap <unique> <silent> <leader>jr :call <SID>DoCommandDelayUpdate("JupyterRunFile")<CR>
