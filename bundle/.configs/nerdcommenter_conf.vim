@@ -10,7 +10,13 @@
 " ,cl           " Same cc, 左对齐.
 " ,cb           " Same cc, 两端对其.
 " ,cu           " Uncomments the selected line(s).  ( 常用 )
-let NERDSpaceDelims = 3       " 让注释符与语句之间留3个空格
+let NERDSpaceDelims = 1       " 让注释符与语句之间留1个空格
 let NERDCompactSexyComs = 1   " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 let NERDRemoveExtraSpaces = 1
+let NERDMenuMode = 0
+
+" 不知道什么原因python注释总多一个空格, 所以这里'#'后面的空格去掉
+let g:NERDCustomDelimiters = {
+    \ 'python': { 'left': '#', 'leftAlt': '#' },
+\ }
