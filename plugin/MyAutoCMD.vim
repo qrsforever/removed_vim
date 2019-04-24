@@ -1,5 +1,5 @@
 
-au FileType text,markdown  setlocal wrap|setlocal textwidth=86
+" au FileType text,markdown  setlocal wrap|setlocal textwidth=86
 
 autocmd FileType c,cpp setlocal makeprg=make\ -j4
 autocmd FileType python setlocal makeprg=python3\ -u

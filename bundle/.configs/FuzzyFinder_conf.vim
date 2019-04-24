@@ -31,7 +31,7 @@ let g:fuf_keyNextPattern = '<C-+>'
 let g:fuf_keyPreview = '<C-@>'
 
 let g:fuf_mrufile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
-let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr|gradle|idea|settings)($|[/\\])'
 let g:fuf_coveragefile_globPatterns = ['**/.*', '**/*']
 
 let g:priv_fuf_dir_openmode = 'NERDTree'

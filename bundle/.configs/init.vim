@@ -1,5 +1,4 @@
 " 专门用来对比源插件更新path和入
-set nocompatible
 let g:update_and_diff = 0
 let g:fork_maps = {
     \ 'qrsforever/lookupfile': 'vim-scripts/lookupfile',
