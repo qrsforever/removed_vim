@@ -151,6 +151,7 @@ nmap <C-s> :silent update!<CR>:silent lchdir %:p:h<CR>:pwd<CR>
 imap \\ <C-x><C-o>
 
 " 标签跳转页面
+nmap g0 :tabl<CR>
 nmap g1 1gt
 nmap g2 2gt
 nmap g3 3gt
@@ -446,6 +447,7 @@ if has("gui_running")
 
     set kp=man\ -P\ more  " remove the [m when using K man help
 
+    map <M-0> :tabl<CR>
     map <M-1> 1gt
     map <M-2> 2gt
     map <M-3> 3gt
@@ -455,6 +457,7 @@ if has("gui_running")
     map <M-7> 7gt
     map <M-8> 8gt
     map <M-9> 9gt
+    map! <M-0> <esc>:tabl<CR>
     map! <M-1> <esc>1gt
     map! <M-2> <esc>2gt
     map! <M-3> <esc>3gt
