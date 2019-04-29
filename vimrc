@@ -58,7 +58,7 @@ nmap <unique> <silent> <S-F3>       :cnext<CR>
 " nmap <unique> <silent> <S-F6>       :MyAsyncRun<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 nmap <unique> <silent> <S-F10>      :MyColColor<CR>
-nmap <unique> <silent> <S-F12>      :MyUMLCharConvert<CR> 
+nmap <unique> <silent> <S-F12>      :MyUMLCharConvert<CR>
 
 imap <unique> <silent> <S-F1>  <ESC>:lnext<CR>
 imap <unique> <silent> <S-F2>  <ESC>:cprevious<CR>
@@ -66,7 +66,7 @@ imap <unique> <silent> <S-F3>  <ESC>:cnext<CR>
 " imap <unique> <silent> <S-F6>  <ESC>:MyAsyncRun<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 imap <unique> <silent> <S-F10> <ESC>:MyColColor<CR>
-imap <unique> <silent> <S-F12> <ESC>:MyUMLCharConvert<CR> 
+imap <unique> <silent> <S-F12> <ESC>:MyUMLCharConvert<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F1>       :lprevious<CR>
@@ -167,7 +167,8 @@ nmap g9 9gt
 "自己定义的命令 "{{{
 command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
-command XRW %s///ge         "消除文件中的^M字符
+command XRW %s///ge        "消除文件中的^M字符
+command XONE 0,$s/\n//       "多行变一行  
 "自己定义的命令 "}}}
 
 "窗口配置"{{{
@@ -177,7 +178,7 @@ noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
 " 让terminal进入norm模式
-" tnoremap <Esc> <C-W>N  
+" tnoremap <Esc> <C-W>N
 tnoremap <C-j> <C-W>j
 tnoremap <C-k> <C-W>k
 tnoremap <C-h> <C-W>h
@@ -374,8 +375,8 @@ set linebreak
 set textwidth=86
 " 选中已有行执行 gq 可以自动换行 或者 gq=G 或者 gggqG
 "highlight column after 'textwidth'
-" set cc=+1  
-" fo = formatoptions: 
+" set cc=+1
+" fo = formatoptions:
 " t：根据 textwidth 自动折行；
 " c：在（程序源代码中的）注释中自动折行，插入合适的注释起始字符；
 " r：插入模式下在注释中键入回车时，插入合适的注释起始字符；
@@ -650,15 +651,15 @@ set completeopt=longest,menu
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"}}}
 
 " 设置Logcat文件类型"{{{
-" au BufRead,BufNewFile *logcat* set filetype=logcat 
+" au BufRead,BufNewFile *logcat* set filetype=logcat
 "}}}
 
 "a.vim实现源文件与头文件切换"{{{
 let alternateNoDefaultAlternate = 1
 "}}}
- 
+
 "按q之后按:进入histroy command
- 
+
 " 0~ 1~ workaround: https://github.com/vim/vim/issues/1671
 if has("unix")"{{{
     let s:uname = system("echo -n \"$(uname)\"")
