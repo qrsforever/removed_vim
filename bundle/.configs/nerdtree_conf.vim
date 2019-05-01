@@ -86,7 +86,8 @@ function! s:DoNERDTreeOpenToggle() "{{{
     if g:NERDTree.IsOpen()
         exec 'NERDTreeClose'
     else
-        exec 'NERDTreeFind'
+        " exec 'NERDTreeFind'
+        exec 'NERDTreeCWD'
     endif
 endfunction "}}}
 
