@@ -35,7 +35,7 @@ let NERDTreeAutoCenter=1                             "控制当光标移动超�
 let NERDTreeAutoCenterThreshold=3
 let NERDTreeHighlightCursorline=1                    "是否高亮显示光标所在行
 let NERDTreeMouseMode=1                              "指定鼠标模式
-let NERDTreeShowBookmarks=1                          "默认显示书签列表
+let NERDTreeShowBookmarks=0                          "默认显示书签列表
 let NERDTreeShowFiles=1                              "默认显示文件
 let NERDTreeShowHidden=0                             "默认not显示隐藏文件
 let NERDTreeShowLineNumbers=0                        "默认是否显示行号
@@ -48,7 +48,7 @@ let NERDTreeDirArrows=1
 " files to ignore "
 let NERDTreeIgnore = ['.*\.o$']
 let NERDTreeIgnore += ['.*\.bak$']
-let NERDTreeIgnore += ['.*\.out$']
+let NERDTreeIgnore += ['.*\.out$', '.*__pycache__$']
 let NERDTreeIgnore += ['.*\.so$', '.*\.a$', '.*\.dll$']
 " audio/video "
 let NERDTreeIgnore += ['.*\.ogv$', '.*\.ogg$', '.*\.mp3$', '.*\.avi$']
@@ -66,6 +66,7 @@ let NERDTreeIgnore += ['.*\.lo$', '.*\.la']
 let NERDTreeIgnore += ['.*\.class']
 " tags "
 let NERDTreeIgnore += ['tags']
+
 " nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 " o.......打开所选文件或目录    ( 常用 )
 " enter..............相当于o
@@ -78,9 +79,18 @@ let NERDTreeIgnore += ['tags']
 " gs......类似s, 但光标仍然停留在NERD_tree
 " O.......递归打开所选目录
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
+
 "}}}
 
-nmap <silent> so :<C-u>NERDTreeFind<CR>
+function! s:DoNERDTreeOpenToggle() "{{{
+    if g:NERDTree.IsOpen()
+        exec 'NERDTreeClose'
+    else
+        exec 'NERDTreeFind'
+    endif
+endfunction "}}}
+
+nmap <silent> so :call <SID>DoNERDTreeOpenToggle()<CR>
 
 " 打开一个空文件时自动开启
 " autocmd StdinReadPre * let s:std_in=1
