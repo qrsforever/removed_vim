@@ -83,11 +83,19 @@ let NERDTreeIgnore += ['tags']
 "}}}
 
 function! s:DoNERDTreeOpenToggle() "{{{
-    if g:NERDTree.IsOpen()
-        exec 'NERDTreeClose'
-    else
-        " exec 'NERDTreeFind'
+    let cwd1 = getcwd()
+    exec 'lchdir %:p:h'
+    let cwd2 = getcwd()
+    
+    if cwd1 != cwd2
         exec 'NERDTreeCWD'
+    else
+        if g:NERDTree.IsOpen()
+            exec 'NERDTreeClose'
+        else
+            " exec 'NERDTreeFind'
+            exec 'NERDTreeCWD'
+        endif
     endif
 endfunction "}}}
 
