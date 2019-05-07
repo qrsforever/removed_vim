@@ -67,7 +67,7 @@ endfunction
 function! s:DoCreateAndConnect()
     exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
     echomsg "wait start..."
-    call system("sleep 2.5")
+    call system("sleep 4.5")
     exec 'redraw!'
     exec 'JupyterConnect'
 endfunction
