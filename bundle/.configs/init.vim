@@ -93,6 +93,7 @@ MyPlugin 'honza/vim-snippets'
 "{{{ 工具类
 MyPlugin 'qrsforever/DrawIt'
 MyPlugin 'qrsforever/jupyter-vim'
+MyPlugin 'qrsforever/vim-align'
 MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'
 MyPlugin 'iamcco/dict.vim'

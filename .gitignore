@@ -71,4 +71,6 @@ bundle/FuzzyFinder
 bundle/lookupfile
 bundle/html5.vim
 bundle/vim-vue
+bundle/vim-align
 extern
+
