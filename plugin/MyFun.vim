@@ -43,19 +43,19 @@ function s:_MyCLopen(cmd, place)
         let h = ''
     endif
     if a:place == 0
-        execute "botright " . a:cmd . " " . h
+        execute "silent! botright " . a:cmd . " " . h
     elseif a:place == 1
-        execute "topleft " . a:cmd . " " . h
+        execute "silent! topleft " . a:cmd . " " . h
     elseif a:place == 2
-        execute "belowright " . a:cmd . " " . h
+        execute "silent! belowright " . a:cmd . " " . h
     elseif a:place == 3
-        execute "aboveleft " . a:cmd . " " . h
+        execute "silent! aboveleft " . a:cmd . " " . h
     else
         let w = winwidth(0) / 2 - 5
         if w < 5
-            execute "vertical " . a:cmd . " ". w
+            execute "silent! vertical " . a:cmd . " ". w
         else
-            execute "vertical " . a:cmd
+            execute "silent! vertical " . a:cmd
         endif
     endif
 endfunction
