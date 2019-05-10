@@ -21,9 +21,11 @@ let g:Lf_CtagsFuncOpts = {
 \ }
 
 let g:Lf_RgConfig = [
-    \ "--max-columns=250",
+    \ "--max-columns=0",
     \ "--case-sensitive",
+    \ "--glob=!git/*",
 \ ]
+
 
 let g:Lf_WildIgnore = {
     \ 'dir': ['.svn','.git','.hg'],
