@@ -29,6 +29,7 @@ __mklink(){
 
 __mklink bashrc ~/.bashrc
 __mklink profile ~/.profile
+__mklink fzf.bash ~/.fzf.bash 1
 __mklink Rprofile ~/.Rprofile 
 __mklink gtkrc-2.0 ~/.gtkrc-2.0
 __mklink gtk.css  ~/.config/gtk-3.0/gtk.css
