@@ -82,24 +82,17 @@ let NERDTreeIgnore += ['tags']
 
 "}}}
 
-function! s:DoNERDTreeOpenToggle() "{{{
-    let cwd1 = getcwd()
-    exec 'lchdir %:p:h'
-    let cwd2 = getcwd()
-    
-    if cwd1 != cwd2
-        exec 'NERDTreeCWD'
+function! s:DoNERDTreeOpenToggle(close) "{{{
+    if a:close == 1
+        exec 'NERDTreeClose'
     else
-        if g:NERDTree.IsOpen()
-            exec 'NERDTreeClose'
-        else
-            " exec 'NERDTreeFind'
-            exec 'NERDTreeCWD'
-        endif
+        exec 'lchdir %:p:h'
+        exec 'NERDTreeCWD'
     endif
 endfunction "}}}
 
-nmap <silent> so :call <SID>DoNERDTreeOpenToggle()<CR>
+nmap <silent> so :call <SID>DoNERDTreeOpenToggle(0)<CR>
+nmap <silent> sO :call <SID>DoNERDTreeOpenToggle(1)<CR>
 
 " 打开一个空文件时自动开启
 " autocmd StdinReadPre * let s:std_in=1
