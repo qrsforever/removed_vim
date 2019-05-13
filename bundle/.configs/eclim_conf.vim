@@ -348,20 +348,17 @@ endfunc "}}}
 
 " Map "{{{
 nnoremap <silent> ,ejs <esc>:JavaSearchContext -a edit<CR>
-" nnoremap <silent> ,sc <esc>:JavaSearchContext -a split<CR>
-nnoremap <silent> ,ejd  <esc>:JavaDocSearch<CR>
-" nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
+nnoremap <silent> ,ejd <esc>:JavaDocSearch<CR>
+nnoremap <silent> ,ejv <esc>:Validate<CR>
+nnoremap <silent> ,ejc <esc>:JavaCorrect<CR>
+nnoremap <silent> ,eji <esc>:JavaImport<CR>
+nnoremap <silent> ,ejg <esc>:JavaImportOrganize<CR>
 
 nnoremap <silent> ,epi <esc>:call DoCurrentProject(0)<CR>
 nnoremap <silent> ,epo <esc>:call DoCurrentProject(1)<CR>
 nnoremap <silent> ,epc <esc>:call DoCurrentProject(2)<CR>
 nnoremap <silent> ,epd <esc>:call DoCurrentProject(3)<CR>
 nnoremap <silent> ,epp <esc>:call DoSelectProjects()<CR>
-
-" nnoremap <silent> ,jv <esc>:Validate<CR>
-" nnoremap <silent> ,jc <esc>:JavaCorrect<CR>
-" nnoremap <silent> ,ji <esc>:JavaImport<CR>
-" nnoremap <silent> ,jg <esc>:JavaImportOrganize<CR>
 
 " nnoremap <silent> <C-LeftMouse>  <esc>:call DoCtrlLeftMouse()<CR>
 " nnoremap <silent> <C-RightMouse> <esc>:call DoCtrlRightMouse()<CR>

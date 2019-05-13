@@ -403,7 +403,7 @@ set matchtime=1
 "set updatecount=40  "设置敲入40个字符后执行
 
 "交换文件刷新后的超时时间
-set updatetime=500  "x秒后刷新
+set updatetime=5000  "x毫秒秒后刷新
 ":preserve "若设置的时间过长,该命令会手工的存入交换文件中.
 
 " When using make, where should it dump the file, please see ./bundle/.config/errormarker.vim_conf.vim
@@ -674,3 +674,6 @@ endif"}}}
 
 " gu gU 大小写互转
 " gitm89$
+
+" workaround for autoread not work
+au FocusGained,BufEnter * :silent! !
