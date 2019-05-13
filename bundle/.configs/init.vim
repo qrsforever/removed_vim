@@ -162,6 +162,10 @@ call vundle#end()
 for ifile in allconfs
     exec 'source ' . ifile
 endfor
+if isdirectory(expand('~/.vim/bundle/eclim'))
+    exec 'source  ~/.vim/bundle/.configs/eclim_conf.vim'
+endif
+
 unlet allconfs
 unlet ballpath
 unlet update_and_diff

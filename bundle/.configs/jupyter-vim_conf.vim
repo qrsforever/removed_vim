@@ -9,9 +9,13 @@ let g:jupyter_mapkeys = 0
 
 let g:priv_window_mode = 1
 
-
 function! s:DoCommandDelayUpdate(cmd)
-    exec a:cmd
+    try
+        exec a:cmd
+    catch
+        echomsg "jupyter import this file error!"
+        return
+    endtry
     " 等待notebook kernel return data
     call system("sleep 0.5")
     if g:priv_window_mode == 1

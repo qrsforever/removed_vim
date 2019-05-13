@@ -293,6 +293,8 @@ set scrolloff=2
 "set scrollbind
 
 "自动读写相关
+" autoread not work: https://stackoverflow.com/questions/2490227/how-does-vims-autoread-work
+" manually exec :e
 set autoread              " read open files again when changed outside Vim ( 同步 )
 set autowrite             " write a modified buffer on each :next , ... ( 跳到另一个文件时,自动保存上个文件 )
 set modified

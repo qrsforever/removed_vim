@@ -1,4 +1,6 @@
 " Setup "{{{
+set rtp+=~/.vim/bundle/eclim
+
 let g:EclimCompletionMethod = 'omnifunc' 
 " let g:EclimBrowser = "chromium-browser"
 " let g:EclimBrowser= "google-chrome"
@@ -43,7 +45,7 @@ let g:EclimAntErrorsEnabled = 1
 
 " let g:EclimJavaValidate=0
 " let g:EclimPythonValidate = 0
-" let g:EclimMakeLCD=0
+let g:EclimMakeLCD=1
 
 "severity sort: errors > warnings > info > etc.
 let g:EclimValidateSortResults = 'severity'
@@ -87,19 +89,17 @@ func! DoCurrentProject(flag) "{{{
                         let proname = strpart(content, 6, len(content) - 13)
                         if len(proname) > 0
                             if a:flag == 0
-                                echo 'Import project: ' . curdir
+                                echomsg 'Import project: ' . curdir
                                 call eclim#project#util#ProjectImport(curdir)
                             elseif a:flag == 1
-                                echo 'Open project: ' . proname
+                                echomsg 'Open project: ' . proname
                                 call eclim#project#util#ProjectOpen(proname)
                             elseif a:flag == 2
-                                echo 'Close project: ' . proname
+                                echomsg 'Close project: ' . proname
                                 call eclim#project#util#ProjectClose(proname)
                             elseif a:flag == 3
-                                echo 'Delete project: ' . proname
+                                echomsg 'Delete project: ' . proname
                                 call eclim#project#util#ProjectDelete(proname)
-                            else 
-                                echo 'Never run here.'
                             endif
                         endif
                         return ''
@@ -347,16 +347,16 @@ endfunc "}}}
 "}}}
 
 " Map "{{{
-" nnoremap <silent> ,c  <esc>:JavaSearchContext -a edit<CR>
+nnoremap <silent> ,ejs <esc>:JavaSearchContext -a edit<CR>
 " nnoremap <silent> ,sc <esc>:JavaSearchContext -a split<CR>
-" nnoremap <silent> ,d  <esc>:JavaDocSearch<CR>
+nnoremap <silent> ,ejd  <esc>:JavaDocSearch<CR>
 " nnoremap <silent> ,sd <esc>:JavaDocPreview<CR>
 
-" nnoremap <silent> ,pi <esc>:call DoCurrentProject(0)<CR>
-" nnoremap <silent> ,po <esc>:call DoCurrentProject(1)<CR>
-" nnoremap <silent> ,pc <esc>:call DoCurrentProject(2)<CR>
-" nnoremap <silent> ,pd <esc>:call DoCurrentProject(3)<CR>
-" nnoremap <silent> ,pp <esc>:call DoSelectProjects()<CR>
+nnoremap <silent> ,epi <esc>:call DoCurrentProject(0)<CR>
+nnoremap <silent> ,epo <esc>:call DoCurrentProject(1)<CR>
+nnoremap <silent> ,epc <esc>:call DoCurrentProject(2)<CR>
+nnoremap <silent> ,epd <esc>:call DoCurrentProject(3)<CR>
+nnoremap <silent> ,epp <esc>:call DoSelectProjects()<CR>
 
 " nnoremap <silent> ,jv <esc>:Validate<CR>
 " nnoremap <silent> ,jc <esc>:JavaCorrect<CR>
