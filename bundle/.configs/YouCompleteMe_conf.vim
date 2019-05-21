@@ -64,8 +64,8 @@ let g:ycm_complete_in_strings = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 0
 let g:ycm_semantic_triggers = {
-            \   'c' : ['->', '    ', '.', ' ', '(', '[', '&'],
-            \   'cpp,objcpp' : ['->', '.', ' ', '(', '[', '&', '::'],
+            \   'c' : ['->', '.', '(', '[', '&'],
+            \   'cpp,objcpp' : ['->', '.', '(', '[', '&', '::'],
             \   'perl' : ['->', '::', ' '],
             \   'php' : ['->', '::', '.'],
             \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
