@@ -59,10 +59,12 @@ function! s:DoCommand(flag)
     let var = expand("<cword>")
     if a:flag == "t"
         exec 'JupyterSendCode ' . '"print(type(' . var . '))"'
-    elseif a:flag == "f"
-        exec 'JupyterSendCode ' . '"!eog /tmp/jupyter_vim.png"'
     elseif a:flag == "p"
         exec 'JupyterSendCode ' . '"print(' . var . ')"'
+    elseif a:flag == "f"
+        exec '!eog /tmp/jupyter_vim.png'
+    elseif a:flag == "l"
+        exec 'OpenUrl http://localhost:6006'
     elseif a:flag == "v"
         if g:priv_window_mode != 'v'
             let g:priv_window_mode = 'v'
@@ -131,6 +133,7 @@ nnoremap <unique> <silent> <leader>jp :call <SID>DoCommand("p")<CR>
 nnoremap <unique> <silent> <leader>jf :call <SID>DoCommand("f")<CR>
 nnoremap <unique> <silent> <leader>jh :call <SID>DoCommand("h")<CR>
 nnoremap <unique> <silent> <leader>jv :call <SID>DoCommand("v")<CR>
+nnoremap <unique> <silent> <leader>jl :call <SID>DoCommand("l")<CR>
 
 nnoremap <unique> <silent> <leader>j1 :call <SID>DoCommand("1")<CR>
 nnoremap <unique> <silent> <leader>j2 :call <SID>DoCommand("2")<CR>
