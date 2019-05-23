@@ -23,7 +23,18 @@ snippet xjupyter "juptyer file"
 # @version 1.0
 # @date `date +"%Y-%m-%d %H:%M:%S"`
 
-### Run the file using jupyter-vim ###
+#############################  jupyter-vim map ######################################
+# https://github.com/qrsforever/vim/blob/master/bundle/.configs/jupyter-vim_conf.vim
+#	,ji: import file
+#  	,je: run cell
+#  	,jj: run current line
+#	,jc: clear buffer; ju: update buffer; jq: quit buffer
+#	,jh: open buffer horizontally; jv: open buffer virtually
+#  	,jf: !eog /tmp/jupyter_vim.png
+#   ,jp: print <cword> variable
+#   ,j1: output <cword> head(1), j2, j3, j4, j5 is also
+#   ,j6: output <cword> tail(1), j7, j8, j9, j0 is also
+#####################################################################################
 
 $0
 endsnippet
@@ -35,7 +46,7 @@ endsnippet
 
 snippet xcell "insert codecell for juptyer" b
 #####################################################################################
-# <codecell>
+# <codecell> $1
 #####################################################################################
 $0
 endsnippet
