@@ -60,9 +60,9 @@ autocmd User YcmQuickFixOpened call s:CustomizeYcmQuickFixWindow()
 
 " 文件路径补全等
 let g:ycm_complete_in_strings = 1
-" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 0
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_semantic_triggers = {
             \   'c' : ['->', '.', '(', '[', '&'],
             \   'cpp,objcpp' : ['->', '.', '(', '[', '&', '::'],
