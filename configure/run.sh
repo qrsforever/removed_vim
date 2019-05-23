@@ -13,9 +13,9 @@ __mklink(){
     fi
     if [[ -f $2 ]]
     then
-	    echo "$2 exist, delete(y/n)"
+	    echo -n "$2 exist, delete(y/N): "
 	    read input
-	    if [[ x$input == xy ]]
+	    if [[ x$input == xy || x$input == x ]]
 	    then
 		    echo "rm -f $2"
 		    rm -f $2
@@ -36,6 +36,7 @@ __mklink gtk.css  ~/.config/gtk-3.0/gtk.css
 __mklink tmux.conf ~/.tmux.conf 1
 __mklink eclimrc ~/.eclimrc 1
 __mklink ctags ~/.ctags 1
+__mklink pip.conf ~/.config/pip/pip.conf
 __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
 __mklink credentials ~/.plotly/.credentials 1
