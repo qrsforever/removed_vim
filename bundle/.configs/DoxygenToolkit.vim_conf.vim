@@ -1,8 +1,8 @@
 "Setup{{{
-let g:DoxygenToolkit_briefTag_pre = "@brief"
-let g:DoxygenToolkit_briefTag_post = " :"
-let g:DoxygenToolkit_paramTag_pre = "@param"
-let g:DoxygenToolkit_paramTag_post = " :"
+let g:DoxygenToolkit_briefTag_pre = "@brief "
+let g:DoxygenToolkit_briefTag_post = ":"
+let g:DoxygenToolkit_paramTag_pre = "@param "
+let g:DoxygenToolkit_paramTag_post = ":"
 let g:DoxygenToolkit_returnTag = "@returns "
 let g:DoxygenToolkit_throwTag_pre = "@exception "
 let g:DoxygenToolkit_fileTag = "@file "

@@ -18,17 +18,18 @@
     let g:jedi#smart_auto_mappings = 0
 " endif
 
+" jedi对非__init__.py文件里面的__all__支持不全, 如果multiprocessing模块
 let g:jedi#force_py_version = 3
 " 1: buffer 2: cmdline(set cmdheight=2)
 let g:jedi#show_call_signatures = 1
 " 如果大于0, (后空格才提示补全, Fixme)
 let g:jedi#show_call_signatures_delay = 0
 
-let g:jedi#goto_assignments_command = ''
 " YCM instead of s]
 let g:jedi#goto_command = ''
+let g:jedi#goto_assignments_command = ''
+let g:jedi#rename_command = ''
 let g:jedi#usages_command = ',jg'
-let g:jedi#rename_command = ',jR'
 let g:jedi#documentation_command = 'K'
 " goto 不跳转tab
 let g:jedi#use_tabs_not_buffers = 0
@@ -42,4 +43,17 @@ if &rtp =~ '\<jedi\>'
                     \ call jedi#configure_call_signatures()
     augroup END
 endif
+
+let s:prv_toggle_call_signatures_flag = 1
+function! s:DoToggleCallSignatures()
+    if s:prv_toggle_call_signatures_flag
+        call jedi#show_call_signatures()
+        let s:prv_toggle_call_signatures_flag = 0
+    else
+        call jedi#clear_call_signatures()
+        let s:prv_toggle_call_signatures_flag = 1
+    endif
+endfunction
 " }}}
+
+nnoremap <unique> <silent> <leader>j<space> :call <SID>DoToggleCallSignatures()<CR>

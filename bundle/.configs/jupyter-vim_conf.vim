@@ -146,7 +146,6 @@ nnoremap <unique> <silent> <leader>j8 :call <SID>DoCommand("8")<CR>
 nnoremap <unique> <silent> <leader>j9 :call <SID>DoCommand("9")<CR>
 nnoremap <unique> <silent> <leader>j0 :call <SID>DoCommand("0")<CR>
 
-
 augroup JupyterTerm
     au BufEnter __jupyter_term__ silent! nmap <silent> <buffer> q :silent! q<CR>
     au BufEnter __jupyter_term__ setlocal wrap

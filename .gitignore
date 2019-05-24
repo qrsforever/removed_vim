@@ -3,6 +3,7 @@
 .netrwhist
 .VimballRecord
 **/**/doc/tags
+**/**/__pycache__
 configure/eclimrc
 configure/bashrc
 bundle/*_diff

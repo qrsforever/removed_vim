@@ -12,7 +12,7 @@ func ListDictWords(A, L, P) "{{{
     return system('cat ' . g:trv_dictionary . ' | cut -d\  -f1')
 endfunc "}}}
 
-func! GetTransLoc()  "{{{
+func! s:GetTransLoc()  "{{{
     let word = expand("<cword>")
     if word == ""
         let word = input("Input: ", "" , "custom,ListDictWords")
@@ -34,9 +34,8 @@ endfunc "}}}
 
 "}}}
 
-nmap <unique> <silent> <leader>tr :call GetTransLoc()<CR>
+nmap <unique> <silent> <leader>tr :call <SID>GetTransLoc()<CR>
 nmap <unique> <silent> <leader>td <Plug>DictSearch
-vmap <unique> <silent> <leader>td <Plug>DictVSearch
 nmap <unique> <silent> <leader>tw <Plug>DictWSearch
 vmap <unique> <silent> <leader>tw <Plug>DictWVSearch
 nmap <unique> <silent> <leader>tR <Plug>DictRSearch
