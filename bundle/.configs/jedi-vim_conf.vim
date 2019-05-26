@@ -43,17 +43,4 @@ if &rtp =~ '\<jedi\>'
                     \ call jedi#configure_call_signatures()
     augroup END
 endif
-
-let s:prv_toggle_call_signatures_flag = 1
-function! s:DoToggleCallSignatures()
-    if s:prv_toggle_call_signatures_flag
-        call jedi#show_call_signatures()
-        let s:prv_toggle_call_signatures_flag = 0
-    else
-        call jedi#clear_call_signatures()
-        let s:prv_toggle_call_signatures_flag = 1
-    endif
-endfunction
 " }}}
-
-nnoremap <unique> <silent> <leader>j<space> :call <SID>DoToggleCallSignatures()<CR>

@@ -61,9 +61,12 @@ function! s:DoCommand(flag)
         exec 'JupyterSendCode ' . '"print(type(' . var . '))"'
     elseif a:flag == "p"
         exec 'JupyterSendCode ' . '"print(' . var . ')"'
-    elseif a:flag == "f"
-        exec '!eog /tmp/jupyter_vim.png'
-    elseif a:flag == "l"
+    elseif a:flag == "F"
+        if filereadable('/tmp/jupyter_vim.png')
+            exec '!eog /tmp/jupyter_vim.png'
+        endif
+    elseif a:flag == "L"
+        "!tensorboard --logdir=/tmp/tf"
         exec 'OpenUrl http://localhost:6006'
     elseif a:flag == "v"
         if g:priv_window_mode != 'v'
@@ -99,11 +102,16 @@ function! s:DoCommand(flag)
 endfunction
 
 function! s:DoCreateAndConnect()
-    exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
     echomsg "wait start..."
-    call system("sleep 4.5")
+    try 
+        exec 'silent! JupyterTerminateKernel'
+        call system("sleep 1.0")
+    catch
+        exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
+        call system("sleep 4.5")
+    endtry
     exec 'redraw!'
-    exec 'JupyterConnect'
+    exec 'silent! JupyterConnect'
 endfunction
 
 command Jupyter      call <SID>DoCreateAndConnect()
@@ -119,7 +127,7 @@ nnoremap <unique> <silent> <leader>ju :call <SID>DoUpdateWindow(2)<CR>
 nnoremap <unique> <silent> <leader>jq :call <SID>DoUpdateWindow(1)<CR>
 nnoremap <unique> <silent> <leader>jw :call <SID>DoUpdateWindow(3)<CR>
 
-nnoremap <unique> <silent> <leader>jC :JupyterConnect<CR>
+nnoremap <unique> <silent> <leader>jC :call <SID>DoCreateAndConnect()<CR>
 
 " 将映射集中到左右字符('q,w,e,r,s,d')
 nnoremap <unique> <silent> <leader>jr :call <SID>DoCommandDelayUpdate("JupyterRunFile")<CR>
@@ -130,10 +138,8 @@ vmap     <unique> <silent> <leader>js <Plug>JupyterRunVisual
 
 nnoremap <unique> <silent> <leader>jt :call <SID>DoCommand("t")<CR>
 nnoremap <unique> <silent> <leader>jp :call <SID>DoCommand("p")<CR>
-nnoremap <unique> <silent> <leader>jf :call <SID>DoCommand("f")<CR>
 nnoremap <unique> <silent> <leader>jh :call <SID>DoCommand("h")<CR>
 nnoremap <unique> <silent> <leader>jv :call <SID>DoCommand("v")<CR>
-nnoremap <unique> <silent> <leader>jl :call <SID>DoCommand("l")<CR>
 
 nnoremap <unique> <silent> <leader>j1 :call <SID>DoCommand("1")<CR>
 nnoremap <unique> <silent> <leader>j2 :call <SID>DoCommand("2")<CR>
@@ -145,6 +151,10 @@ nnoremap <unique> <silent> <leader>j7 :call <SID>DoCommand("7")<CR>
 nnoremap <unique> <silent> <leader>j8 :call <SID>DoCommand("8")<CR>
 nnoremap <unique> <silent> <leader>j9 :call <SID>DoCommand("9")<CR>
 nnoremap <unique> <silent> <leader>j0 :call <SID>DoCommand("0")<CR>
+
+
+nnoremap <unique> <silent> <leader>jF :call <SID>DoCommand("F")<CR>
+nnoremap <unique> <silent> <leader>jL :call <SID>DoCommand("L")<CR>
 
 augroup JupyterTerm
     au BufEnter __jupyter_term__ silent! nmap <silent> <buffer> q :silent! q<CR>
