@@ -102,16 +102,20 @@ function! s:DoCommand(flag)
 endfunction
 
 function! s:DoCreateAndConnect()
-    echomsg "wait start..."
-    try 
-        exec 'silent! JupyterTerminateKernel'
-        call system("sleep 1.0")
+    try
+        echomsg "kill..."
+        exec 'JupyterTerminateKernel'
     catch
         exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
-        call system("sleep 4.5")
+        exec 'redraw!'
+        echomsg "wait..."
+        call system("sleep 3.5")
     endtry
-    exec 'redraw!'
+    echomsg "connect..."
+    call system("sleep 1.0")
     exec 'silent! JupyterConnect'
+    exec 'redraw!'
+    echomsg "ok"
 endfunction
 
 command Jupyter      call <SID>DoCreateAndConnect()
