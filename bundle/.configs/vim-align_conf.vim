@@ -1,7 +1,7 @@
 ""{{{ setup
 
-" if !hasmapto('<Plug>AM_tt','n')		|call AlignMaps#MakeMap("tt")|endif
-
-map <Leader>tl	<Plug>AM_tt
+" 清除映射(不启动), 等于: AlignMapsClean
+let g:loaded_AlignMapsPlugin = 1
+let g:loaded_AlignMaps = 1
 
 ""}}}
