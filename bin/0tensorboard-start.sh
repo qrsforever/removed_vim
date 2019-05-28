@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pidfile=/tmp/jupyter_qtconsole.pid
+pidfile=/tmp/0tensorboard_start.pid
 
 if [ ! -f $pidfile ]
 then
@@ -18,5 +18,10 @@ then
     fi
 fi
 
-jupyter qtconsole --no-confirm-exit --no-banner >/dev/null 2>&1 &
+tensorboard --logdir=/tmp/tf >/dev/null 2>&1 &
+
+# sleep 5
+
+# xdg-open http://localhost:6006
+
 echo "$!" > $pidfile

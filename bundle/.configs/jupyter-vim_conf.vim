@@ -55,6 +55,14 @@ function! s:DoUpdateWindow(flag)
     endif
 endfunction
 
+func s:TimerTBOpenUrl(timer) abort
+    exec 'silent! OpenUrl http://localhost:6006'
+endfunc
+
+func s:TimerJupyterConnect(timer) abort
+    exec 'silent! JupyterConnect'
+endfunc
+
 function! s:DoCommand(flag)
     let var = expand("<cword>")
     if a:flag == "t"
@@ -66,8 +74,9 @@ function! s:DoCommand(flag)
             exec '!eog /tmp/jupyter_vim.png'
         endif
     elseif a:flag == "L"
-        "!tensorboard --logdir=/tmp/tf"
-        exec 'OpenUrl http://localhost:6006'
+        exec 'silent! !~/.vim/bin/0tensorboard-start.sh'
+        exec 'redraw!'
+        call timer_start(3500, function('s:TimerTBOpenUrl'))
     elseif a:flag == "v"
         if g:priv_window_mode != 'v'
             let g:priv_window_mode = 'v'
@@ -105,17 +114,14 @@ function! s:DoCreateAndConnect()
     try
         echomsg "kill..."
         exec 'JupyterTerminateKernel'
+        exec 'redraw!'
+        call timer_start(500, function('s:TimerJupyterConnect'))
     catch
+        echomsg "start..."
         exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
         exec 'redraw!'
-        echomsg "wait..."
-        call system("sleep 3.5")
+        call timer_start(4500, function('s:TimerJupyterConnect'))
     endtry
-    echomsg "connect..."
-    call system("sleep 1.0")
-    exec 'silent! JupyterConnect'
-    exec 'redraw!'
-    echomsg "ok"
 endfunction
 
 command Jupyter      call <SID>DoCreateAndConnect()
