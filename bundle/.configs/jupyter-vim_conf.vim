@@ -57,10 +57,12 @@ endfunction
 
 func s:TimerTBOpenUrl(timer) abort
     exec 'silent! OpenUrl http://localhost:6006'
+    echomsg "finish"
 endfunc
 
 func s:TimerJupyterConnect(timer) abort
     exec 'silent! JupyterConnect'
+    echomsg "finish"
 endfunc
 
 function! s:DoCommand(flag)
@@ -76,6 +78,7 @@ function! s:DoCommand(flag)
     elseif a:flag == "L"
         exec 'silent! !~/.vim/bin/0tensorboard-start.sh'
         exec 'redraw!'
+        echomsg "open url..."
         call timer_start(3500, function('s:TimerTBOpenUrl'))
     elseif a:flag == "v"
         if g:priv_window_mode != 'v'
@@ -115,11 +118,13 @@ function! s:DoCreateAndConnect()
         echomsg "kill..."
         exec 'JupyterTerminateKernel'
         exec 'redraw!'
+        echomsg "connecting..."
         call timer_start(500, function('s:TimerJupyterConnect'))
     catch
         echomsg "start..."
         exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
         exec 'redraw!'
+        echomsg "connecting..."
         call timer_start(4500, function('s:TimerJupyterConnect'))
     endtry
 endfunction
