@@ -63,6 +63,9 @@ endfunc
 func s:TimerJupyterConnect(timer) abort
     exec 'silent! JupyterConnect'
     echomsg "finish"
+    " 全局设置
+    " 显示图片
+    exec 'JupyterSendCode ' . '"%pylab --no-import-all"'
 endfunc
 
 function! s:DoCommand(flag)
@@ -71,10 +74,6 @@ function! s:DoCommand(flag)
         exec 'JupyterSendCode ' . '"print(type(' . var . '))"'
     elseif a:flag == "p"
         exec 'JupyterSendCode ' . '"print(' . var . ')"'
-    elseif a:flag == "F"
-        if filereadable('/tmp/jupyter_vim.png')
-            exec '!eog /tmp/jupyter_vim.png'
-        endif
     elseif a:flag == "L"
         exec 'silent! !~/.vim/bin/0tensorboard-start.sh'
         exec 'redraw!'
@@ -125,7 +124,7 @@ function! s:DoCreateAndConnect()
         exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
         exec 'redraw!'
         echomsg "connecting..."
-        call timer_start(4500, function('s:TimerJupyterConnect'))
+        call timer_start(3500, function('s:TimerJupyterConnect'))
     endtry
 endfunction
 
@@ -168,7 +167,6 @@ nnoremap <unique> <silent> <leader>j9 :call <SID>DoCommand("9")<CR>
 nnoremap <unique> <silent> <leader>j0 :call <SID>DoCommand("0")<CR>
 
 
-nnoremap <unique> <silent> <leader>jF :call <SID>DoCommand("F")<CR>
 nnoremap <unique> <silent> <leader>jL :call <SID>DoCommand("L")<CR>
 
 augroup JupyterTerm

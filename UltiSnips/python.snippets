@@ -23,14 +23,9 @@ snippet xjupyter "juptyer file"
 # @version 1.0
 # @date `date +"%Y-%m-%d %H:%M:%S"`
 
-#############################  jupyter-vim map ######################################
+################################  jupyter-vim #######################################
 # https://github.com/qrsforever/vim/blob/master/bundle/.configs/jupyter-vim_conf.vim
-#   ,ji: import file; ,je: run cell; ,jj: run current line
-#   ,jc: clear buffer; ju: update buffer; jq: quit buffer
-#   ,jh: open buffer horizontally; jv: open buffer virtually
-#   ,jp: print <cword> variable; ,jt: print <cword> type
-#   ,j1: output <cword> head(1), j2, j3, j4, j5 is also
-#   ,j6: output <cword> tail(1), j7, j8, j9, j0 is also
+# %pylab --no-import-all # noqa
 #####################################################################################
 
 $0
@@ -68,44 +63,10 @@ Notes
 """
 endsnippet
 
-######################
-###  numpy
-######################
-
-snippet xim-numpy
-import numpy as np
-endsnippet
-
-######################
-###  pandas
-######################
-
-snippet xim-pandas
-import pandas as pd
-endsnippet
-
-
-######################
-###  matplotlib
-######################
-
-snippet xim-plt
-import matplotlib.pyplot as plt
-endsnippet
-
-snippet xplt-style
-plt.style.use('ggplot')
-plt.rcParams['font.sans-serif'] = 'monospace'
+snippet xpltrc
+plt.rcParams['font.sans-serif'] = 'SimHei'
 plt.rcParams['axes.unicode_minus'] = False
-$0
-endsnippet
-
-snippet xplt-box
-${1:pd} = plt.boxplot(x = ${2:data}, whis=1.5, patch_artist = True, showmeans = True,
-	boxprops = {'color':'black','facecolor':'#9999ff'},
-	flierprops = {'marker':'o','markerfacecolor':'red','color':'black'},
-	meanprops = {'marker':'D','markerfacecolor':'indianred'},
-	medianprops = {'linestyle':'--','color':'orange'}
-	)
-$0
+plt.rcParams['figure.figsize'] = (16.0, 8.0)
+plt.rcParams['text.usetex'] = True
+plt.rcParams['text.latex.preamble'] = [r'\usepackage{amsmath}']
 endsnippet

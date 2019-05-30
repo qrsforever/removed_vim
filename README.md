@@ -67,3 +67,11 @@ Use:
     jupyter notebook password
     ```
 
+13. 语法检查
+
+    sudo apt-get install pyflakes
+    sudo apt-get install python-flake8 (推荐)
+
+14. 数学公式
+
+    sudo apt-get install texlive
