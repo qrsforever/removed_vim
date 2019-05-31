@@ -116,7 +116,11 @@ func s:TimerJupyterConnect(timer) abort
     for line in split(system('grep "^import\ " ' . expand('%:p')), '\n')
         exec 'JupyterSendCode ' . '"' . line . '"'
     endfor
-    call timer_start(500, function('s:DoUpdateWindow'))
+    if g:priv_window_mode == 'v'
+        exec 'silent! JupyterUpdateVShell'
+    else
+        exec 'silent! JupyterUpdateShell'
+    endif
 endfunc
 
 function! s:DoCreateAndConnect()
