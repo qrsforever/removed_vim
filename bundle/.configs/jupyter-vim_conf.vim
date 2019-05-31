@@ -36,13 +36,15 @@ function! s:DoUpdateWindow(flag)
         if a:flag == 1 || a:flag == 3
             exec 'bwipeout __jupyter_term__'
             return
-        elseif a:flag == 0
-            exec 'bwipeout __jupyter_term__'
         elseif a:flag == 2
             let bufid = bufnr('__jupyter_term__')
             if bufid != -1
                 exec 'bunload! ' . bufid
             endif
+        elseif a:flag == 0
+            exec 'bwipeout __jupyter_term__'
+        else
+            exec 'bwipeout __jupyter_term__'
         endif
     endif
     if a:flag == 1
@@ -58,14 +60,6 @@ endfunction
 func s:TimerTBOpenUrl(timer) abort
     exec 'silent! OpenUrl http://localhost:6006'
     echomsg "finish"
-endfunc
-
-func s:TimerJupyterConnect(timer) abort
-    exec 'silent! JupyterConnect'
-    echomsg "finish"
-    " 全局设置
-    " 显示图片
-    exec 'JupyterSendCode ' . '"%pylab --no-import-all"'
 endfunc
 
 function! s:DoCommand(flag)
@@ -111,6 +105,19 @@ function! s:DoCommand(flag)
         exec 'JupyterSendCode ' . '"' . var . '.tail(5)"'
     endif
 endfunction
+
+func s:TimerJupyterConnect(timer) abort
+    exec 'silent! JupyterConnect'
+    echomsg "finish"
+    " 全局设置
+    " 显示图片
+    exec 'JupyterSendCode ' . '"%pylab --no-import-all"'
+    " 导入import包
+    for line in split(system('grep "^import\ " ' . expand('%:p')), '\n')
+        exec 'JupyterSendCode ' . '"' . line . '"'
+    endfor
+    call timer_start(500, function('s:DoUpdateWindow'))
+endfunc
 
 function! s:DoCreateAndConnect()
     try
