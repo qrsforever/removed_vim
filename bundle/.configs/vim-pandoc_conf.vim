@@ -25,10 +25,14 @@ let g:pandoc#command#use_message_buffers = 0
 
 function! <SID>_CallPandoc(o)
     exec "silent! w!"
-    exec "Pandoc --output=/tmp/vim-pandoc-gen.html"
-    if a:o == 1
-        call system("firefox /tmp/vim-pandoc-gen.html")
-    endif
+    try
+        exec "Pandoc --output=/tmp/vim-pandoc-gen.html"
+        if a:o == 1
+            call system("firefox /tmp/vim-pandoc-gen.html")
+        endif
+    catch
+        echomsg "not markdown file"
+    endtry
 endfunction
 
 command! -nargs=0 XPandoc  :call <SID>_CallPandoc(0)

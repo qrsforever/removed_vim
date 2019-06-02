@@ -28,9 +28,11 @@ let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["go", "html
 " let g:syntastic_python_pyflakes_exe = 'python3 -m pyflakes'
 " 2. 使用flake8, 可以抑制语法错误: all file '# flake8: noqa' or single line end '# noqa'
 " sudo apt-get install python-flake8
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501,E261,E302,E251,E231,E128,E305,E226,E221,E266,W291,E303'
-"
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--ignore=' .
+    \ 'E128,E221,E226,E231,E251,E261,E266,E302,E303,E305,E501,' .
+    \ 'W291,W293'
+
 " let g:syntastic_quiet_messages = { "level": "warnings" }
 " let g:syntastic_python_pylint_quiet_messages = { "level" : [] }
 

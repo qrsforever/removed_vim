@@ -116,6 +116,9 @@ func s:TimerJupyterConnect(timer) abort
     for line in split(system('grep "^import\ " ' . expand('%:p')), '\n')
         exec 'JupyterSendCode ' . '"' . line . '"'
     endfor
+    for line in split(system('grep "^from\ " ' . expand('%:p')), '\n')
+        exec 'JupyterSendCode ' . '"' . line . '"'
+    endfor
     if g:priv_window_mode == 'v'
         exec 'silent! JupyterUpdateVShell'
     else
@@ -123,7 +126,7 @@ func s:TimerJupyterConnect(timer) abort
     endif
 endfunc
 
-function! s:DoCreateAndConnect()
+function! s:DoCreateAndConnect(xvbf)
     try
         echomsg "kill..."
         exec 'JupyterTerminateKernel'
@@ -132,14 +135,14 @@ function! s:DoCreateAndConnect()
         call timer_start(500, function('s:TimerJupyterConnect'))
     catch
         echomsg "start..."
-        exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh'
+        exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh ' . a:xvbf
         exec 'redraw!'
         echomsg "connecting..."
         call timer_start(3500, function('s:TimerJupyterConnect'))
     endtry
 endfunction
 
-command Jupyter      call <SID>DoCreateAndConnect()
+command Jupyter      call <SID>DoCreateAndConnect(0)
 "}}}
 
 nnoremap <unique> <silent> <leader>ji :call <SID>DoCommandDelayUpdate("PythonImportThisFile")<CR>
@@ -152,7 +155,7 @@ nnoremap <unique> <silent> <leader>ju :call <SID>DoUpdateWindow(2)<CR>
 nnoremap <unique> <silent> <leader>jq :call <SID>DoUpdateWindow(1)<CR>
 nnoremap <unique> <silent> <leader>jw :call <SID>DoUpdateWindow(3)<CR>
 
-nnoremap <unique> <silent> <leader>jC :call <SID>DoCreateAndConnect()<CR>
+nnoremap <unique> <silent> <leader>jC :call <SID>DoCreateAndConnect(1)<CR>
 
 " 将映射集中到左右字符('q,w,e,r,s,d')
 nnoremap <unique> <silent> <leader>jr :call <SID>DoCommandDelayUpdate("JupyterRunFile")<CR>
