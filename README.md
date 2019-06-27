@@ -75,3 +75,7 @@ Use:
 14. 数学公式
 
     sudo apt-get install texlive
+
+15. 画动物
+  
+    sudo apt-get install boxes

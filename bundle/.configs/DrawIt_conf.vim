@@ -14,7 +14,7 @@ let g:priv_draw_arrow   = ',da'
 let g:priv_draw_box     = ',db'
 let g:priv_draw_canvas  = ',dc'
 let g:priv_draw_line    = ',dl'
-let g:priv_draw_spacer  = ',ds'
+let g:priv_draw_spacer  = ',d>'
 let g:priv_draw_ellipse = ',de'
 
 function! MyYank2Reg(mode) 
@@ -28,3 +28,26 @@ function! MyYank2Reg(mode)
     exec 'norm! gv"ay'
 endfunction 
 "}}}
+
+" apt install boxes
+
+"    ________________________
+"   /\                       \
+"   \_|                       |
+"     |                       |
+"     |                       |
+"     |   ____________________|_
+"      \_/_____________________/
+"
+vmap ,dd !boxes -d dog<CR>
+vmap ,df !boxes -d spring<CR>
+vmap ,dg !boxes -d cat<CR>
+vmap ,dh !boxes -d ian_jones<CR>
+vmap ,dj !boxes -d santa<CR>
+vmap ,dk !boxes -d capgirl<CR>
+
+vmap ,dz !boxes -d mouse<CR>
+vmap ,dx !boxes -d peek<CR>
+vmap ,dv !boxes -d parchment<CR>
+vmap ,dn !boxes -d boy<CR>
+vmap ,dm !boxes -d girl<CR>
