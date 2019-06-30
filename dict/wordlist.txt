@@ -5883,6 +5883,7 @@ put
 puzzle
 pyjamas
 pyramid
+qquad
 qualification
 qualified
 qualify
