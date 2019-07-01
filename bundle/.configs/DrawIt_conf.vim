@@ -10,6 +10,9 @@ nmap <Esc>[161q	<s-up>
 "----> "ay 
 "----> ,ra
 
+" 有时候,ds一些设置没有恢复, 比如virtualedit(ve=all), 现象是光标可以去任意地方,可以set ve=
+" ,di: start ,ds: stop
+
 let g:priv_draw_arrow   = ',da'
 let g:priv_draw_box     = ',db'
 let g:priv_draw_canvas  = ',dc'

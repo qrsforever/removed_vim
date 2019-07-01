@@ -66,12 +66,12 @@ autocmd FileType nerdtree,tagbar,lookupfile setlocal cc=""
 command! MyColColor call s:_MyColColor()
 function! s:_MyColColor()
     let cx = &colorcolumn
-    let cz = "+1," . col(".")
+    let cz = "+1,86," . col(".")
     if cx != '' && cx == cz
         exec "set cc=\"\""
     else
         "+1表示textwidth后一列标亮
-        exec "set cc=+1," . col(".")
+        exec "set cc=+1,86," . col(".")
     endif
 endfunc
 "}}}
