@@ -21,6 +21,9 @@ filetype indent on
 nnoremap [search] <Nop>
 nmap s [search]
 
+" 暂用映射: [m
+let g:no_python_maps = '1'
+
 source ~/.vim/bundle/.configs/init.vim
 
 "F1~F12快捷键映射"{{{
