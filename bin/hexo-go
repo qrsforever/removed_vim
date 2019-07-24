@@ -25,12 +25,20 @@ echo "" > $log_file
 
 destdir="$current_dir/../extern/git-blog-setting"
 drafts="source/_drafts"
+assets="source/assets"
 workdir=${destdir}/${drafts}/$rootDir
+assetsdir=${destdir}/${assets}
 
 if [ ! -d "${workdir}" ]
 then
     echo "mkdir -p ${workdir}" >> $log_file
     mkdir -p ${workdir}
+fi
+
+if [ ! -d $assetsdir ]
+then
+    echo "mkdir -p ${assetsdir}" >> $log_file
+    mkdir -p $assetsdir
 fi
 
 if [[ x"md" != x${fileME##*.} ]]
@@ -55,6 +63,7 @@ then
     echo "hexo clean" >> $log_file
     $HEXO_CMD clean
     rm -rf ${destdir}/${drafts}/*
+    rm -rf $assetsdir
     exit 0
 else
     rm -rf "${workdir}/${fileME}"
