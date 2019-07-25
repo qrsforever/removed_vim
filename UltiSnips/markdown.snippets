@@ -74,7 +74,9 @@ snippet xxasset_img "asset_img, only self post asset"
 endsnippet
 
 snippet xxcodeblock "code block using pandoc"
-{.${1:lang} .center caption=${2:caption} ${3:.numberLines startFrom="1"}}
+\`\`\`{.${1:lang} .center caption=${2:caption} ${3:.numberLines startFrom="1"} ${4:filename=""}}
+$0
+\`\`\`
 endsnippet
 
 snippet xxdataset "baidu cloud disk"

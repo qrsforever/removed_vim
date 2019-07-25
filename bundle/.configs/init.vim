@@ -6,6 +6,7 @@ let g:fork_maps = {
     \ 'qrsforever/vim-pandoc': 'vim-pandoc/vim-pandoc',
     \ 'qrsforever/DrawIt': 'vim-scripts/DrawIt',
     \ 'qrsforever/jupyter-vim': 'broesler/jupyter-vim',
+    \ 'qrsforever/vim-markdown-toc': 'mzlogin/vim-markdown-toc',
 \}
 
 " For load plugins
@@ -104,7 +105,7 @@ MyPlugin 'scrooloose/syntastic'
 "{{{ Markdown&Html
 MyPlugin 'qrsforever/vim-pandoc'
 MyPlugin 'jackiehan/vim-instant-markdown'
-MyPlugin 'mzlogin/vim-markdown-toc'
+MyPlugin 'qrsforever/vim-markdown-toc'
 "}}}
 
 "{{{ 淘汰类
