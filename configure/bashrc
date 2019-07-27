@@ -135,3 +135,9 @@ export socks_proxy=''
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
+
+
+# 键盘使能
+# xinput list
+# xinput set-prop 12 "Device Enabled" 0
+
