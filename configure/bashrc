@@ -112,6 +112,12 @@ alias 0vi='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
+# 将本机的public key copy到目标机user@ip中authorized_keys
+#  or ssh-copy-id lidong@remote.ssh.com
+# /etc/hosts: remote.ssh.com 可以公网 or 公司大网等
+# ssh -NfR 8383:localhost:22 lidong@remote.ssh.com (内网执行)
+# ssh -p 8383 localhost (公司大网,公网执行)
+
 stty stop ''
 
 if [ -d /system/vagrant ];
