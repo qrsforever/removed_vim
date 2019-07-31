@@ -100,6 +100,7 @@ MyPlugin 'szw/vim-maximizer'
 MyPlugin 'iamcco/dict.vim'
 MyPlugin 'hari-rangarajan/CCTree'
 MyPlugin 'scrooloose/syntastic'
+MyPlugin 'vim-scripts/DoxygenToolkit.vim'
 "}}}
 
 "{{{ Markdown&Html
@@ -132,7 +133,6 @@ MyPlugin 'qrsforever/vim-markdown-toc'
 " endif
 " MyPlugin 'Shougo/neosnippet.vim'
 " MyPlugin 'Shougo/neosnippet-snippets'
-" MyPlugin 'vim-scripts/DoxygenToolkit.vim'
 "
 "{{{搜索类
 " LeaderF 取代grep.vim

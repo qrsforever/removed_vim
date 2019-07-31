@@ -117,6 +117,7 @@ alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 # /etc/hosts: remote.ssh.com 可以公网 or 公司大网等
 # ssh -NfR 8383:localhost:22 lidong@remote.ssh.com (内网执行)
 # ssh -p 8383 localhost (公司大网,公网执行)
+# ss -antp
 
 stty stop ''
 
