@@ -29,6 +29,17 @@ assets="source/assets"
 workdir=${destdir}/${drafts}/$rootDir
 assetsdir=${destdir}/${assets}
 
+HEXO_CMD=`which hexo`
+
+if [[ x$HEXO_CMD == x ]]
+then
+    echo "cmd not found: hexo" >> $log_file
+    exit 0
+fi
+
+cd $destdir
+killall hexo
+
 if [ ! -d "${workdir}" ]
 then
     echo "mkdir -p ${workdir}" >> $log_file
@@ -46,17 +57,6 @@ then
     echo "file not md: $fileME" >> $log_file
     exit 0
 fi
-
-HEXO_CMD=`which hexo`
-
-if [[ x$HEXO_CMD == x ]]
-then
-    echo "cmd not found: hexo" >> $log_file
-    exit 0
-fi
-
-cd $destdir
-killall hexo
 
 if [[ $2 == 2 ]]
 then

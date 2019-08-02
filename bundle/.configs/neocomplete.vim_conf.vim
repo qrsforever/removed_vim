@@ -33,6 +33,7 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*|\.log\|\.log\.\|.*quickrun.
 
 let g:neocomplete#sources._ = ['buffer']
 let g:neocomplete#sources#dictionary#dictionaries = {
+	        \ 'default' : '~/.vim/dict/wordlist.txt',
             \ 'xml' : "~/.vim/dict/android_xml.txt,~/.vim/dict/ant_xml.txt",
             \ 'markdown' : '~/.vim/dict/wordlist.txt,~/.vim/dict/math.txt',
             \ 'text' : '~/.vim/dict/wordlist.txt'
