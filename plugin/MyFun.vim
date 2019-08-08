@@ -143,3 +143,14 @@ function! s:_MyGoAlternate()
     endtry
 endfunction
 "}}}
+
+"{{{MyDoSave
+command! MyDoSave call s:_MyDoSave()
+function! s:_MyDoSave()
+    exec 'norm! \<ESC>'
+    exec 'silent update!'
+    exec 'silent lchdir %:p:h'
+    call setreg('*', expand('%:p'))
+    exec 'pwd'
+endfunction
+"}}}
