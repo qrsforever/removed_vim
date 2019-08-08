@@ -54,3 +54,5 @@ vmap ,dx !boxes -d peek<CR>
 vmap ,dv !boxes -d parchment<CR>
 vmap ,dn !boxes -d boy<CR>
 vmap ,dm !boxes -d girl<CR>
+
+command! -nargs=0 XDI :set ve=
