@@ -99,11 +99,11 @@ function! s:DoLeaderfFileWithPath()
     exec 'LeaderfFile ' . dirstr
 endfunc
 
-function! s:DoBufExplorer()
-    exec 'normal \<esc>'
-    exec 'normal sb'
-endfunc
-command! MyBufExplorer call s:DoBufExplorer()
+" function! s:DoBufExplorer()
+"     exec 'normal \<esc>'
+"     exec 'normal sb'
+" endfunc
+" command! MyBufExplorer call s:DoBufExplorer()
 
 function! s:DoLeaderfRgWithPath(cwd, nwrap, cbuf, icase, append)
     let key = expand("<cword>")

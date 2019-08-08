@@ -143,6 +143,7 @@ function! s:DoCreateAndConnect(xvbf)
 endfunction
 
 command Jupyter      call <SID>DoCreateAndConnect(0)
+command JupyterNW    call <SID>DoCreateAndConnect(1)
 "}}}
 
 nnoremap <unique> <silent> <leader>ji :call <SID>DoCommandDelayUpdate("PythonImportThisFile")<CR>

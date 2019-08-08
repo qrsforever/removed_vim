@@ -1,6 +1,6 @@
 function! MyFun_is_special_buffer(bt) "{{{
     let buftype = a:bt != '' ? a:bt : getbufvar('%', '&filetype')
-    let buffers = ['nerdtree', 'tagbar', 'qf', 'unite', 'lookupfile', 'bufexplorer', 'marksbuffer', 'vimshell']
+    let buffers = ['nerdtree', 'tagbar', 'qf', 'unite', 'lookupfile', 'bufexplorer', 'marksbuffer', 'vimshell', 'leaderf']
     let ret = 0
     for name in buffers
         if name ==# buftype
@@ -74,6 +74,22 @@ function! s:_MyColColor()
         exec "set cc=+1,86," . col(".")
     endif
 endfunc
+"}}}
+
+"{{{ MyBufExplorer 
+command! MyBufExplorer call s:DoBufExplorer()
+function! s:DoBufExplorer()
+    let buftype = getbufvar('%', '&filetype')
+    let ret = MyFun_is_special_buffer(buftype)
+    if ret == 0
+        exec 'normal \<esc>'
+        exec 'normal sb'
+    else
+        if buftype ==# 'leaderf'
+            execute "normal q"
+        endif
+    endif
+endfunction
 "}}}
 
 "{{{ MyMarkColor
