@@ -21,7 +21,7 @@ filetype indent on
 nnoremap [search] <Nop>
 nmap s [search]
 
-" 暂用映射: [m
+" 暂用映射: [m in ppython.vim: Python_jump
 let g:no_python_maps = '1'
 
 source ~/.vim/bundle/.configs/init.vim

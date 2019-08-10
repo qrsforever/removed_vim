@@ -32,8 +32,8 @@ endif
 
 let s:win_title = '[Marks]'
 "lidong mod
-"let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>\""
-let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
+" let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>\""
+let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "lidong end
 let s:isShown = 0
 let s:originalBuff = 1
@@ -120,23 +120,23 @@ fun! s:Header()
 endf
 
 fun! s:FetchMarks()
-  let maxmarks = strlen(s:all_marks)
-  let n = 0
-  let res = []
-  while n < maxmarks
-    let c = strpart(s:all_marks, n, 1)
-    let lnum = line("'" . c)
-    if lnum != 0
-      let line = getline(lnum)
-      "lidong mod
-      "let string = "'" . c . "\t" . lnum . "\t" . line
-      let string = "'" . c . "\t\t" . lnum . "\t" . line
-      "lidong end
-      call add(res, [string, lnum, c])
-    endif
-    let n += 1
-  endwhile
-  return res
+    let maxmarks = strlen(s:all_marks)
+    let n = 0
+    let res = []
+    while n < maxmarks
+        let c = strpart(s:all_marks, n, 1)
+        let lnum = line("'" . c)
+        "lidong mod, change > 1, if not, the uppper char 'A' 'B' will the first line
+        if lnum > 1
+            let line = getline(lnum)
+            "let string = "'" . c . "\t" . lnum . "\t" . line
+            let string = "'" . c . "\t\t" . lnum . "\t" . line
+            "lidong end
+            call add(res, [string, lnum, c])
+        endif
+        let n += 1
+    endwhile
+    return res
 endf
 
 fun! s:setupSyntax()
