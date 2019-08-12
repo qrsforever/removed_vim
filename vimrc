@@ -182,10 +182,10 @@ noremap <C-l> <C-W>l
 
 " 让terminal进入norm模式
 " tnoremap <Esc> <C-W>N
-tnoremap <C-j> <C-W>j
-tnoremap <C-k> <C-W>k
-tnoremap <C-h> <C-W>h
-tnoremap <C-l> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " <C-W>r --> 交换窗口
 noremap <C-W>v <C-W>v<C-W>l
