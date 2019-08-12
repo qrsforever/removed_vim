@@ -33,7 +33,8 @@ endif
 let s:win_title = '[Marks]'
 "lidong mod
 " let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>\""
-let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
 "lidong end
 let s:isShown = 0
 let s:originalBuff = 1
@@ -129,11 +130,10 @@ fun! s:FetchMarks()
         "lidong mod, change > 1, if not, the uppper char 'A' 'B' will the first line
         if lnum > 1
             let line = getline(lnum)
-            "let string = "'" . c . "\t" . lnum . "\t" . line
             let string = "'" . c . "\t\t" . lnum . "\t" . line
-            "lidong end
             call add(res, [string, lnum, c])
         endif
+        "lidong end
         let n += 1
     endwhile
     return res

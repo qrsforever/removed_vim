@@ -97,6 +97,9 @@ if exists( "loaded_showmarks" )
 endif
 let loaded_showmarks = 1
 
+" lidong add
+let showmarks_ignore_type = "hqprm"
+
 " Bail if Vim isn't compiled with signs support.
 if has( "signs" ) == 0
 	echohl ErrorMsg
@@ -120,7 +123,8 @@ if !exists('g:showmarks_hlline_other') | let g:showmarks_hlline_other = "1"  | e
 " possible mark (not just those specified in the possibly user-supplied list
 " of marks to show -- it can be changed on-the-fly).
 " let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
-let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
 
 " Commands
 com! -nargs=0 ShowMarksToggle    :call <sid>ShowMarksToggle()
@@ -148,7 +152,8 @@ if g:showmarks_enable == 1
 	aug ShowMarks
 		au!
 		"lidong mod
-		"autocmd CursorHold * call s:ShowMarks()
+		" autocmd CursorHold * call s:ShowMarks()
+		" autocmd WinEnter * call s:ShowMarks()
 		autocmd BufEnter * call s:ShowMarks()
 		"lidong end
 	aug END
@@ -363,7 +368,7 @@ fun! s:ShowMarks()
 	endif
 
 	if   ((match(g:showmarks_ignore_type, "[Hh]") > -1) && (&buftype    == "help"    ))
-	\ || ((match(g:showmarks_ignore_type, "[Qq]") > -1) && (&buftype    == "quickfix"))
+	\ || ((match(g:showmarks_ignore_type, "[Qq]") > -1) && (&buftype    == "quickfix") || (&buftype == "nofile"))
 	\ || ((match(g:showmarks_ignore_type, "[Pp]") > -1) && (&pvw        == 1         ))
 	\ || ((match(g:showmarks_ignore_type, "[Rr]") > -1) && (&readonly   == 1         ))
 	\ || ((match(g:showmarks_ignore_type, "[Mm]") > -1) && (&modifiable == 0         ))
@@ -395,6 +400,12 @@ fun! s:ShowMarks()
 				endif
 				let mark_at{ln} = nm
 				if !exists('b:placed_'.nm) || b:placed_{nm} != ln
+					" if c =~# '[A-Z]' 
+					" 	redir => cout
+					"     silent exec 'marks ' . c
+					"     redir END
+					"     let list = split(cout, "\n")
+					" endif
 					exe 'sign unplace '.id.' buffer='.winbufnr(0)
 					exe 'sign place '.id.' name=ShowMark'.nm.' line='.ln.' buffer='.winbufnr(0)
 					let b:placed_{nm} = ln
@@ -421,7 +432,7 @@ fun! s:ShowMarksClearMark()
 			exe 'sign unplace '.id.' buffer='.winbufnr(0)
 			"lidong mod
 			"exe '1 mark '.c
-			exe 'delmark '.c
+			exe 'delmarks '.c
 			"lidong end
 			let b:placed_{nm} = 1
 		endif
