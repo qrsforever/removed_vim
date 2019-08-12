@@ -28,3 +28,14 @@ fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git
 cd ./fzf ; ./install --all
 ` export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})'" >> ~/.fzf.bash `
+
+
+lua
+------
+
+[lua](https://jaist.dl.sourceforge.net/project/luabinaries/5.3.5/Docs%20and%20Sources/lua-5.3.5_Sources.tar.gz)
+    
+    apt-get install libreadline-dev
+    INSTALL_TOP= /usr/local/ 
+    make linux; sudo make install
+    

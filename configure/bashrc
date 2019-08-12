@@ -148,3 +148,4 @@ export socks_proxy=''
 # xinput list
 # xinput set-prop 12 "Device Enabled" 0
 
+# ssh -L 127.0.0.1:8140:127.0.0.1:8140 dc2-user@117.51.150.168
