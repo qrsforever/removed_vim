@@ -27,4 +27,4 @@ call unite#custom#profile(
 call unite#custom#source(
     \ 'vim_bookmarks',
     \ 'converters',
-    \ ['converter_vim_bookmarks_long'])
+    \ ['converter_vim_bookmarks_short'])
