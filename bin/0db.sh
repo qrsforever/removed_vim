@@ -32,7 +32,7 @@ CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
 
-find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\)' \
+find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|py\)' \
     ! -path "*git*" -and \
     ! -path "*svn*" -and \
     ! -path ".tags*" -and \
