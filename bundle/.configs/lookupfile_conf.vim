@@ -69,25 +69,25 @@ func! s:DoLookupFile() abort
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
         " 如果Eclimd启动,并没有设置LookupFile_TagExpr, 使用eclimd
-        if g:LookupFile_TagExpr == "'filenametags'"
-            if isdirectory(expand('~/.vim/bundle/eclim'))
-                if eclim#EclimAvailable(0)
-                    if s:ToggleFlag != 1
-                        exec "LocateFile"
-                        let s:ToggleFlag = 1
-                        if has('lambda')
-                            if s:timeID == 0
-                                " 5秒恢复状态, 从eclim那里拿不到Locatefile窗口的状态
-                                let s:timeID = timer_start(5000, function('s:RestoreToogleFlag'))
-                            endif
-                        endif
-                    else 
-                        call s:RestoreToogleFlag(s:timeID)
-                    endif
-                    return 
-                endif
-            endif
-        endif
+        " if g:LookupFile_TagExpr == "'filenametags'"
+        "     if isdirectory(expand('~/.vim/bundle/eclim'))
+        "         if eclim#EclimAvailable(0)
+        "             if s:ToggleFlag != 1
+        "                 exec "LocateFile"
+        "                 let s:ToggleFlag = 1
+        "                 if has('lambda')
+        "                     if s:timeID == 0
+        "                         " 5秒恢复状态, 从eclim那里拿不到Locatefile窗口的状态
+        "                         let s:timeID = timer_start(5000, function('s:RestoreToogleFlag'))
+        "                     endif
+        "                 endif
+        "             else 
+        "                 call s:RestoreToogleFlag(s:timeID)
+        "             endif
+        "             return 
+        "         endif
+        "     endif
+        " endif
         exec "LookupFile"
     else
         if 'lookupfile' ==# buftype

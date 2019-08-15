@@ -7,6 +7,7 @@ let g:fork_maps = {
     \ 'qrsforever/DrawIt': 'vim-scripts/DrawIt',
     \ 'qrsforever/jupyter-vim': 'broesler/jupyter-vim',
     \ 'qrsforever/vim-markdown-toc': 'mzlogin/vim-markdown-toc',
+    \ 'qrsforever/vim-bookmarks': 'MattesGroeger/vim-bookmarks',
 \}
 
 " For load plugins
@@ -74,6 +75,7 @@ MyPlugin 'Yggdroot/LeaderF'
 MyPlugin 'Shougo/unite.vim'
 MyPlugin 'qrsforever/lookupfile'
 MyPlugin 'qrsforever/FuzzyFinder'
+MyPlugin 'qrsforever/vim-bookmarks'
 "}}}
 
 "{{{ 补全类
@@ -163,9 +165,9 @@ call vundle#end()
 for ifile in allconfs
     exec 'source ' . ifile
 endfor
-if isdirectory(expand('~/.vim/bundle/eclim'))
-    exec 'source  ~/.vim/bundle/.configs/eclim_conf.vim'
-endif
+" if isdirectory(expand('~/.vim/bundle/eclim'))
+"     exec 'source  ~/.vim/bundle/.configs/eclim_conf.vim'
+" endif
 
 unlet allconfs
 unlet ballpath
