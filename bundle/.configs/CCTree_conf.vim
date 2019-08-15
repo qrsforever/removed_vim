@@ -88,6 +88,7 @@ func! CCTreeOpenFile(cmd, flag) "{{{
         exec a:cmd . ' find f ' . pattern
     catch
         echomsg "[".  pattern . "] not found!"
+        exec 'LUTags ' . pattern
     endtry
     " let buf2 = bufname("%")
     " if buf1 != buf2 && line != ''
