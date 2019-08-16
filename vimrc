@@ -215,6 +215,10 @@ set pumheight=15
 "使用鼠标
 set mouse=a  "在vim里可以用鼠标复制粘贴, 用鼠标左键选中,中键粘贴(中键), shift + 选中:可复制(右键)
 
+"粘贴板
+" * : primary, copy-on-select, 鼠标中键
+" + : clipboard, common-key-bind ctrl+c, 右键粘贴
+
 "可以在buffer中任意地方使用鼠标
 " set selection=exclusive
 " set selectmode=mouse,key

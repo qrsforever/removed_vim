@@ -150,11 +150,9 @@ function! s:_MyDoSave()
     exec 'norm! \<ESC>'
     exec 'silent update!'
     exec 'silent lchdir %:p:h'
-    if v:version >= 801
-        call setreg('*', expand('%:p'))
-    else
-        call setreg('p', 'a'. expand('%:p'))
-    endif
+    call setreg('p', 'a'. expand('%:p'))
+
+    "@p
     exec 'pwd'
 endfunction
 "}}}
