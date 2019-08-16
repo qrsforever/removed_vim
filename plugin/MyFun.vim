@@ -151,7 +151,7 @@ function! s:_MyDoSave()
     exec 'silent update!'
     exec 'silent lchdir %:p:h'
     if v:version >= 801
-        call setreg('*', 'a'. expand('%:p'))
+        call setreg('*', expand('%:p'))
     else
         call setreg('p', 'a'. expand('%:p'))
     endif
