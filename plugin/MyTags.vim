@@ -37,7 +37,7 @@ func! s:DeleteTagDB(root) "{{{
 endfunc "}}}
 
 func! s:CreateTagDB(root) "{{{
-    let dbrun = '~/.vim/bin/0db.sh'
+    let dbrun = '$VIM_HOME/bin/0db.sh'
     let inputdir = substitute(input("source dir:", a:root, "dir"), '\/$', '', '')
     let tagsdir = '/tmp/tags' . inputdir . '/.tags'
     if !isdirectory(tagsdir)

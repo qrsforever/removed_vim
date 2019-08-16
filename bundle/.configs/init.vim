@@ -12,7 +12,7 @@ let g:fork_maps = {
 
 " For load plugins
 
-if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+if !isdirectory(expand(g:VIM_HOME . '/bundle/Vundle.vim'))
     echomsg "-------------------------------------------------"
     echomsg "   Need install Vundle plugin, See README.md"
     echomsg "-------------------------------------------------"
@@ -20,7 +20,7 @@ if !isdirectory(expand('~/.vim/bundle/Vundle.vim'))
 endif
 
 let g:allconfs = []
-let g:ballpath = expand('$HOME/.vim/bundle')
+let g:ballpath = expand(g:VIM_HOME . '/bundle')
 
 "{{{ 定义方法
 func! s:_AddPlugin(plgname)
@@ -50,7 +50,7 @@ com! -nargs=*  -bar MyPlugin :call <SID>_AddPlugin(<args>)
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
+exec 'set rtp+=' . g:VIM_HOME . '/bundle/Vundle.vim'
 "}}}
 
 call vundle#begin()
@@ -165,8 +165,8 @@ call vundle#end()
 for ifile in allconfs
     exec 'source ' . ifile
 endfor
-" if isdirectory(expand('~/.vim/bundle/eclim'))
-"     exec 'source  ~/.vim/bundle/.configs/eclim_conf.vim'
+" if isdirectory(expand(g:VIM_HOME . '/bundle/eclim'))
+"     exec 'source ' . g:VIM_HOME . '/bundle/.configs/eclim_conf.vim'
 " endif
 
 unlet allconfs
@@ -174,7 +174,7 @@ unlet ballpath
 unlet update_and_diff
 unlet fork_maps
 
-if ! isdirectory(expand('~/.vim/bundle/L9'))
+if ! isdirectory(expand(g:VIM_HOME . '/bundle/L9'))
     echomsg "---------------------------------------------"
     echomsg "   Plugins is not downloads!!!"
     echomsg "   Open vim, then exec :PluginInstall"

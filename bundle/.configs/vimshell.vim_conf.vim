@@ -1,7 +1,7 @@
 " VimShell Setup {{{
 let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|.\)\+> '
-let g:vimshell_vimshrc_path	= '~/.vim/vimshrc'
+let g:vimshell_vimshrc_path	= '$VIM_HOME/vimshrc'
 let g:vimshell_disable_escape_highlight = 1
 let g:vimshell_force_overwrite_statusline = 0
 let g:vimshell_split_command = 'split'

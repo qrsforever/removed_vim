@@ -37,7 +37,7 @@ autocmd BufNewFile,BufReadPost *.aidl let b:tagbar_ignore = 1
 " Add support for markdown files in tagbar.
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : '~/.vim/configure/markdown2ctags.py',
+    \ 'ctagsbin' : '$VIM_HOME/configure/markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes',
     \ 'kinds' : [
         \ 's:sections',

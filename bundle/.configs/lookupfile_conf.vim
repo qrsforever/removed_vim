@@ -70,7 +70,7 @@ func! s:DoLookupFile() abort
     if ret == 0
         " 如果Eclimd启动,并没有设置LookupFile_TagExpr, 使用eclimd
         " if g:LookupFile_TagExpr == "'filenametags'"
-        "     if isdirectory(expand('~/.vim/bundle/eclim'))
+        "     if isdirectory(expand(g:VIM_HOME . '/bundle/eclim'))
         "         if eclim#EclimAvailable(0)
         "             if s:ToggleFlag != 1
         "                 exec "LocateFile"

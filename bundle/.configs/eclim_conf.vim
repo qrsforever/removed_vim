@@ -1,5 +1,5 @@
 " Setup "{{{
-set rtp+=~/.vim/bundle/eclim
+" set rtp+=~/.vim/bundle/eclim
 
 let g:EclimCompletionMethod = 'omnifunc' 
 " let g:EclimBrowser = "chromium-browser"

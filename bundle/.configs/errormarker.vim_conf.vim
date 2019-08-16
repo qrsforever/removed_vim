@@ -10,6 +10,6 @@ let errormarker_warninggroup = "Todo"
 " let &errorformat="%f:%l:%c: %t %n: %m," . &errorformat
 " let &errorformat="%f:%l:%c: %t%*[^:]:%m," . &errorformat
 "f:file l:line c:column t:warningtypes m:message
-let errormarker_erroricon = expand("$HOME/.vim/res/icons/dialog-error.png") 
-let errormarker_warningicon = expand("$HOME/.vim/res/icons/dialog-warning.png")
+let errormarker_erroricon = expand(g:VIM_HOME ."/res/icons/dialog-error.png") 
+let errormarker_warningicon = expand(g:VIM_HOME . "res/icons/dialog-warning.png")
 "}}}

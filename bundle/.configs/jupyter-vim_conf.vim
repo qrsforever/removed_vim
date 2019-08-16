@@ -69,7 +69,7 @@ function! s:DoCommand(flag)
     elseif a:flag == "p"
         exec 'JupyterSendCode ' . '"print(' . var . ')"'
     elseif a:flag == "L"
-        exec 'silent! !~/.vim/bin/0tensorboard-start.sh'
+        exec 'silent! !' . g:VIM_HOME . '/bin/0tensorboard-start.sh'
         exec 'redraw!'
         echomsg "open url..."
         call timer_start(3500, function('s:TimerTBOpenUrl'))
@@ -135,7 +135,7 @@ function! s:DoCreateAndConnect(xvbf)
         call timer_start(500, function('s:TimerJupyterConnect'))
     catch
         echomsg "start..."
-        exec 'silent! !~/.vim/bin/0jupyter-qtconsole.sh ' . a:xvbf
+        exec 'silent! !' . g:VIM_HOME . '/bin/0jupyter-qtconsole.sh ' . a:xvbf
         exec 'redraw!'
         echomsg "connecting..."
         call timer_start(3500, function('s:TimerJupyterConnect'))

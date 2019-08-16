@@ -1,5 +1,8 @@
 let g:mapleader = ","
 
+let g:VIM_HOME = split(&runtimepath, ',')[0]
+let $VIM_HOME = g:VIM_HOME
+
 autocmd!
 :mapclear
 
@@ -24,14 +27,14 @@ nmap s [search]
 " 暂用映射: [m in ppython.vim: Python_jump
 let g:no_python_maps = '1'
 
-source ~/.vim/bundle/.configs/init.vim
+exec 'source ' . g:VIM_HOME . '/bundle/.configs/init.vim'
 
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
 nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
 nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>         :TagbarToggle<CR>
-nmap <unique> <silent> <F5>         :MyLookupFile<CR>
+" nmap <unique> <silent> <F5>         :MyLookupFile<CR>
 " nmap <unique> <silent> <F6>         :<c-u>call MyMake('n')<CR>
 " nmap <unique> <silent> <F7>         :<c-u>call MyGrep('n')<CR>
 nmap <unique> <silent> <F8>         :<c-u>call MyTags('n')<CR>
@@ -44,7 +47,7 @@ imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>    <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>    <ESC>:TagbarToggle<CR>
-imap <unique> <silent> <F5>    <ESC>:MyLookupFile<CR>
+" imap <unique> <silent> <F5>    <ESC>:MyLookupFile<CR>
 " imap <unique> <silent> <F6>    <ESC>:<c-u>call MyMake('i')<CR>
 " imap <unique> <silent> <F7>    <ESC>:<c-u>call MyGrep('i')<CR>
 imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>

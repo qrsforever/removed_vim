@@ -1,7 +1,7 @@
 
 "[normal, horizontal, vertical, context]
 let g:UltiSnipsEditSplit = "horizontal"
-let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+let g:UltiSnipsSnippetsDir = "$VIM_HOME/UltiSnips"
 let g:UltiSnipsSnippetDirectories =['UltiSnips']
 let g:UltiSnipsExpandTrigger="<c-h>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
