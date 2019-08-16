@@ -202,7 +202,6 @@ call unite#custom#source(
 " nnoremap <silent> [search]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
 " nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
 " nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
-" nnoremap <silent> [search]w :<C-u>UniteResume<CR>
 " nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
 " nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
 " nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
@@ -249,6 +248,7 @@ nnoremap <unique> <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name
 nnoremap <unique> <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <unique> <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
 nnoremap <unique> <silent> [search]j :<C-u>Unite -buffer-name=jump -no-split -immediately jump_point<CR>
+nnoremap <unique> <silent> [search]W :<C-u>UniteResume<CR>
 
 " 寄存器:help reg
 "
