@@ -9,8 +9,8 @@ let g:unite_source_rec_min_cache_files = 120
 let g:unite_source_buffer_time_format = "(%Y-%m-%d %H:%M:%S) "
 let g:unite_force_overwrite_statusline = 0
 let g:unite_ignore_source_files = []
-let g:unite_data_directory = "$HOME/.cache/unite"
-let g:unite_source_bookmark_directory = '$HOME/.cache/unite/bookmark'
+let g:unite_data_directory = expand('$HOME/.cache/unite')
+let g:unite_source_bookmark_directory = expand('$HOME/.cache/unite/bookmark')
 let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
 
