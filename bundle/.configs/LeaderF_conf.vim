@@ -10,6 +10,7 @@ let g:Lf_CursorBlink = 1
 let g:Lf_DefaultMode = 'NameOnly'
 let g:Lf_MruFileExclude = ['*.so', '*.class', '*.o']
 let g:Lf_MruMaxFiles = 120
+let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseCache = 1
 let g:Lf_StlColorscheme = 'powerline'
@@ -28,7 +29,7 @@ let g:Lf_RgConfig = [
 
 
 let g:Lf_WildIgnore = {
-    \ 'dir': ['.svn','.git','.hg'],
+    \ 'dir': ['.svn','.git','.hg','out','output'],
     \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.class','*.so','*.py[co]']
 \ }
 
@@ -144,7 +145,8 @@ endfunc
 " {file,tag,function,mru,searchHistory,cmdHistory,help,line,colorscheme,self,bufTag,buffer,rg}
 
 " Warning conflict with unite.vim or fuzzyfinder
-nnoremap <unique> <silent> [search]b :<C-U>Leaderf! buffer --fullScreen --nameOnly --nowrap<CR>
+" sb mapping see vim-bookmark
+" nnoremap <unique> <silent> [search]b :<C-U>Leaderf! buffer --fullScreen --nameOnly --nowrap<CR>
 nnoremap <unique> <silent> [search]c :<C-U>Leaderf! cmdHistory<CR>
 nnoremap <unique> <silent> [search]s :<C-U>Leaderf! searchHistory<CR>
 

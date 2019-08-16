@@ -33,7 +33,6 @@ let g:unite_ignore_source_files = [
     \ "history_unite.vim",
     \ "interactive.vim",
     \ "jump.vim",
-    \ "jump_point.vim",
     \ "launcher.vim",
     \ "line.vim",
     \ "output.vim",
@@ -55,6 +54,7 @@ let g:unite_ignore_source_files = [
   " \ "menu.vim",
   " \ "register.vim",
   " \ "runtimepath.vim",
+  " \ "jump_point.vim",
 """
 
 if executable('ag')
@@ -82,7 +82,8 @@ let g:unite_source_menu_menus = {
     \   },
     \}
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"matcher_fuzzy
+call unite#filters#matcher_default#use(['matcher_regexp'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
 let s:my_mrufilter = {
@@ -243,11 +244,11 @@ endfunction
 autocmd FileType unite call s:unite_my_settings()
 "}}}
 
-nnoremap <silent> [search]a :<C-u>Unite -buffer-name=sources -no-split source<CR>
-nnoremap <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
-nnoremap <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
-nnoremap <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
+nnoremap <unique> <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
+nnoremap <unique> <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
+nnoremap <unique> <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <unique> <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
+nnoremap <unique> <silent> [search]j :<C-u>Unite -buffer-name=jump -no-split -immediately jump_point<CR>
 
 " 寄存器:help reg
 "
