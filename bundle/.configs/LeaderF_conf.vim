@@ -145,8 +145,7 @@ endfunc
 " {file,tag,function,mru,searchHistory,cmdHistory,help,line,colorscheme,self,bufTag,buffer,rg}
 
 " Warning conflict with unite.vim or fuzzyfinder
-" sb mapping see vim-bookmark
-" nnoremap <unique> <silent> [search]b :<C-U>Leaderf! buffer --fullScreen --nameOnly --nowrap<CR>
+nnoremap <unique> <silent> [search]b :<C-U>Leaderf! buffer --fullScreen --nameOnly --nowrap<CR>
 nnoremap <unique> <silent> [search]c :<C-U>Leaderf! cmdHistory<CR>
 nnoremap <unique> <silent> [search]s :<C-U>Leaderf! searchHistory<CR>
 
