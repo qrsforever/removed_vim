@@ -39,6 +39,16 @@ let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'text' : '$VIM_HOME/dict/wordlist.txt'
             \ }
 
+" Or set this.
+let g:neocomplete#enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplete#enable_insert_char_pre = 1
+
+let g:neocomplete#cursor_hold_i_time = 1000
+let g:neocomplete#sources#buffer#cache_limit_size = 500000
+let g:neocomplete#sources#tags#cache_limit_size   = 500000
+let g:neocomplete#force_overwrite_completefunc=1 
+
 if !exists("g:youcompleteme_enable")
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     " inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
@@ -56,23 +66,9 @@ if !exists("g:youcompleteme_enable")
         return !col || getline('.')[col - 1]  =~ '\s'
     endfunction
 
-    " Or set this.
-    let g:neocomplete#enable_cursor_hold_i = 1
-    " Or set this.
-    "let g:neocomplete#enable_insert_char_pre = 1
-
-    let g:neocomplete#cursor_hold_i_time = 1000
-
     let g:neocomplete#force_overwrite_completefunc=1 
-    let g:neocomplete#sources#buffer#cache_limit_size = 500000
-    let g:neocomplete#sources#tags#cache_limit_size   = 500000
 
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType markdown setlocal omnifunc=
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    " ycm can do it
     if has('python3')
         autocmd FileType python setlocal omnifunc=python3complete#Complete
     else
@@ -80,12 +76,9 @@ if !exists("g:youcompleteme_enable")
     endif
 
     " Enable heavy omni completion.
-    " let g:neocomplete#sources#omni#input_patterns.java = '\k\.\k*'
-    " let g:neocomplete#sources#omni#input_patterns.ruby = ''
+    let g:neocomplete#sources#omni#input_patterns.ruby = ''
     let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
-    "let g:neocomplete#sources#omni#input_patterns.php =
-    "           \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-    "
+
     " omnicppcomplete插件已包含
     let g:neocomplete#sources#omni#input_patterns.c =
                \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
@@ -94,15 +87,26 @@ if !exists("g:youcompleteme_enable")
      
     " R
     let g:neocomplete#sources#omni#input_patterns.r = '[[:alnum:].\\]\+'
-    " let g:neocomplete#sources#omni#input_patterns.php =   
-                \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
+    let g:neocomplete#sources#omni#input_patterns.php =   
+                 \ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?' 
 
     " 必须要有这个否则<c-x><c-o>不会自动弹出 
-    " let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+    let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
     " fix eclim does't work
-    let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
+    " let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
     " jedi
     let g:neocomplete#force_omni_input_patterns.python =
-                \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+               \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+else
+    " Enable omni completion.
+    autocmd FileType text setlocal omnifunc=contextcomplete#Complete
+    " already auto set, so commont them
+    " autocmd FileType markdown setlocal omnifunc=contextcomplete#Complete
+    " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    " autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+    " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    " autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+    " autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
 " }}}

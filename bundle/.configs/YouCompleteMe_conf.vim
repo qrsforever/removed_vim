@@ -87,12 +87,13 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_filetype_whitelist = {
             \ "c":1,
             \ "cpp":1,
-            \ "sh":1,
-            \ "text":1,
             \ "python":1,
-            \ "vim":1,
             \ "java":1,
             \ "markdown":1,
+            \ "panddoc":1,
+            \ "text":1,
+            \ "vim":1,
+            \ "sh":1,
             \ }
 
 " 如果python使用neocomplete, 这里需要把python加进来
