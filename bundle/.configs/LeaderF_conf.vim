@@ -158,12 +158,12 @@ nnoremap <unique> <silent> [search]n :<C-U>Leaderf! mru --nowrap<CR>
 nnoremap <unique> <silent> [search]N :<C-U>Leaderf mru --cword --regexMode --nowrap<CR>
 
 " 查找[所有]buffer中某个函数名或变量
-nnoremap <unique> <silent> [search], :<C-U>Leaderf bufTag --nowrap --stayOpen<CR>
-nnoremap <unique> <silent> [search]< :<C-U>Leaderf bufTag --all --nowrap --stayOpen<CR>
+nnoremap <unique> <silent> [search], :<C-U>Leaderf bufTag --cword --regexMode<CR>
+nnoremap <unique> <silent> [search]< :<C-U>Leaderf! bufTag --nowrap --stayOpen<CR>
 
 " 查找[所有]buffer中的某个函数
-nnoremap <unique> <silent> [search]. :<C-U>Leaderf function --nowrap --cword --next<CR>
-nnoremap <unique> <silent> [search]> :<C-U>Leaderf function --all --nowrap --stayOpen<CR>
+nnoremap <unique> <silent> [search]. :<C-U>Leaderf function --cword --regexMode<CR>
+nnoremap <unique> <silent> [search]> :<C-U>Leaderf! function --nowrap --stayOpen<CR>
 
 " 从Tag文件中查找某个函数或变量名 (], })留给YCM使用
 nnoremap <unique> <silent> [search][ :<C-U>Leaderf tag --cword --regexMode --nowrap<CR>
