@@ -31,7 +31,7 @@ exec 'source ' . g:VIM_HOME . '/bundle/.configs/init.vim'
 
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
-" nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
+nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
 nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>         :TagbarToggle<CR>
 " nmap <unique> <silent> <F5>         :MyLookupFile<CR>
@@ -44,7 +44,7 @@ nmap <unique> <silent> <F11>        :MaximizerToggle<CR>
 nmap <unique> <silent> <F12>        ,ra
 
 imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
-" imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
+imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>    <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>    <ESC>:TagbarToggle<CR>
 " imap <unique> <silent> <F5>    <ESC>:MyLookupFile<CR>

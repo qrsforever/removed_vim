@@ -83,7 +83,7 @@ function! s:DoBufExplorer()
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
         exec 'normal \<esc>'
-        exec 'normal sb'
+        exec 'Leaderf! buffer --fullScreen --nowrap'
     else
         if buftype ==# 'leaderf'
             execute "normal q"
