@@ -35,8 +35,12 @@ __mklink gtkrc-2.0 ~/.gtkrc-2.0
 __mklink gtk.css  ~/.config/gtk-3.0/gtk.css
 __mklink tmux.conf ~/.tmux.conf 1
 __mklink eclimrc ~/.eclimrc 1
+__mklink condarc ~/.condarc 1
 __mklink ctags ~/.ctags 1
 __mklink pip.conf ~/.config/pip/pip.conf
 __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
 __mklink credentials ~/.plotly/.credentials 1
+__mklink vim_binding.css $(jupyter --data-dir)/nbextensions/vim_binding/vim_binding.css
+
+

@@ -11,7 +11,7 @@ let g:bookmark_auto_close = 1
 let g:bookmark_location_list = 0
 let g:bookmark_disable_ctrlp = 1
 
-nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=annotate -no-empty -no-split vim_bookmarks<CR>
+nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=annotate -no-empty vim_bookmarks<CR>
 
 "}}}
 
@@ -19,6 +19,7 @@ nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=annotate -no-empty
 call unite#custom#profile(
     \ 'source/vim_bookmarks',
     \ 'context', {
+    \     'winheight': 30,
     \     'direction': 'dynamictop',
     \     'start_insert': 0,
     \     'keep_focus': 1,
