@@ -243,6 +243,7 @@ endfunction
 autocmd FileType unite call s:unite_my_settings()
 "}}}
 
+nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=source -no-empty source<CR>
 nnoremap <unique> <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <unique> <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
 nnoremap <unique> <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
