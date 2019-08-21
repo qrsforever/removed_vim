@@ -29,7 +29,7 @@ let g:Lf_RgConfig = [
 
 
 let g:Lf_WildIgnore = {
-    \ 'dir': ['.svn','.git','.hg','out','output'],
+    \ 'dir': ['.svn','.git','.hg','out','output', 'build'],
     \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.class','*.so','*.py[co]']
 \ }
 
