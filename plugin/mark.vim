@@ -94,6 +94,23 @@ function! s:RGB(r, g, b)
 	return a:r * 36 + a:g * 6 + a:b + 16
 endfunction
 
+"	    0	    0	    Black
+"	    1	    4	    DarkBlue
+"	    2	    2	    DarkGreen
+"	    3	    6	    DarkCyan
+"	    4	    1	    DarkRed
+"	    5	    5	    DarkMagenta
+"	    6	    3	    Brown, DarkYellow
+"	    7	    7	    LightGray, LightGrey, Gray, Grey
+"	    8	    0*	    DarkGray, DarkGrey
+"	    9	    4*	    Blue, LightBlue
+"	    10	    2*	    Green, LightGreen
+"	    11	    6*	    Cyan, LightCyan
+"	    12	    1*	    Red, LightRed
+"	    13	    5*	    Magenta, LightMagenta
+"	    14	    3*	    Yellow, LightYellow
+"	    15	    7*	    White
+
 " default colors/groups
 " you may define your own colors in you vimrc file, in the form as below:
 if &t_Co < 256
@@ -103,13 +120,19 @@ if &t_Co < 256
 	hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=Cyan
 	hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=Blue
 	hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=Magenta
+  hi MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=Grey
+  hi MarkWord8 guifg=Black ctermfg=Black guibg=#BCDDBD ctermbg=Brown
+  hi MarkWord9 guifg=White ctermfg=White guibg=#D9D9D9 ctermbg=DarkBlue
 else
-	exec "hi MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=".s:RGB(5,0,0)
-	exec "hi MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=".s:RGB(5,4,0)
-	exec "hi MarkWord3 guifg=Black ctermfg=Black guibg=#5FD700 ctermbg=".s:RGB(1,4,0)
-	exec "hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=".s:RGB(0,4,5)
-	exec "hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=".s:RGB(0,2,5)
-	exec "hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=".s:RGB(3,0,5)
+  exec "hi MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=".s:RGB(5,0,0)
+  exec "hi MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=".s:RGB(5,4,0)
+  exec "hi MarkWord3 guifg=Black ctermfg=Black guibg=#5FD700 ctermbg=".s:RGB(1,4,0)
+  exec "hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=".s:RGB(0,4,5)
+  exec "hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=".s:RGB(0,2,5)
+  exec "hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=".s:RGB(3,0,5)
+  exec "hi MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=".s:RGB(2,5,2)
+  exec "hi MarkWord8 guifg=Black ctermfg=White guibg=#B21DBD ctermbg=".s:RGB(3,3,3)
+  exec "hi MarkWord9 guifg=White ctermfg=White guibg=#192939 ctermbg=".s:RGB(1,2,7)
 endif
 
 " Anti reinclusion guards
@@ -173,12 +196,12 @@ nnoremap <silent> <Plug>MarkClear :call
 "       do a \*; otherwise (\/ is the
 "       most recently used), do a \/.
 
-nnoremap <silent> [* :call <sid>SearchCurrentMark()<cr>
-nnoremap <silent> [# :call <sid>SearchCurrentMark("b")<cr>
-nnoremap <silent> [/ :call <sid>SearchAnyMark()<cr>
-nnoremap <silent> [? :call <sid>SearchAnyMark("b")<cr>
-nnoremap <silent> * :if !<sid>SearchNext()<bar>execute "norm! *"<bar>endif<cr>
-nnoremap <silent> # :if !<sid>SearchNext("b")<bar>execute "norm! #"<bar>endif<cr>
+nnoremap <unique> <silent> [\  :call <sid>SearchCurrentMark()<cr>
+nnoremap <unique> <silent> [\| :call <sid>SearchCurrentMark("b")<cr>
+nnoremap <unique> <silent> [/  :call <sid>SearchAnyMark()<cr>
+nnoremap <unique> <silent> [?  :call <sid>SearchAnyMark("b")<cr>
+nnoremap          <silent> *   :if !<sid>SearchNext()<bar>execute "norm! *"<bar>endif<cr>
+nnoremap          <silent> #   :if !<sid>SearchNext("b")<bar>execute "norm! #"<bar>endif<cr>
 
 command! -nargs=? Mark call s:DoMark(<f-args>)
 
