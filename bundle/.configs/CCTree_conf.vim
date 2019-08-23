@@ -112,7 +112,11 @@ func! CCTreeEGrep(pattern) "{{{
             " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
             let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
         endfor
-        execute "Unite -buffer-name=shellcmd output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ \"" . a:pattern . "\""
+        if dbs != ""
+            execute "Unite -buffer-name=shellcmd output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ \"" . a:pattern . "\""
+        else
+            echomsg "no dbs"
+        endif
     catch
         echomsg "no dbs"
     endtry
