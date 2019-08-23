@@ -27,6 +27,7 @@ let g:unite_ignore_source_files = [
     \ "file_point.vim",
     \ "find.vim",
     \ "function.vim",
+    \ "grep.vim",
     \ "grep_git.vim",
     \ "history_input.vim",
     \ "history_unite.vim",
@@ -35,7 +36,6 @@ let g:unite_ignore_source_files = [
     \ "launcher.vim",
     \ "line.vim",
     \ "output.vim",
-    \ "output_shellcmd.vim",
     \ "process.vim",
     \ "rec.vim",
     \ "resume.vim",
@@ -47,7 +47,6 @@ let g:unite_ignore_source_files = [
 \]
 
 """
-  " \ "grep.vim",
   " \ "change.vim",
   " \ "source.vim",
   " \ "mapping.vim",
@@ -55,6 +54,7 @@ let g:unite_ignore_source_files = [
   " \ "register.vim",
   " \ "runtimepath.vim",
   " \ "jump_point.vim",
+  " \ "output_shellcmd.vim",
 """
 
 if executable('ag')

@@ -105,11 +105,14 @@ func! CCTreeEGrep(pattern) "{{{
         redir => result
         silent! execute 'cs show'
         redir END
-        let sources = ""
+        " let sources = ""
+        let cmd = "grep " . a:pattern . " `cat "
+        let dbs = ""
         for line in split(result, "\n")[2:]
-            let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
+            " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
+            let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
         endfor
-        execute "UniteWithCursorWord -buffer-name=grep grep:" . sources
+        execute "Unite -buffer-name=shellcmd output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ \"" . a:pattern . "\""
     catch
         echomsg "no dbs"
     endtry
