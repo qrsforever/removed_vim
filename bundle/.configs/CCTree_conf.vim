@@ -100,6 +100,21 @@ func! CCTreeOpenFile(cmd, flag) "{{{
     endif
 endfunc "}}}
 
+func! CCTreeEGrep(pattern) "{{{
+    try
+        redir => result
+        silent! execute 'cs show'
+        redir END
+        let sources = ""
+        for line in split(result, "\n")[2:]
+            let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
+        endfor
+        execute "UniteWithCursorWord -buffer-name=grep grep:" . sources
+    catch
+        echomsg "no dbs"
+    endtry
+endfunc "}}}
+
 """使用方法
 """生成一个 cscope 的数据库
 """1.cd /usr/src/linux/
@@ -168,6 +183,7 @@ nmap <unique> <silent> <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('tab cs', 0)<CR>
+nmap <unique> <silent> <C-\>E :call CCTreeEGrep(expand("<cword>"))<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
 nmap <unique> <silent> <C-\>]a :scs find a <C-R>=expand("<cword>")<CR><CR>

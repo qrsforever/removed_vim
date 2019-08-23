@@ -42,7 +42,7 @@ find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|p
     -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
-cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$' > $TAG_DIR/cscope.tag.files
+cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$|*.py$' > $TAG_DIR/cscope.tag.files
 if [[ x$CCGLUE_FLAG != x"1" ]]
 then
     KERNEL_FLAG="-k"

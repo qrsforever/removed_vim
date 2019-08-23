@@ -27,7 +27,6 @@ let g:unite_ignore_source_files = [
     \ "file_point.vim",
     \ "find.vim",
     \ "function.vim",
-    \ "grep.vim",
     \ "grep_git.vim",
     \ "history_input.vim",
     \ "history_unite.vim",
@@ -48,6 +47,7 @@ let g:unite_ignore_source_files = [
 \]
 
 """
+  " \ "grep.vim",
   " \ "change.vim",
   " \ "source.vim",
   " \ "mapping.vim",
@@ -194,18 +194,6 @@ call unite#custom#source(
     \ 'white_globs',
     \ ['R.class'])
 
-" Warning conflict with LeaderF and fuzzfinder
-" see fuzzfinder: su sU, si, sI
-" nnoremap <silent> [search]Y :<C-u>UniteBookmarkAdd %<CR>
-" nnoremap <silent> [search]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
-" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
-" nnoremap <silent> [search]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
-" nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
-" nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
-" nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
-" nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
-" nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
-" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
 let g:unite_prompt = '>>> '
 
 function! s:unite_my_settings()
@@ -242,6 +230,20 @@ function! s:unite_my_settings()
 endfunction
 autocmd FileType unite call s:unite_my_settings()
 "}}}
+
+
+" Warning conflict with LeaderF and fuzzfinder
+" see fuzzfinder: su sU, si, sI
+" nnoremap <silent> [search]Y :<C-u>UniteBookmarkAdd %<CR>
+" nnoremap <silent> [search]y :<C-u>Unite -buffer-name=bookmark -no-empty bookmark<CR>
+" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=files -no-empty -start-insert file_rec/async<CR>
+" nnoremap <silent> [search]d :<C-u>Unite -buffer-name=mru -default-action=switch directory_mru<CR>
+" nnoremap <silent> [search]g :<C-u>UniteWithCursorWord -buffer-name=grep grep:%<CR>
+" nnoremap <silent> [search]x :<C-u>Unite -buffer-name=change change<CR>
+" nnoremap <silent> [search]n :<C-u>Unite -buffer-name=mru file_mru<CR>
+" nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
+" nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
+" nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
 
 nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=source -no-empty source<CR>
 nnoremap <unique> <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
