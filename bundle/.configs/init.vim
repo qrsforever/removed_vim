@@ -102,7 +102,6 @@ MyPlugin 'szw/vim-maximizer'
 MyPlugin 'iamcco/dict.vim'
 MyPlugin 'hari-rangarajan/CCTree'
 MyPlugin 'scrooloose/syntastic'
-MyPlugin 'vim-scripts/DoxygenToolkit.vim'
 "}}}
 
 "{{{ Markdown&Html
@@ -113,6 +112,8 @@ MyPlugin 'qrsforever/vim-markdown-toc'
 
 "{{{ 淘汰类
 " 可用LeaderBuffer取代之
+" MyPlugin 'vim-scripts/DoxygenToolkit.vim'
+" MyPlugin 'vim-scripts/vimim'
 " MyPlugin 'jlanzarotta/bufexplorer'
 " MyPlugin 'errormarker.vim'
 " MyPlugin 'digitalrounin/vim-yaml-folds'

@@ -103,19 +103,21 @@ let g:ycm_filetype_specific_completion_to_disable = {
             \ 'css': 1,
             \}
 
-" ['same-buffer', 'horizontal-split', 'vertical-split', 'new-tab']
-let g:ycm_goto_buffer_command = 'same-buffer'
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_python_interpreter_path = '/usr/bin/python3'
-
 "youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 " let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 " 修改对C函数的补全快捷键，默认是CTRL + space;
 let g:ycm_key_invoke_completion = '<C-]>'
 
+" [same-buffer', 'split',  'split-or-existing-window']
+" 如果想使用tab, 不能设置成same-buffer, see README.md
+let g:ycm_goto_buffer_command = 'same-buffer'
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_interpreter_path = '/usr/bin/python3'
+
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 "}}}
 
-nnoremap <unique> <silent> [search]] :YcmCompleter GoTo<CR>
-nnoremap <unique> <silent> [search]} :YcmDiags<CR>
+nnoremap <unique> <silent> [search]] <esc>:YcmCompleter GoTo<CR>
+" workaround 使用tab open, first set modified
+nnoremap <unique> <silent> [search]} <esc>:set modified<CR>:tab YcmCompleter GoTo<CR>

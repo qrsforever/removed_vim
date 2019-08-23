@@ -74,5 +74,6 @@ bundle/html5.vim
 bundle/vim-vue
 bundle/vim-align
 bundle/vim-bookmarks
+bundle/vimim*
 extern
 

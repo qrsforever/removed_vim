@@ -42,5 +42,6 @@ __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
 __mklink credentials ~/.plotly/.credentials 1
 __mklink vim_binding.css $(jupyter --data-dir)/nbextensions/vim_binding/vim_binding.css
+__mklink ssh.config ~/.ssh/config 1
 
 
