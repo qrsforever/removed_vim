@@ -110,8 +110,7 @@ func! CCTreeOpenFile(cmd, flag) "{{{
     if a:flag == 1
         let pattern = getreg("*")
         if len(pattern) < 3 || len(pattern) > 48
-            echomsg "file is too short/long[1]"
-            exec 'LUTags ' . pattern
+            exec 'LUTags'
             return
         endif
         " res[0]是匹配的字符串, res[1]/res[2]匹配的正则表达式内容
@@ -138,8 +137,7 @@ func! CCTreeOpenFile(cmd, flag) "{{{
         endtry
     endif
     if len(pattern) < 3
-        echomsg "file is too short"
-        exec 'LUTags ' . pattern
+        exec 'LUTags'
         return
     endif
     " 如果路径完整, 直接跳转
@@ -155,8 +153,7 @@ func! CCTreeOpenFile(cmd, flag) "{{{
                 exec line
             endif
         catch
-            echomsg "[".  pattern . "] not found!"
-            exec 'LUTags ' . pattern
+            exec 'LUTags'
             return
         endtry
     endif
