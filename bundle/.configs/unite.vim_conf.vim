@@ -33,6 +33,7 @@ let g:unite_ignore_source_files = [
     \ "history_unite.vim",
     \ "interactive.vim",
     \ "jump.vim",
+    \ "jump_point.vim",
     \ "launcher.vim",
     \ "line.vim",
     \ "output.vim",
@@ -53,7 +54,6 @@ let g:unite_ignore_source_files = [
   " \ "menu.vim",
   " \ "register.vim",
   " \ "runtimepath.vim",
-  " \ "jump_point.vim",
   " \ "output_shellcmd.vim",
 """
 
@@ -105,12 +105,12 @@ endfunction
 call unite#define_filter(s:my_mrufilter)
 unlet s:my_mrufilter
 
-let s:open_dir = {'is_selectable' : 1}
-function! s:open_dir.func(candidates)
+let s:my_open_dir = {'is_selectable' : 1}
+function! s:my_open_dir.func(candidates)
     execute NERDTree fnameescape(a:candidate.word)
 endfunction
-call unite#custom#action('directory_mru', 'switch', s:open_dir)
-unlet s:open_dir
+call unite#custom#action('directory_mru', 'switch', s:my_open_dir)
+unlet s:my_open_dir
 
 call unite#custom#source(
     \ 'file_mru, directory_mru',
@@ -244,13 +244,13 @@ autocmd FileType unite call s:unite_my_settings()
 " nnoremap <silent> [search]b :<C-u>Unite -buffer-name=buffer buffer<CR>
 " nnoremap <silent> [search]R :<C-u>Unite -buffer-name=files -no-split -no-empty -start-insert file_rec/git<CR>
 " nnoremap <silent> [search]f :<C-u>Unite -buffer-name=find find:.<CR>
+" nnoremap <unique> <silent> [search]j :<C-u>Unite -buffer-name=jump -no-split -immediately jump_point<CR>
 
 nnoremap <unique> <silent> [search]a :<C-u>Unite -buffer-name=source -no-empty source<CR>
 nnoremap <unique> <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <unique> <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
 nnoremap <unique> <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <unique> <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
-nnoremap <unique> <silent> [search]j :<C-u>Unite -buffer-name=jump -no-split -immediately jump_point<CR>
 nnoremap <unique> <silent> [search]W :<C-u>UniteResume<CR>
 
 " 寄存器:help reg

@@ -67,13 +67,6 @@ func! CCTreeOpenFile(cmd, flag) "{{{
             let line = res[2]
         endif
     else
-        let pattern = expand("<cword>")
-        if len(pattern) < 3 || len(pattern) > 48
-            echomsg "file is too short/long[2]"
-            exec 'LUTags ' . pattern
-            return
-        endif
-        " <cword>不含有文件后缀
         " 区分: path1.path2.file and file.function
         " help \v: very magic, 有些不需用'\'进行转义了.
         " accept file:line:xxx or file:line.xxx
@@ -85,21 +78,32 @@ func! CCTreeOpenFile(cmd, flag) "{{{
             " echomsg "file2: " . pattern . "  line:" . line
         endtry
     endif
-    " let buf1 = bufname("%")
-    try
-        exec a:cmd . ' find f ' . pattern
-    catch
-        echomsg "[".  pattern . "] not found!"
+    if len(pattern) < 3
+        echomsg "file is too short"
         exec 'LUTags ' . pattern
         return
-    endtry
-    " let buf2 = bufname("%")
-    " if buf1 != buf2 && line != ''
-    if line != ''
-        exec line
+    endif
+    " 如果路径完整, 直接跳转
+    if filereadable(pattern)
+        exec 'tabedit ' . pattern
+        if line != ''
+            exec line
+        endif
+    else
+        try
+            exec a:cmd . ' find f ' . pattern
+            if line != ''
+                exec line
+            endif
+        catch
+            echomsg "[".  pattern . "] not found!"
+            exec 'LUTags ' . pattern
+            return
+        endtry
     endif
 endfunc "}}}
 
+" 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeEGrep(pattern) "{{{
     try
         redir => result
