@@ -46,7 +46,7 @@ $0
 endsnippet
 
 snippet xxgitimg "githubusercontent asset images"
-![${1:title}](https://raw.githubusercontent.com/qrsforever/assets_blog_post/master/${2:path}){ width=${3} height=${4} }
+![${1:title}](https://raw.githubusercontent.com/qrsforever/assets_blog_post/master/${2:path}){ .center ${3:width=} ${4:height=} }
 endsnippet
 
 snippet xxblock "blockquote"
@@ -58,7 +58,7 @@ $0
 endsnippet
 
 snippet xxcode "codeblock"
-{% codeblock ${1:[title]} ${2:[lang:language]} ${3:[url]} ${4:[link text]} %}
+{% codeblock ${1:title} ${2:highlight:true} ${3:lang:lang} ${4:http://} ${5:link text} ${6:line_number:true} ${7:first_line:1} %}
 
 $0
 
