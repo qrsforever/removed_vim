@@ -1,16 +1,29 @@
+#!/bin/bash
+
 # Setup fzf
-# ---------
-if [[ ! "$PATH" == *$HOME/.vim/bundle/fzf/bin* ]]; then
-  export PATH="$PATH:$HOME/.vim/bundle/fzf/bin"
+# ---------------
+
+current_file=${BASH_SOURCE[0]}
+if [[ -L $current_file ]]
+then
+    tmp_fil=`readlink $current_file`
+    tmp_dir=`dirname $tmp_fil`
+    vim_dir=`dirname $tmp_dir`
+else
+    vim_dir=$HOME/.vim
+fi
+
+if [[ ! "$PATH" == *$vim_dir/extern/fzf/bin* ]]; then
+      export PATH="$PATH:$vim_dir/extern/fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "$HOME/.vim/bundle/fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "$vim_dir/extern/fzf/shell/completion.bash" 2> /dev/null
 
 # Key bindings
 # ------------
-source "$HOME/.vim/bundle/fzf/shell/key-bindings.bash"
+source "$vim_dir/extern/fzf/shell/key-bindings.bash"
 
 alias dfzf='cd $(find * -type d | fzf)'
 alias vfzf='vim $(fzf)'
