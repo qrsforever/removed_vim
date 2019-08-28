@@ -95,7 +95,9 @@ MyPlugin 'honza/vim-snippets'
 
 "{{{ 工具类
 MyPlugin 'qrsforever/DrawIt'
-MyPlugin 'qrsforever/jupyter-vim'
+if executable('jupyter')
+    MyPlugin 'qrsforever/jupyter-vim'
+endif
 MyPlugin 'qrsforever/vim-align'
 MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'
