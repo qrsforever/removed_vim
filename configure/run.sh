@@ -27,7 +27,7 @@ __mklink(){
     ln -s $cur_dir/$1 $2 2>/dev/null
 }
 
-__mklink bashrc ~/.bashrc
+# __mklink bashrc ~/.bashrc
 __mklink profile ~/.profile
 __mklink fzf.bash ~/.fzf.bash 1
 __mklink Rprofile ~/.Rprofile 
