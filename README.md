@@ -49,6 +49,8 @@ Use:
     or 
     cargo install ripgrep (推荐)
 
+    see extern/README.md
+
 11. LeaderF
     cd ./bundle/LeaderF; ./install.sh
 

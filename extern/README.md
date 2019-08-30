@@ -15,6 +15,11 @@ ripgrep
 
 git clone https://github.com/BurntSushi/ripgrep
 
+see ripgrep/README
+
+    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+    sudo dpkg -i ripgrep_11.0.2_amd64.deb
+
 
 ycm-generator
 -------------
@@ -34,8 +39,5 @@ lua
 ------
 
 [lua](https://jaist.dl.sourceforge.net/project/luabinaries/5.3.5/Docs%20and%20Sources/lua-5.3.5_Sources.tar.gz)
-    
-    apt-get install libreadline-dev
-    INSTALL_TOP= /usr/local/ 
-    make linux; sudo make install
-    
+
+    git clone git@github.com:qrsforever/lua.git 

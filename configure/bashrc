@@ -1,9 +1,15 @@
 #!/bin/bash
 
-alias sl='ls'
-alias rm='rm -i'
-alias sudo='sudo env PATH=$PATH'
-alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=tags'
+stty stop ''
+
+cur_fil=${BASH_SOURCE[0]}
+con_dir=`dirname $cur_fil`
+vim_dir=`dirname $con_dir`
+
+export PATH=$vim_dir/bin:$PATH
+
+[ -f $con/fzf.bash ] && source $con/fzf.bash
+[ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
 xpwd() 
 {
@@ -12,11 +18,14 @@ xpwd()
     export tt
 }
 
+alias sl='ls'
+alias rm='rm -i'
+alias sudo='sudo env PATH=$PATH'
+alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=tags'
+
 alias 0vi='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
-
-stty stop ''
 
 ####### Docker ###########
 alias di='docker images'
@@ -34,6 +43,3 @@ alias dcup='docker-compose up'
 
 alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
 alias dit='docker exec -it'
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/.tmp.bash ] && source ~/.tmp.bash
