@@ -28,3 +28,19 @@ call unite#custom#source(
     \ 'vim_bookmarks',
     \ 'converters',
     \ ['converter_vim_bookmarks_short'])
+
+"  n  mg      <Plug>BookmarkMoveToLine
+"  n  mjj     <Plug>BookmarkMoveDown
+"  n  mkk     <Plug>BookmarkMoveUp
+"  n  mx      <Plug>BookmarkClearAll
+"  n  mc      <Plug>BookmarkClear
+"  n  mp      <Plug>BookmarkPrev
+"  n  mn      <Plug>BookmarkNext
+"  n  mi      <Plug>BookmarkAnnotate
+"  n  mm      <Plug>BookmarkToggle
+"  n  ma      <Plug>BookmarkShowAll
+
+" 另一个配合的兄弟插件showmarks.vim + marksbrowser
+" n   <leader>mx ClearAll
+" n   <leader>mm PlaceMarkToggle
+" n   <leader>ma MarksBrowser

@@ -134,17 +134,17 @@ com! -nargs=0 ShowMarksClearAll  :call <sid>ShowMarksClearAll()
 com! -nargs=0 ShowMarksPlaceMark :call <sid>ShowMarksPlaceMark()
 
 " Mappings (NOTE: Leave the '|'s immediately following the '<cr>' so the mapping does not contain any trailing spaces!)
-if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>mt :ShowMarksToggle<cr>|    endif
-if !hasmapto( '<Plug>ShowmarksShowMarksOn'     ) | map <silent> <unique> <leader>mo :ShowMarksOn<cr>|        endif
-if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
-if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>ma :ShowMarksClearAll<cr>|  endif
+" lidong mod
+" if !hasmapto( '<Plug>ShowmarksShowMarksOn'     ) | map <silent> <unique> <leader>mo :ShowMarksOn<cr>|        endif
+" lidong make mm toggle add/remove
+" if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
+if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>mx :ShowMarksClearAll<cr>|  endif
 if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
+if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>ma :MarksBrowser<cr>|    endif
 
 " lidong cha
 " noremap <unique> <script> \sm m
 " noremap <silent> m :exe 'norm \sm'.nr2char(getchar())<bar>call <sid>ShowMarks()<CR>
-nnoremap <unique> <script> \sm m
-nnoremap <silent> m :exe 'norm \sm'.nr2char(getchar())<bar>call <sid>ShowMarks()<CR>
 " lidong end
 
 " AutoCommands: Only if ShowMarks is enabled
@@ -494,6 +494,7 @@ fun! s:ShowMarksPlaceMark()
 	let first_alpha_mark = -1
 	let last_alpha_mark  = -1
 	let next_mark        = -1
+	let ln = line('.')
 
 	if !exists('b:previous_auto_mark')
 		let b:previous_auto_mark = -1
@@ -506,10 +507,15 @@ fun! s:ShowMarksPlaceMark()
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
 		if c =~# '[a-z]'
-			if line("'".c) <= 1
+			let mk = line("'".c)
+			if mk <= 1
 				" Found an unused [a-z] mark; we're done.
 				let next_mark = n
 				break
+			endif
+			" lidong add
+			if ln == mk
+				return s:ShowMarksClearMark()
 			endif
 
 			if first_alpha_mark < 0
