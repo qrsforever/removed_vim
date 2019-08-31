@@ -87,11 +87,16 @@ let s:HexoConvertState = 0
 function! s:_Normal2Hexo() 
     :silent! %s/{{/\\{\\{/g
     :silent! %s/}}/\\}\\}/g
+    :silent! %s/{#/\\{\\#/g
+    :silent! %s/#}/\\#\\}/g
 endfunction 
 
 function! s:_Hexo2Normal() 
     :silent! %s/\\{\\{/{{/g
     :silent! %s/\\}\\}/}}/g
+    :silent! %s/\\{\\#/{#/g
+    :silent! %s/\\#\\}/#}/g
+
 endfunction 
 
 command! MyHexoConvert call s:HexoConvertToogle()

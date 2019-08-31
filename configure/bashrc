@@ -29,7 +29,7 @@ alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
 ####### Docker ###########
 alias di='docker images'
-alias dri='docker rmi' # $(docker images -q)'
+alias dri='docker rmi'
 
 alias dc='docker container ls -a'
 alias drc='docker container rm'
