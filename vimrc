@@ -47,32 +47,24 @@ imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>    <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>    <ESC>:TagbarToggle<CR>
-" imap <unique> <silent> <F5>    <ESC>:MyLookupFile<CR>
-" imap <unique> <silent> <F6>    <ESC>:<c-u>call MyMake('i')<CR>
-" imap <unique> <silent> <F7>    <ESC>:<c-u>call MyGrep('i')<CR>
 imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>
 imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F10>   <ESC>:MyColColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
 imap <unique> <silent> <F12>   <ESC>,ra
 
-" vmap <unique> <silent> <F6>         :<c-u>call MyMake('v')<CR>
 vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 
 " "Shift"
 nmap <unique> <silent> <S-F1>       :lnext<CR>
 nmap <unique> <silent> <S-F2>       :cprevious<CR>
 nmap <unique> <silent> <S-F3>       :cnext<CR>
-" nmap <unique> <silent> <S-F6>       :MyAsyncRun<CR>
 nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
-nmap <unique> <silent> <S-F12>      :MyUMLCharConvert<CR>
 
 imap <unique> <silent> <S-F1>  <ESC>:lnext<CR>
 imap <unique> <silent> <S-F2>  <ESC>:cprevious<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cnext<CR>
-" imap <unique> <silent> <S-F6>  <ESC>:MyAsyncRun<CR>
 imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
-imap <unique> <silent> <S-F12> <ESC>:MyUMLCharConvert<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F1>       :lprevious<CR>

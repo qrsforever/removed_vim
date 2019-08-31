@@ -31,20 +31,18 @@ alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 alias di='docker images'
 alias dri='docker rmi' # $(docker images -q)'
 
-alias dc='docker container ls'
-alias drc='docker container rm' # $(docker ps -aq)'
-alias dsc='docker container stop' #  $(docker ps -aq)'
+alias dc='docker container ls -a'
+alias drc='docker container rm'
+alias dsc='docker container stop'
 
 alias dv='docker volume ls'
 alias drv='docker volume rm'
 
-alias dps='docker ps -a'
-alias dcup='docker-compose up'
-
 alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
 alias dit='docker run -it'
 
-alias dl='docker logs --follow'
+alias din='docker inspect'
+alias dlg='docker logs --follow'
 
 dsh()
 {

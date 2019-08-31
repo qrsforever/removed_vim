@@ -1,6 +1,25 @@
-"UML特殊字符映射 "{{{
+"{{{ 中文标点转换
+command! MyPunctuationConvert call s:_PunctuationConvert()
+function! s:_PunctuationConvert() 
+   :silent! %s/　/\ /g
+   :silent! %s/，/,/g
+   :silent! %s/。/./g
+   :silent! %s/、/\ /g
+   :silent! %s/？/?/g
+   :silent! %s/！/!/g
+   :silent! %s/；/;/g
+   :silent! %s/：/:/g
+   :silent! %s/“/"/g
+   :silent! %s/”/"/g
+   :silent! %s/‘/'/g
+   :silent! %s/’/'/g
+   :silent! %s/（/(/g
+   :silent! %s/）/)/g
+endfunction 
+"}}}
+
+"{{{ 特殊字符映射 
 " set digraph
-  
 nmap `<Up>               r△<Esc>
 nmap `<Down>             r▽<Esc>
 nmap `<Left>             r◁<Esc>
@@ -31,37 +50,58 @@ imap `<KMinus>      <Esc>r☜<Esc>
 imap `<KMultiply>   <Esc>r★<Esc>
 imap `<KDivide>     <Esc>r♡<Esc>
 
-"}}}
+let s:CharConvertState = 0
 
-let s:ConvertState = 0
-
-command! UMLChar2Digraph call s:_Char2Digraph()
-function! s:_Char2Digraph() "{{{
+function! s:_Char2Digraph() 
     :silent! %s/\<e1\>/△\ /g
     :silent! %s/\<e2\>/▽\ /g
     :silent! %s/\<e3\>/◁\ /g
     :silent! %s/\<e4\>/▷\ /g
     :silent! %s/\<c1\>/◇\ /g
     :silent! %s/\<c2\>/◆\ /g
-endfunction "}}}
+endfunction 
 
-command! UMLDigraph2Char call s:_Digraph2Char()
-function! s:_Digraph2Char() "{{{
+function! s:_Digraph2Char() 
     :silent! %s/△\ /e1/g
     :silent! %s/▽\ /e2/g
     :silent! %s/◁\ /e3/g
     :silent! %s/▷\ /e4/g
     :silent! %s/◇\ /c1/g
     :silent! %s/◆\ /c2/g
-endfunction "}}}
+endfunction 
 
 command! MyUMLCharConvert call s:CharConvertToogle()
-function! s:CharConvertToogle() "{{{
-    if s:ConvertState != 1
+function! s:CharConvertToogle() 
+    if s:CharConvertState != 1
         call s:_Char2Digraph()
-        let s:ConvertState = 1
+        let s:CharConvertState = 1
     else
         call s:_Digraph2Char()
-        let s:ConvertState = 0
+        let s:CharConvertState = 0
     endif
-endfunction "}}}
+endfunction 
+"}}}
+
+"{{{ 生成博客对特殊字符处理 hexo blog {{ }} <--> [[ ]]
+let s:HexoConvertState = 0
+function! s:_Normal2Hexo() 
+    :silent! %s/{{/\\{\\{/g
+    :silent! %s/}}/\\}\\}/g
+endfunction 
+
+function! s:_Hexo2Normal() 
+    :silent! %s/\\{\\{/{{/g
+    :silent! %s/\\}\\}/}}/g
+endfunction 
+
+command! MyHexoConvert call s:HexoConvertToogle()
+function! s:HexoConvertToogle() 
+    if s:HexoConvertState  != 1
+        call s:_Normal2Hexo()
+        let s:HexoConvertState  = 1
+    else
+        call s:_Hexo2Normal()
+        let s:HexoConvertState  = 0
+    endif
+endfunction 
+"}}}
