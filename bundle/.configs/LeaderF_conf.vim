@@ -67,8 +67,8 @@ let g:Lf_CommandMap = {
 \}
 
 "    <C-C>, <ESC> : quit from LeaderF.
-"    <C-R> : switch between fuzzy search mode and regex mode.
-"    <C-F> : switch between full path search mode and name only search mode.
+"    <C-R> : switch between fuzzy search mode and regex mode. (文本搜索)
+"    <C-F> : switch between full path search mode and name only search mode. (文件搜索)
 "    <Tab> : switch to normal mode.
 "    <C-V>, <S-Insert> : paste from clipboard.
 "    <C-U> : clear the prompt.
