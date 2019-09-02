@@ -109,7 +109,9 @@ endfunc
 function! s:DoLeaderfRgWithPath(cwd, nwrap, cbuf, icase, append)
     let key = expand("<cword>")
     if a:cwd != 1 || len(key) < 2
-        let key = input("Searching pattern: ", key)
+        call inputsave()
+        let key = input("@", key)
+        call inputrestore()
     endif
     if key == ""
         return

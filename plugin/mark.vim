@@ -153,10 +153,10 @@ if !hasmapto('<Plug>MarkSet', 'v')
 	vmap <unique> <silent> [m <Plug>MarkSet
 endif
 if !hasmapto('<Plug>MarkRegex', 'n')
-	nmap <unique> <silent> [r <Plug>MarkRegex
+	nmap <unique> <silent> [M <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkRegex', 'v')
-	vmap <unique> <silent> [r <Plug>MarkRegex
+	vmap <unique> <silent> [M <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkClear', 'n')
 	nmap <unique> <silent> [n <Plug>MarkClear
