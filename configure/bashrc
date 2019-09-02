@@ -8,7 +8,7 @@ vim_dir=`dirname $con_dir`
 
 export PATH=$vim_dir/bin:$PATH
 
-[ -f $con/fzf.bash ] && source $con/fzf.bash
+[ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
 xpwd()
