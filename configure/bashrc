@@ -8,7 +8,7 @@ vim_dir=`dirname $con_dir`
 
 export PATH=$vim_dir/bin:$PATH
 
-[ -f $con/fzf.bash ] && source $con/fzf.bash
+[ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
 xpwd()
@@ -29,10 +29,36 @@ alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
 ####### Docker ###########
 alias di='docker images'
-alias dri='docker rmi'
+# alias dri='docker rmi'
+dri()
+{
+    if [[ x$1 == x ]]
+    then
+        docker images
+        echo -ne "\nInput ID: "
+        read image
+    else
+        image=$1
+    fi
+    docker rmi $image
+}
 
 alias dc='docker container ls -a'
-alias drc='docker container rm'
+# alias drc='docker container rm'
+drc()
+{
+    if [[ x$1 == x ]]
+    then
+        docker container ls -a
+        echo -ne "\nInput ID: "
+        read container
+    else
+        container=$1
+    fi
+    docker container stop $container
+    docker container rm $container
+}
+
 alias dsc='docker container stop'
 
 alias dv='docker volume ls'
@@ -42,12 +68,34 @@ alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddr
 alias dit='docker run -it'
 
 alias din='docker inspect'
-alias dlg='docker logs --follow'
+
+# alias dlg='docker logs --follow'
+dlg()
+{
+    if [[ x$1 == x ]]
+    then
+        docker container ls -a
+        echo -ne "\nInput ID: "
+        read container
+    else
+        container=$1
+    fi
+    docker logs --follow $container
+}
 
 dsh()
 {
     args=($@)
     container=$1
-    bashcmd=${args[@]: 1:$#}
-    docker exec $container bash -c "$bashcmd"
+    if [ "${#container}" -eq "12" ]
+    then
+        bashcmd=${args[@]: 1:$#}
+        docker exec $container bash -c "$bashcmd"
+    else
+        docker container ls -a
+        echo -ne "\nInput ID: "
+        read container
+        echo ""
+        docker exec $container bash -c "$@"
+    fi
 }
