@@ -164,7 +164,7 @@ func! CCTreeEGrep(pattern) "{{{
     call inputsave()
     let key = input("@", a:pattern)
     call inputrestore()
-    if len(key) == 0:
+    if len(key) < 3
         return
     endif
     try
