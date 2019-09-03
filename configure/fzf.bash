@@ -10,7 +10,8 @@ then
     tmp_dir=`dirname $tmp_fil`
     vim_dir=`dirname $tmp_dir`
 else
-    vim_dir=$HOME/.vim
+    tmp_dir=`dirname $current_file`
+    vim_dir=`dirname $tmp_dir`
 fi
 
 if [[ ! "$PATH" == *$vim_dir/extern/fzf/bin* ]]; then
