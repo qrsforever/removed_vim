@@ -161,19 +161,25 @@ endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeEGrep(pattern) "{{{
+    call inputsave()
+    let key = input("@", a:pattern)
+    call inputrestore()
+    if len(key) == 0:
+        return
+    endif
     try
         redir => result
         silent! execute 'cs show'
         redir END
         " let sources = ""
-        let cmd = "grep " . a:pattern . " `cat "
+        let cmd = "grep " . key . " `cat "
         let dbs = ""
         for line in split(result, "\n")[2:]
             " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
             let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
         endfor
         if dbs != ""
-            execute "Unite -buffer-name=shellcmd output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . a:pattern . "\""
+            execute "Unite -buffer-name=shellcmd output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\""
         else
             echomsg "no dbs"
         endif

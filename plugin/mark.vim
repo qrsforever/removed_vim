@@ -159,7 +159,7 @@ if !hasmapto('<Plug>MarkRegex', 'v')
 	vmap <unique> <silent> [M <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkClear', 'n')
-	nmap <unique> <silent> [n <Plug>MarkClear
+	nmap <unique> <silent> [x <Plug>MarkClear
 endif
 
 nnoremap <silent> <Plug>MarkSet   :call
@@ -196,8 +196,8 @@ nnoremap <silent> <Plug>MarkClear :call
 "       do a \*; otherwise (\/ is the
 "       most recently used), do a \/.
 
-nnoremap <unique> <silent> [\  :call <sid>SearchCurrentMark()<cr>
-nnoremap <unique> <silent> [\| :call <sid>SearchCurrentMark("b")<cr>
+nnoremap <unique> <silent> [n  :call <sid>SearchCurrentMark()<cr>
+nnoremap <unique> <silent> [N  :call <sid>SearchCurrentMark("b")<cr>
 nnoremap <unique> <silent> [/  :call <sid>SearchAnyMark()<cr>
 nnoremap <unique> <silent> [?  :call <sid>SearchAnyMark("b")<cr>
 nnoremap          <silent> *   :if !<sid>SearchNext()<bar>execute "norm! *"<bar>endif<cr>
