@@ -9,8 +9,8 @@ let g:unite_source_rec_min_cache_files = 120
 let g:unite_source_buffer_time_format = "(%Y-%m-%d %H:%M:%S) "
 let g:unite_force_overwrite_statusline = 0
 let g:unite_ignore_source_files = []
-let g:unite_data_directory = expand('$HOME/.cache/unite')
-let g:unite_source_bookmark_directory = expand('$HOME/.cache/unite/bookmark')
+let g:unite_data_directory = expand('$VIM_HOME/.cache/unite')
+let g:unite_source_bookmark_directory = expand('$VIM_HOME/.cache/unite/bookmark')
 let g:unite_enable_auto_select = 1
 let g:unite_source_file_async_command = "ls -la"
 
@@ -77,7 +77,7 @@ let g:unite_source_menu_menus = {
     \   "default" : {
     \       "description" : "shortcut for unite-menu",
     \       "command_candidates" : [
-    \           ["1. Open xlog dir", "NERDTree /tmp/xlog"],
+    \           ["1. Open Vim Home Dir", "NERDTree $VIM_HOME"],
     \       ],
     \   },
     \}
@@ -106,11 +106,32 @@ call unite#define_filter(s:my_mrufilter)
 unlet s:my_mrufilter
 
 let s:my_open_dir = {'is_selectable' : 1}
-function! s:my_open_dir.func(candidates)
+function! s:my_open_dir.func(candidate)
     execute NERDTree fnameescape(a:candidate.word)
 endfunction
 call unite#custom#action('directory_mru', 'switch', s:my_open_dir)
 unlet s:my_open_dir
+
+let s:my_open_file = {'is_selectable' : 1}
+function! s:my_open_file.func(candidates)
+    if len(a:candidates) != 1
+        return
+    endif
+    let linestr = get(a:candidates[0], 'action__text', a:candidates[0].word)
+    try
+        let [_, pattern, line; __] = matchlist(linestr, '\s*\([^:]\+\):\~*\(\d*\).*$')
+        if filereadable(pattern)
+            exec 'edit ' . pattern
+            if line != ''
+                exec line
+            endif
+        endif
+    catch
+    endtry
+endfunction
+call unite#custom#action('source/output/shellcmd/word', 'yank', s:my_open_file)
+unlet s:my_open_file
+
 
 call unite#custom#source(
     \ 'file_mru, directory_mru',
@@ -147,6 +168,13 @@ call unite#custom#profile(
         \ 'direction': 'aboveleft',
         \ 'vertical': 1,
         \ 'horizontal': 0,
+    \ })
+
+call unite#custom#profile(
+    \ 'gotofile',
+    \ 'context',
+    \ {
+    \    'default-action': 'jump',
     \ })
 
 call unite#custom#source(
@@ -259,10 +287,10 @@ nnoremap <unique> <silent> [search]W :<C-u>UniteResume<CR>
 	".	Contains the last inserted text
 	"%	Contains the name of the current file!ls.
 	":	Contains the most recent executed command-line.
-    
-" Alternate file register "#
-"    Contains the name of the alternate file for the current window 
 
-" Selection and drop registers "*, "+ and "~ 
+" Alternate file register "#
+"    Contains the name of the alternate file for the current window
+
+" Selection and drop registers "*, "+ and "~
     " '+' 右击复制的数据
     " '*' 双击复制的数据

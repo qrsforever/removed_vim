@@ -2,6 +2,7 @@
 *.swp
 .netrwhist
 .VimballRecord
+.cache
 **/**/doc/tags
 **/**/__pycache__
 configure/eclimrc

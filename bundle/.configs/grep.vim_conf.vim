@@ -10,7 +10,7 @@ let Grep_Null_Device = '/dev/null'
 let Grep_Shell_Quote_Char = "'"
 let Grep_Default_Filelist = '*'
 
-let s:MRUGrepWordsFile = expand('$HOME/.MRUGrepWordsFile')
+let s:MRUGrepWordsFile = expand('$VIM_HOME/.cache/MRUGrepWordsFile')
 let s:MaxCount = 30
 
 func ListCandidateWord(A, L, P) "{{{

@@ -10,6 +10,7 @@ let g:bookmark_center = 0
 let g:bookmark_auto_close = 1
 let g:bookmark_location_list = 0
 let g:bookmark_disable_ctrlp = 1
+let g:bookmark_auto_save_file = expand('$VIM_HOME/.cache/vim-bookmarks')
 
 "}}}
 

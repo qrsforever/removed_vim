@@ -166,7 +166,7 @@ nmap g9 9gt
 command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge        "消除文件中的^M字符
-command XONE 0,$s/\n//       "多行变一行  
+command XONE 0,$s/\n//       "多行变一行
 "自己定义的命令 "}}}
 
 "窗口配置"{{{
@@ -644,6 +644,19 @@ au BufReadPost *
             \ exe "normal! g'\"" |
             \ endif
 "打开文件后自动回到上一次最后编辑的地方"}}}
+
+"viminfo{{{
+set viminfo=%,<200,'50,/50,:50,h,f0,s10,n$VIM_HOME/.cache/viminfo
+"           | |    |   |   |   | | |   + viminfo file path
+"           | |    |   |   |   | | + maximum size of an item in kb
+"           | |    |   |   |   | + file marks 0-9,A-Z 0=NOT stored
+"           | |    |   |   |   + disable 'hlsearch' loading viminfo
+"           | |    |   |   + command-line history saved
+"           | |    |   + search history saved
+"           | |    + files marks saved
+"           | + lines saved each register (old name for <, vi6.2)
+"           + save/restore buffer list
+"}}}
 
 "completeopt 弹出菜单 输入字母实现即时的过滤和匹配 ( 参考 neocomplcache  )"{{{
 ""关掉智能补全时的预览窗口 (Scratch)
