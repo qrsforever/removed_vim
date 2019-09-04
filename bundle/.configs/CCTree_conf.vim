@@ -179,7 +179,7 @@ func! CCTreeEGrep(pattern) "{{{
             let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
         endfor
         if dbs != ""
-            execute "Unite -buffer-name=shellcmd -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\" 2>/dev/null"
+            execute "Unite -buffer-name=shellcmd -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
         else
             echomsg "no dbs"
         endif
