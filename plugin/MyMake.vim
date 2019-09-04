@@ -1,6 +1,6 @@
 "{{{ MyMake
 "CTRL-W <Enter>  垂直打开
-" let s:MakefileDirsFile = expand('$HOME/.MakefileDirsFile')
+" let s:MakefileDirsFile = expand('$VIM_HOME/.cache/MakefileDirsFile')
 " let s:MaxFileCount = 3
 " func! MyMake(mode)
 "     exec 'silent! cclose'

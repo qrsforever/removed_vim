@@ -14,6 +14,7 @@ let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseCache = 1
 let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_CacheDirectory =  expand('$VIM_HOME/.cache')
 
 let g:Lf_Ctags = 'ctags'
 let g:Lf_CtagsFuncOpts = {

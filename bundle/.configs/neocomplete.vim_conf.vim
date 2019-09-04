@@ -9,6 +9,8 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 
+let g:neocomplete#data_directory = expand('$VIM_HOME/.cache')
+
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
