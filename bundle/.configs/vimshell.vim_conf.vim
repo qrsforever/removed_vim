@@ -11,20 +11,22 @@ let g:vimshell_max_directory_stack = 30
 let g:vimshell_scrollback_limit = 1500
 " }}}
 
-autocmd FileType vimshell imap <buffer><c-k> <c-o><c-w>k
-autocmd FileType vimshell imap <buffer><c-h> <c-o><c-w>h
-
 "{{{ VimShell
 command! MyVimShellS :call s:DoVimShell('25split')
 command! MyVimShellV :call s:DoVimShell('60vsplit')
+command! MyVimShell  :call s:DoVimShell('')
 func! s:DoVimShell(t)
     let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
-        exec "VimShellCurrentDir -buffer-name=# -split-command=" . a:t
+        if a:t == ''
+            exec "VimShell -buffer-name=QRS"
+        else
+            exec "VimShellCurrentDir -buffer-name=QRS -split-command=" . a:t
+        endif
     else
         if buftype ==# 'vimshell'
-            exec "normal q"
+            exec "VimShellClose QRS"
         endif
     endif
 endf

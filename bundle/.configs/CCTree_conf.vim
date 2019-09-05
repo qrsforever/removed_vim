@@ -83,7 +83,7 @@ if has("cscope")
 	set cscopetag   "具有Ctags快捷键功能eg. ctrl+] , ctrl + t
     set csto=1      "先使用ctags再使用cscope
     set nocscopeverbose  "不显示信息
-    set notimeout
+    " set notimeout
 endif
 """cscope和ctags的兼容问题
 "":help if_cscop.txt
