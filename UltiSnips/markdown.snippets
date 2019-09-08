@@ -1,3 +1,25 @@
+
+global !p
+
+import vim
+
+def gen_code_raw_github_path():
+	git = "https://raw.githubusercontent.com/qrsforever/code_blog_post/master"
+	path = vim.eval('expand("%:p")') or ""
+	if not path:
+		return git
+	else:
+		return git + re.match(r'.*/source/_posts(/.*)', path).groups()[0]
+
+def gen_asset_raw_github_path():
+	git = "https://raw.githubusercontent.com/qrsforever/assets_blog_post/master"
+	dir = vim.eval('expand("%:p:h")') or ""
+	if not dir:
+		return git
+	else:
+		return git + re.match(r'.*/source/_posts(/.*)', dir).groups()[0] + "/"
+endglobal
+
 snippet xhead "mark down head info" b
 ---
 
@@ -19,7 +41,6 @@ snippet xxcenter "center DIV" b
 <div align='center'>$0</div>
 endsnippet
 
-
 snippet xxjump "span anchor"
 <span id="${1:id}"></span>
 endsnippet
@@ -29,59 +50,35 @@ snippet xxline
 $0
 endsnippet
 
-snippet xxalignat "begin{alignat"
-\begin{alignat}{$1}
-$0
-\end{alignat}
-endsnippet
-
-snippet xxali "begin{align*}"
-\begin{align*}
-$0 &= \\
-\end{align*}
-endsnippet
-
-snippet xxnb "asset_jupyter"
-{% asset_jupyter python3 notebook/${1:`!p snip.rv = snip.basename`.ipynb} %}
-$0
-endsnippet
-
-snippet xxgitimg "githubusercontent asset images"
-![${1:title}](https://raw.githubusercontent.com/qrsforever/assets_blog_post/master/${2:path}){ .center ${3:width=} ${4:height=} }
-endsnippet
-
-snippet xxblock "blockquote"
-{% blockquote ${1:[author[, source]]} ${2:[link]} ${3:[source_link_title]} %}
-
-$0
-
-{% endblockquote %}
-endsnippet
-
-snippet xxcode "codeblock"
-{% codeblock ${1:title} ${2:highlight:true} ${3:lang:lang} ${4:http://} ${5:link text} ${6:line_number:true} ${7:first_line:1} %}
-
-$0
-
-{% endcodeblock %}
-endsnippet
-
-snippet xxpost_ln "post_link"
-{% post_link ${1:filepath} ${2:[optional text]} %}
-endsnippet
-
-snippet xxasset_img "asset_img, only self post asset"
-{% asset_img ${1:slug} ${2:[title]} %}
-endsnippet
-
-snippet xxcodeblock "code block using pandoc"
-\`\`\`{.${1:lang} ${2:.center} ${3:caption=""} ${4:.numberLines startFrom="1"} ${5:fileName=""}}
+snippet xxcodepandoc "```codeblock```"
+\`\`\`{.${1:lang} ${2:.numberLines startFrom="1"} ${3:.center ${4:caption=""} ${5:fileName=""}}}
 $0
 \`\`\`
 endsnippet
 
-snippet xxdataset "baidu cloud disk"
-[百度云盘Datasets](https://pan.baidu.com/s/1gAFZ9gSf4pHJBt5W6_PgPQ "提取码: gxk4")
+snippet xxcodehexo "{% codeblock %}"
+{% codeblock ${1:title} ${2:highlight:true ${3:lang:${4:py}} ${5:http://} ${6:link text} ${7:line_number:true first_line:${8:1}}} %}
+$0
+{% endcodeblock %}
+endsnippet
+
+snippet xxblockhexo "{% blockquote %}"
+{% blockquote ${1:${2:author}${3:, source}} ${4:${5:link} ${6:title}} %}
+$0
+{% endblockquote %}
+endsnippet
+
+snippet xxnb "{% asset_jupyter %}"
+{% asset_jupyter python3 notebook/${1:`!p snip.rv = snip.basename`.ipynb} %}
+$0
+endsnippet
+
+snippet xxpost_link "{% post_link %}"
+{% post_link ${1:filepath} ${2:[optional text]} %}
+endsnippet
+
+snippet xxasset_img "{% asset_img %} for current dir"
+{% asset_img ${1:slug} ${2:[title]} %}
 endsnippet
 
 snippet xxtable "table"
@@ -92,21 +89,35 @@ endsnippet
 
 snippet xxunnum "div unnumbered"
 <div class='unnumbered'>
-
 $0
-
 </div
 endsnippet
 
-snippet xemoji "hexo emoji"
+snippet xxemoji "hexo emoji"
 {% emoji_hj ${1:src} ${2:,[className]} %}
 endsnippet
 
 snippet xxalert "div alert info"
 <div class="alert alert-info"><p>
-
 $0
-
 </p></div>
 endsnippet
 
+snippet "xxbeg( (\S+))?" "begin{} / end{}" br
+\begin{${1:`!p
+snip.rv = match.group(2) if match.group(1) is not None else "align*"`}}
+$2 &= \\
+\end{$1}$0
+endsnippet
+
+snippet xxgitcode "githubusercontent raw file"
+[RAW CODE](`!p snip.rv = gen_code_raw_github_path()`)
+endsnippet
+
+snippet xxgitimg "githubusercontent asset image"
+![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${2:pic.jpg})${3:{.center ${4:${5:width=${6:100%} ${7:height=${8:100px}}}}}}
+endsnippet
+
+snippet xxdataset "baidu cloud disk"
+[百度云盘Datasets](https://pan.baidu.com/s/1gAFZ9gSf4pHJBt5W6_PgPQ "提取码: gxk4")
+endsnippet
