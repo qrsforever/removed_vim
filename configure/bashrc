@@ -80,7 +80,7 @@ dlg()
     else
         container=$1
     fi
-    docker logs --follow $container
+    docker logs --timestamps --follow $container
 }
 
 dsh()
