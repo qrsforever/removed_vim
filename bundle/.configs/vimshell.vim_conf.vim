@@ -1,23 +1,32 @@
 " VimShell Setup {{{
 let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|.\)\+> '
-let g:vimshell_vimshrc_path	= '$VIM_HOME/vimshrc'
+let g:vimshell_vimshrc_path	= expand('$VIM_HOME/vimshrc')
 let g:vimshell_disable_escape_highlight = 1
 let g:vimshell_force_overwrite_statusline = 0
 let g:vimshell_split_command = 'split'
+let g:vimshell_data_directory = expand('$VIM_HOME/.cache')
+let g:vimshell_max_command_history = 50
+let g:vimshell_max_directory_stack = 30
+let g:vimshell_scrollback_limit = 1500
 " }}}
- 
+
 "{{{ VimShell
 command! MyVimShellS :call s:DoVimShell('25split')
 command! MyVimShellV :call s:DoVimShell('60vsplit')
+command! MyVimShell  :call s:DoVimShell('')
 func! s:DoVimShell(t)
     let buftype = getbufvar('%', '&filetype')
     let ret = MyFun_is_special_buffer(buftype)
     if ret == 0
-        exec "VimShellCurrentDir -buffer-name=# -split-command=" . a:t
+        if a:t == ''
+            exec "VimShell -buffer-name=QRS"
+        else
+            exec "VimShellCurrentDir -buffer-name=QRS -split-command=" . a:t
+        endif
     else
         if buftype ==# 'vimshell'
-            exec "normal q"
+            exec "VimShellClose QRS"
         endif
     endif
 endf
@@ -57,7 +66,7 @@ endf
 " <C-n>			<C-n>
 " <TAB>			Select candidate or start completion
 
-" imap <buffer><C-g> <Plug>(vimshell_history_complete)
+imap <buffer><C-g> <Plug>(vimshell_history_complete)
 
 ":p		expand to full path
 ":h		head (last path component removed)
