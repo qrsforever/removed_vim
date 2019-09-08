@@ -51,13 +51,19 @@ $0
 endsnippet
 
 snippet xxcodepandoc "```codeblock```"
-\`\`\`{.${1:lang} ${2:.numberLines startFrom="1"} ${3:.center ${4:caption=""} ${5:fileName=""}}}
+\`\`\`{.${1:lang}${2: .numberLines startFrom="1"}}
+$0
+\`\`\`
+endsnippet
+
+snippet xxgraph "```graphviz```"
+\`\`\`{.graph ${1:.center${2: caption=${3}}${4: fileName=${5}}}${6: latex="true"${7: resolution=${8:"1080"}${9: desity=${10:"100"}}}}}
 $0
 \`\`\`
 endsnippet
 
 snippet xxcodehexo "{% codeblock %}"
-{% codeblock ${1:title} ${2:highlight:true ${3:lang:${4:py}} ${5:http://} ${6:link text} ${7:line_number:true first_line:${8:1}}} %}
+{% codeblock ${1:title}${2: highlight:true${3: lang:${4:py}}${5: http:// ${6:link text}} ${7:line_number:true first_line:${8:1}}} %}
 $0
 {% endcodeblock %}
 endsnippet
