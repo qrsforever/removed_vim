@@ -59,9 +59,9 @@ endsnippet
 snippet xxgraph "```graphviz```"
 \`\`\`{.graph ${1:.center${2: caption="${3}"}${4: fileName="${5}"}}${6: latex="true"${7:resolution="${8:1080}"${9: desity="${10:100}"}}}}
 digraph G {
-    graph [shape=circle, splines=ortho, rankdir=LR, nodesep=1];
+    graph [splines=ortho, rankdir=LR, nodesep=1];
     edge  [style=solid];
-    node  [label=""];
+    node  [shape=circle, label=""];
     subgraph cluster_0 {
         grpah [];
         edge  [];

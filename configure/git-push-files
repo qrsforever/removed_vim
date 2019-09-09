@@ -1,0 +1,40 @@
+#!/bin/bash
+
+files=$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+
+count=0
+for file in $files
+do
+    echo "$file" >> /tmp/c.txt
+    dir=`dirname $file`
+    echo "$dir" >> /tmp/c.txt
+    while [[ ${#dir} > 1 ]]
+    do
+        if [[ -d $dir/.git ]]
+        then
+            res=`git ls-files $file`
+            if [[ x$res == x ]]
+            then
+                echo "####1" >> /tmp/c.txt
+                git add $files
+                (( count += 1 ))
+            fi
+            echo "###111" >> /tmp/c.txt
+            break
+        else
+            dir=`dirname $dir`
+        fi
+    done
+done
+
+if (( $count > 0 ))
+then
+    dt=`date +"%Y-%m-%d %H:%M:%S"`
+    git commit -m "update: $dt"
+    git push
+    echo "#1##" >> /tmp/c.txt
+    notify-send "git push success"
+else
+    echo "###2#" >> /tmp/c.txt
+    notify-send "no file need git push"
+fi
