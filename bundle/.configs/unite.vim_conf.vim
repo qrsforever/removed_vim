@@ -77,7 +77,8 @@ let g:unite_source_menu_menus = {
     \   "default" : {
     \       "description" : "shortcut for unite-menu",
     \       "command_candidates" : [
-    \           ["1. Open Vim Home Dir", "NERDTree $VIM_HOME"],
+    \           ["1. Open vim configure", "NERDTree $VIM_HOME"],
+    \           ["2. Update project tag", "MyUpdateTags $TAG_HOME"],
     \       ],
     \   },
     \}

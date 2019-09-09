@@ -225,7 +225,7 @@ func! MyTags(mode) "{{{
     let root = getcwd()
     let sel = str2nr(input("Select(1.load 2.create):", ''), 10)
 
-    let tagdir = $tags
+    let tagdir = $TAG_HOME
     if len(tagdir) == 0
         if isdirectory('/projects/tags')
             let tagdir = '/projects/tags'
@@ -241,4 +241,47 @@ func! MyTags(mode) "{{{
     else
         return 
     endif
+endfunc "}}}
+
+
+command! -bang -nargs=? -complete=dir MyUpdateTags call s:_MyUpdateTags(<q-args>)
+func! s:_MyUpdateTags(tagdir) "{{{
+    if !vimshell#util#has_vimproc()
+        echomsg "Need vimproc plugin supported!"
+        return
+    endif
+
+    if len(a:tagdir) == 0
+        echomsg "Not set TAG_HOME!!!"
+        return
+    endif
+
+    let upscripts = [ ]
+    let i = 0
+    :silent! messages clear
+
+    let dirs = vimproc#readdir(a:tagdir)
+    for subdir in dirs
+        let subdir = substitute(subdir, '\/$', '', '')
+        let upfile = subdir . '/update.sh'
+        if filereadable(upfile)
+            let i = i + 1
+            echomsg ' ' . i . ' ' . subdir
+            call add(upscripts, upfile)
+        endif
+    endfor
+
+    if len(upscripts) == 0
+        echomsg "Not found tagdir!!!"
+        return
+    endif
+
+    let tmpstr = input("Select(,): ", '')
+    echomsg ''
+    let nums = split(tmpstr, ',')
+    for strn in nums 
+        let t = str2nr(strn, 10) - 1
+        call system(upscripts[t] . ' >/dev/null 2>&1 &')
+    endfor
+
 endfunc "}}}
