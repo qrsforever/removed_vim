@@ -68,6 +68,32 @@ dcrm()
     docker container rm $container
 }
 
+dcup()
+{
+    if [[ x$1 == x ]]
+    then
+        docker container ls -a
+        echo -ne "\n[UP] Input ID: "
+        read container
+    else
+        container=$@
+    fi
+    docker container start $container
+}
+
+dcdown()
+{
+    if [[ x$1 == x ]]
+    then
+        docker container ls -a
+        echo -ne "\n[DOWN] Input ID: "
+        read container
+    else
+        container=$@
+    fi
+    docker container stop $container
+}
+
 alias dv='docker volume ls'
 alias dvrma='docker volume prune'
 dvrm()
