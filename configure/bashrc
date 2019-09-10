@@ -82,7 +82,7 @@ dsh()
     else
         image=$1
     fi
-    docker run -it $image bash -c sh
+    docker run -it $image bash
 }
 
 
