@@ -34,6 +34,8 @@ alias 0vi='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
+alias lports='netstat -antp'
+
 ########### Docker ###########
 alias di='docker images'
 dirm()
@@ -64,6 +66,7 @@ dcrm()
     docker container rm $container
 }
 
+alias dcrma='docker container prune'
 alias dcstart='docker container start'
 alias dcstop='docker container stop'
 
@@ -72,17 +75,36 @@ alias dvrm='docker volume rm'
 
 alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
 
+drun()
+{
+    args=($@)
+    image=$1
+    if [[ x$image == x ]]
+    then
+        docker images
+        echo -ne "\n[RUN] Input ID: "
+        read image
+    fi
+    if [ "${#image}" -eq "12" ]
+    then
+        bashcmd=${args[@]: 1:$#}
+    else
+        bashcmd=''
+    fi
+    docker run -it -d $image $bashcmd
+}
+
 dsh()
 {
     if [[ x$1 == x ]]
     then
-        docker images
+        docker container ls -a
         echo -ne "\n[SH] Input ID: "
-        read image
+        read container
     else
-        image=$1
+        container=$1
     fi
-    docker run -it $image bash
+    docker exec -it $container bash
 }
 
 
