@@ -73,8 +73,6 @@ alias dcstop='docker container stop'
 alias dv='docker volume ls'
 alias dvrm='docker volume rm'
 
-alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-
 drun()
 {
     args=($@)
@@ -95,7 +93,7 @@ dsh()
 {
     if [[ x$1 == x ]]
     then
-        docker container ls -a
+        docker container ls
         echo -ne "\n[SH] Input ID: "
         read container
     else
@@ -109,7 +107,7 @@ dlog()
 {
     if [[ x$1 == x ]]
     then
-        docker container ls -a
+        docker container ls
         echo -ne "\n[LOG] Input ID: "
         read container
     else
@@ -127,10 +125,22 @@ dexe()
         bashcmd=${args[@]: 1:$#}
         docker exec $container bash -c "$bashcmd"
     else
-        docker container ls -a
+        docker container ls
         echo -ne "\n[SH] Input ID: "
         read container
         echo ""
         docker exec $container bash -c "$@"
     fi
+}
+
+dip()
+{
+    container=$1
+    if [ "${#container}" -ne "12" ]
+    then
+        docker container ls
+        echo -ne "\n[IP] Input ID: "
+        read container
+    fi
+    docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $container
 }
