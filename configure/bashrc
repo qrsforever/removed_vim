@@ -32,7 +32,7 @@ alias rm='rm -i'
 alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=tags'
 
-alias 0vi='vim --noplugin'
+alias vi0='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
@@ -79,7 +79,7 @@ drun()
 {
     args=($@)
     image=$1
-    if [[ x$image != x && "${#image}" -ne "12" ]]
+    if [[ x$image == x ]] || [[ x$image != x && "${#image}" -ne "12" ]]
     then
         bashcmd=$image
         docker images
