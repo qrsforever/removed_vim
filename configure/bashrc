@@ -18,6 +18,13 @@ xpwd()
     export tt
 }
 
+alias ebashrc='vim $cur_fil'
+alias evimrc='vim $vim_dir/vimrc'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 alias sl='ls'
 alias rm='rm -i'
 alias sudo='sudo env PATH=$PATH'
@@ -27,15 +34,14 @@ alias 0vi='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
-####### Docker ###########
+########### Docker ###########
 alias di='docker images'
-# alias dri='docker rmi'
-dri()
+dirm()
 {
     if [[ x$1 == x ]]
     then
         docker images
-        echo -ne "\nInput ID: "
+        echo -ne "\n[RM] Input ID: "
         read image
     else
         image=$1
@@ -44,13 +50,12 @@ dri()
 }
 
 alias dc='docker container ls -a'
-# alias drc='docker container rm'
-drc()
+dcrm()
 {
     if [[ x$1 == x ]]
     then
         docker container ls -a
-        echo -ne "\nInput ID: "
+        echo -ne "\n[RM] Input ID: "
         read container
     else
         container=$1
@@ -59,23 +64,34 @@ drc()
     docker container rm $container
 }
 
-alias dsc='docker container stop'
+alias dcstart='docker container start'
+alias dcstop='docker container stop'
 
 alias dv='docker volume ls'
-alias drv='docker volume rm'
+alias dvrm='docker volume rm'
 
 alias dip='docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-alias dit='docker run -it'
 
-alias din='docker inspect'
+dsh()
+{
+    if [[ x$1 == x ]]
+    then
+        docker images
+        echo -ne "\n[SH] Input ID: "
+        read image
+    else
+        image=$1
+    fi
+    docker run -it $image bash -c sh
+}
 
-# alias dlg='docker logs --follow'
-dlg()
+
+dlog()
 {
     if [[ x$1 == x ]]
     then
         docker container ls -a
-        echo -ne "\nInput ID: "
+        echo -ne "\n[LOG] Input ID: "
         read container
     else
         container=$1
@@ -83,7 +99,7 @@ dlg()
     docker logs --timestamps --follow $container
 }
 
-dsh()
+dexe()
 {
     args=($@)
     container=$1
@@ -93,7 +109,7 @@ dsh()
         docker exec $container bash -c "$bashcmd"
     else
         docker container ls -a
-        echo -ne "\nInput ID: "
+        echo -ne "\n[SH] Input ID: "
         read container
         echo ""
         docker exec $container bash -c "$@"
