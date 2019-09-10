@@ -18,6 +18,7 @@ xpwd()
     export tt
 }
 
+alias upvim='cd $vim_dir; git pull; cd - >/dev/null'
 alias ebashrc='vim $cur_fil'
 alias evimrc='vim $vim_dir/vimrc'
 
