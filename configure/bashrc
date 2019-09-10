@@ -18,10 +18,11 @@ xpwd()
     export tt
 }
 
-alias xupvim='cd $vim_dir; git pull; cd - >/dev/null'
-alias xebashrc='vim $cur_fil'
-alias xevimrc='vim $vim_dir/vimrc'
-alias xlports='netstat -antp'
+alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
+alias xbashrc='vim $cur_fil'
+alias xvimrc='vim $vim_dir/vimrc'
+alias xnetstata='netstat -ntpa'
+alias xnetstatl='netstat -ntpl'
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -52,6 +53,7 @@ dirm()
 }
 
 alias dc='docker container ls -a'
+alias dcrma='docker container prune'
 dcrm()
 {
     if [[ x$1 == x ]]
@@ -66,12 +68,20 @@ dcrm()
     docker container rm $container
 }
 
-alias dcrma='docker container prune'
-alias dcstart='docker container start'
-alias dcstop='docker container stop'
-
 alias dv='docker volume ls'
-alias dvrm='docker volume rm'
+alias dvrma='docker volume prune'
+dvrm()
+{
+    if [[ x$1 == x ]]
+    then
+        docker volume ls
+        echo -ne "\n[RM] Input ID: "
+        read vols
+    else
+        vols=$@
+    fi
+    docker volume rm $vols
+}
 
 drun()
 {
@@ -86,6 +96,10 @@ drun()
     else
         bashcmd=${args[@]: 1:$#}
     fi
+    if [[ x$image == x ]]
+    then
+        return
+    fi
     docker run -it -d $image $bashcmd
 }
 
@@ -99,9 +113,12 @@ dsh()
     else
         container=$1
     fi
+    if [[ x$container == x ]]
+    then
+        return
+    fi
     docker exec -it $container bash
 }
-
 
 dlog()
 {
@@ -112,6 +129,10 @@ dlog()
         read container
     else
         container=$1
+    fi
+    if [[ x$container == x ]]
+    then
+        return
     fi
     docker logs --timestamps --follow $container
 }
@@ -142,5 +163,30 @@ dip()
         echo -ne "\n[IP] Input ID: "
         read container
     fi
+    if [[ x$container == x ]]
+    then
+        return
+    fi
     docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $container
+}
+
+dmount()
+{
+    container=$1
+    if [ "${#container}" -ne "12" ]
+    then
+        docker container ls
+        echo -ne "\n[MOUNT] Input ID: "
+        read container
+    fi
+    if [[ x$container == x ]]
+    then
+        return
+    fi
+    jsontool=`which jq`
+    if [[ x$jsontool == x ]]
+    then
+        jsontool=python -m json.tool
+    fi
+    docker inspect -f '{{ json .Mounts }}' $container | $jsontool
 }
