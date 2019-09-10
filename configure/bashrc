@@ -47,7 +47,7 @@ dirm()
         echo -ne "\n[RM] Input ID: "
         read image
     else
-        image=$1
+        image=$@
     fi
     docker rmi $image
 }
@@ -61,7 +61,7 @@ dcrm()
         echo -ne "\n[RM] Input ID: "
         read container
     else
-        container=$1
+        container=$@
     fi
     docker container stop $container
     docker container rm $container
@@ -80,17 +80,14 @@ drun()
 {
     args=($@)
     image=$1
-    if [[ x$image == x ]]
+    if [[ x$image != x && "${#image}" -ne "12" ]]
     then
+        bashcmd=$image
         docker images
         echo -ne "\n[RUN] Input ID: "
         read image
-    fi
-    if [ "${#image}" -eq "12" ]
-    then
-        bashcmd=${args[@]: 1:$#}
     else
-        bashcmd=''
+        bashcmd=${args[@]: 1:$#}
     fi
     docker run -it -d $image $bashcmd
 }
