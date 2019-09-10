@@ -11,16 +11,17 @@ export PATH=$vim_dir/bin:$PATH
 [ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
-0pwd()
+xpwd()
 {
     tt=`pwd`
     echo $tt
     export tt
 }
 
-alias 0upvim='cd $vim_dir; git pull; cd - >/dev/null'
-alias 0ebashrc='vim $cur_fil'
-alias 0evimrc='vim $vim_dir/vimrc'
+alias xupvim='cd $vim_dir; git pull; cd - >/dev/null'
+alias xebashrc='vim $cur_fil'
+alias xevimrc='vim $vim_dir/vimrc'
+alias xlports='netstat -antp'
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -34,8 +35,6 @@ alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude=ta
 alias 0vi='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
-
-alias 0lports='netstat -antp'
 
 ########### Docker ###########
 alias di='docker images'
