@@ -181,7 +181,6 @@ func! CCTreeGrep(flag, pattern) "{{{
             silent! execute 'cs show'
             redir END
             " let sources = ""
-            let cmd = "grep " . key . " `cat "
             let dbs = ""
             for line in split(result, "\n")[2:]
                 " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"

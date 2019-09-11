@@ -18,6 +18,9 @@ then
     exit
 fi
 
+VIM_BIN=`dirname ${BASH_SOURCE[0]}`
+VIM_HOME=`dirname $VIM_BIN`
+
 ((DIR_NUM = $# - 1))
 
 DIRS=($@)
@@ -32,17 +35,19 @@ CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
 
-find $SRC_DIR -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|py\)' \
-    ! -path "*git*" -and \
-    ! -path "*svn*" -and \
-    ! -path ".tags*" -and \
-    ! -path "out*" -and \
-    ! -path "output*" -and \
-    ! -path "*bin*" -and \
+find $SRC_DIR $VIM_HOME/tags/test.c -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|py\)' \
+    ! -path ".git" -and \
+    ! -path "build" -and \
+    ! -path ".svn" -and \
+    ! -path ".tags" -and \
+    ! -path "out" -and \
+    ! -path "output" -and \
+    ! -path "objs" -and \
+    ! -path "bin" -and \
     -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
  
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
-cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$|*.py$' > $TAG_DIR/cscope.tag.files
+cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$|*.py$|*.php$' > $TAG_DIR/cscope.tag.files
 if [[ x$CCGLUE_FLAG != x"1" ]]
 then
     KERNEL_FLAG="-k"
