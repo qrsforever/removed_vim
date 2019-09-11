@@ -147,13 +147,16 @@ func! CCTreeOpenFile(flag, cmd) "{{{
             let line = res[2]
         endif
     else
-        let pattern = a:cmd
-        call inputsave()
-        let pattern = input("@", pattern)
-        call inputrestore()
-        if g:LookupFile_TagExpr != ''
-            exec 'LUTags ' . pattern 
+        if g:LookupFile_TagExpr == ''
+            return
         endif
+        let pattern = a:cmd
+        if pattern != ''
+            call inputsave()
+            let pattern = input("@", pattern)
+            call inputrestore()
+        endif
+        exec 'LUTags ' . pattern 
         return
     endif
     if len(pattern) < 3
