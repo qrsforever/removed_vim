@@ -104,7 +104,7 @@ endif
 nmap <C-\>> :CCTreeTraceForward <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>< :CCTreeTraceReverse <C-R>=expand("<cword>")<CR><CR>
 
-func! CCTreeOpenFile(cmd, flag) "{{{
+func! CCTreeOpenFile(flag, cmd) "{{{
     let pattern = ''
     let line = ''
     if a:flag == 1
@@ -130,7 +130,12 @@ func! CCTreeOpenFile(cmd, flag) "{{{
         " accept file:line:xxx or file:line.xxx
         " ';' matchlist有没有匹配都会返回10个, 这个';'可以抑制个数不对的错误
         try
-            let [_, pattern, line; __] = matchlist(getline("."), '\v.*(' . expand('<cfile>') . ')\s*:\~*(\d*).*$')
+            let curfile = expand('<cfile>')
+            if filereadable(curfile )
+                let [_, pattern, line; __] = matchlist(getline("."), '\v.*(' . curfile . ')\s*:\~*(\d*).*$')
+            else
+                let pattern = curfile
+            endif
             " echomsg "file1: " . pattern . "  line:" . line
         catch
             " echomsg "file2: " . pattern . "  line:" . line
@@ -140,8 +145,11 @@ func! CCTreeOpenFile(cmd, flag) "{{{
         exec 'LUTags'
         return
     endif
+
     " 如果路径完整, 直接跳转
-    if filereadable(pattern)
+    if isdirectory(pattern)
+        exec 'NERDTree ' . pattern
+    elseif filereadable(pattern)
         exec 'tabedit ' . pattern
         if line != ''
             exec line
@@ -161,7 +169,7 @@ endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeGrep(flag, pattern) "{{{
-    if a:flag == 2
+    if a:flag == 1
         call inputsave()
         let key = input("@", a:pattern)
         call inputrestore()
@@ -209,15 +217,16 @@ nmap <unique> <silent> <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('tab cs', 0)<CR>
-nmap <unique> <silent> <C-\>e :call CCTreeGrep(1, expand("<cword>"))<CR>
-nmap <unique> <silent> <C-\>E :call CCTreeGrep(2, expand("<cword>"))<CR>
+nmap <unique> <silent> <C-\>f :call CCTreeOpenFile(0, 'tab cs')<CR>
+nmap <unique> <silent> <C-\>F :LUTags<CR>
+nmap <unique> <silent> <C-\>e :call CCTreeGrep(0, expand("<cword>"))<CR>
+nmap <unique> <silent> <C-\>E :call CCTreeGrep(1, expand("<cword>"))<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile('scs', 0)<CR>
+nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile(0, 'scs')<CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile('vert scs', 0)<CR>
+nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile(0, 'vert scs')<CR>
 
 "" using selection register
-nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile('tab cs', 1)<CR>
+nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile(1, 'tab cs')<CR>
