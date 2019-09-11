@@ -107,24 +107,7 @@ nmap <C-\>< :CCTreeTraceReverse <C-R>=expand("<cword>")<CR><CR>
 func! CCTreeOpenFile(flag, cmd) "{{{
     let pattern = ''
     let line = ''
-    if a:flag == 1
-        let pattern = getreg("*")
-        if len(pattern) < 3 || len(pattern) > 48
-            exec 'LUTags'
-            return
-        endif
-        " res[0]是匹配的字符串, res[1]/res[2]匹配的正则表达式内容
-        try
-            let res = matchlist(pattern, '\s*\([^:]\+\):\~*\(\d*\).*$')
-            " echomsg "res[1] " . res[1] . "  res[2]: " . res[2]
-        catch
-            " echomsg "len: " . len(res)
-        endtry
-        if !empty(res) && res[1] != '' && res[2] != ''
-            let pattern = res[1]
-            let line = res[2]
-        endif
-    else
+    if a:flag == 0
         " 区分: path1.path2.file and file.function
         " help \v: very magic, 有些不需用'\'进行转义了.
         " accept file:line:xxx or file:line.xxx
@@ -140,9 +123,43 @@ func! CCTreeOpenFile(flag, cmd) "{{{
         catch
             " echomsg "file2: " . pattern . "  line:" . line
         endtry
+
+    elseif a:flag == 2
+        let pattern = getreg("*")
+        call inputsave()
+        let pattern = input("@", pattern)
+        call inputrestore()
+        if len(pattern) < 3 || len(pattern) > 48
+            if g:LookupFile_TagExpr != ''
+                exec 'LUTags'
+            endif
+            return
+        endif
+        " res[0]是匹配的字符串, res[1]/res[2]匹配的正则表达式内容
+        try
+            let res = matchlist(pattern, '\s*\([^:]\+\):\~*\(\d*\).*$')
+            " echomsg "res[1] " . res[1] . "  res[2]: " . res[2]
+        catch
+            " echomsg "len: " . len(res)
+        endtry
+        if !empty(res) && res[1] != '' && res[2] != ''
+            let pattern = res[1]
+            let line = res[2]
+        endif
+    else
+        let pattern = a:cmd
+        call inputsave()
+        let pattern = input("@", pattern)
+        call inputrestore()
+        if g:LookupFile_TagExpr != ''
+            exec 'LUTags ' . pattern 
+        endif
+        return
     endif
     if len(pattern) < 3
-        exec 'LUTags'
+        if g:LookupFile_TagExpr != ''
+            exec 'LUTags'
+        endif
         return
     endif
 
@@ -161,7 +178,9 @@ func! CCTreeOpenFile(flag, cmd) "{{{
                 exec line
             endif
         catch
-            exec 'LUTags'
+            if g:LookupFile_TagExpr != ''
+                exec 'LUTags'
+            endif
             return
         endtry
     endif
@@ -169,7 +188,17 @@ endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeGrep(flag, pattern) "{{{
-    if a:flag == 1
+    if a:flag == 0
+        try
+            let curfile = expand("%:p")
+            execute 'silent cs find e ' . a:pattern
+            " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
+            execute 'edit ' . curfile 
+            execute "Unite -buffer-name=cscope:1 quickfix"
+        catch
+            echomsg 'error: cs find e ' . a:pattern
+        endtry
+    else
         call inputsave()
         let key = input("@", a:pattern)
         call inputrestore()
@@ -194,16 +223,6 @@ func! CCTreeGrep(flag, pattern) "{{{
         catch
             echomsg "no dbs"
         endtry
-    else
-        try
-            let curfile = expand("%:p")
-            execute 'silent cs find e ' . a:pattern
-            " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
-            execute 'edit ' . curfile 
-            execute "Unite -buffer-name=cscope:1 quickfix"
-        catch
-            echomsg 'error: cs find e ' . a:pattern
-        endtry
     endif
 endfunc "}}}
 
@@ -217,9 +236,11 @@ nmap <unique> <silent> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>f :call CCTreeOpenFile(0, 'tab cs')<CR>
-nmap <unique> <silent> <C-\>F :LUTags<CR>
+nmap <unique> <silent> <C-\>F :call CCTreeOpenFile(1, '')<CR>
+vmap <unique> <silent> <C-\>F :<C-U>call CCTreeOpenFile(1, strpart(getline("'>"), col("'<") - 1, col("'>") - col("'<") + 1))<CR>
 nmap <unique> <silent> <C-\>e :call CCTreeGrep(0, expand("<cword>"))<CR>
 nmap <unique> <silent> <C-\>E :call CCTreeGrep(1, expand("<cword>"))<CR>
+vmap <unique> <silent> <C-\>E :<C-U>call CCTreeGrep(1, strpart(getline("'>"), col("'<") - 1, col("'>") - col("'<") + 1))<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
 nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile(0, 'scs')<CR>
@@ -228,4 +249,4 @@ nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile(0, 'scs')<CR>
 nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile(0, 'vert scs')<CR>
 
 "" using selection register
-nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile(1, 'tab cs')<CR>
+nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile(2, 'tab cs')<CR>

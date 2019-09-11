@@ -17,7 +17,7 @@ let g:LookupFile_DefaultCmd = ':LUTags'
 
 " Don't display binary files
 let g:LookupFile_FileFilter = '\.class$\|\.o$\|\.obj$\|\.exe$\|\.jar$\|\.zip$\|\.war$\|\.ear$\|\.bak$\|\tag$'
-let g:LookupFile_TagExpr=string('filenametags')
+let g:LookupFile_TagExpr = ''
 "映射LookupFile为,lk
 " nmap <silent> <leader>lk :LUTags<cr>
 "映射LUBufs为,ll
