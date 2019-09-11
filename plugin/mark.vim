@@ -197,9 +197,9 @@ nnoremap <silent> <Plug>MarkClear :call
 "       most recently used), do a \/.
 
 nnoremap <unique> <silent> [n  :call <sid>SearchCurrentMark()<cr>
-nnoremap <unique> <silent> [N  :call <sid>SearchCurrentMark("b")<cr>
-nnoremap <unique> <silent> [/  :call <sid>SearchAnyMark()<cr>
-nnoremap <unique> <silent> [?  :call <sid>SearchAnyMark("b")<cr>
+nnoremap <unique> <silent> [p  :call <sid>SearchCurrentMark("b")<cr>
+nnoremap <unique> <silent> [N  :call <sid>SearchAnyMark()<cr>
+nnoremap <unique> <silent> [P  :call <sid>SearchAnyMark("b")<cr>
 nnoremap          <silent> *   :if !<sid>SearchNext()<bar>execute "norm! *"<bar>endif<cr>
 nnoremap          <silent> #   :if !<sid>SearchNext("b")<bar>execute "norm! #"<bar>endif<cr>
 

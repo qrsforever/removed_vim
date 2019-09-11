@@ -243,7 +243,6 @@ func! MyTags(mode) "{{{
     endif
 endfunc "}}}
 
-
 command! -bang -nargs=? -complete=dir MyUpdateTags call s:_MyUpdateTags(<q-args>)
 func! s:_MyUpdateTags(tagdir) "{{{
     if !vimshell#util#has_vimproc()
@@ -272,7 +271,7 @@ func! s:_MyUpdateTags(tagdir) "{{{
     endfor
 
     if len(upscripts) == 0
-        echomsg "Not found tagdir!!!"
+        echomsg "Not found update.sh in " . a:tagdir "/subdir !!!"
         return
     endif
 
