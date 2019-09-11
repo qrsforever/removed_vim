@@ -17,16 +17,15 @@ sudo apt-get build-dep vim
 
 cd $extern_dir
 
-if [[ ! -d $extern_dir/lua ]]
-then
-    git clone git@github.com:qrsforever/lua.git
-fi
-
 have_lua=`/usr/lib/liblua.so`
 
 if [[ x$have_lua == x ]]
 then
-   sudo cp $extern_dir/lua/lib/liblua.so /usr/lib/
+    if [[ ! -d $extern_dir/lua ]]
+    then
+        git clone git@github.com:qrsforever/lua.git
+    fi
+    sudo cp -aprf $extern_dir/lua/lib/liblua*.so /usr/lib/
 fi
 
 cd $vim_src_dir

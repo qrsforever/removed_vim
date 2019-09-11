@@ -170,6 +170,9 @@ func! s:LoadTagDB(root, tagdir) "{{{
 
     " 4. 选择并设置tags
     let tmpstr = input("Select(,): ", '')
+    exec 'silent! messages clear'
+    exec 'redraw'
+    echomsg " Loaded!"
     let nums = split(tmpstr, ',')
     for strn in nums 
         let n = str2nr(strn, 10)
@@ -210,8 +213,8 @@ func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
         let tag_dir = a:tagdir . "/" . fnamemodify(tmpdir, ":t")
         let prorun = 'cd ' . tag_dir . '; ./db.sh'
         if filereadable(tag_dir . '/db.sh')
-            :silent! messages clear
-            :redraw
+            exec 'silent! messages clear'
+            exec 'redraw'
             echomsg " Update ..."
             call system(prorun)
             call s:Loading([tag_dir])

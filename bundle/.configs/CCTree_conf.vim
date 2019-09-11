@@ -160,32 +160,44 @@ func! CCTreeOpenFile(cmd, flag) "{{{
 endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
-func! CCTreeEGrep(pattern) "{{{
-    call inputsave()
-    let key = input("@", a:pattern)
-    call inputrestore()
-    if len(key) < 3
-        return
-    endif
-    try
-        redir => result
-        silent! execute 'cs show'
-        redir END
-        " let sources = ""
-        let cmd = "grep " . key . " `cat "
-        let dbs = ""
-        for line in split(result, "\n")[2:]
-            " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
-            let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
-        endfor
-        if dbs != ""
-            execute "Unite -buffer-name=shellcmd -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
-        else
-            echomsg "no dbs"
+func! CCTreeGrep(flag, pattern) "{{{
+    if a:flag == 2
+        call inputsave()
+        let key = input("@", a:pattern)
+        call inputrestore()
+        if len(key) < 3
+            return
         endif
-    catch
-        echomsg "no dbs"
-    endtry
+        try
+            redir => result
+            silent! execute 'cs show'
+            redir END
+            " let sources = ""
+            let cmd = "grep " . key . " `cat "
+            let dbs = ""
+            for line in split(result, "\n")[2:]
+                " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
+                let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
+            endfor
+            if dbs != ""
+                execute "Unite -buffer-name=cscope:2 -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
+            else
+                echomsg "error: cat cscopse.file to grep"
+            endif
+        catch
+            echomsg "no dbs"
+        endtry
+    else
+        try
+            let curfile = expand("%:p")
+            execute 'silent cs find e ' . a:pattern
+            " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
+            execute 'edit ' . curfile 
+            execute "Unite -buffer-name=cscope:1 quickfix"
+        catch
+            echomsg 'error: cs find e ' . a:pattern
+        endtry
+    endif
 endfunc "}}}
 
 "局部跳转到赋值或定义处:gd, cs a 是去全局
@@ -195,41 +207,17 @@ nmap <unique> <silent> <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <unique> <silent> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>f :call CCTreeOpenFile('tab cs', 0)<CR>
-nmap <unique> <silent> <C-\>E :call CCTreeEGrep(expand("<cword>"))<CR>
+nmap <unique> <silent> <C-\>e :call CCTreeGrep(1, expand("<cword>"))<CR>
+nmap <unique> <silent> <C-\>E :call CCTreeGrep(2, expand("<cword>"))<CR>
 
 ""window split horizontally <C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>]a :scs find a <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>]i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <unique> <silent> <C-\>]d :scs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>]f :call CCTreeOpenFile('scs', 0)<CR>
 "
 ""window split vertically <C-@><C-@> 在gvim有些冲突
-nmap <unique> <silent> <C-\>[a :vert scs find a <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <unique> <silent> <C-\>[i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <unique> <silent> <C-\>[d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile('vert scs', 0)<CR>
 
 "" using selection register
-nmap <unique> <silent> <C-\><C-\>a :cs find a <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>s :cs find s <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>g :cs find g <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>c :cs find c <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>t :cs find t <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>e :cs find e <C-R>=expand(getreg("*"))<CR><CR>
-nmap <unique> <silent> <C-\><C-\>i :cs find i ^<C-R>=expand(getreg("*"))<CR>$<CR>
-nmap <unique> <silent> <C-\><C-\>d :cs find d <C-R>=expand(getreg("*"))<CR><CR>
 nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile('tab cs', 1)<CR>

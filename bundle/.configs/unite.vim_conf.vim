@@ -55,6 +55,7 @@ let g:unite_ignore_source_files = [
   " \ "register.vim",
   " \ "runtimepath.vim",
   " \ "output_shellcmd.vim",
+  " \ "quickfix",
 """
 
 if executable('ag')
