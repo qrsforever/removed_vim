@@ -11,12 +11,6 @@ __usage__()
     exit -1
 }
 
-if (( $# < 1 ))
-then
-    __usage__
-    exit -1
-fi
-
 CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
