@@ -57,6 +57,11 @@ shift $(($OPTIND - 1))
 SRCS_INCLUDE=''
 SRCS_EXCLUDE=''
 
+if [[ x$SRC_DIR == x ]]
+then
+    SRC_DIR=`cd $TAG_DIR/..; pwd`
+fi
+
 if [[ x$COMMAND == x"vim" ]]
 then
     SRCS_INCLUDE=$SRC_DIR
