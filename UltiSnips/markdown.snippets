@@ -51,8 +51,8 @@ $0
 endsnippet
 
 snippet xxcodepandoc "```codeblock```"
-\`\`\`{.${1:lang}${2: .numberLines startFrom="1"}}
-$0
+\`\`\`{.${0:lang}${1: .numberLines startFrom="1"}}
+
 \`\`\`
 endsnippet
 
@@ -130,7 +130,7 @@ snippet xxgitcode "githubusercontent raw file"
 endsnippet
 
 snippet xxgitimg "githubusercontent asset image"
-![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${2:pic.jpg})${3:{.center ${4:${5:width=${6:100%} ${7:height=${8:100px}}}}}}
+![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${0:pic.jpg})${2:{.center ${3:${4:width=${5:100%} ${6:height=${7:100px}}}}}}
 endsnippet
 
 snippet xxdataset "baidu cloud disk"

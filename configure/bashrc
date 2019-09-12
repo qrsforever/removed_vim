@@ -216,3 +216,15 @@ dmount()
     fi
     docker inspect -f '{{ json .Mounts }}' $container | $jsontool
 }
+
+dcst()
+{
+    container=$1
+    if [ "${#container}" -ne "12" ]
+    then
+        docker container ls
+        echo -ne "\n[STAT] Input ID: "
+        read container
+    fi
+    docker stats --no-stream $container
+}

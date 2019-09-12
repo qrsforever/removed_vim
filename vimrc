@@ -2,6 +2,7 @@ let g:mapleader = ","
 
 let g:VIM_HOME = split(&runtimepath, ',')[0]
 let $VIM_HOME = g:VIM_HOME
+let $TMP_TAGS = '/tmp/tags'
 
 autocmd!
 :mapclear

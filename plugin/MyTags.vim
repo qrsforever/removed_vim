@@ -1,9 +1,9 @@
 func! s:TmpLoadTagDB(force, root) "{{{
-    let flg = str2nr(a:force, 10) 
+    let flg = str2nr(a:force, 10)
     if flg == 1
         let dbfile = s:FindTagDB(a:root)
     else
-        let dbfile = s:DeleteTagDB(a:root) 
+        let dbfile = s:DeleteTagDB(a:root)
     endif
     if flg == 0
         return
@@ -39,20 +39,19 @@ endfunc "}}}
 func! s:CreateTagDB(root) "{{{
     let dbrun = '$VIM_HOME/bin/0db.sh'
     let inputdir = substitute(input("source dir:", a:root, "dir"), '\/$', '', '')
-    let tagsdir = '/tmp/tags' . inputdir . '/.tags'
+    let tagsdir = expand('$TMP_TAGS' . inputdir . '/.tags')
     if !isdirectory(tagsdir)
         call mkdir(tagsdir, 'p')
     endif
-    :silent! messages clear
-    :silent! redraw
+    exec "silent! messages clear"
     echomsg "build db: " . inputdir
-    exec '!' . dbrun . ' ' . tagsdir . ' ' . inputdir
+    exec '!' . dbrun . ' -y -s ' . inputdir . ' -t ' . tagsdir
     return [tagsdir]
 endfunc "}}}
 
 func! s:BuildTagDB(root) "{{{
-    :silent! messages clear
-    :silent! redraw
+    exec "silent! messages clear"
+    exec "silent! redraw"
     let res = str2nr(input("Select(1.build 2.rebuild 3.delete): ", ''), 10)
     if res == 1
         " build or load
@@ -71,8 +70,8 @@ endfunc "}}}
 func! s:Loading(tagdirs) "{{{
     " 清空原全局tags
     set tags=
-    :cs kill -1
-    :cs reset
+    exec "cs kill -1"
+    exec "cs reset"
     let g:LookupFile_TagExpr=string('filenametags')
 
     let tlufiles=''
@@ -83,9 +82,9 @@ func! s:Loading(tagdirs) "{{{
             let tlufiles = tlufiles . ' ' . filenametags
         endif
 
-        let include_dirs = item . '/include_dirs.txt'
-        if filereadable(include_dirs)
-            for incdir in split(system("cat ". include_dirs), '\n')
+        let header_dirs = item . '/header_dirs.txt'
+        if filereadable(header_dirs)
+            for incdir in split(system("cat ". header_dirs), '\n')
                 call add(tIncfiles, incdir)
             endfor
         endif
@@ -97,7 +96,7 @@ func! s:Loading(tagdirs) "{{{
 
         let cctreeout = item . '/cctree.out'
         if filereadable(cctreeout)
-            exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout 
+            exec  'silent! CCTreeLoadXRefDBFromDisk ' . cctreeout
         endif
 
         let ctags = item . '/libc.tags'
@@ -116,8 +115,8 @@ func! s:Loading(tagdirs) "{{{
         endif
     endfor
     let g:LookupFile_TagExpr=string(tlufiles)
-    let g:syntastic_c_include_dirs = tIncfiles
-    let g:syntastic_cpp_include_dirs = tIncfiles
+    let g:syntastic_c_header_dirs = tIncfiles
+    let g:syntastic_cpp_header_dirs = tIncfiles
 
     unlet tlufiles
     unlet tIncfiles
@@ -137,8 +136,8 @@ func! s:LoadTagDB(root, tagdir) "{{{
     let subdirs = [ ]
     let tagdirs = [ ]
     let i = 0
-    :silent! messages clear
-    :silent! redraw
+    exec "silent! messages clear"
+    exec "silent! redraw"
 
     " 1. 标准 c/c++ tags
     if isdirectory($HOME . '/.vim/tags')
@@ -159,11 +158,11 @@ func! s:LoadTagDB(root, tagdir) "{{{
     endfor
 
     " 3. 临时目录下的tags
-    if isdirectory('/tmp/tags')
-        let s:dirs = split(system("dirname `find /tmp/tags/ -name .tags -type d`"), '\n')
+    if isdirectory($TMP_TAGS)
+        let s:dirs = split(system("dirname `find " . $TMP_TAGS . " -name .tags -type d`"), '\n')
         for subdir in s:dirs
             let i = i + 1
-            echomsg ' ' . i . ' ' . substitute(subdir, '/tmp/tags', '', '')
+            echomsg ' ' . i . ' ' . substitute(subdir, $TMP_TAGS, '', '')
             call add(subdirs, subdir . '/.tags')
         endfor
     endif
@@ -174,7 +173,7 @@ func! s:LoadTagDB(root, tagdir) "{{{
     exec 'redraw'
     echomsg " Loaded!"
     let nums = split(tmpstr, ',')
-    for strn in nums 
+    for strn in nums
         let n = str2nr(strn, 10)
         if n == 0
             call add(tagdirs, subdirs[0])
@@ -193,13 +192,9 @@ func! s:LoadTagDB(root, tagdir) "{{{
 endfunc "}}}
 
 func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
-    if len(a:tagdir) == 0
-        echomsg 'You must add envirenment tags, export tags=your_fix_tagdirs in ~/.profile file'
-        return
-    endif
     let flg = 0
     let tmpdir = a:root
-    while len(tmpdir) > 12 
+    while len(tmpdir) > 12
         let gitdir = tmpdir . '/.git'
         let svndir = tmpdir . '/.svn'
         if isdirectory(gitdir) || isdirectory(svndir)
@@ -209,9 +204,9 @@ func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
         let pathpos = strridx(tmpdir, '/')
         let tmpdir = strpart(tmpdir, 0, pathpos)
     endwhile
-    if flg == 1 
+    if flg == 1
         let tag_dir = a:tagdir . "/" . fnamemodify(tmpdir, ":t")
-        let prorun = 'cd ' . tag_dir . '; ./db.sh'
+        let prorun = 'cd ' . tag_dir . '; ./update.sh'
         if filereadable(tag_dir . '/db.sh')
             exec 'silent! messages clear'
             exec 'redraw'
@@ -219,7 +214,7 @@ func! s:UpdateAndLoadTagDB(root, tagdir) "{{{
             call system(prorun)
             call s:Loading([tag_dir])
             echomsg " Done..."
-        endif 
+        endif
     endif
 endfunc "}}}
 
@@ -232,6 +227,9 @@ func! MyTags(mode) "{{{
     if len(tagdir) == 0
         if isdirectory('/projects/tags')
             let tagdir = '/projects/tags'
+        else
+            echomsg "not set TAG_HOME env"
+            return
         endif
     endif
 
@@ -242,7 +240,7 @@ func! MyTags(mode) "{{{
     elseif sel == 3
         call s:UpdateAndLoadTagDB(root, tagdir)
     else
-        return 
+        return
     endif
 endfunc "}}}
 
@@ -281,7 +279,7 @@ func! s:_MyUpdateTags(tagdir) "{{{
     let tmpstr = input("Select(,): ", '')
     echomsg ''
     let nums = split(tmpstr, ',')
-    for strn in nums 
+    for strn in nums
         let t = str2nr(strn, 10) - 1
         call system(upscripts[t] . ' >/dev/null 2>&1 &')
     endfor
