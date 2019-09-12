@@ -44,8 +44,7 @@ func! s:CreateTagDB(root) "{{{
         call mkdir(tagsdir, 'p')
     endif
     exec "silent! messages clear"
-    echomsg "build db: " . inputdir
-    exec '!' . dbrun . ' -y -s ' . inputdir . ' -t ' . tagsdir
+    call system(dbrun . ' -y -s ' . inputdir . ' -t ' . tagsdir . ' >/dev/null')
     return [tagsdir]
 endfunc "}}}
 

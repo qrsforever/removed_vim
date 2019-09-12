@@ -20,6 +20,7 @@ fi
 CMD_CSCOPE=`which cscope`
 CMD_CTAGS=`which ctags`
 CMD_CCGLUE=`which ccglue`
+CMD_NTFSND=`which notify-send`
 
 VIM_BIN=`dirname ${BASH_SOURCE[0]}`
 VIM_HOME=`dirname $VIM_BIN`
@@ -152,4 +153,13 @@ $CMD_CTAGS -I __THROW --c++-kinds=+p --fields=+ialS --extra$t=+q -L $TAG_DIR/csc
 if [[ x$VIM_SYN == x"1" ]]
 then
     dirname `find $SRCS_INCLUDE -name "*.h" -or -name "*.H" ` 2>/dev/null | sort -u > $TAG_DIR/header_dirs.txt
+fi
+
+#-----------------------------------------------------------------
+# Notify infomation
+#-----------------------------------------------------------------
+
+if [[ x$CMD_NTFSND != x ]]
+then
+    notify-send "Generate DBs ok!"
 fi
