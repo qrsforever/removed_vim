@@ -255,9 +255,9 @@ func! s:_MyUpdateTags(tagdir) "{{{
         return
     endif
 
-    let upscripts = [ ]
+    let protags = [ ]
     let i = 0
-    :silent! messages clear
+    exec 'silent! messages clear'
 
     let dirs = vimproc#readdir(a:tagdir)
     for subdir in dirs
@@ -266,11 +266,11 @@ func! s:_MyUpdateTags(tagdir) "{{{
         if filereadable(upfile)
             let i = i + 1
             echomsg ' ' . i . ' ' . subdir
-            call add(upscripts, upfile)
+            call add(protags, subdir)
         endif
     endfor
 
-    if len(upscripts) == 0
+    if len(protags) == 0
         echomsg "Not found update.sh in " . a:tagdir "/subdir !!!"
         return
     endif
@@ -280,7 +280,7 @@ func! s:_MyUpdateTags(tagdir) "{{{
     let nums = split(tmpstr, ',')
     for strn in nums
         let t = str2nr(strn, 10) - 1
-        call system(upscripts[t] . ' >/dev/null 2>&1 &')
+        call system('cd ' . protags[t] . ';./update.sh >/dev/null 2>&1 &')
     endfor
 
 endfunc "}}}

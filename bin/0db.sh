@@ -160,5 +160,5 @@ fi
 
 if [[ x$CMD_NTFSND != x ]]
 then
-    notify-send "Generate DBs ok!"
+    notify-send "Generate $(dirname $TAG_DIR) ok!"
 fi
