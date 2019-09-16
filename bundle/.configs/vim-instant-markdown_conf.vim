@@ -13,11 +13,11 @@ endfunction
 function! <SID>_InstantHexoblogPreview(flag)
     if a:flag == 0
         exec "w!"
-        call system("hexo-go " . expand('%:p') . " 0 &>/dev/null &")
+        call system("0hexo-go " . expand('%:p') . " 0 &>/dev/null &")
     elseif a:flag == 1
-        call system("hexo-go " . expand('%:p') . " 1 &>/dev/null &")
+        call system("0hexo-go " . expand('%:p') . " 1 &>/dev/null &")
     elseif a:flag == 2
-        call system("hexo-go " . expand('%:p') . " 2 &>/dev/null &")
+        call system("0hexo-go " . expand('%:p') . " 2 &>/dev/null &")
     endif
 
 endfunction

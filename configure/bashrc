@@ -18,7 +18,7 @@ xpwd()
     export tt
 }
 
-alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
+alias xviup='cd $vim_dir; git pull; cd - >/dev/null'
 alias xbashrc='vim $cur_fil'
 alias xvimrc='vim $vim_dir/vimrc'
 alias xnetstata='netstat -ntpa'

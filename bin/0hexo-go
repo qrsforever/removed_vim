@@ -5,6 +5,8 @@ then
     exit 0
 fi
 
+CMD_NTFSND=`which notify-send`
+
 fullpath=$1
 pathdir=`dirname $fullpath`
 fileME=`basename $fullpath`
@@ -89,7 +91,14 @@ fi
 
 $HEXO_CMD g --draft 2>&1 | tee -a $log_file
 $HEXO_CMD s --silent --draft &
-sleep 3
+
+sleep 1
+
+if [[ x$CMD_NTFSND != x ]]
+then
+    $CMD_NTFSND "Start Hexo Server Ok!"
+fi
+
 if [[ $2 == 1 ]]
 then
     # 10.58.82.240

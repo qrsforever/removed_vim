@@ -35,6 +35,7 @@ nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
 nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
 nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>         :TagbarToggle<CR>
+nmap <unique> <silent> <F5>         :XHexo<CR>
 nmap <unique> <silent> <F8>         :<c-u>call MyTags('n')<CR>
 nmap <unique> <silent> <F9>         :MyMarkColor<CR>
 nmap <unique> <silent> <F10>        :MyColColor<CR>
@@ -45,6 +46,7 @@ imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>    <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>    <ESC>:TagbarToggle<CR>
+imap <unique> <silent> <F5>    <ESC>:XHexo<CR>
 imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>
 imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F10>   <ESC>:MyColColor<CR>

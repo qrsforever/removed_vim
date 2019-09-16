@@ -15,6 +15,13 @@ do
             then
                 git add $files
                 (( count += 1 ))
+            else
+                res=`git diff --name-only $files`
+                if [[ x$res != x ]]
+                then
+                    git add $files
+                    (( count += 1 ))
+                fi
             fi
             break
         else
