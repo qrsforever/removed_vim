@@ -19,7 +19,6 @@ function! <SID>_InstantHexoblogPreview(flag)
     elseif a:flag == 2
         call system("0hexo-go " . expand('%:p') . " 2 &>/dev/null &")
     endif
-
 endfunction
 
 command! -nargs=0 XMark  :silent! call <SID>_InstantMarkdownPreview()

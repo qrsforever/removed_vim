@@ -5,8 +5,7 @@ then
     exit 0
 fi
 
-CMD_NTFSND=`which notify-send`
-
+log_file=/tmp/hexo-go.log
 fullpath=$1
 pathdir=`dirname $fullpath`
 fileME=`basename $fullpath`
@@ -17,25 +16,34 @@ then
 fi
 filePP=${fileME%%.*md}
 current_dir=`dirname ${BASH_SOURCE[0]}`
-current_dir=`cd $current_dir; pwd`
+vim_home_dir=`cd $current_dir/..; pwd`
 
-log_file=/tmp/hexo-go.log
-
-echo "" > $log_file
+echo "$*" > $log_file
 
 # randnum=`date +%s%N`
 
-destdir="$current_dir/../extern/git-blog-setting"
+destdir="$vim_home_dir/extern/git-blog-setting"
 drafts="source/_drafts"
 assets="source/assets"
 workdir=${destdir}/${drafts}/$rootDir
 assetsdir=${destdir}/${assets}
 
 HEXO_CMD=`which hexo`
+CMD_NTFSND=`which notify-send`
+
+__echo__()
+{
+    if [[ x$CMD_NTFSND != x ]]
+    then
+        $CMD_NTFSND -i $vim_home_dir/res/icons/dialog-information.png hexo "$*"
+    else
+        echo "$*" >> $log_file
+    fi
+}
 
 if [[ x$HEXO_CMD == x ]]
 then
-    echo "cmd not found: hexo" >> $log_file
+    __echo__ "cmd not found: hexo"
     exit 0
 fi
 
@@ -56,7 +64,7 @@ fi
 
 if [[ x"md" != x${fileME##*.} ]]
 then
-    echo "file not md: $fileME" >> $log_file
+    __echo__ "file not md: $fileME"
     exit 0
 fi
 
@@ -94,14 +102,10 @@ $HEXO_CMD s --silent --draft &
 
 sleep 1
 
-if [[ x$CMD_NTFSND != x ]]
-then
-    $CMD_NTFSND "Start Hexo Server Ok!"
-fi
+__echo__ "Start Server Ok!"
 
 if [[ $2 == 1 ]]
 then
-    # 10.58.82.240
     ip=`ifconfig | grep -a1 "eth0" | grep "inet addr" | cut -d\: -f2 | cut -d\  -f1`
     if [[ x$ip == x ]]
     then
@@ -109,4 +113,3 @@ then
     fi
     xdg-open http://${ip}:4000
 fi
-cd - >/dev/null

@@ -17,7 +17,7 @@ CMD_CCGLUE=`which ccglue`
 CMD_NTFSND=`which notify-send`
 
 VIM_BIN=`dirname ${BASH_SOURCE[0]}`
-VIM_HOME=`dirname $VIM_BIN`
+VIM_HOME=`cd $VIM_BIN/..; pwd`
 
 CC_GLUE=0
 VIM_SYN=0
@@ -160,5 +160,5 @@ fi
 
 if [[ x$CMD_NTFSND != x ]]
 then
-    $CMD_NTFSND "Generate $(dirname $TAG_DIR) ok!"
+    $CMD_NTFSND -i $VIM_HOME/res/icons/dialog-information.png hexo TagDB "Generate $(dirname $TAG_DIR) ok!"
 fi
