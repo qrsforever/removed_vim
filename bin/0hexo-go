@@ -62,12 +62,6 @@ then
     mkdir -p $assetsdir
 fi
 
-if [[ x"md" != x${fileME##*.} ]]
-then
-    __echo__ "file not md: $fileME"
-    exit 0
-fi
-
 if [[ $2 == 2 ]]
 then
     echo "hexo clean" >> $log_file
@@ -79,6 +73,12 @@ else
     rm -rf "${workdir}/${fileME}"
     rm -rf ${workdir}/notebook
     rm -rf ${workdir}/${filePP}
+fi
+
+if [[ x"md" != x${fileME##*.} ]]
+then
+    __echo__ "file not md: $fileME"
+    exit 0
 fi
 
 echo "ln -s $fullpath ${workdir}/${fileME}" >> $log_file
