@@ -118,6 +118,12 @@ $0
 </p></div>
 endsnippet
 
+snippet xxalign "begin align"
+\begin{align*}
+
+\end{align*}
+endsnippet
+
 snippet "xxbeg( (\S+))?" "begin{} / end{}" br
 \begin{${1:`!p
 snip.rv = match.group(2) if match.group(1) is not None else "align*"`}}
