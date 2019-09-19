@@ -6,8 +6,10 @@ cur_fil=${BASH_SOURCE[0]}
 con_dir=`dirname $cur_fil`
 vim_dir=`dirname $con_dir`
 
+export TAG_HOME=/projects/tags
 export PATH=$vim_dir/bin:$PATH
 
+[ -f /data/opt/env.sh ] && source  /data/opt/env.sh
 [ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
