@@ -1,0 +1,47 @@
+#!/bin/bash
+
+current_dir=`pwd`
+cmd_path=`which 0gvim`
+
+if [[ x$cmd_path == x ]]
+then
+    echo "Not found 0gvim"
+    exit 0
+fi
+
+if [ ! -L /etc/alternatives/gvim ]
+then
+    sudo update-alternatives --install /usr/local/bin/gvim gvim $cmd_path 100
+fi
+
+rel_path=`readlink /etc/alternatives/gvim`
+if [[ x"$rel_path" != x"$cmd_path" ]]
+then
+    sudo update-alternatives --set gvim $cmd_path
+fi
+
+ss=`vim --serverlist | head -n1 | cut -c 1-3`
+
+files=$@
+if [[ $@ =~ "-f" ]]
+then
+    files=`echo "$files" | cut -d\  -f2-`    
+fi
+
+if [[ x$ss == x"QRS" ]]
+then
+    if [[ x$@ != x ]]
+    then
+        have=`echo "$files" | grep servername`
+        if [[ x$have == x ]]
+        then
+            vim -g -p --servername QRS --remote-tab-silent $files
+        else
+            vim -g $files
+        fi
+    else 
+        vim -g -p --servername QRS --remote-send ":NERDTree $current_dir <cr>"
+    fi
+else
+    vim -g -p --servername QRS $files
+fi
