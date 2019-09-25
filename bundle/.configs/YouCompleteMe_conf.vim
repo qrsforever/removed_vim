@@ -79,22 +79,15 @@ let g:ycm_filetype_blacklist = {
             \ 'nerdtree' : 1,
             \ 'bookmark' : 1,
             \ 'files' : 1,
+            \ 'lookupfile' : 1,
             \ 'qf' : 1,
+            \ 'fuf' : 1,
             \ 'notes' : 1,
             \ 'unite' : 1,
             \ 'logcat' : 1,
             \}
-let g:ycm_filetype_whitelist = {
-            \ "c":1,
-            \ "cpp":1,
-            \ "python":1,
-            \ "java":1,
-            \ "markdown":1,
-            \ "panddoc":1,
-            \ "text":1,
-            \ "vim":1,
-            \ "sh":1,
-            \ }
+
+" let g:ycm_filetype_whitelist = {'*': 1}
 
 " 如果python使用neocomplete, 这里需要把python加进来
 let g:ycm_filetype_specific_completion_to_disable = {
@@ -112,8 +105,8 @@ let g:ycm_key_invoke_completion = '<C-]>'
 " [same-buffer', 'split',  'split-or-existing-window']
 " 如果想使用tab, 不能设置成same-buffer, see README.md
 let g:ycm_goto_buffer_command = 'same-buffer'
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_python_interpreter_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_python_interpreter_path = 'python3'
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	
 "}}}

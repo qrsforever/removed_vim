@@ -112,26 +112,26 @@ func! CCTreeOpenFile(flag, cmd) "{{{
         " help \v: very magic, 有些不需用'\'进行转义了.
         " accept file:line:xxx or file:line.xxx
         " ';' matchlist有没有匹配都会返回10个, 这个';'可以抑制个数不对的错误
-        try
-            let curfile = expand('<cfile>')
-            if filereadable(curfile )
+        let curfile = expand('<cfile>')
+        if filereadable(curfile)
+            try
                 let [_, pattern, line; __] = matchlist(getline("."), '\v.*(' . curfile . ')\s*:\~*(\d*).*$')
-            else
-                let pattern = curfile
-            endif
-            " echomsg "file1: " . pattern . "  line:" . line
-        catch
-            " echomsg "file2: " . pattern . "  line:" . line
-        endtry
-
+            catch
+                echomsg "no line"
+            endtry
+            let pattern = curfile
+        endif
     elseif a:flag == 2
-        let pattern = getreg("*")
+        let pattern = substitute(getreg("*"), '\%^\_s*\(.\{-}\)\_s*\%$', '\1', '')
         call inputsave()
         let pattern = input("@", pattern)
         call inputrestore()
+        exec "redraw"
         if len(pattern) < 3 || len(pattern) > 48
             if g:LookupFile_TagExpr != ''
                 exec 'LUTags'
+            else
+                echomsg "not found file tag!"
             endif
             return
         endif
@@ -149,6 +149,8 @@ func! CCTreeOpenFile(flag, cmd) "{{{
     else
         if g:LookupFile_TagExpr == ''
             return
+        else
+            echomsg "not found file tag!"
         endif
         let pattern = a:cmd
         if pattern != ''
@@ -162,6 +164,8 @@ func! CCTreeOpenFile(flag, cmd) "{{{
     if len(pattern) < 3
         if g:LookupFile_TagExpr != ''
             exec 'LUTags'
+        else
+            echomsg "not found file tag!"
         endif
         return
     endif
@@ -183,6 +187,8 @@ func! CCTreeOpenFile(flag, cmd) "{{{
         catch
             if g:LookupFile_TagExpr != ''
                 exec 'LUTags'
+            else
+                echomsg "not found file tag!"
             endif
             return
         endtry

@@ -160,6 +160,9 @@ nmap g7 7gt
 nmap g8 8gt
 nmap g9 9gt
 
+" 如果使能了YCM补全, 直接使用<C-x><C-k>会直接触发digraphs(C-K), 所以在此映射
+imap <C-k> <C-x><C-k>
+
 "非F1~F12快捷键"}}}
 
 "自己定义的命令 "{{{
@@ -678,14 +681,14 @@ let alternateNoDefaultAlternate = 1
 "按q之后按:进入histroy command
 
 " 0~ 1~ workaround: https://github.com/vim/vim/issues/1671
-if has("unix")"{{{
+if has("unix") "{{{
     let s:uname = system("echo -n \"$(uname)\"")
     if !v:shell_error && s:uname == "Linux"
         set t_BE=
         " 影响R concose
         set t_SH=
     endif
-endif"}}}
+endif "}}}
 
 " gu gU 大小写互转
 " gitm89$
