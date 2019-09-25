@@ -5,8 +5,7 @@ cmd_path=`which 0gvim`
 
 if [[ x$cmd_path == x ]]
 then
-    echo "Not found 0gvim"
-    exit 0
+    cmd_path=${BASH_SOURCE[0]}
 fi
 
 if [ ! -L /etc/alternatives/gvim ]
