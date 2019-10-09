@@ -73,7 +73,12 @@ else
     else
         for dir in $SRC_DIR
         do
-            SRCS_INCLUDE="$SRCS_INCLUDE $PRO_DIR/${dir}"
+            path=$PRO_DIR/${dir}
+            if [[ ! -d $path ]]
+            then
+                path=$dir
+            fi
+            SRCS_INCLUDE="$SRCS_INCLUDE $path"
         done
     fi
 
@@ -81,7 +86,12 @@ else
     then
         for dir in $IGN_DIR
         do
-            SRCS_EXCLUDE="$SRCS_EXCLUDE -path $PRO_DIR/${dir} -prune -o"
+            path=$PRO_DIR/${dir}
+            if [[ ! -d $path ]]
+            then
+                path=$dir
+            fi
+            SRCS_EXCLUDE="$SRCS_EXCLUDE -path ${path} -prune -o"
         done
     fi
 fi
@@ -160,5 +170,5 @@ fi
 
 if [[ x$CMD_NTFSND != x ]]
 then
-    $CMD_NTFSND -i $VIM_HOME/res/icons/dialog-information.png hexo TagDB "Generate $(dirname $TAG_DIR) ok!"
+    $CMD_NTFSND -i $VIM_HOME/res/icons/dialog-information.png hexo "TagDB Generate $(dirname $TAG_DIR) ok!"
 fi

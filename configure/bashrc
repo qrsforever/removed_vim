@@ -12,6 +12,15 @@ export PATH=$vim_dir/bin:$PATH
 [ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
 [ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
+if [[ x$TAG_HOME == x ]]
+then
+    if [[ ! -d $HOME/.tags ]]
+    then
+        mkdir $HOME/.tags >/dev/null
+    fi
+    export TAG_HOME=$HOME/.tags
+fi
+
 xpwd()
 {
     tt=`pwd`

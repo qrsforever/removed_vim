@@ -224,8 +224,8 @@ func! MyTags(mode) "{{{
 
     let tagdir = $TAG_HOME
     if len(tagdir) == 0
-        if isdirectory('/projects/tags')
-            let tagdir = '/projects/tags'
+        if isdirectory($HOME . '/.tags')
+            let tagdir = $HOME . '/.tags'
         else
             echomsg "not set TAG_HOME env"
             return
