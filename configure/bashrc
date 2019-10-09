@@ -163,8 +163,8 @@ dlog()
         return
     fi
     logfile=`docker inspect --format='{{.LogPath}}' $container`
-    logdir=`dirname $logfile`
-    echo -ne "[LOG] Clear $logdir/${container}**-json.log (Y/n): "
+    logbase=`basename $logfile`
+    echo -ne "[LOG] Clear $logbase (Y/n): "
     read result
     if [[ x$result != xN ]] && [[ x$result != xn ]]
     then
