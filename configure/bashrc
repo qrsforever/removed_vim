@@ -22,6 +22,7 @@ xpwd()
 alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
 alias xbashrc='vim $cur_fil'
 alias xvimrc='vim $vim_dir/vimrc'
+alias xtmprc='vim ~/.tmp.bash'
 alias xnetstata='netstat -ntpa'
 alias xnetstatl='netstat -ntpl'
 
@@ -162,11 +163,12 @@ dlog()
         return
     fi
     logfile=`docker inspect --format='{{.LogPath}}' $container`
-    echo -ne "\n[LOG] Clear (Y/n): "
+    logdir=`dirname $logfile`
+    echo -ne "[LOG] Clear $logdir/${container}**-json.log (Y/n): "
     read result
     if [[ x$result != xN ]] && [[ x$result != xn ]]
     then
-        truncate -s 0 $logfile
+        sudo truncate -s 0 $logfile
     fi
     docker logs --timestamps --follow $container
 }
