@@ -33,10 +33,10 @@ if [[ ! -f $SCRIPT ]]
 then
     echo "#!/bin/bash" > $SCRIPT
     echo "" >> $SCRIPT
-    echo "SRC_DIRS=." >> $SCRIPT
-    echo "ING_DIRS=.tags" >> $SCRIPT
+    echo "# SRC_DIRS=\"-s xxx -s xxx\"" >> $SCRIPT
+    echo "# ING_DIRS=\"-i xxx -i xxx\"" >> $SCRIPT
     echo "" >> $SCRIPT
-    echo "0db.sh -s \$SRC_DIRS -i \$ING_DIRS -y" >> $SCRIPT
+    echo "0db.sh -y \$SRC_DIRS \$ING_DIRS" >> $SCRIPT
     chmod 777 $SCRIPT
 fi
 

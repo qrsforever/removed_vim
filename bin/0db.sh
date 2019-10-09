@@ -22,14 +22,32 @@ VIM_HOME=`cd $VIM_BIN/..; pwd`
 CC_GLUE=0
 VIM_SYN=0
 
+TAG_DIR=`readlink /proc/$PPID/cwd`
+PRO_DIR=`cd $(dirname $TAG_DIR); pwd`
+
+SRCS_INCLUDE=
+SRCS_EXCLUDE=
+
 while getopts 's:i:t:gy' OPT;
 do
     case $OPT in
         s)
             SRC_DIR="$OPTARG"
+            path=$PRO_DIR/${SRC_DIR}
+            if [[ ! -d $path ]]
+            then
+                path=$SRC_DIR
+            fi
+            SRCS_INCLUDE="$SRCS_INCLUDE $path"
             ;;
         i)
             IGN_DIR="$OPTARG"
+            path=$PRO_DIR/${IGN_DIR}
+            if [[ ! -d $path ]]
+            then
+                path=$SRC_DIR
+            fi
+            SRCS_EXCLUDE="$SRCS_EXCLUDE -path ${path} -prune -o"
             ;;
         t)
             TAG_DIR="$OPTARG"
@@ -48,14 +66,6 @@ done
 
 shift $(($OPTIND - 1))
 
-SRCS_INCLUDE=''
-SRCS_EXCLUDE=''
-
-if [[ x$SRC_DIR == x ]]
-then
-    SRC_DIR=`cd $TAG_DIR/..; pwd`
-fi
-
 if [[ x$COMMAND == x"vim" ]]
 then
     SRCS_INCLUDE=$SRC_DIR
@@ -64,44 +74,15 @@ then
         TAG_DIR="/tmp/tags/$SRC_DIR/.tags"
     fi
 else
-    TAG_DIR=`readlink /proc/$PPID/cwd`
-    PRO_DIR=`cd $(dirname $TAG_DIR); pwd`
-    if [[ x$SRC_DIR == x ]]
+    if [[ x$SRCS_INCLUDE == x ]]
     then
-        __usage__
-        exit -1
-    else
-        for dir in $SRC_DIR
-        do
-            path=$PRO_DIR/${dir}
-            if [[ ! -d $path ]]
-            then
-                path=$dir
-            fi
-            SRCS_INCLUDE="$SRCS_INCLUDE $path"
-        done
+        SRCS_INCLUDE=$PRO_DIR
     fi
-
-    if [[ x$IGN_DIR != x ]]
-    then
-        for dir in $IGN_DIR
-        do
-            path=$PRO_DIR/${dir}
-            if [[ ! -d $path ]]
-            then
-                path=$dir
-            fi
-            SRCS_EXCLUDE="$SRCS_EXCLUDE -path ${path} -prune -o"
-        done
-    fi
+    echo "TAG_DIR = $TAG_DIR"
+    echo "PRO_DIR = $PRO_DIR"
+    echo "SRCS_INCLUDE: $SRCS_INCLUDE"
+    echo "SRCS_EXCLUDE: $SRCS_EXCLUDE"
 fi
-
-# echo "TAG_DIR = $TAG_DIR"
-# echo "SRC_DIR = $SRC_DIR"
-# echo "IGN_DIR = $IGN_DIR"
-# echo "PRO_DIR = $PRO_DIR"
-# echo "SRCS_INCLUDE: $SRCS_INCLUDE"
-# echo "SRCS_EXCLUDE: $SRCS_EXCLUDE"
 
 #-----------------------------------------------------------------
 # Generate filenametags
