@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if [[ x$TAG_HOME == x ]]
+then
+    echo "not set TAG_HOME env"
+    exit 0
+fi
+
+CUR_DIR=`pwd`
+
+if [[ $CUR_DIR == $TAG_HOME ]]
+then
+    if [[ $# == 0 ]] || [[ ! -d $1 ]]
+    then
+        echo "Usage: $0 code_dir"
+        exit 0
+    fi
+    CODE_DIR=$1
+else
+    CODE_DIR=$CUR_DIR
+fi
+
+TAG_NAME=`basename $CODE_DIR`
+
+if [[ ! -d $CODE_DIR/.tags ]]
+then
+    mkdir $CODE_DIR/.tags
+fi
+
+SCRIPT=$CODE_DIR/.tags/update.sh
+
+if [[ ! -f $SCRIPT ]]
+then
+    echo "#!/bin/bash" > $SCRIPT
+    echo "" >> $SCRIPT
+    echo "SRC_DIRS=." >> $SCRIPT
+    echo "ING_DIRS=.tags" >> $SCRIPT
+    echo "" >> $SCRIPT
+    echo "0db.sh -s \$SRC_DIRS -i \$ING_DIRS -y" >> $SCRIPT
+    chmod 777 $SCRIPT
+fi
+
+if [[ ! -L $TAG_HOME/$TAG_NAME ]]
+then
+    ln -s $CODE_DIR/.tags $TAG_HOME/$TAG_NAME
+fi
