@@ -56,9 +56,18 @@ Use:
     cd ./bundle/LeaderF; ./install.sh
 
 12. jupyter
+
     ```
-    sudo pip3 install jupyter_contrib_nbextensions
-    jupyter nbextensions_configurator enable --user
+    sudo pip3 install -U \
+        jupyter \
+        jupyter_contrib_nbextensions \
+        jupyter_nbextensions_configurator \
+        -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+    sudo pip3 install -U jupyterthemes (可选)
+
+    sudo jupyter contrib nbextension install
+    sudo jupyter nbextensions_configurator enable
     # Now clone the repository
     cd $(jupyter --data-dir)/nbextensions
     git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
