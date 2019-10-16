@@ -1,5 +1,13 @@
 Use:
 
+0. 中文字体(尤其登陆远端服务器)
+
+    下载SimHei.ttf: https://pan.baidu.com/s/15iwAcVLCdOnCgRRZ1rtauQ 提取码: mpts 
+
+    mkdir -p ~/.fonts
+    mv SimHei.ttf ~/.fonts
+    fc-cache -vf  # 刷新系统字体缓存
+
 1. 要求vim版本：vim8.0 or high 
 
 2. 管理插件: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
