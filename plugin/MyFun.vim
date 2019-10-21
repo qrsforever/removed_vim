@@ -153,6 +153,6 @@ function! s:_MyDoSave()
     call setreg('p', 'a'. expand('%:p'))
 
     "@p
-    exec 'pwd'
+    echo "[" . hostname() . '] ' . getcwd()
 endfunction
 "}}}
