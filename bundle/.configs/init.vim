@@ -67,7 +67,7 @@ MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'Shougo/vimproc.vim'
 MyPlugin 'Shougo/vimshell.vim'
 MyPlugin 'majutsushi/tagbar'
-MyPlugin 'Lokaltog/vim-powerline'
+MyPlugin 'qrsforever/vim-powerline'
 "}}}
 
 "{{{ 搜索类
