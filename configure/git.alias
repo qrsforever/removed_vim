@@ -1,0 +1,10 @@
+#!/bin/bash
+
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.st status
+git config --global alias.last 'log -1'
+git config --global alias.logd "log --color -p --full-diff"
+git config --global alias.logg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.logs "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cblue %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --no-merges --stat --date=format:'%Y-%m-%d %H:%M:%S'"
