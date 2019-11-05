@@ -85,6 +85,19 @@ dirm()
     docker rmi $image
 }
 
+dii()
+{
+    if [[ x$1 == x ]]
+    then
+        docker images
+        echo -ne "\n[INFO] Input ID: "
+        read image
+    else
+        image=$@
+    fi
+    docker inspect $image
+}
+
 alias dc='docker container ls -a'
 alias dcrma='docker container prune'
 dcrm()
@@ -99,6 +112,19 @@ dcrm()
     fi
     docker container stop $container
     docker container rm $container
+}
+
+dcc()
+{
+    if [[ x$1 == x ]]
+    then
+        docker container ls -a
+        echo -ne "\n[INFO] Input ID: "
+        read container
+    else
+        container=$@
+    fi
+    docker inspect $container
 }
 
 dcup()
@@ -159,7 +185,7 @@ drun()
     then
         return
     fi
-    if [[ x$bashcmd == xbash ]]
+    if [[ x$bashcmd == xsh ]]
     then
         docker run -it --rm --runtime nvidia --entrypoint /bin/bash $image
     else
