@@ -170,26 +170,28 @@ dvrm()
 
 drun()
 {
-    args=($@)
-    image=$1
+    if [[ x$1 == xsh ]]
+    then
+        image=$2
+    else
+        image=$1
+    fi
     if [[ x$image == x ]] || [[ x$image != x && "${#image}" -ne "12" ]]
     then
-        bashcmd=$image
         docker images
         echo -ne "\n[RUN] Input ID: "
         read image
-    else
-        bashcmd=${args[@]: 1:$#}
     fi
     if [[ x$image == x ]]
     then
-        return
+        echo "Not input image id"
+        exit 0 
     fi
-    if [[ x$bashcmd == xsh ]]
+    if [[ x$1 == xsh ]]
     then
         docker run -it --rm --runtime nvidia --entrypoint /bin/bash $image
     else
-        docker run -it -d --runtime nvidia $image $bashcmd
+        docker run -it -d --runtime nvidia $image
     fi
 }
 
