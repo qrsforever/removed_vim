@@ -7,6 +7,7 @@ con_dir=`dirname $cur_fil`
 vim_dir=`dirname $con_dir`
 
 export PATH=$vim_dir/bin:$PATH
+export MXNET_GLUON_REPO=https://apache-mxnet.s3.cn-north-1.amazonaws.com.cn
 
 [ -f /data/opt/env.sh ] && source /data/opt/env.sh
 [ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash

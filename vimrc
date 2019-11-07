@@ -695,3 +695,5 @@ endif "}}}
 
 " workaround for autoread not work
 au FocusGained,BufEnter * :silent! !
+
+au BufRead,BufNewFile *.jsonnet set filetype=json
