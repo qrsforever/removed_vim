@@ -57,7 +57,7 @@ docker()
     then
         docker_tag_search $2;
     else
-        command docker $@;
+        command docker "$@";
     fi
 }
 
