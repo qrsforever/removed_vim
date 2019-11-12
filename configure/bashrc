@@ -51,6 +51,8 @@ alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
 ########### Docker ###########
 
+alias dst='docker stats'
+
 docker()
 {
     if [[ "${1}" = "tags" ]]
@@ -99,7 +101,7 @@ dii()
     docker inspect $image
 }
 
-alias dc='docker container ls -a'
+alias dc='docker container ls -a --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}"'
 alias dcrma='docker container prune'
 dcrm()
 {
