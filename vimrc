@@ -169,13 +169,13 @@ command XONE 0,$s/\n//       "多行变一行
 "自己定义的命令 "}}}
 
 "窗口配置"{{{
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
-
 " 让terminal进入norm模式
-" tnoremap <Esc> <C-W>N
+tnoremap <Esc> <C-W>N
+tnoremap <C-j> <C-W>j
+tnoremap <C-k> <C-W>k
+tnoremap <C-h> <C-W>h
+tnoremap <C-l> <C-W>l
+
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
@@ -428,11 +428,12 @@ set splitright
 set wildignore=*.o,*~,*.pyc,*.sh,*.png,.git\*,.hg\*,.svn\*
 
 "简单配置"}}}
-
+"
 "Gui选项 放到.gvimrc"{{{
 set tabline=%!MyTabLine()  " custom tab pages line
 if has("gui_running")
     "set noruler
+    set termguicolors
     set guifont=Monospace\ 12  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
     set guioptions=
@@ -473,6 +474,11 @@ if has("gui_running")
     map! <M-9> <esc>9gt
 endif
 "Gui选项 放到.gvimrc"}}}
+ 
+"{{{ Terminal终端
+set termwinscroll=5000
+au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | setlocal filetype=terminal | endif
+"}}}
 
 "高亮 注释代码的颜色"{{{
 "hi Comment ctermfg=6
