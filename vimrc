@@ -477,7 +477,12 @@ endif
  
 "{{{ Terminal终端
 set termwinscroll=5000
-au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | setlocal filetype=terminal | endif
+au TerminalOpen * if &buftype == 'terminal'
+            \ | setlocal bufhidden=hide
+            \ | setlocal laststatus=0
+            \ | setlocal noshowcmd
+            \ | setlocal filetype=terminal
+            \ | endif
 "}}}
 
 "高亮 注释代码的颜色"{{{
