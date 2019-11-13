@@ -65,7 +65,6 @@ MyPlugin 'vim-scripts/EasyMotion'
 MyPlugin 'scrooloose/nerdtree'
 MyPlugin 'scrooloose/nerdcommenter'
 MyPlugin 'Shougo/vimproc.vim'
-MyPlugin 'Shougo/vimshell.vim'
 MyPlugin 'majutsushi/tagbar'
 MyPlugin 'qrsforever/vim-powerline'
 "}}}
@@ -116,6 +115,8 @@ MyPlugin 'qrsforever/vim-markdown-toc'
 "{{{ 淘汰类
 " 可用LeaderBuffer取代之
 " MyPlugin 'vim-scripts/DoxygenToolkit.vim'
+" vim8.0 above 使用terminal取代
+" MyPlugin 'Shougo/vimshell.vim'
 " MyPlugin 'vim-scripts/vimim'
 " MyPlugin 'jlanzarotta/bufexplorer'
 " MyPlugin 'errormarker.vim'

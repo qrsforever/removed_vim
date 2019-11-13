@@ -59,24 +59,20 @@ vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 nmap <unique> <silent> <S-F1>       :lnext<CR>
 nmap <unique> <silent> <S-F2>       :cprevious<CR>
 nmap <unique> <silent> <S-F3>       :cnext<CR>
-nmap <unique> <silent> <S-F9>       :MyVimShellS<CR>
 
 imap <unique> <silent> <S-F1>  <ESC>:lnext<CR>
 imap <unique> <silent> <S-F2>  <ESC>:cprevious<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cnext<CR>
-imap <unique> <silent> <S-F9>  <ESC>:MyVimShellS<CR>
 
 " "Ctrl"
 nmap <unique> <silent> <C-F1>       :lprevious<CR>
 nmap <unique> <silent> <C-F2>       :tprevious<CR>
 nmap <unique> <silent> <C-F3>       :tnext<CR>
-nmap <unique> <silent> <C-F9>       :MyVimShellV<CR>
 nmap <unique> <silent> <C-F10>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <C-F1>  <ESC>:lprevious<CR>
 imap <unique> <silent> <C-F2>  <ESC>:tprevious<CR>
 imap <unique> <silent> <C-F3>  <ESC>:tnext<CR>
-imap <unique> <silent> <C-F9>  <ESC>:MyVimShellV<CR>
 imap <unique> <silent> <C-F10> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 "Shift and Ctrl &term不同特殊映射 ctrl+F1不可用
@@ -436,18 +432,18 @@ set wildignore=*.o,*~,*.pyc,*.sh,*.png,.git\*,.hg\*,.svn\*
 "Gui选项 放到.gvimrc"{{{
 set tabline=%!MyTabLine()  " custom tab pages line
 if has("gui_running")
-   "set noruler
+    "set noruler
     set guifont=Monospace\ 12  "在Linux下设置字体的命令是：
-   "set guicursor=a:blinkon0 "停止光标闪烁
-   set guioptions=
-   "set guioptions=e    " GUI Tabbar
-   "set guioptions+=m   " 菜单栏
-   "set guioptions+=T   " 工具栏
-   " set guioptions+=b   " 底边滚动条
-   " set guioptions+=l   " 左边滚动条
-   "set guioptions+=L   " 垂直分隔窗口左边滚动条
-   " set guioptions+=r   " 右边滚动条
-   "set guioptions+=R   " 垂直分隔窗口右边滚动条
+    "set guicursor=a:blinkon0 "停止光标闪烁
+    set guioptions=
+    "set guioptions=e    " GUI Tabbar
+    "set guioptions+=m   " 菜单栏
+    "set guioptions+=T   " 工具栏
+    " set guioptions+=b   " 底边滚动条
+    " set guioptions+=l   " 左边滚动条
+    "set guioptions+=L   " 垂直分隔窗口左边滚动条
+    " set guioptions+=r   " 右边滚动条
+    "set guioptions+=R   " 垂直分隔窗口右边滚动条
     set mousemodel=popup
     map! <S-Insert> <MiddleMouse>
     "MiddleMouse: 粘贴
