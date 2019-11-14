@@ -156,3 +156,33 @@ function! s:_MyDoSave()
     exec 'pwd'
 endfunction
 "}}}
+
+"{{{ MyOpenTerm
+command! MyTermOpen call s:_MyTermOpen()
+function! s:_MyTermOpen()
+    let tnr = 0
+    let bnr = bufnr('!/bin/bash')
+    if bnr == -1
+        exec 'tab terminal'
+        return
+    endif
+    for i in range(tabpagenr("$"))
+        if index(tabpagebuflist(i + 1), bnr) != -1
+            let tnr = i + 1
+            break
+        endif
+    endfor
+    if tnr == 0
+        execute "$tab split +buffer" . bnr
+    else
+        execute tnr . "tabnext"
+        let wnr = 1
+        let tablist = tabpagebuflist(tnr)
+        if type(tablist) == 3
+            let wnr = index(tabpagebuflist(tnr), bnr) + 1
+        endif
+        execute wnr . "wincmd w"
+        execute 'norm i'
+    endif
+endfunction
+"}}}

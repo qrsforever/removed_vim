@@ -479,10 +479,10 @@ endif
 set termwinscroll=5000
 au TerminalOpen * if &buftype == 'terminal'
             \ | setlocal bufhidden=hide
-            \ | setlocal laststatus=0
             \ | setlocal noshowcmd
             \ | setlocal filetype=terminal
             \ | endif
+nmap gb :silent! MyTermOpen<CR>
 "}}}
 
 "高亮 注释代码的颜色"{{{
