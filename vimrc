@@ -156,6 +156,17 @@ nmap g7 7gt
 nmap g8 8gt
 nmap g9 9gt
 
+tmap <M-0> <esc>:tabl<CR>
+tmap <M-1> <esc>1gt
+tmap <M-2> <esc>2gt
+tmap <M-3> <esc>3gt
+tmap <M-4> <esc>4gt
+tmap <M-5> <esc>5gt
+tmap <M-6> <esc>6gt
+tmap <M-7> <esc>7gt
+tmap <M-8> <esc>8gt
+tmap <M-9> <esc>9gt
+
 " 如果使能了YCM补全, 直接使用<C-x><C-k>会直接触发digraphs(C-K), 所以在此映射
 imap <C-k> <C-x><C-k>
 
@@ -428,7 +439,23 @@ set splitright
 set wildignore=*.o,*~,*.pyc,*.sh,*.png,.git\*,.hg\*,.svn\*
 
 "简单配置"}}}
-"
+ 
+"{{{ Terminal终端
+tmap <expr> <C-l> SendToTerm("\<C-l>")
+func SendToTerm(what)
+  call term_sendkeys('', a:what)
+  return ''
+endfunc
+set termwinscroll=5000
+au TerminalOpen * if &buftype == 'terminal'
+            \ | setlocal bufhidden=hide
+            \ | setlocal noshowcmd
+            \ | setlocal filetype=terminal
+            \ | endif
+nmap <C-W>t :silent! MyTermOpen<CR>
+imap <C-W>t <Esc>:silent! MyTermOpen<CR>
+"}}}
+
 "Gui选项 放到.gvimrc"{{{
 set tabline=%!MyTabLine()  " custom tab pages line
 if has("gui_running")
@@ -474,16 +501,6 @@ if has("gui_running")
     map! <M-9> <esc>9gt
 endif
 "Gui选项 放到.gvimrc"}}}
- 
-"{{{ Terminal终端
-set termwinscroll=5000
-au TerminalOpen * if &buftype == 'terminal'
-            \ | setlocal bufhidden=hide
-            \ | setlocal noshowcmd
-            \ | setlocal filetype=terminal
-            \ | endif
-nmap gb :silent! MyTermOpen<CR>
-"}}}
 
 "高亮 注释代码的颜色"{{{
 "hi Comment ctermfg=6

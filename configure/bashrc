@@ -179,7 +179,7 @@ drun()
     else
         image=$1
     fi
-    if [[ x$image == x ]] || [[ x$image != x && "${#image}" -ne "12" ]]
+    if [[ x$image == x ]]
     then
         docker images
         echo -ne "\n[RUN] Input ID: "
