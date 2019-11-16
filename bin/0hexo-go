@@ -43,7 +43,6 @@ __echo__()
 
 if [[ x$HEXO_CMD == x ]]
 then
-    __echo__ "cmd not found: hexo"
     exit 0
 fi
 
@@ -78,6 +77,8 @@ fi
 if [[ x"md" != x${fileME##*.} ]]
 then
     __echo__ "file not md: $fileME"
+
+export data=/data
     exit 0
 fi
 
