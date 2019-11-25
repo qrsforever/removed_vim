@@ -29,43 +29,43 @@
 "NERDTreeStatusline          窗口状态栏
 "NERDTreeWinPos              窗口位置（'left' or 'right'）
 "NERDTreeWinSize             窗口宽
-let NERDTreeHijackNetrw=0                            "使用:edit命令时只打开一个NerdTree
-let NERDChristmasTree=0                              "让Tree把自己给装饰得多姿多彩漂亮点
-let NERDTreeAutoCenter=1                             "控制当光标移动超过一定距离时，是否自动将焦点调整到屏中心
-let NERDTreeAutoCenterThreshold=3
-let NERDTreeHighlightCursorline=1                    "是否高亮显示光标所在行
-let NERDTreeMouseMode=1                              "指定鼠标模式
-let NERDTreeShowBookmarks=0                          "默认显示书签列表
-let NERDTreeShowFiles=1                              "默认显示文件
-let NERDTreeShowHidden=0                             "默认not显示隐藏文件
-let NERDTreeShowLineNumbers=0                        "默认是否显示行号
-let NERDTreeWinPos='left'                            "窗口位置left
-let NERDTreeWinSize=36                               "窗口宽
-let NERDTreeStatusline=1
-let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=0
-let NERDTreeDirArrows=1
+let g:NERDTreeHijackNetrw=0
+let g:NERDChristmasTree=0
+let g:NERDTreeAutoCenter=1
+let g:NERDTreeAutoCenterThreshold=3
+let g:NERDTreeHighlightCursorline=1
+let g:NERDTreeMouseMode=1
+let g:NERDTreeShowBookmarks=0
+let g:NERDTreeShowFiles=1
+let g:NERDTreeShowHidden=0
+let g:NERDTreeShowLineNumbers=0
+let g:NERDTreeWinPos='left'
+let g:NERDTreeWinSize=36
+let g:NERDTreeStatusline=1
+let g:NERDTreeChDirMode=2
+let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeDirArrows=1
 " files to ignore "
-let NERDTreeIgnore = ['.*\.o$']
-let NERDTreeIgnore += ['.*\.bak$']
-let NERDTreeIgnore += ['.*\.out$', '.*__pycache__$']
-let NERDTreeIgnore += ['.*\.so$', '.*\.a$', '.*\.dll$']
+let g:NERDTreeIgnore = ['.*\.o$']
+let g:NERDTreeIgnore += ['.*\.bak$']
+let g:NERDTreeIgnore += ['.*\.out$', '.*__pycache__$']
+let g:NERDTreeIgnore += ['.*\.so$', '.*\.a$', '.*\.dll$']
 " audio/video "
-let NERDTreeIgnore += ['.*\.ogv$', '.*\.ogg$', '.*\.mp3$', '.*\.avi$']
-let NERDTreeIgnore += ['.*\.mp4$', '.*\.wmv$', '.*\.wma$', '.*\.mp([eE])?g$']
+let g:NERDTreeIgnore += ['.*\.ogv$', '.*\.ogg$', '.*\.mp3$', '.*\.avi$']
+let g:NERDTreeIgnore += ['.*\.mp4$', '.*\.wmv$', '.*\.wma$', '.*\.mp([eE])?g$']
 " pics "
-let NERDTreeIgnore += ['.*\.[pP][nN][gG]$', '.*\.[jJ][pP][gG]$', '.*\.[gG][iI][fF]$']
+let g:NERDTreeIgnore += ['.*\.[pP][nN][gG]$', '.*\.[jJ][pP][gG]$', '.*\.[gG][iI][fF]$']
 " tarballs "
-let NERDTreeIgnore += ['.*\.bz2$', '.*\.gz$', '.*\.tar$', '.*\.zip$', '.*\.tgz$', '.*\.rar$']
+let g:NERDTreeIgnore += ['.*\.bz2$', '.*\.gz$', '.*\.tar$', '.*\.zip$', '.*\.tgz$', '.*\.rar$']
 " packages "
-let NERDTreeIgnore += ['.*\.deb$', '.*\.ipk$', '.*\.rpm$', '.*\.tbz$']" flash "
-let NERDTreeIgnore += ['.*\.[sS][wW][fF]$']
+let g:NERDTreeIgnore += ['.*\.deb$', '.*\.ipk$', '.*\.rpm$', '.*\.tbz$']" flash "
+let g:NERDTreeIgnore += ['.*\.[sS][wW][fF]$']
 " libtool archives and objs "
-let NERDTreeIgnore += ['.*\.lo$', '.*\.la']
+let g:NERDTreeIgnore += ['.*\.lo$', '.*\.la']
 " java's binary files "
-let NERDTreeIgnore += ['.*\.class']
+let g:NERDTreeIgnore += ['.*\.class']
 " tags "
-let NERDTreeIgnore += ['tags']
+let g:NERDTreeIgnore += ['tags']
 
 " nnoremap <silent> <leader>f :NERDTreeToggle<CR>
 " o.......打开所选文件或目录    ( 常用 )
@@ -79,6 +79,9 @@ let NERDTreeIgnore += ['tags']
 " gs......类似s, 但光标仍然停留在NERD_tree
 " O.......递归打开所选目录
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
+
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
 
 "}}}
 
