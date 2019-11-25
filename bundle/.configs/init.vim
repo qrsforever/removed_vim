@@ -81,7 +81,7 @@ MyPlugin 'qrsforever/vim-bookmarks'
 "{{{ 补全类
 if executable('clang')
     let g:youcompleteme_enable = 1
-    MyPlugin 'Valloric/YouCompleteMe'
+    MyPlugin 'ycm-core/YouCompleteMe'
     MyPlugin 'davidhalter/jedi-vim'
 endif
 

@@ -40,4 +40,4 @@ lua
 
 [lua](https://jaist.dl.sourceforge.net/project/luabinaries/5.3.5/Docs%20and%20Sources/lua-5.3.5_Sources.tar.gz)
 
-    git clone git@github.com:qrsforever/lua.git 
+    git clone https://github.com/qrsforever/lua.git 
