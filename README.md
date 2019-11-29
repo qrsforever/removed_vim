@@ -102,3 +102,10 @@ Use:
 15. 画动物
   
     sudo apt-get install boxes
+
+
+# error:
+
+1. Gtk-Message: Failed to load module "canberra-gtk-module"
+
+    sudo apt install libcanberra-gtk-module

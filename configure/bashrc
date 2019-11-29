@@ -75,6 +75,7 @@ docker_tag_search()
 }
 
 alias di='docker images'
+alias dirma='docker rmi `docker images | grep  "<none>" | awk "{print $3}"`'
 dirm()
 {
     if [[ x$1 == x ]]
