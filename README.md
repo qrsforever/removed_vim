@@ -2,6 +2,9 @@ Use:
 
 0. 中文字体(尤其登陆远端服务器)
 
+    sudo locale-gen zh_CN.UTF-8
+    sudo locale -a | grep "zh"
+
     下载SimHei.ttf: https://pan.baidu.com/s/15iwAcVLCdOnCgRRZ1rtauQ 提取码: mpts 
 
     mkdir -p ~/.fonts

@@ -42,7 +42,7 @@ alias l='ls -CF'
 
 alias sl='ls'
 alias rm='rm -i'
-alias sudo='sudo env PATH=$PATH'
+# alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=.tags --exclude=tags'
 
 alias vi0='vim --noplugin'
@@ -102,7 +102,7 @@ dii()
 }
 
 alias dc='docker container ls -a --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}"'
-alias dcrma='docker container prune'
+alias dcrma='docker container prune -f'
 dcrm()
 {
     if [[ x$1 == x ]]
