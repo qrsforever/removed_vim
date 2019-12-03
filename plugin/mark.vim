@@ -205,7 +205,8 @@ nnoremap          <silent> #   :if !<sid>SearchNext("b")<bar>execute "norm! #"<b
 
 command! -nargs=? Mark call s:DoMark(<f-args>)
 
-autocmd! BufWinEnter,WinEnter * silent call s:UpdateMark()
+" autocmd! BufWinEnter,WinEnter * silent call s:UpdateMark()
+autocmd! WinEnter * silent call s:UpdateMark()
 
 " Functions
 
