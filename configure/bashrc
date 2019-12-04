@@ -243,8 +243,13 @@ dlog()
     fi
     logfile=`docker inspect --format='{{.LogPath}}' $container`
     logbase=`basename $logfile`
-    echo -ne "[LOG] Clear $logbase (Y/n): "
-    read result
+    if [[ x$2 == x ]]
+    then
+        echo -ne "[LOG] Clear $logbase (Y/n): "
+        read result
+    else
+        result=$2
+    fi
     if [[ x$result != xN ]] && [[ x$result != xn ]]
     then
         sudo truncate -s 0 $logfile
