@@ -245,11 +245,6 @@ endfunc "}}}
 
 command! -bang -nargs=? -complete=dir MyUpdateTags call s:_MyUpdateTags(<q-args>)
 func! s:_MyUpdateTags(tagdir) "{{{
-    if !vimshell#util#has_vimproc()
-        echomsg "Need vimproc plugin supported!"
-        return
-    endif
-
     if len(a:tagdir) == 0
         echomsg "Not set TAG_HOME!!!"
         return

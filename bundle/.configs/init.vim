@@ -98,6 +98,10 @@ MyPlugin 'qrsforever/DrawIt'
 if executable('jupyter')
     MyPlugin 'qrsforever/jupyter-vim'
 endif
+MyPlugin 'skywind3000/asyncrun.vim'
+if $RSYNC
+    MyPlugin 'qrsforever/vim-sync'
+endif
 MyPlugin 'qrsforever/vim-align'
 MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'
@@ -160,8 +164,6 @@ MyPlugin 'qrsforever/vim-markdown-toc'
 " MyPlugin 'ternjs/tern_for_vim'
 " MyPlugin 'othree/html5.vim'
 " MyPlugin 'posva/vim-vue'}}}
-"
-" MyPlugin 'skywind3000/asyncrun.vim'
 "}}}
 
 call vundle#end()

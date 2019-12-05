@@ -42,6 +42,9 @@ alias vi0='vim --noplugin'
 alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
+alias rvim='RSYNC=1 vim'
+alias rgvim='RSYNC=1 gvim'
+
 ########### Utils ############
 xpwd()
 {
