@@ -22,13 +22,6 @@ then
     export TAG_HOME=$HOME/.tags
 fi
 
-xpwd()
-{
-    tt=`pwd`
-    echo $tt
-    export tt
-}
-
 alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
 alias xbashrc='vim $cur_fil'
 alias xvimrc='vim $vim_dir/vimrc'
@@ -50,6 +43,18 @@ alias vi='vim'
 alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
 
 ########### Utils ############
+xpwd()
+{
+    tt=`pwd`
+    if [[ x$(which xsel) == x ]]
+    then
+        echo $tt
+        export tt
+    else
+        echo $tt | xsel
+    fi
+}
+
 xps()
 {
     if [[ x$1 == x ]]
@@ -58,6 +63,31 @@ xps()
     else
         ps -eo pid,args | grep "$1" | grep -v grep
     fi
+}
+
+xgrep()
+{
+    exclude_dirs=
+    tmp=$(pwd)/.grepignore
+    if [[ -f $tmp ]]
+    then
+        exclude_files="{tags"
+        exclude_dirs="{\.svn,\.git,\.tags"
+        while read line
+        do
+            fty=`echo $line | cut -d\  -f1`
+            pat=`echo $line | cut -d\  -f2`
+            if [[ x$fty == xd ]] || [[ x$fty == x ]]
+            then
+                exclude_dirs="${exclude_dirs},${pat}"
+            else
+                exclude_files="${exclude_files},${pat}"
+            fi
+        done < $tmp
+        exclude_dirs="${exclude_dirs}}"
+        exclude_files="${exclude_files}}"
+    fi
+    eval egrep --color=auto --exclude-dir=${exclude_dirs} -I -rin $*
 }
 
 ########### Docker ###########
@@ -200,7 +230,7 @@ drun()
     if [[ x$image == x ]]
     then
         echo "Not input image id"
-        exit 0 
+        exit 0
     fi
     if [[ x$1 == xsh ]]
     then
