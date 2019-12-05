@@ -12,10 +12,10 @@ cd $(dirname $0)
 
 if [[ 'upload' == $1 ]]
 then
-    rsync -azcul --relative "$2/$3" "$remote_hostname:$remote_relative_path"
+    rsync -azcul --exclude '.git' --relative "$2/$3" "$remote_hostname:$remote_relative_path"
 elif [[ 'download' == $1 ]]
 then
-    rsync -azcul "$remote_hostname:$remote_relative_path/$2/$3" "$2/$3"
+    rsync -azcul --exclude '.git' "$remote_hostname:$remote_relative_path/$2/$3" "$2/$3"
 fi
 
 cd -

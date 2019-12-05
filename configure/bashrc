@@ -287,7 +287,7 @@ dlog()
     then
         sudo truncate -s 0 $logfile
     fi
-    docker logs --timestamps --follow $container
+    docker logs --follow $container
 }
 
 dexe()
