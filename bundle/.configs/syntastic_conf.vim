@@ -30,7 +30,10 @@ let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["go", "html
 " sudo apt-get install python-flake8
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--ignore=' .
-    \ 'E128,E221,E226,E231,E251,E261,E266,E302,E303,E305,E501,' .
+    \ 'E123,E126,E127,E128,' .
+    \ 'E221,E226,E228,E231,E251,E261,E266,' . 
+    \ 'E302,E303,E305,' .
+    \ 'E401,E501,' .
     \ 'W291,W293'
 
 " let g:syntastic_quiet_messages = { "level": "warnings" }
