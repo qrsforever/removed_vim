@@ -94,14 +94,17 @@ MyPlugin 'honza/vim-snippets'
 "}}}
 
 "{{{ 工具类
-MyPlugin 'qrsforever/DrawIt'
 if executable('jupyter')
     MyPlugin 'qrsforever/jupyter-vim'
 endif
-MyPlugin 'skywind3000/asyncrun.vim'
+if executable('jsonnet')
+    MyPlugin 'google/vim-jsonnet'
+endif
 if $RSYNC
     MyPlugin 'qrsforever/vim-sync'
 endif
+MyPlugin 'qrsforever/DrawIt'
+MyPlugin 'skywind3000/asyncrun.vim'
 MyPlugin 'qrsforever/vim-align'
 MyPlugin 'vim-scripts/vcscommand.vim'
 MyPlugin 'szw/vim-maximizer'

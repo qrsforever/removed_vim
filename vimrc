@@ -720,4 +720,5 @@ endif "}}}
 " workaround for autoread not work
 au FocusGained,BufEnter * :silent! !
 
-au BufRead,BufNewFile *.jsonnet set filetype=json
+" use jsonnet.vim
+" au BufRead,BufNewFile *.jsonnet set filetype=json

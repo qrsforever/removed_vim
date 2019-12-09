@@ -103,6 +103,11 @@ Use:
   
     sudo apt-get install boxes
 
+16. jsonnet
+
+    编译安装: https://github.com/google/jsonnet
+    make -j4; sudo make install
+    sudo pip3 install jsonnet
 
 # error:
 
