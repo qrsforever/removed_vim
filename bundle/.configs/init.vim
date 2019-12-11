@@ -8,6 +8,7 @@ let g:fork_maps = {
     \ 'qrsforever/jupyter-vim': 'broesler/jupyter-vim',
     \ 'qrsforever/vim-markdown-toc': 'mzlogin/vim-markdown-toc',
     \ 'qrsforever/vim-bookmarks': 'MattesGroeger/vim-bookmarks',
+    \ 'qrsforever/vim-jsonnet': 'google/vim-jsonnet',
 \}
 
 " For load plugins
@@ -98,7 +99,7 @@ if executable('jupyter')
     MyPlugin 'qrsforever/jupyter-vim'
 endif
 if executable('jsonnet')
-    MyPlugin 'google/vim-jsonnet'
+    MyPlugin 'qrsforever/vim-jsonnet'
 endif
 if $RSYNC
     MyPlugin 'qrsforever/vim-sync'
