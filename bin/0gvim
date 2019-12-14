@@ -8,6 +8,12 @@ then
     cmd_path=${BASH_SOURCE[0]}
 fi
 
+if [[ x$RSYNC == x1 ]]
+then
+    vim -g $@
+    exit 0
+fi
+
 if [ ! -L /etc/alternatives/gvim ]
 then
     sudo update-alternatives --install /usr/local/bin/gvim gvim $cmd_path 100

@@ -76,6 +76,7 @@ Use:
         -i https://pypi.tuna.tsinghua.edu.cn/simple
 
     sudo pip3 install -U jupyterthemes (可选)
+    sudo pip3 install -U ipywidgets
 
     sudo jupyter contrib nbextension install
     sudo jupyter nbextensions_configurator enable
@@ -84,6 +85,7 @@ Use:
     git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
     chmod -R go-w vim_binding
     jupyter nbextension enable vim_binding/vim_binding
+    jupyter nbextension enable --py widgetsnbextension
 
     配置jupyter
     jupyter notebook --generate-config

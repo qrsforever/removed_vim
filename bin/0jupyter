@@ -1,0 +1,35 @@
+#!/bin/bash
+
+currdir=`pwd`
+
+if [[ x$BROWSER == x ]]
+then
+    export BROWSER=opera
+fi
+
+if [[ x$1 != x ]]
+then
+    jupyter notebook --notebook-dir=$currdir --port=9182 >/dev/null 2>&1 &
+    exit 0
+fi
+
+pidfile=/tmp/jupyter_notebook_pid
+
+if [ ! -f $pidfile ]
+then
+    touch $pidfile
+fi
+
+pid=`cat $pidfile`
+
+if [[ x$pid != x ]]
+then
+    ret=`ps -p $pid | tail -n 1 | grep jupyter`
+    if [[ x$ret != x ]]
+    then
+        kill -9 $pid
+    fi
+fi
+
+jupyter notebook --notebook-dir=$currdir --port=9182 >/dev/null 2>&1 &
+echo "$!" > /tmp/jupyter_notebook_pid

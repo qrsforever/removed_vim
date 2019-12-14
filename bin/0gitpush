@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cmd=`which expect`
+
+if [[ x$cmd == x ]]
+then
+    sudo apt-get install expect
+fi
+
+if [[ ! -f ~/.qrsgit.pass ]]
+then
+    echo "no password"
+    exit
+fi
+
+PASSWD=`cat ~/.qrsgit.pass`
+
+/usr/bin/expect << ENDOFEXPECT
+    set timeout 30
+
+    spawn git push
+
+    expect { 
+        "Username" { send "qrsforever\r"; exp_continue }
+        "Password" { send "$PASSWD\r"; exp_continue } 
+    }
+ENDOFEXPECT

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ x$# != x1 ]]
+then
+    echo "0gitsvn url"
+    exit 0
+fi
+
+url=$1
+
+echo "svn co ${url/tree\/master/trunk}"
+svn co ${url/tree\/master/trunk}
