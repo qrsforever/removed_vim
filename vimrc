@@ -453,7 +453,7 @@ au TerminalOpen * if &buftype == 'terminal'
             \ | setlocal filetype=terminal
             \ | endif
 nmap <C-W>t :silent! MyTermOpen<CR>
-imap <C-W>t <Esc>:silent! MyTermOpen<CR>
+" imap <C-W>t <Esc>:silent! MyTermOpen<CR>
 "}}}
 
 "Gui选项 放到.gvimrc"{{{
