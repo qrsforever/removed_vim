@@ -461,7 +461,7 @@ set tabline=%!MyTabLine()  " custom tab pages line
 if has("gui_running")
     "set noruler
     set termguicolors
-    set guifont=Monospace\ 14  "在Linux下设置字体的命令是：
+    set guifont=Monospace\ 12  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
     set guioptions=
     "set guioptions=e    " GUI Tabbar
