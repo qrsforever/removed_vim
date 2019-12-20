@@ -177,6 +177,8 @@ command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge        "消除文件中的^M字符
 command XONE 0,$s/\n//       "多行变一行
+" sudo usermod -a -G sudo $USER
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "自己定义的命令 "}}}
 
 "窗口配置"{{{
