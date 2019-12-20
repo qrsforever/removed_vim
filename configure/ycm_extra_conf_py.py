@@ -2,6 +2,7 @@ import os
 
 DIR_OF_THIS_SCRIPT = os.path.abspath(os.path.dirname(__file__))
 
+
 def PythonSysPath(**kwargs):
     sys_path = kwargs['sys_path']
 
