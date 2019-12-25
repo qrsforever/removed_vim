@@ -263,6 +263,9 @@ drun()
     if [[ x$1 == xsh ]]
     then
         docker run -it --rm --runtime nvidia --entrypoint /bin/bash $image
+    elif [[ x$1 == xhost ]]
+    then
+        docker run -it --rm --network host --runtime nvidia --entrypoint /bin/bash $image
     else
         docker run -it -d --runtime nvidia $image
     fi
