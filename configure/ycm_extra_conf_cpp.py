@@ -1,5 +1,4 @@
 import os
-import ycm_core
 
 flags = [
         '-Wall',
@@ -21,22 +20,26 @@ flags = [
         '/usr/include/c++/v1',
         ]
 
-SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
+SOURCE_EXTENSIONS = ['.cpp', '.cxx', '.cc', '.c', '.m', '.mm']
+
 
 def DirectoryOfThisScript():
-    return os.path.dirname( os.path.abspath( __file__ ) )
+    return os.path.dirname(os.path.abspath(__file__))
+
 
 def IsHeaderFile(filename):
     extension = os.path.splitext(filename)[1]
-    return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
+    return extension in ['.h', '.hxx', '.hpp', '.hh']
+
 
 SRC_DIR = [
         'your project subdir-1',
         'your project subdir-2/subdir-3',
         ]
 
+
 def SearchHeaderDirs(path, working_directory):
-    if not path.startswith( '/' ):
+    if not path.startswith('/'):
         path = os.path.join(working_directory, path)
     for root, dirs, files in os.walk(path):
         if os.path.basename(root) in ['include', 'inc', 'Include', 'Inc']:
@@ -49,7 +52,8 @@ def SearchHeaderDirs(path, working_directory):
                     flags.append(root)
                     break
 
-def Settings( filename, **kwargs ):
+
+def Settings(filename, **kwargs):
 
     relative_to = DirectoryOfThisScript()
 
