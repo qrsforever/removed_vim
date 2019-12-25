@@ -34,17 +34,17 @@ let g:fuf_mrufile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|sw[po])$|^(\/\
 let g:fuf_coveragefile_exclude = '\v\~$|\.(o|so|class|exe|dll|bak|orig|swp)$|(^|[/\\])\.(hg|git|bzr|gradle|idea|settings)($|[/\\])'
 let g:fuf_coveragefile_globPatterns = ['**/.*', '**/*']
 
-" let g:priv_fuf_dir_openmode = 'NERDTree'
-let g:priv_fuf_current_item = ''
-
 let g:fuf_dataDir = expand('$VIM_HOME/.cache/vim-fuf-data')
 
-function! <SID>_CallCoverageFile()
-    exec ':FufCoverageFileChange ' . g:priv_fuf_current_item
-endfunction
+" let g:priv_fuf_dir_openmode = 'NERDTree'
+" let g:priv_fuf_current_item = ''
+" function! <SID>_CallCoverageFile()
+"     exec ':FufCoverageFileChange ' . g:priv_fuf_current_item
+" endfunction
+" nnoremap <unique> <silent> [search]l  :call <SID>_CallCoverageFile()<CR>
 "}}}
 
-nnoremap <unique> <silent> [search]l  :call <SID>_CallCoverageFile()<CR>
+nnoremap <unique> <silent> [search]l  :FufCoverageFileChange<CR>
 nnoremap <unique> <silent> [search]L  :FufCoverageFileRegister<CR>
 nnoremap <unique> <silent> [search]u  :FufBookmarkFile<CR>
 nnoremap <unique> <silent> [search]U  :FufBookmarkFileAdd<CR>
