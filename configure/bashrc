@@ -11,7 +11,7 @@ export MXNET_GLUON_REPO=https://apache-mxnet.s3.cn-north-1.amazonaws.com.cn
 
 [ -f /data/opt/env.sh ] && source /data/opt/env.sh
 [ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
-[ -f ~/.tmp.bash ] && source ~/.tmp.bash
+[ -f $HOME/.tmp.bash ] && source $HOME/.tmp.bash
 
 if [[ x$TAG_HOME == x ]]
 then
@@ -25,7 +25,7 @@ fi
 alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
 alias xbashrc='vim $cur_fil'
 alias xvimrc='vim $vim_dir/vimrc'
-alias xtmprc='vim ~/.tmp.bash'
+alias xtmprc='vim $HOME/.tmp.bash'
 alias xneta='netstat -ntpa'
 alias xnetl='netstat -ntpl'
 
