@@ -34,7 +34,8 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias sl='ls'
-alias rm='rm -i'
+alias rm='xrm'
+# alias rm='rm -i'
 # alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=.tags --exclude=tags'
 
@@ -45,6 +46,32 @@ alias rvim='RSYNC=1 vim'
 alias rgvim='RSYNC=1 vim -g'
 
 ########### Utils ############
+xrm()
+{
+    trash_dir=/trashx
+    if [[ ! -d $trash_dir ]]
+    then
+        return
+    fi
+    for file in $*
+    do
+        if [[ ${file:0:1} == '-' ]]
+        then
+            continue
+        fi
+        if [[ ${file:0:1} != "/" ]]
+        then
+            file=${PWD}/$file
+        fi
+        dir=$(dirname $file)
+        if [[ ! -d $trash_dir/${dir} ]]
+        then
+            mkdir -p $trash_dir/${dir}
+        fi
+        mv $file $trash_dir/${dir}
+    done
+}
+
 xpwd()
 {
     tt=`pwd`
@@ -91,7 +118,6 @@ xgrep()
     fi
     eval egrep --color=auto --exclude-dir=${exclude_dirs} -I -rin $*
 }
-
 ########### Docker ###########
 
 alias dst='docker stats'
