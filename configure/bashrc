@@ -34,7 +34,6 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias sl='ls'
-alias rm='xrm'
 # alias rm='rm -i'
 # alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=.tags --exclude=tags'
@@ -46,11 +45,13 @@ alias rvim='RSYNC=1 vim'
 alias rgvim='RSYNC=1 vim -g'
 
 ########### Utils ############
+alias rm='xrm'
 xrm()
 {
-    trash_dir=/trashx
+    trash_dir=/trash
     if [[ ! -d $trash_dir ]]
     then
+        echo "no trash dir"
         return
     fi
     for file in $*
