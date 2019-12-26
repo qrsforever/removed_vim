@@ -112,7 +112,8 @@ func! CCTreeOpenFile(flag, cmd) "{{{
         " help \v: very magic, 有些不需用'\'进行转义了.
         " accept file:line:xxx or file:line.xxx
         " ';' matchlist有没有匹配都会返回10个, 这个';'可以抑制个数不对的错误
-        let curfile = expand('<cfile>')
+        " 第一个:expand: ~/xxx 第二个expand: /home/lidong/xxx
+        let curfile = expand(expand('<cfile>'))
         if filereadable(curfile)
             try
                 let [_, pattern, line; __] = matchlist(getline("."), '\v.*(' . curfile . ')\s*:\~*(\d*).*$')
