@@ -186,31 +186,3 @@ function! s:_MyTermOpen()
     endif
 endfunction
 "}}}
-
-" from DrawIt/autoload
-fun! s:_MyPutBlock(block)
-    call s:SavePosn()
-    exe "let block  = @".a:block
-    let blocklen    = strlen(block)
-    let iblock= 0
-    let curline   = getline(".")
-    call setline(getline(".") , printf('%-'.blocklen.'s', getline(l)))
-    while iblock < blocklen
-        let chr= strpart(block,iblock,4)
-        if char2nr(chr) <= 0x80
-            let chr= strpart(block,iblock,1)
-        elseif char2nr(chr) <= 0x100
-            let chr= strpart(block,iblock,2)
-            let iblock= iblock + 1
-        elseif char2nr(chr) <= 0x8000
-            let chr= strpart(block,iblock,3)
-            let iblock= iblock + 2
-        else
-            let iblock= iblock + 3
-        endif
-        exe "norm! r".chr."l"
-        let iblock = iblock + 1
-    endwhile
-    call s:RestorePosn()
-endfun
-nmap <silent> <buffer> ,r*  :<c-u>set lz<cr>:silent! call <SID>_MyPutBlock("*")<cr>:set nolz<cr>
