@@ -3,15 +3,15 @@
 stty stop ''
 
 cur_fil=${BASH_SOURCE[0]}
-con_dir=`dirname $cur_fil`
-vim_dir=`dirname $con_dir`
+cur_dir=`dirname $cur_fil`
+vim_dir=`dirname $cur_dir`
 
 export PATH=$vim_dir/bin:$HOME/.local/bin:$PATH
 export MXNET_GLUON_REPO=https://apache-mxnet.s3.cn-north-1.amazonaws.com.cn
 
 [ -f /data/opt/env.sh ] && source /data/opt/env.sh
-[ -f $con_dir/fzf.bash ] && source $con_dir/fzf.bash
-[ -f $HOME/.tmp.bash ] && source $HOME/.tmp.bash
+[ -f $cur_dir/fzf.bash ] && source $cur_dir/fzf.bash
+[ -f ~/.tmp.bash ] && source ~/.tmp.bash
 
 if [[ x$TAG_HOME == x ]]
 then
@@ -25,7 +25,7 @@ fi
 alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
 alias xbashrc='vim $cur_fil'
 alias xvimrc='vim $vim_dir/vimrc'
-alias xtmprc='vim $HOME/.tmp.bash'
+alias xtmprc='vim ~/.tmp.bash'
 alias xneta='netstat -ntpa'
 alias xnetl='netstat -ntpl'
 
