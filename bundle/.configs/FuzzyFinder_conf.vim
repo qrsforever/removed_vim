@@ -36,6 +36,7 @@ let g:fuf_coveragefile_globPatterns = ['**/.*', '**/*']
 
 let g:fuf_dataDir = expand('$VIM_HOME/.cache/vim-fuf-data')
 
+let g:priv_fuf_dir_openmode = 'edit'
 " let g:priv_fuf_dir_openmode = 'NERDTree'
 " let g:priv_fuf_current_item = ''
 " function! <SID>_CallCoverageFile()
