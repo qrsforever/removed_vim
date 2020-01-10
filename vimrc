@@ -40,7 +40,7 @@ nmap <unique> <silent> <F8>         :<c-u>call MyTags('n')<CR>
 nmap <unique> <silent> <F9>         :MyMarkColor<CR>
 nmap <unique> <silent> <F10>        :MyColColor<CR>
 nmap <unique> <silent> <F11>        :MaximizerToggle<CR>
-nmap <unique> <silent> <F12>        ,r*
+nmap <unique> <silent> <F12>        ,ra
 
 imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
@@ -51,7 +51,7 @@ imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>
 imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F10>   <ESC>:MyColColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
-imap <unique> <silent> <F12>   <ESC>,r*
+imap <unique> <silent> <F12>   <ESC>,ra
 
 vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 
@@ -466,7 +466,7 @@ if has("gui_running")
     set termguicolors
     set guifont=Monospace\ 12  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
-    set guioptions=
+    set guioptions=a     " a autoselection
     "set guioptions=e    " GUI Tabbar
     "set guioptions+=m   " 菜单栏
     "set guioptions+=T   " 工具栏

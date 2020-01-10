@@ -7,9 +7,6 @@
   
 nmap <Esc>[161q	<s-up>
 
-"----> "ay 
-"----> ,ra
-
 " 有时候,ds一些设置没有恢复, 比如virtualedit(ve=all), 现象是光标可以去任意地方,可以set ve=
 " ,di: start ,ds: stop
 
@@ -21,6 +18,8 @@ let g:priv_draw_spacer  = ',d>'
 let g:priv_draw_ellipse = ',de'
 
 function! MyYank2Reg(mode) 
+    "----> "ay 
+    "----> ,ra
     let start = virtcol("'<") 
     let end = virtcol("'>")
     " 当Drawit功能开启后, 点击leftmouse, 总是先进入virtual模式
