@@ -45,6 +45,9 @@ __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
 __mklink git-push-files ~/.local/share/nautilus/scripts/git-push-files 1
 __mklink credentials ~/.plotly/.credentials 1
-__mklink vim_binding.css $(jupyter --data-dir)/nbextensions/vim_binding/vim_binding.css 1
+if [[ -d $(jupyter --data-dir) ]]
+then
+    __mklink vim_binding.css $(jupyter --data-dir)/nbextensions/vim_binding/vim_binding.css 1
+fi
 __mklink ssh.config ~/.ssh/config 1
 __mklink git.config ~/.gitconfig 1
