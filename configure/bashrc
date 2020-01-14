@@ -244,31 +244,41 @@ dvrm()
 
 drun()
 {
-    args="--runtime nvidia"
+    args="-it"
+    if [[ x$1 == xhelp ]]
+    then
+        echo "drun [host] [gpu] [sh] [image]"
+        return
+    fi
+    if [[ x$1 == xhost ]]
+    then
+        args="$args --network host"
+        shift
+    fi
+    if [[ x$1 == xgpu ]]
+    then
+        args="$args --runtime nvidia"
+        shift
+    fi
     if [[ x$1 == xsh ]]
     then
-        image=$2
-        args="-it --rm $args --entrypoint /bin/bash"
-    elif [[ x$1 == xhost ]]
-    then
-        image=$2
-        args="-it --rm $args --network host --entrypoint /bin/bash"
-    else
-        image=$1
-        args="-dit $args"
+        args="--rm $args --entrypoint /bin/bash"
+        shift
     fi
-    if [[ x$image == x ]]
+    if [[ x$1 == x ]]
     then
         docker images
         echo -ne "\n[RUN] Input ID: "
         read image
+    else
+        image=$1
     fi
     if [[ x$image == x ]]
     then
         echo "Not input image id"
-        exit 0
+    else
+        docker run $args $image
     fi
-    docker run $args $image
 }
 
 dsh()
