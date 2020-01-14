@@ -254,8 +254,8 @@ drun()
         image=$2
         args="-it --rm $args --network host --entrypoint /bin/bash"
     else
-        args="-dit $args"
         image=$1
+        args="-dit $args"
     fi
     if [[ x$image == x ]]
     then
@@ -268,7 +268,7 @@ drun()
         echo "Not input image id"
         exit 0
     fi
-    docker run $args
+    docker run $args $image
 }
 
 dsh()
