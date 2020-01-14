@@ -89,7 +89,7 @@ xps()
 {
     if [[ x$1 == x ]]
     then
-        ps -ef
+        ps H -eo pid,ppid,tid,%cpu,args --sort=%cpu
     else
         ps -eo pid,args | grep "$1" | grep -v grep
     fi
@@ -244,10 +244,17 @@ dvrm()
 
 drun()
 {
+    args="--runtime nvidia"
     if [[ x$1 == xsh ]]
     then
         image=$2
+        args="-it --rm $args --entrypoint /bin/bash"
+    elif [[ x$1 == xhost ]]
+    then
+        image=$2
+        args="-it --rm $args --network host --entrypoint /bin/bash"
     else
+        args="-dit $args"
         image=$1
     fi
     if [[ x$image == x ]]
@@ -261,15 +268,7 @@ drun()
         echo "Not input image id"
         exit 0
     fi
-    if [[ x$1 == xsh ]]
-    then
-        docker run -it --rm --runtime nvidia --entrypoint /bin/bash $image
-    elif [[ x$1 == xhost ]]
-    then
-        docker run -it --rm --network host --runtime nvidia --entrypoint /bin/bash $image
-    else
-        docker run -it -d --runtime nvidia $image
-    fi
+    docker run $args
 }
 
 dsh()
