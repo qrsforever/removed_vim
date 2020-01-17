@@ -204,7 +204,7 @@ func! CCTreeGrep(flag, pattern) "{{{
             execute 'silent cs find e ' . a:pattern
             " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
             execute 'edit ' . curfile 
-            execute "Unite -buffer-name=cscope:1 quickfix"
+            execute "Unite -buffer-name=cscope:e quickfix"
         catch
             echomsg 'error: cs find e ' . a:pattern
         endtry
@@ -226,7 +226,7 @@ func! CCTreeGrep(flag, pattern) "{{{
                 let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
             endfor
             if dbs != ""
-                execute "Unite -buffer-name=cscope:2 -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
+                execute "Unite -buffer-name=cscope:E -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
             else
                 echomsg "error: cat cscopse.file to grep"
             endif

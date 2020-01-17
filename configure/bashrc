@@ -34,7 +34,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias sl='ls'
-# alias rm='rm -i'
+alias xrm='/bin/rm -i'
 # alias sudo='sudo env PATH=$PATH'
 alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=.tags --exclude=tags'
 
@@ -45,8 +45,8 @@ alias rvim='RSYNC=1 vim'
 alias rgvim='RSYNC=1 vim -g'
 
 ########### Utils ############
-alias rm='xrm'
-xrm()
+alias rm='_rm'
+_rm()
 {
     trash_dir=/trash
     if [[ ! -d $trash_dir ]]

@@ -3,25 +3,27 @@ max-line-length = 115
 
 ignore =
     E203  # whitespace before :
-    E123
-    E126
-    E127
-    E128
-    E221
-    E226
-    E228
-    E231
-    E251
-    E261
-    E266 
-    E302
-    E303
-    E305
-    E401
-    E501
+#   E123
+    E126  # continuation line over-indented for hanging indent
+    E127  # continuation line over-indented for visual indent 
+    E128  # continuation line under-indented for visual indent
+#   E221
+#   E226
+    E228  # missing whitespace around modulo operator
+    E231  # missing whitespace after ':' 
+#   E251
+    E261  # 2 spaces before comments
+    E266  # too many leading # for block comments
+#   E302
+#   E303
+#   E305
+    E401  # multiple imports on one line
+    E402  # imports not at top of file
+    E501  # line to long
     W503  # line break before binary operator
     W291
     W293
+    F401  # unused imports
 
 exclude =
     build/**
@@ -29,4 +31,4 @@ exclude =
     out/**
 
 per-file-ignores =
-    **/__init__.py:F401, E501
+    **/**/__init__.py:F401, E501
