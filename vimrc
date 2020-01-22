@@ -466,7 +466,7 @@ if has("gui_running")
     set guifont=Monospace\ 14  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
     set guioptions=a     " a autoselection
-    set guioptions+=e    " GUI Tabbar
+    " set guioptions+=e    " GUI Tabbar
     " set guioptions+=m   " 菜单栏
     " set guioptions+=T   " 工具栏
     " set guioptions+=b   " 底边滚动条
@@ -504,9 +504,8 @@ if has("gui_running")
 
     set showtabline=2
 	set guitablabel=%{MyGuiTabLabel()}
-else
-    set tabline=%!MyTabLine()  " custom tab pages line
 endif
+set tabline=%!MyTabLine()  " custom tab pages line
 "Gui选项 放到.gvimrc"}}}
 
 "高亮 注释代码的颜色"{{{
