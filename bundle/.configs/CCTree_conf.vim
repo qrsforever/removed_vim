@@ -198,10 +198,20 @@ endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeGrep(flag, pattern) "{{{
-    if a:flag == 0
+    if a:flag == 0 || a:flag == 2
         try
+            if a:flag == 2
+                call inputsave()
+                let pattern = input("@", a:pattern)
+                call inputrestore()
+                if len(pattern) < 3
+                    return
+                endif
+            else
+                pattern = a:pattern
+            endif
             let curfile = expand("%:p")
-            execute 'silent cs find e ' . a:pattern
+            execute 'silent cs find e ' . pattern
             " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
             execute 'edit ' . curfile 
             execute "Unite -buffer-name=cscope:e quickfix"
@@ -260,3 +270,4 @@ nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile(0, 'vert scs')<CR>
 
 "" using selection register
 nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile(2, 'tab cs')<CR>
+nmap <unique> <silent> <C-\><C-\>e :call CCTreeGrep(2, getreg("*"))<CR>
