@@ -460,22 +460,21 @@ nmap <C-W>t :silent! MyTermOpen<CR>
 "}}}
 
 "Gui选项 放到.gvimrc"{{{
-set tabline=%!MyTabLine()  " custom tab pages line
 if has("gui_running")
     "set noruler
     set termguicolors
     set guifont=Monospace\ 14  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
     set guioptions=a     " a autoselection
-    "set guioptions=e    " GUI Tabbar
-    "set guioptions+=m   " 菜单栏
-    "set guioptions+=T   " 工具栏
+    set guioptions+=e    " GUI Tabbar
+    " set guioptions+=m   " 菜单栏
+    " set guioptions+=T   " 工具栏
     " set guioptions+=b   " 底边滚动条
     " set guioptions+=l   " 左边滚动条
-    "set guioptions+=L   " 垂直分隔窗口左边滚动条
+    " set guioptions+=L   " 垂直分隔窗口左边滚动条
     " set guioptions+=r   " 右边滚动条
-    "set guioptions+=R   " 垂直分隔窗口右边滚动条
-    set mousemodel=popup
+    " set guioptions+=R   " 垂直分隔窗口右边滚动条
+    " set mousemodel=popup
     map! <S-Insert> <MiddleMouse>
     "MiddleMouse: 粘贴
     colorscheme spring
@@ -502,6 +501,10 @@ if has("gui_running")
     map! <M-7> <esc>7gt
     map! <M-8> <esc>8gt
     map! <M-9> <esc>9gt
+
+	set guitablabel=%{MyGuiTabLabel()}
+else
+    set tabline=%!MyTabLine()  " custom tab pages line
 endif
 "Gui选项 放到.gvimrc"}}}
 
