@@ -198,52 +198,42 @@ endfunc "}}}
 
 " 使用Unite output/shellcmd 执行grep, 需要先cs connect
 func! CCTreeGrep(flag, pattern) "{{{
-    if a:flag == 0 || a:flag == 2
+    if a:flag == 0
         try
-            if a:flag == 2
-                call inputsave()
-                let pattern = input("@", a:pattern)
-                call inputrestore()
-                if len(pattern) < 3
-                    return
-                endif
-            else
-                pattern = a:pattern
-            endif
             let curfile = expand("%:p")
-            execute 'silent cs find e ' . pattern
+            execute 'silent cs find e ' . a:pattern
             " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
             execute 'edit ' . curfile 
             execute "Unite -buffer-name=cscope:e quickfix"
         catch
             echomsg 'error: cs find e ' . a:pattern
         endtry
-    else
-        call inputsave()
-        let key = input("@", a:pattern)
-        call inputrestore()
-        if len(key) < 3
-            return
-        endif
-        try
-            redir => result
-            silent! execute 'cs show'
-            redir END
-            " let sources = ""
-            let dbs = ""
-            for line in split(result, "\n")[2:]
-                " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
-                let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
-            endfor
-            if dbs != ""
-                execute "Unite -buffer-name=cscope:E -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
-            else
-                echomsg "error: cat cscopse.file to grep"
-            endif
-        catch
-            echomsg "no dbs"
-        endtry
+        return
     endif
+    call inputsave()
+    let key = input("@", a:pattern)
+    call inputrestore()
+    if len(key) < 3
+        return
+    endif
+    try
+        redir => result
+        silent! execute 'cs show'
+        redir END
+        " let sources = ""
+        let dbs = ""
+        for line in split(result, "\n")[2:]
+            " let sources = sources . join(readfile(split(line)[3] . "/cscope.files"), "\n")."\n"
+            let dbs = dbs . split(line)[3] . "/cscope.files\\\ "
+        endfor
+        if dbs != ""
+            execute "Unite -buffer-name=cscope:E -profile-name=gotofile output/shellcmd:cat\\\ " . dbs . "|xargs\\\ grep\\\ -n\\\ \"" . key . "\"\\\ 2>/dev/null"
+        else
+            echomsg "error: cat cscopse.file to grep"
+        endif
+    catch
+        echomsg "no dbs"
+    endtry
 endfunc "}}}
 
 "局部跳转到赋值或定义处:gd, cs a 是去全局
@@ -271,3 +261,4 @@ nmap <unique> <silent> <C-\>[f :call CCTreeOpenFile(0, 'vert scs')<CR>
 "" using selection register
 nmap <unique> <silent> <C-\><C-\>f :call CCTreeOpenFile(2, 'tab cs')<CR>
 nmap <unique> <silent> <C-\><C-\>e :call CCTreeGrep(2, getreg("*"))<CR>
+vmap <unique> <silent> <C-\><C-\>e :<C-U>call CCTreeGrep(2, getreg("*"))<CR>
