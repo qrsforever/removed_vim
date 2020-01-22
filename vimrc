@@ -502,6 +502,7 @@ if has("gui_running")
     map! <M-8> <esc>8gt
     map! <M-9> <esc>9gt
 
+    set showtabline=2
 	set guitablabel=%{MyGuiTabLabel()}
 else
     set tabline=%!MyTabLine()  " custom tab pages line
@@ -535,7 +536,7 @@ hi ColorColumn ctermbg=darkgrey guibg=lightgrey
 
 "高亮tab标签"{{{
 "hi! TabWinNum term=bold,underline cterm=underline gui=bold,underline ctermfg=green guifg=Green ctermbg=darkgrey guibg=DarkGrey
-"hi! TabWinNumSel term=bold,underline cterm=underline gui=bold,underline ctermfg=magenta ctermbg=blue guifg=Magenta guibg=#0000ff
+" hi! TabWinNumSel term=bold,underline cterm=underline gui=bold,underline ctermfg=magenta ctermbg=blue guifg=Magenta guibg=#0000ff
 "hi! TabPunct term=bold,underline cterm=underline gui=bold,underline ctermfg=cyan guifg=cyan ctermbg=darkgrey guibg=DarkGrey
 "hi! TabPunctSel term=bold,underline cterm=underline gui=bold,underline ctermfg=magenta ctermbg=blue guifg=Magenta guibg=#0000ff
 hi! TabLineFill ctermfg=darkcyan guifg=darkgrey
