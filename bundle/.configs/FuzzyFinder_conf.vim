@@ -51,7 +51,6 @@ nnoremap <unique> <silent> [search]u  :FufBookmarkFile<CR>
 nnoremap <unique> <silent> [search]U  :FufBookmarkFileAdd<CR>
 nnoremap <unique> <silent> [search]i  :FufBookmarkDir<CR>
 nnoremap <unique> <silent> [search]I  :FufBookmarkDirAdd<CR>
-nnoremap <unique> <silent> [search]e  :FufEditDataFile<CR>
 
 " Fix: http://vim.wikia.com/wiki/Script:1984
 " For some reason the "BufDelete" autocmd is not working properly under vim 8.0 with FuzzyFinder.vim. A quick fix is to add the following line in .vim/autoload/l9/tempbuffer.vim (line 101):
