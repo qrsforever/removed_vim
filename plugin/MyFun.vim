@@ -149,11 +149,11 @@ command! MyDoSave call s:_MyDoSave()
 function! s:_MyDoSave()
     exec 'norm! \<ESC>'
     exec 'silent update!'
-    exec 'silent lchdir %:p:h'
+    " exec 'silent lchdir %:p:h'
     call setreg('p', 'a'. expand('%:p'))
 
     "@p
-    exec 'pwd'
+    echomsg expand("%:p")
 endfunction
 "}}}
 
@@ -184,5 +184,20 @@ function! s:_MyTermOpen()
         execute wnr . "wincmd w"
         execute 'norm i'
     endif
+endfunction
+"}}}
+
+"{{{ MyFun_GetTagRoot
+function! MyFun_GetTagRoot()
+    let tmpdir = expand('%:p:h')
+    while len(tmpdir) > 12
+        let tagdir = tmpdir . '/.tags'
+        if isdirectory(tagdir)
+            return tmpdir
+        endif
+        let pathpos = strridx(tmpdir, '/')
+        let tmpdir = strpart(tmpdir, 0, pathpos)
+    endwhile
+    return ''
 endfunction
 "}}}

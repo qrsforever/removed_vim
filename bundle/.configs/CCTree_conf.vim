@@ -200,6 +200,10 @@ endfunc "}}}
 func! CCTreeGrep(flag, pattern) "{{{
     if a:flag == 0
         try
+            let tagroot = MyFun_GetTagRoot()
+            if len(tagroot) > 0
+                execute 'silent lchdir ' . tagroot
+            endif
             let curfile = expand("%:p")
             execute 'silent cs find e ' . a:pattern
             " 现在vim版本默认自动跳转第一个, 而且没法设置(disable)这个功能.
