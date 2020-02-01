@@ -151,10 +151,13 @@ call unite#custom#profile(
         \ 'vertical': 0,
         \ 'horizontal': 1,
         \ 'prompt_direction': 'top',
-        \ 'update-time': 250,
-        \ 'auto-resize': 1,
-        \ 'max-multi-lines': 5,
-        \ 'multi-line': 0,
+        \ 'update_time' : 250,
+        \ 'auto_resize' : 1,
+        \ 'max_multi_lines' : 5,
+        \ 'multi_line' : 0,
+        \ 'truncate' : 1,
+        \ 'truncate_width' : 80,
+        \ 'short_source_names' : 1,
     \ })
 
 call unite#custom#profile(
@@ -281,7 +284,7 @@ nnoremap <unique> <silent> [search]v :<C-u>Unite -buffer-name=keymap mapping<CR>
 nnoremap <unique> <silent> [search]m :<C-u>Unite -buffer-name=menu -profile-name=leftview menu:default<CR>
 nnoremap <unique> <silent> [search]q :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <unique> <silent> [search]x :<C-u>Unite -buffer-name=change -no-empty change<CR>
-nnoremap <unique> <silent> [search]W :<C-u>UniteResume<CR>
+nnoremap <unique> <silent> [search]r :<C-u>UniteResume<CR>
 
 " 寄存器:help reg
 "

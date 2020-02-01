@@ -465,8 +465,9 @@ if has("gui_running")
     set termguicolors
     set guifont=Monospace\ 14  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
-    set guioptions=a     " a autoselection
-    " set guioptions+=e    " GUI Tabbar
+    " set guioptions=a    " * autoselection
+    set guioptions=P    " + autoselection
+    " set guioptions+=e   " GUI Tabbar
     " set guioptions+=m   " 菜单栏
     " set guioptions+=T   " 工具栏
     " set guioptions+=b   " 底边滚动条

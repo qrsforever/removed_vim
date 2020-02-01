@@ -16,9 +16,9 @@ function! MyTabLine()
     " 最后一个标签页之后用 TabLineFill 填充并复位标签页号
     let s .= '%#TabLineFill#%T'
     " 右对齐用于关闭当前标签页的标签
-    if tabpagenr('$') > 1
-        let s .= '%=%#TabLine#%999Xclose'
-    endif
+    " if tabpagenr('$') > 1
+    "     let s .= '%=%#TabLine#%999Xclose'
+    " endif
     return s
 endfunction
 
