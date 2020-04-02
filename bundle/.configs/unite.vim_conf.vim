@@ -152,7 +152,7 @@ call unite#custom#profile(
         \ 'horizontal': 1,
         \ 'prompt_direction': 'top',
         \ 'update_time' : 250,
-        \ 'auto_resize' : 1,
+        \ 'auto_resize' : 0,
         \ 'max_multi_lines' : 5,
         \ 'multi_line' : 0,
     \ })
