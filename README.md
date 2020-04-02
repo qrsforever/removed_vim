@@ -78,7 +78,7 @@ Use:
     sudo pip3 install -U jupyterthemes (可选)
     sudo pip3 install -U ipywidgets
 
-    sudo jupyter contrib nbextension install
+    sudo jupyter contrib nbextension install --sys-prefix
     sudo jupyter nbextensions_configurator enable
     # Now clone the repository
     cd $(jupyter --data-dir)/nbextensions

@@ -158,7 +158,7 @@ func! s:LoadTagDB(root, tagdir) "{{{
 
     " 3. 临时目录下的tags
     if isdirectory($TMP_TAGS)
-        let s:dirs = split(system("dirname `find " . $TMP_TAGS . " -name .tags -type d`"), '\n')
+        let s:dirs = split(system("dirname `find " . $TMP_TAGS . " -name .tags -type d` 2>/dev/null "), '\n')
         for subdir in s:dirs
             let i = i + 1
             echomsg ' ' . i . ' ' . substitute(subdir, $TMP_TAGS, '', '')

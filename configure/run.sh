@@ -44,6 +44,7 @@ __mklink pip.conf ~/.config/pip/pip.conf 1
 __mklink terminator.conf ~/.config/terminator/config 1
 __mklink vim-with-servername ~/.local/share/nautilus/scripts/vim-with-servername 1
 __mklink git-push-files ~/.local/share/nautilus/scripts/git-push-files 1
+__mklink sshfs-eta-data ~/.local/share/nautilus/scripts/sshfs-eta-data 1
 __mklink credentials ~/.plotly/.credentials 1
 if [[ -d $(jupyter --data-dir) ]]
 then

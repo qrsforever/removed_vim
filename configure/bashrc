@@ -184,6 +184,7 @@ dcrm()
     else
         container=$@
     fi
+    # docker container kill --signal="SIGTERM" $container
     docker container stop $container
     docker container rm $container
 }
