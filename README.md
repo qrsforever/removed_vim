@@ -111,6 +111,8 @@ Use:
     make -j4; sudo make install
     sudo pip3 install jsonnet
 
+    https://github.com/qrsforever/vim-jsonnet
+
 # error:
 
 1. Gtk-Message: Failed to load module "canberra-gtk-module"

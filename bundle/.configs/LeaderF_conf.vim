@@ -16,6 +16,9 @@ let g:Lf_UseCache = 1
 let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_CacheDirectory = expand('$VIM_HOME/.cache')
 
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShowDevIcons = 0
+
 let g:Lf_Ctags = 'ctags'
 let g:Lf_CtagsFuncOpts = {
     \ 'c': '-I __THROW --c++-kinds=+p --c-kinds=fp --fields=+ialS --extras=+q',

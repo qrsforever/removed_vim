@@ -143,7 +143,7 @@ function! s:DoCreateAndConnect(xvbf)
 endfunction
 
 command Jupyter      call <SID>DoCreateAndConnect(0)
-command JupyterNW    call <SID>DoCreateAndConnect(1)
+command JupyterXvfb  call <SID>DoCreateAndConnect(1)
 "}}}
 
 nnoremap <unique> <silent> <leader>ji :call <SID>DoCommandDelayUpdate("PythonImportThisFile")<CR>
@@ -181,7 +181,7 @@ nnoremap <unique> <silent> <leader>j8 :call <SID>DoCommand("8")<CR>
 nnoremap <unique> <silent> <leader>j9 :call <SID>DoCommand("9")<CR>
 nnoremap <unique> <silent> <leader>j0 :call <SID>DoCommand("0")<CR>
 
-
+" tensorboard
 nnoremap <unique> <silent> <leader>jL :call <SID>DoCommand("L")<CR>
 
 augroup JupyterTerm

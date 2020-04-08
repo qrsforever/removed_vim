@@ -9,18 +9,16 @@ then
     use_xvfb=$1
 fi
 
-DISPLAY_ID=9
-
-if [[ x$use_xvfb == 1 ]]
-then
-    pid=`ps a | grep "Xvfb" | grep ":$DISPLAY_ID" | cut -d\  -f2`
-
-    if [[ x$pid == x ]]
-    then
-        Xvfb :$DISPLAY_ID -ac -screen 0 640x480x8 &
-        sleep 1
-    fi
-fi
+# if [[ x$use_xvfb == 1 ]]
+# then
+#     pid=`ps a | grep "Xvfb" | grep ":$DISPLAY_ID" | cut -d\  -f2`
+# 
+#     if [[ x$pid == x ]]
+#     then
+#         Xvfb :$DISPLAY_ID -ac -screen 0 640x480x8 &
+#         sleep 1
+#     fi
+# fi
 
 if [ ! -f $pidfile ]
 then
@@ -38,9 +36,9 @@ then
     fi
 fi
 
-if [[ x$use_xvfb == 1 ]]
+if [[ x$use_xvfb == x1 ]]
 then
-    DISPLAY=:$DISPLAY_ID jupyter qtconsole --no-confirm-exit --no-banner >/dev/null 2>&1 &
+    xvfb-run -a -s "-screen 0 300x300x8" jupyter qtconsole --no-confirm-exit --no-banner >/dev/null 2>&1 &
 else
     jupyter qtconsole --no-confirm-exit --no-banner >/dev/null 2>&1 &
 fi
