@@ -307,7 +307,13 @@ dlog()
         echo -ne "\n[LOG] Input ID: "
         read container
     else
-        container=$1
+        id=$1                                                                                       
+        if [[ ${#id} -le 2 ]]
+        then
+            container=`docker container ls -a --format "{{.ID}}" | head -n $id | tail -n 1`
+        else
+            container=$1
+        fi
     fi
     if [[ x$container == x ]]
     then
