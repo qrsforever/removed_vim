@@ -391,12 +391,36 @@ dmount()
 
 dcst()
 {
-    container=$1
-    if [ "${#container}" -ne "12" ]
+    if [[ x$1 == x ]]
     then
         docker container ls
         echo -ne "\n[STAT] Input ID: "
         read container
+    else
+        container=$@
     fi
     docker stats --no-stream $container
+}
+
+dcrmk12()
+{
+    filters=
+    if [[ x$1 != x ]]
+    then
+        filters='${filters} --filter "label=k12ai.service.user=$1"'
+    fi
+    if [[ x$2 != x ]]
+    then
+        filters='${filters} --filter "label=k12ai.service.uuid=$2"'
+    fi
+    if [[ x$filters != x ]]
+    then
+        for c in `docker container ls -a ${filters} --format "{{.ID}}"`
+        do
+            docker container stop $c > /dev/null
+            docker container rm $c
+        done
+    else
+        echo "dcrmk12 user uuid"
+    fi
 }
