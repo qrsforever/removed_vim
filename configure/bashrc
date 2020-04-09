@@ -407,11 +407,11 @@ dcrmk12()
     filters=
     if [[ x$1 != x ]]
     then
-        filters='${filters} --filter "label=k12ai.service.user=$1"'
+        filters="${filters} --filter label=k12ai.service.user=$1"
     fi
     if [[ x$2 != x ]]
     then
-        filters='${filters} --filter "label=k12ai.service.uuid=$2"'
+        filters="${filters} --filter label=k12ai.service.uuid=$2"
     fi
     if [[ x$filters != x ]]
     then
