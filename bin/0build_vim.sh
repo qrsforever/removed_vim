@@ -17,7 +17,7 @@ sudo apt-get build-dep vim
 
 cd $extern_dir
 
-have_lua=`/usr/lib/liblua.so`
+have_lua=`which /usr/lib/liblua.so`
 
 if [[ x$have_lua == x ]]
 then
