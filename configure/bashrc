@@ -263,7 +263,8 @@ drun()
     fi
     if [[ x$1 == xsh ]]
     then
-        args="--rm $args --entrypoint /bin/bash"
+        # args="--rm $args --entrypoint /bin/bash"
+        args="--rm $args"
         shift
     fi
     if [[ x$1 == x ]]
