@@ -119,7 +119,7 @@ xgrep()
     fi
     eval egrep --color=auto --exclude-dir=${exclude_dirs} -I -rin $*
 }
-########### Docker ###########
+########### Docker: gpasswd -a ${USER} docker; newgrp docker ###########
 
 alias dst='docker stats'
 
