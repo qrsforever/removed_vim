@@ -19,10 +19,12 @@ Use:
 
 4. cd bundle/vimproc.vim; make -f make_unix.mk
 
-5. 保证系统clang版本3.9 or high， 到YouCompleteMe执行python3 ./install.py --clang-completer --clangd-completer or --all (时间比较久)
-    ./install.py --clangd-completer --clang-completer --go-completer --ts-completer --java-completer
-    python3: 修改一下install.sh
-    (apt install clang)
+5. 保证系统clang版本3.9 or high
+    某些库下载 链接: https://pan.baidu.com/s/1jid3TQMpDw3r1I0Nn57xcA 提取码: jiu6
+    git submodule sync
+    git submodule update --init --recursive
+    python3 ./install.py --clangd-completer --clang-completer --go-completer --ts-completer --java-completer
+    # (apt install clang)
 
 6. jedi补全sudo pip3 install -U jedi
     git clone https://github.com/davidhalter/jedi
@@ -112,6 +114,11 @@ Use:
     sudo pip3 install jsonnet
 
     https://github.com/qrsforever/vim-jsonnet
+
+
+17. gotags (go install: https://golang.google.cn/doc/install)
+    
+    go get -u github.com/jstemmer/gotags
 
 # error:
 

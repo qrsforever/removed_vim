@@ -72,7 +72,7 @@ let g:ycm_semantic_triggers = {
             \   'ruby' : ['.', '::'],
             \   'lua' : ['.', ':'],
             \   'vim' : ['$', '&', 're![\w&$<-][\w:#<>-]*']
-            \ }
+            \}
 " Fixme: 这种类型下的补全功能, 隔一个弹出一次
 let g:ycm_filetype_blacklist = {
             \ 'tagbar' : 1,
