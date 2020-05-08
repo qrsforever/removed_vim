@@ -21,6 +21,7 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_min_num_identifier_candidate_chars = 5
 let g:ycm_auto_trigger = 1
+let g:ycm_auto_hover = ''
 let g:ycm_cache_omnifunc = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_disable_for_files_larger_than_kb = 2000

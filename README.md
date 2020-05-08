@@ -125,3 +125,14 @@ Use:
 1. Gtk-Message: Failed to load module "canberra-gtk-module"
 
     sudo apt install libcanberra-gtk-module
+
+
+2. error: RPC failed; curl 56 GnuTLS recv error (-54): Error in the pull function.
+
+    https://stackoverflow.com/questions/38378914/git-error-rpc-failed-curl-56-gnutls
+    # 定位错误原因
+    export GIT_TRACE_PACKET=1; export GIT_TRACE=1; export GIT_CURL_VERBOSE=1
+    git config --global http.postBuffer 524288000
+    # 如果上述方法不行, 只下载最新的代码(不下载tag及历史版本)
+    git clone --depth=1
+
