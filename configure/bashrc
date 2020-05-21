@@ -172,6 +172,19 @@ dii()
     docker inspect $image
 }
 
+did()
+{
+    if [[ x$1 == x ]]
+    then
+        docker images
+        echo -ne "\n[DEPEND] Input ID: "
+        read image
+    else
+        image=$@
+    fi
+    docker image inspect --format='{{.RepoTags}} {{.Id}} {{.Parent}}' $(docker image ls -q --filter since=$image)
+}
+
 alias dc='docker container ls -a --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}"'
 alias dcrma='docker container prune -f'
 dcrm()
