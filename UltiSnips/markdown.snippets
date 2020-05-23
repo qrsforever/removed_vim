@@ -11,13 +11,30 @@ def gen_code_raw_github_path():
 	else:
 		return git + re.match(r'.*/source/_posts(/.*)', path).groups()[0]
 
-def gen_asset_raw_github_path():
+def gen_asset_raw_gitee_path():
 	git = "https://raw.githubusercontent.com/qrsforever/assets_blog_post/master"
 	dir = vim.eval('expand("%:p:h")') or ""
 	if not dir:
 		return git
 	else:
 		return git + re.match(r'.*/source/_posts(/.*)', dir).groups()[0] + "/"
+
+def gen_code_raw_github_path():
+	git = "https://gitee.com/lidongai/code_blog_post/raw/master"
+	path = vim.eval('expand("%:p")') or ""
+	if not path:
+		return git
+	else:
+		return git + re.match(r'.*/source/_posts(/.*)', path).groups()[0]
+
+def gen_asset_raw_gitee_path():
+	git = "https://gitee.com/lidongai/assets_blog_post/raw/master"
+	dir = vim.eval('expand("%:p:h")') or ""
+	if not dir:
+		return git
+	else:
+		return git + re.match(r'.*/source/_posts(/.*)', dir).groups()[0] + "/"
+
 endglobal
 
 snippet xhead "mark down head info" b
@@ -131,11 +148,19 @@ $2 &= \\
 \end{$1}$0
 endsnippet
 
-snippet xxrawcode "githubusercontent raw file"
+snippet xxgitcode "githubusercontent raw file"
 [RAWCODE](`!p snip.rv = gen_code_raw_github_path()`)
 endsnippet
 
 snippet xxgitimg "githubusercontent asset image"
+![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${0:pic.jpg})${2:{.center ${3:${4:width=${5:100%} ${6:height=${7:100px}}}}}}
+endsnippet
+
+snippet xxgiteecode "gitee code raw file"
+[RAWCODE](`!p snip.rv = gen_code_raw_github_path()`)
+endsnippet
+
+snippet xxgiteeimg "gitee asset image"
 ![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${0:pic.jpg})${2:{.center ${3:${4:width=${5:100%} ${6:height=${7:100px}}}}}}
 endsnippet
 
