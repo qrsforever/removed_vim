@@ -11,7 +11,7 @@ def gen_code_raw_github_path():
 	else:
 		return git + re.match(r'.*/source/_posts(/.*)', path).groups()[0]
 
-def gen_asset_raw_gitee_path():
+def gen_asset_raw_github_path():
 	git = "https://raw.githubusercontent.com/qrsforever/assets_blog_post/master"
 	dir = vim.eval('expand("%:p:h")') or ""
 	if not dir:
@@ -161,7 +161,7 @@ snippet xxgiteecode "gitee code raw file"
 endsnippet
 
 snippet xxgiteeimg "gitee asset image"
-![${1:title}](`!p snip.rv = gen_asset_raw_github_path()`${0:pic.jpg})${2:{.center ${3:${4:width=${5:100%} ${6:height=${7:100px}}}}}}
+![${1:title}](`!p snip.rv = gen_asset_raw_gitee_path()`${0:pic.jpg})${2:{.center ${3:${4:width=${5:100%} ${6:height=${7:100px}}}}}}
 endsnippet
 
 snippet xxdataset "baidu cloud disk"

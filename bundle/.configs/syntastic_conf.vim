@@ -31,8 +31,8 @@ let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["go", "html
 let g:syntastic_python_checkers = ['flake8']
 " put ~/.vim/configure/flake8 into project/.flake8
 " let g:syntastic_python_flake8_args = '--ignore=' .
-"     \ 'E123,E126,E127,E128,' .
-"     \ 'W291,W293'
+"      \ 'E123,E126,E127,E128,E266' .
+"      \ 'W291,W293'
 
 " let g:syntastic_quiet_messages = { "level": "warnings" }
 " let g:syntastic_python_pylint_quiet_messages = { "level" : [] }

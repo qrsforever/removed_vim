@@ -45,6 +45,7 @@ alias rvim='RSYNC=1 vim'
 alias rgvim='RSYNC=1 vim -g'
 
 ########### Utils ############
+alias frm='/bin/rm -rif'
 alias rm='_rm'
 _rm()
 {
@@ -122,6 +123,7 @@ xgrep()
 ########### Docker: gpasswd -a ${USER} docker; newgrp docker ###########
 
 alias dst='docker stats'
+alias dil='docker history'
 
 docker()
 {
