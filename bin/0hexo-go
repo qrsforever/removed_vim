@@ -24,7 +24,7 @@ echo "$*" > $log_file
 
 destdir="$vim_home_dir/extern/git-blog-setting"
 drafts="source/_drafts"
-assets="source/assets"
+assets="source/_assets"
 workdir=${destdir}/${drafts}/$rootDir
 assetsdir=${destdir}/${assets}
 
@@ -66,7 +66,7 @@ then
     echo "hexo clean" >> $log_file
     $HEXO_CMD clean
     rm -rf ${destdir}/${drafts}/*
-    rm -rf $assetsdir
+    # rm -rf $assetsdir
     exit 0
 else
     rm -rf "${workdir}/${fileME}"
@@ -77,8 +77,6 @@ fi
 if [[ x"md" != x${fileME##*.} ]]
 then
     __echo__ "file not md: $fileME"
-
-export data=/data
     exit 0
 fi
 

@@ -7,7 +7,7 @@
 
 个人本地博客
 -----------
-1. git clone git@github.com:qrsforever/git-blog-setting.git
+1. git clone git@gitee.com:lidongai/git-blog-setting.git
 2. npm install
 
 ripgrep
