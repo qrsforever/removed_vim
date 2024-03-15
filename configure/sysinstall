@@ -1,0 +1,63 @@
+#!/bin/bash
+
+__apt_install() {
+    sudo apt install -y $@
+}
+
+__pip_install() {
+    pip3 install --user $@
+}
+
+sudo apt update
+
+# basic
+__apt_install software-properties-common apt-transport-https ca-certificates
+__apt_install git curl wget net-tools xclip xsel xauth exuberant-ctags cscope terminator goldendict ripgrep fzf
+__apt_install python3-pip python3-venv python3-flake8 golang libclang-dev python3-opencv
+
+# gnome
+__apt_isntall ubuntu-gnome-desktop
+__apt_install gnome-shell-extensions gnome-shell-extension-gpaste
+
+# lanuage
+sudo apt purge ibus
+__apt_install fcitx fcitx-sunpinyin
+__apt_install language-pack-zh-hans
+
+# editor
+sudo apt build-dep neovim vim
+__pip_install neovim
+
+# chrome 
+curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg > /dev/null
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+__apt_install google-chrome-stable
+
+# mount
+__apt_install nfs-common nfs-kernel-server
+
+# secury
+__apt_install libssl-dev openssl
+
+# build tools
+__apt_install cmake
+
+# docker
+curl https://get.docker.com | sh && sudo systemctl --now enable docker
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \
+    sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt update
+[ x$(which nvidia-smi) == x ] || sudo apt install -y nvidia-docker2
+sudo gpasswd -a $USER docker; newgrp docker
+sudo systemctl restart docker
+sudo apt remove -y golang-docker-credential-helpers
+__pip_install docker
+
+# flake8
+__apt_install flake8
+
+# picture edit easy
+# __apt_install pinta

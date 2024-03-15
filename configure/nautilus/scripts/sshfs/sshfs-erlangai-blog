@@ -1,0 +1,15 @@
+#!/bin/bash
+
+dir=$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+dir=${dir[0]}
+for d in $dir
+do
+    dir=$d
+    break
+done
+echo "mount dir ${dir} " > /tmp/sshfs-erlangai-blog.txt
+if [[ -d $dir ]]
+then
+    sudo umount $dir
+    sshfs erlangai:/root/blog_setting $dir >> /tmp/sshfs-erlangai-blog.txt
+fi

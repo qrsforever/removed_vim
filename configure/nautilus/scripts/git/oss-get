@@ -1,0 +1,21 @@
+#!/bin/bash
+
+file=${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS[0]}
+OSS_DOMAIN=http://assets.erlangai.cn
+
+file_git_path=`git ls-files --full-name $file`
+if [[ x$file_git_path == x ]]
+then
+    notify-send "err: [ls-files $file]"
+    exit -1
+fi
+
+if [[ x"$(which xclip)" == x ]]
+then
+    notify-send "not found xclip, sudo apt install xclip"
+    exit -1
+fi
+
+oss_url=${OSS_DOMAIN}/${file_git_path}
+notify-send "$oss_url"
+echo $oss_url | xclip -i -selection primary -filter | xclip -i -selection clipboard

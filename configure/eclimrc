@@ -1,4 +1,0 @@
-nailgun.server.host=0.0.0.0
-nailgun.server.port=20012
-osgi.instance.area.default=/projects/eclimd
--Xmx1024M

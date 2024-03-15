@@ -12,7 +12,7 @@ snippet xxhead3 "python file head" b
 # @file `!p snip.rv = snip.fn`
 # @brief
 # @author QRS
-# @blog lidongai.gitee.io
+# @blog qrsforever.gitee.io
 # @version 1.0
 # @date `date +"%Y-%m-%d %H:%M"`
 
@@ -26,26 +26,34 @@ snippet xxjupyter "juptyer file"
 # @file `!p snip.rv = snip.fn`
 # @brief
 # @author QRS
-# @blog qrsforever.github.io
+# @blog blog.erlangai.cn
 # @version 1.0
 # @date `date +"%Y-%m-%d %H:%M:%S"`
 
-######################  jupyter-vim ##############################
-# Start: JupyterXvfb(,jC) or Jupyter
-# ,ji ,jj ,js ,jc ,je ,jp ,jt
 ##################################################################
-
-$0
-endsnippet
-
-snippet xline "one comment line 66" b
+# Start: Jupyter
+#     ,jr:run|,jj:line|,js|visul|,je:cell|,jp:print|,jt:type
+# <codecell>
 ##################################################################
 $0
 endsnippet
 
 snippet xcell "insert codecell for juptyer" b
 ##################################################################
-# <codecell> $1
+### <codecell> $1
+##################################################################
+$0
+endsnippet
+
+snippet xxblogcode "pandoc code"
+################## pandoc code file filter beg ###################
+
+$0
+
+################## pandoc code file filter end ###################
+endsnippet
+
+snippet xline "one comment line 66" b
 ##################################################################
 $0
 endsnippet

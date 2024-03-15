@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]
+then
+    echo "$0 name" 
+    exit
+fi
+
+path=`which $1`
+if [[ x$path == x ]]
+then
+    echo "which $1 is null"
+    exit
+fi
+
+search=`dpkg-query -S $path`
+ret=`echo $search | grep ": $path"`
+
+if [[ x$ret != x ]]
+then
+    val=`echo $search | cut -d : -f1`
+    apt-get source $val
+fi

@@ -4,7 +4,8 @@ currdir=`pwd`
 
 if [[ x$BROWSER == x ]]
 then
-    export BROWSER=opera
+    # chromium-browser
+    export BROWSER=/opt/google/chrome/chrome 
 fi
 
 if [[ x$1 != x ]]

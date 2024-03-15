@@ -1,95 +1,3 @@
-" Script Name: mark.vim
-" Version:     1.2.2 (global version)
-" Last Change: January 30, 2019
-" Author:      Yuheng Xie <thinelephant@gmail.com>
-" Contributor: Luc Hermitte
-"
-" Description: a little script to highlight several words in different colors
-"              simultaneously
-"
-" Usage:       :Mark regexp   to mark a regular expression
-"              :Mark regexp   with exactly the same regexp to unmark it
-"              :Mark          to mute all marks
-"              :Mark          to show all marks again
-"
-"              You may map keys for the call in your vimrc file for
-"              convenience. The default keys is:
-"              Highlighting:
-"                Normal \m  mark/unmark the word under the cursor,
-"                           it clear all marks if state is muted
-"                       \n  unmark the mark under the cursor,
-"                           or mute/show all marks
-"                       \r  manually input a regular expression
-"                Visual \m  mark/unmark a visual selection
-"                       \r  manually input a regular expression
-"              Searching:
-"                Normal \*  jump to the next occurrence of current mark
-"                       \#  jump to the previous occurrence of current mark
-"                       \/  jump to the next occurrence of ANY mark
-"                       \?  jump to the previous occurrence of ANY mark
-"                        *  behaviors vary,
-"                        #  please refer to the table SEARCHING
-"                combined with VIM's / and ? etc.
-"
-" Colors:      The default colors/groups setting is for marking six different
-"              words in different colors. You may define your own colors in
-"              your vimrc file. That is to define highlight group names as
-"              "MarkWordN", where N is a number. An example could be found
-"              below.
-"
-" Bugs:        some colored words could not be highlighted (on vim < 7.1)
-"
-" Changes:
-" 30th Jan 2019, Yuheng Xie: default to muted when vim restarts
-"
-" 27th Jan 2019, Yuheng Xie: fix multi-lines pattern
-"
-" 14th Jan 2019, Yuheng Xie:
-" (*) \n now mutes marks instead of clearing them, \m may clear them
-" (*) marks are now savable if '!' exists in 'viminfo'
-"
-" 09th Jan 2019, Yuheng Xie: fix unnamed-register content after visual marking
-"
-" 21th Nov 2017, Yuheng Xie: fix error when no marks found
-" (*) added exists() check when no marks found
-" (*) changed default mark colors again
-"
-" 17th Dec 2016, Yuheng Xie: fix error in vim 6.4
-" (*) added exists() check before calling vim 7 functions
-" (*) changed default mark colors
-"
-" 16th Jan 2015, Yuheng Xie: add auto event WinEnter
-" (*) added auto event WinEnter for reloading highlights after :split, etc.
-"
-" 29th Jul 2014, Yuheng Xie: call matchadd()
-" (*) added call to VIM 7.1 matchadd(), make highlighting keywords possible
-"
-" 10th Mar 2006, Yuheng Xie: jump to ANY mark
-" (*) added \* \# \/ \? for the ability of jumping to ANY mark, even when the
-"     cursor is not currently over any mark
-"
-" 20th Sep 2005, Yuheng Xie: minor modifications
-" (*) merged MarkRegexVisual into MarkRegex
-" (*) added GetVisualSelectionEscaped for multi-lines visual selection and
-"     visual selection contains ^, $, etc.
-" (*) changed the name ThisMark to CurrentMark
-" (*) added SearchCurrentMark and re-used raw map (instead of VIM function) to
-"     implement * and #
-"
-" 14th Sep 2005, Luc Hermitte: modifications done on v1.1.4
-" (*) anti-reinclusion guards. They do not guard colors definitions in case
-"     this script must be reloaded after .gvimrc
-" (*) Protection against disabled |line-continuation|s.
-" (*) Script-local functions
-" (*) Default keybindings
-" (*) \r for visual mode
-" (*) uses <leader> instead of "\"
-" (*) do not mess with global variable g:w
-" (*) regex simplified -> double quotes changed into simple quotes.
-" (*) strpart(str, idx, 1) -> str[idx]
-" (*) command :Mark
-"     -> e.g. :Mark Mark.\{-}\ze(
-
 function! s:RGB(r, g, b)
 	return a:r * 36 + a:g * 6 + a:b + 16
 endfunction
@@ -113,32 +21,37 @@ endfunction
 
 " default colors/groups
 " you may define your own colors in you vimrc file, in the form as below:
-if &t_Co < 256
-	hi MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=Red
-	hi MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=Yellow
-	hi MarkWord3 guifg=Black ctermfg=Black guibg=#5FD700 ctermbg=Green
-	hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=Cyan
-	hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=Blue
-	hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=Magenta
-  hi MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=Grey
-  hi MarkWord8 guifg=Black ctermfg=Black guibg=#BCDDBD ctermbg=Brown
-  hi MarkWord9 guifg=White ctermfg=White guibg=#D9D9D9 ctermbg=DarkBlue
-else
-  exec "hi MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=".s:RGB(5,0,0)
-  exec "hi MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=".s:RGB(5,4,0)
-  exec "hi MarkWord3 guifg=Black ctermfg=Black guibg=#5FD7A2 ctermbg=".s:RGB(1,4,6)
-  exec "hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=".s:RGB(0,4,5)
-  exec "hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=".s:RGB(0,2,5)
-  exec "hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=".s:RGB(3,0,5)
-  exec "hi MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=".s:RGB(2,5,2)
-  exec "hi MarkWord8 guifg=Black ctermfg=White guibg=#B21DBD ctermbg=".s:RGB(3,3,3)
-  exec "hi MarkWord9 guifg=White ctermfg=White guibg=#192939 ctermbg=".s:RGB(1,2,7)
-endif
+function! s:SetColor()
+    if &t_Co < 256
+        hi MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=Red
+        hi MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=Yellow
+        hi MarkWord3 guifg=Black ctermfg=Black guibg=#5FD700 ctermbg=Green
+        hi MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=Cyan
+        hi MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=Blue
+        hi MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=Magenta
+        hi MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=Grey
+        hi MarkWord8 guifg=Black ctermfg=Black guibg=#BCDDBD ctermbg=Brown
+        hi MarkWord9 guifg=White ctermfg=White guibg=#D9D9D9 ctermbg=DarkBlue
+    else
+        exec "hi! MarkWord1 guifg=White ctermfg=White guibg=#FF0000 ctermbg=".s:RGB(5,0,0)
+        exec "hi! MarkWord2 guifg=Black ctermfg=Black guibg=#FFD700 ctermbg=".s:RGB(5,4,0)
+        exec "hi! MarkWord3 guifg=Black ctermfg=Black guibg=#5FD7A2 ctermbg=".s:RGB(1,4,6)
+        exec "hi! MarkWord4 guifg=Black ctermfg=Black guibg=#00D7FF ctermbg=".s:RGB(0,4,5)
+        exec "hi! MarkWord5 guifg=White ctermfg=White guibg=#0087FF ctermbg=".s:RGB(0,2,5)
+        exec "hi! MarkWord6 guifg=White ctermfg=White guibg=#AF00FF ctermbg=".s:RGB(3,0,5)
+        exec "hi! MarkWord7 guifg=Black ctermfg=Black guibg=#E12672 ctermbg=".s:RGB(2,5,2)
+        exec "hi! MarkWord8 guifg=Black ctermfg=White guibg=#B21DBD ctermbg=".s:RGB(3,3,3)
+        exec "hi! MarkWord9 guifg=White ctermfg=White guibg=#192939 ctermbg=".s:RGB(1,2,7)
+    endif
+endfunction
 
 " Anti reinclusion guards
-if exists('g:loaded_mark') && !exists('g:force_reload_mark')
+if exists('g:loaded_mark_vim') && !exists('g:force_reload_mark')
 	finish
 endif
+
+let g:loaded_mark_vim = 1
+call s:SetColor()
 
 " Support for |line-continuation|
 let s:save_cpo = &cpo
@@ -147,19 +60,19 @@ set cpo&vim
 " Default bindings
 
 if !hasmapto('<Plug>MarkSet', 'n')
-	nmap <unique> <silent> [m <Plug>MarkSet
+	nmap <unique> <silent> \m <Plug>MarkSet
 endif
 if !hasmapto('<Plug>MarkSet', 'v')
-	vmap <unique> <silent> [m <Plug>MarkSet
+	vmap <unique> <silent> \m <Plug>MarkSet
 endif
 if !hasmapto('<Plug>MarkRegex', 'n')
-	nmap <unique> <silent> [M <Plug>MarkRegex
+	nmap <unique> <silent> \M <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkRegex', 'v')
-	vmap <unique> <silent> [M <Plug>MarkRegex
+	vmap <unique> <silent> \M <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkClear', 'n')
-	nmap <unique> <silent> [x <Plug>MarkClear
+	nmap <unique> <silent> \x <Plug>MarkClear
 endif
 
 nnoremap <silent> <Plug>MarkSet   :call
@@ -196,10 +109,10 @@ nnoremap <silent> <Plug>MarkClear :call
 "       do a \*; otherwise (\/ is the
 "       most recently used), do a \/.
 
-nnoremap <unique> <silent> [n  :call <sid>SearchCurrentMark()<cr>
-nnoremap <unique> <silent> [p  :call <sid>SearchCurrentMark("b")<cr>
-nnoremap <unique> <silent> [N  :call <sid>SearchAnyMark()<cr>
-nnoremap <unique> <silent> [P  :call <sid>SearchAnyMark("b")<cr>
+nnoremap <unique> <silent> \n  :call <sid>SearchCurrentMark()<cr>
+nnoremap <unique> <silent> \N  :call <sid>SearchCurrentMark("b")<cr>
+nnoremap <unique> <silent> \a  :call <sid>SearchAnyMark()<cr>
+nnoremap <unique> <silent> \A  :call <sid>SearchAnyMark("b")<cr>
 nnoremap          <silent> *   :if !<sid>SearchNext()<bar>execute "norm! *"<bar>endif<cr>
 nnoremap          <silent> #   :if !<sid>SearchNext("b")<bar>execute "norm! #"<bar>endif<cr>
 
@@ -304,6 +217,11 @@ endfunction
 
 " mark or unmark a regular expression
 function! s:DoMark(...) " DoMark(regexp)
+    " TODO lidong for neovim colorschema hi clear
+    if !exists('g:mark_vim_setcolor')
+        call s:SetColor()
+        let g:mark_vim_setcolor = 1
+    endif
 	" define variables if they don't exist
 	call s:InitMarkVariables()
 

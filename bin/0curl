@@ -1,0 +1,13 @@
+#!/bin/bash
+
+GITHUB_PROXY=${GITHUB_PROXY:-'ghproxy.com'}
+params=$*
+
+if [[ ${params} =~ [^/]*https://github.com*. ]]
+then
+    params=${params/\ https:\/\/github.com/\ https:\/\/${GITHUB_PROXY}/github.com}
+fi
+
+echo "$params" > /tmp/curl.txt
+
+/usr/bin/curl $params

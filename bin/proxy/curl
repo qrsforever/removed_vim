@@ -1,0 +1,5 @@
+#!/bin/bash
+
+params="$(printf " %q" "${@}")"
+bash -c "/usr/bin/curl -x ${PROXY} --insecure $params"
+echo "[/usr/bin/curl -x ${PROXY} --insecure $params -> $?]" >> /tmp/proxy_curl.txt

@@ -1,0 +1,74 @@
+{
+	"name": "Vimium C",
+	"@time": "1/16/2024, 2:45:19 PM",
+	"time": 1705387519101,
+	"environment": {
+		"extension": "1.99.994",
+		"platform": "linux",
+		"chromium": 120
+	},
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://jupyter.erlangai.cn/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://jupyter\\.localhost\\.cn/"
+		}
+	],
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"##### chrome #####",
+		"## <c--> <c-+> <c-0> (zoom in / out / reset)",
+		"## <c-a> select all in input text",
+		"## <Esc> Stop the page loading\t",
+		"##### chrome #####",
+		"",
+		"# v: use v/c/V to toggle visual/line/caret modes",
+		"unmap l",
+		"unmap h",
+		"",
+		"# 最近Tab切换",
+		"map <a-/> visitPreviousTab",
+		"",
+		"# 通过chrom的keyboard shortcuts设置",
+		"# s-a-,(A-<)",
+		"shortcut userCustomized1 command=\"moveTabLeft\"",
+		"# s-a-.(A->)",
+		"shortcut userCustomized2 command=\"moveTabRight\"",
+		"",
+		"# 翻译: https://github.com/gdh1995/vimium-c/issues/247",
+		"mapkey <a-g:v> <v-f3>",
+		"map <v-f3> LinkHints.click dblclick",
+		""
+	],
+	"linkHintCharacters": "sadlewcmpgh",
+	"searchEngines": [
+		"X: https://search.mdosch.de/search?q=%s",
+		"bn: https://cn.bing.com/search?q=%s",
+		"bi|bing: https://www.bing.com/search?q=%s \\",
+		"  blank=https://www.bing.com/ Bing",
+		"b|ba|baidu|百度: https://www.baidu.com/s?ie=utf-8&wd=%s \\",
+		"  blank=https://www.baidu.com/ 百度",
+		"g|go|gg|google|Google: https://www.google.com/search?q=%s \\",
+		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://www.google.com/ Google",
+		"",
+		"g.m|gm|g.map|gmap: https://www.google.com/maps?q=%s \\",
+		"  blank=https://www.google.com/maps Google Maps",
+		"",
+		"b.m|bm|map|b.map|bmap|百度地图: \\",
+		"  https://api.map.baidu.com/geocoder?output=html&address=%s&src=vimium-c",
+		"y|yt: https://www.youtube.com/results?search_query=%s \\",
+		"  blank=https://www.youtube.com/ YouTube",
+		"",
+		"gh|github: https://github.com/search?q=$s \\",
+		"  blank=https://github.com/ GitHub Repo",
+		"ge|gitee: https://search.gitee.com/?type=repository&q=$s \\",
+		"  blank=https://gitee.com/ Gitee 仓库",
+		""
+	],
+	"vimSync": true
+}

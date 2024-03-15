@@ -1,30 +1,69 @@
+```
+git config --global url."github.com/".insteadOf "https://github.com.cnpmjs.org/"
+or 
+git config --global url."github.com/".insteadOf "https://hub.fastgit.org/"
+```
+
 Use: 1
 
 0. 中文字体(尤其登陆远端服务器)
+
+    sudo apt-get -y install language-pack-zh-hans language-pack-zh-hans-base
+
+    到https://github.com/ryanoasis/nerd-fonts/releases 下载UbuntuMono.zip放到~/.fonts
+    并设置terminator font
+
+    fc-list
 
     sudo locale-gen zh_CN.UTF-8
     sudo locale -a | grep "zh"
 
     下载SimHei.ttf: https://pan.baidu.com/s/15iwAcVLCdOnCgRRZ1rtauQ 提取码: mpts 
+    or wget https://gitee.com/qrsforever/sysfonts/raw/master/simhei.ttf [simsun.ttc]
 
     mkdir -p ~/.fonts
-    mv SimHei.ttf ~/.fonts
+    mv simhei.ttf ~/.fonts
     fc-cache -vf  # 刷新系统字体缓存
+    fc-list :lang=zh-cn
+
 
 1. 要求vim版本：vim8.0 or high 
 
-2. 管理插件: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+2. ~~管理插件: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim~~
 
 3. 安装插件: Open vim, 执行:PluginInstall
 
 4. cd bundle/vimproc.vim; make -f make_unix.mk
 
-5. 保证系统clang版本3.9 or high
-    某些库下载 链接: https://pan.baidu.com/s/1jid3TQMpDw3r1I0Nn57xcA 提取码: jiu6
-    git submodule sync
-    git submodule update --init --recursive
-    python3 ./install.py --clangd-completer --clang-completer --go-completer --ts-completer --java-completer
-    # (apt install clang)
+5. YCM: 保证系统clang版本3.9 or high
+    sudo apt install gcc-9 g++-9 golang clang libclang-dev
+    export GOPROXY=https://goproxy.io
+    export GO111MODULE=on
+
+    sudo python3 install.py --clang-completer --go-completer --system-libclang --force-sudo --verbose
+    # git submodule update --init --recursive --jobs=$(nproc)
+
+
+    下载相应的clangd
+        https://github.com/ycm-core/llvm/releases
+
+    Install
+        https://github.com/ycm-core/YouCompleteMe/wiki/Full-Installation-Guide
+        
+        LLVM_ROOT=/home/lidong/.vim/extern/clang+llvm-15.0.1-x86_64-unknown-linux-gnu
+        CC=gcc CXX=g++ EXTRA_CMAKE_ARGS="-DPATH_TO_LLVM_ROOT=$LLVM_ROOT" python3 install.py --clang-completer --go-completer --verbose
+
+    or:
+        1. YouCompleteMe/third_party/ycmd/cpp/ycm/CMakeLists.txt:
+            GIT_REPOSITORY https://hub.fastgit.org/abseil/abseil-cpp
+            GIT_TAG 3b4a16abad2c2ddc494371cc39a2946e36d35d11
+            SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/absl
+        2. YouCompleteMe/third_party/ycmd/build.py: DownloadClangd
+            wget https://github.91chifun.workers.dev/https://github.com/ycm-core/llvm/releases/download/12.0.0/clangd-12.0.0-x86_64-unknown-linux-gnu.tar.bz2
+            file_name = f'/home/lidong/.vim/bundle/YouCompleteMe/{ file_name }'  # p.join( CLANGD_CACHE_DIR, file_name )
+
+    # Ubuntu18.04
+    CC=gcc-9 CXX=g++-9 python3 ./install.py --clangd-completer
 
 6. jedi补全sudo pip3 install -U jedi
     git clone https://github.com/davidhalter/jedi
@@ -69,6 +108,8 @@ Use: 1
     cd ./bundle/LeaderF; ./install.sh
 
 12. jupyter
+    
+    /usr/local/lib/python3.6/dist-packages/matplotlib/mpl-data/fonts/ttf/SimHei.ttf
 
     ```
     sudo pip3 install -U \
@@ -97,7 +138,10 @@ Use: 1
 13. 语法检查
 
     sudo apt-get install pyflakes
-    sudo apt-get install python-flake8 (推荐)
+    or:
+    sudo apt-get install flake8 python-flake8
+    or:
+    sudo python3 -m pip install flake8 (推荐)
 
 14. 数学公式
 
@@ -106,6 +150,9 @@ Use: 1
 15. 画动物
   
     sudo apt-get install boxes
+
+    Interactive ASCII art diagram generators:
+    diagon: https://github.com/ArthurSonzogni/Diagon/releases
 
 16. jsonnet
 
@@ -119,6 +166,23 @@ Use: 1
 17. gotags (go install: https://golang.google.cn/doc/install)
     
     go get -u github.com/jstemmer/gotags
+
+
+18. deoplete.nvim
+
+    pip3 install --user --upgrade pynvim
+
+
+## xsel and xclip
+    sudo apt install xclip xsel
+
+
+## notify-send
+
+    https://github.com/andreztz/notify-send
+    sudo apt install libcairo2-dev libgirepository1.0-dev
+    pip3 install notify-send
+
 
 # error:
 

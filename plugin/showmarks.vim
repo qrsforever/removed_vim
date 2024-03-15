@@ -123,15 +123,18 @@ if !exists('g:showmarks_hlline_other') | let g:showmarks_hlline_other = "1"  | e
 " possible mark (not just those specified in the possibly user-supplied list
 " of marks to show -- it can be changed on-the-fly).
 " let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>[]{}()\""
-" let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
+let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
+let s:lower_marks = "abcdefghijklmnopqrstuvwxyz" 
+let s:upper_marks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" 
 
 " Commands
 com! -nargs=0 ShowMarksToggle    :call <sid>ShowMarksToggle()
 com! -nargs=0 ShowMarksOn        :call <sid>ShowMarksOn()
 com! -nargs=0 ShowMarksClearMark :call <sid>ShowMarksClearMark()
 com! -nargs=0 ShowMarksClearAll  :call <sid>ShowMarksClearAll()
-com! -nargs=0 ShowMarksPlaceMark :call <sid>ShowMarksPlaceMark()
+com! -nargs=0 ShowMarksPlaceMarkLower :call <sid>ShowMarksPlaceMark(1)
+com! -nargs=0 ShowMarksPlaceMarkUpper :call <sid>ShowMarksPlaceMark(2)
 
 " Mappings (NOTE: Leave the '|'s immediately following the '<cr>' so the mapping does not contain any trailing spaces!)
 " lidong mod
@@ -139,7 +142,8 @@ com! -nargs=0 ShowMarksPlaceMark :call <sid>ShowMarksPlaceMark()
 " lidong make mm toggle add/remove
 " if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
 if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>mx :ShowMarksClearAll<cr>|  endif
-if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
+if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMarkLower<cr>| endif
+if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mi :ShowMarksPlaceMarkUpper<cr>| endif
 if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>ma :MarksBrowser<cr>|    endif
 
 " lidong cha
@@ -252,6 +256,7 @@ fun! s:ShowMarksSetup()
 	call s:VerifyText('other')
 
 	let n = 0
+	let b:showmarks_include = s:all_marks
 	let s:maxmarks = strlen(s:all_marks)
 	while n < s:maxmarks
 		let c = strpart(s:all_marks, n, 1)
@@ -376,6 +381,7 @@ fun! s:ShowMarks()
 	endif
 
 	let n = 0
+	let b:showmarks_include = s:all_marks
 	let s:maxmarks = strlen(s:IncludeMarks())
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
@@ -423,6 +429,7 @@ endf
 fun! s:ShowMarksClearMark()
 	let ln = line(".")
 	let n = 0
+	let b:showmarks_include = s:all_marks
 	let s:maxmarks = strlen(s:IncludeMarks())
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
@@ -447,6 +454,7 @@ endf
 fun! s:ShowMarksClearAll()
 	let n = 0
 	let m = 0
+	let b:showmarks_include = s:all_marks
 	let s:maxmarks = strlen(s:IncludeMarks())
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
@@ -469,6 +477,7 @@ endf
 " It simply removes the signs.
 fun! s:ShowMarksHideAll()
 	let n = 0
+	let b:showmarks_include = s:all_marks
 	let s:maxmarks = strlen(s:IncludeMarks())
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
@@ -488,7 +497,7 @@ endf
 " of marks so the user doesn't have to remember which marks are placed or not.
 " Hidden marks are considered to be unplaced.
 " Only marks a-z are supported.
-fun! s:ShowMarksPlaceMark()
+fun! s:ShowMarksPlaceMark(flg)
 	" Find the first, next, and last [a-z] mark in showmarks_include (i.e.
 	" priority order), so we know where to "wrap".
 	let first_alpha_mark = -1
@@ -503,10 +512,17 @@ fun! s:ShowMarksPlaceMark()
 	" Find the next unused [a-z] mark (in priority order); if they're all
 	" used, find the next one after the previously auto-assigned mark.
 	let n = 0
+	if a:flg == 1
+		let b:showmarks_include = s:lower_marks
+		let search_chars = '[a-z]'
+	elseif a:flg == 2
+		let b:showmarks_include = s:upper_marks
+		let search_chars = '[A-Z]'
+	endif
 	let s:maxmarks = strlen(s:IncludeMarks())
 	while n < s:maxmarks
 		let c = strpart(s:IncludeMarks(), n, 1)
-		if c =~# '[a-z]'
+		if c =~# search_chars
 			let mk = line("'".c)
 			if mk <= 1
 				" Found an unused [a-z] mark; we're done.

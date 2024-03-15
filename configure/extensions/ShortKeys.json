@@ -1,0 +1,90 @@
+[
+  {
+    "key": "alt+t",
+    "label": "new tab",
+    "action": "newtab",
+    "blacklist": false,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ],
+    "activeInInputs": true
+  },
+  {
+    "key": "alt+w",
+    "label": "Close tab",
+    "action": "closetab",
+    "sites": "",
+    "sitesArray": [
+      ""
+    ],
+    "activeInInputs": true,
+    "blacklist": false
+  },
+  {
+    "key": "alt+0",
+    "label": "Last tab",
+    "action": "lasttab",
+    "sites": "",
+    "sitesArray": [
+      ""
+    ],
+    "activeInInputs": true,
+    "blacklist": false
+  },
+  {
+    "label": "Next tab",
+    "action": "nexttab",
+    "key": "alt+k",
+    "blacklist": false,
+    "activeInInputs": true,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ]
+  },
+  {
+    "key": "alt+j",
+    "action": "prevtab",
+    "label": "Previous tab",
+    "activeInInputs": true,
+    "blacklist": false,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ]
+  },
+  {
+    "key": "alt+h",
+    "label": " Go back",
+    "action": "back",
+    "activeInInputs": true,
+    "blacklist": false,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ]
+  },
+  {
+    "key": "alt+l",
+    "action": "forward",
+    "label": "Go forward",
+    "activeInInputs": true,
+    "blacklist": false,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ]
+  },
+  {
+    "key": "alt+s",
+    "action": "searchgoogle",
+    "label": "Search selected text",
+    "blacklist": false,
+    "activeInInputs": true,
+    "sites": "",
+    "sitesArray": [
+      ""
+    ]
+  }
+]

@@ -33,8 +33,8 @@ endif
 let s:win_title = '[Marks]'
 "lidong mod
 " let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'`^<>\""
-" let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
+let s:all_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" let s:all_marks = "abcdefghijklmnopqrstuvwxyz"
 "lidong end
 let s:isShown = 0
 let s:originalBuff = 1

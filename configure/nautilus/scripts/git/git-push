@@ -1,0 +1,111 @@
+#!/bin/bash
+
+CUR_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
+files=$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+OSS=${OSS:-0}
+git_root_dir=
+
+__notify()
+{
+    summary=$1
+    body=$2
+    notify-send --expire-time 200 --app-name "git-push" --category "nautilus" "${summary}" "${body}"
+}
+
+OSS_PUSH_PY=
+if [[ $OSS == 1 ]]
+then
+    if [[ ! -f ~/.oss.accessKey.csv ]]
+    then
+        __notify "oss push" "not found ~/.oss.accessKey.csv"
+        exit -1
+    fi
+    python3 -c "import oss2"
+    if [[ $? != 0 ]]
+    then
+        pip3 install --user oss2
+        if [[ $? != 0 ]]
+        then
+            __notify "oss push" "pip3 install --user oss2 error"
+            exit -1
+        fi
+    fi
+    read -r -d '' OSS_PUSH_PY << EOF
+#!/usr/bin/python3
+
+import csv
+import os
+import sys
+import oss2
+
+if __name__ == "__main__":
+    git_root, git_path = sys.argv[1], sys.argv[2]
+    try:
+        OSSKEY_PATH = os.path.expanduser('~/.oss.accessKey.csv')
+        with open(OSSKEY_PATH, 'r', encoding='utf-8') as f:
+            row = next(csv.DictReader(f))
+            auth = oss2.Auth(row['AccessKey ID'], row['AccessKey Secret'])
+        bucket = oss2.Bucket(auth, 'assets.erlangai.cn', 'erlangai-blog-assets', is_cname=True)
+        bucket.put_object_from_file(git_path, f'{git_root}/{git_path}')
+        bucket.put_object_acl(git_path, oss2.OBJECT_ACL_PUBLIC_READ)
+        print(f'push {git_path} sucess')
+    except Exception:
+        print(f'push {git_path} fail')
+EOF
+fi
+
+for path in ${files}
+do
+    ## 1. find the git root directory
+    if [[ x${git_root_dir} == x ]]
+    then
+        dir=`dirname $path`
+        while (( ${#dir} > 3 ))
+        do
+            [[ -e ${dir}/.git ]] && break || dir=`dirname ${dir}`
+        done
+        if (( ${#dir} <= 3 ))
+        then
+            __notify "find git root" "not found .git from ${path}"
+            exit 0
+        fi
+        cd ${dir}
+        git_root_dir=${dir}
+    fi
+    ## 2. check the path: new or modified
+    git_path=`git ls-files $path`
+    if [[ x${git_path} == x ]]
+    then
+        git_path=${path:((${#git_root_dir} + 1))}
+        git add ${git_path}
+        __notify "add new file" "${OSS} ${git_path}"
+    else
+        modified=`git diff --name-only ${git_path}`
+        if [[ x${modified} != x ]]
+        then
+            git add ${git_path}
+            __notify "add modify file" "${git_path}"
+        fi
+    fi
+    if [[ $OSS == 1 ]]
+    then
+        res=`python3 -c "${OSS_PUSH_PY}" ${git_root_dir} ${git_path}`
+        __notify "oss push" "${res}"
+    fi
+done
+
+## 3. push
+push_files=`git status --short --untracked-files=no`
+if [[ x${push_files} != x ]]
+then
+    dt=`date +"%Y-%m-%d %H:%M:%S"`
+    git commit -m "update: $dt"
+    unset SSH_AUTH_SOCK
+    git push
+    __notify "success" "git push success"
+else
+    if [[ $OSS != 1 ]]
+    then
+        __notify "fail" "no file need git push"
+    fi
+fi

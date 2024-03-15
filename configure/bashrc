@@ -4,14 +4,254 @@ stty stop ''
 
 cur_fil=${BASH_SOURCE[0]}
 cur_dir=`dirname $cur_fil`
-vim_dir=`dirname $cur_dir`
+VIM_DIR=`dirname $cur_dir`
 
-export PATH=$vim_dir/bin:$HOME/.local/bin:$PATH
-export MXNET_GLUON_REPO=https://apache-mxnet.s3.cn-north-1.amazonaws.com.cn
+__line__() { echo -e "\033[1;31m----------------------------------------------------------------------------------\033[0;m"; }
 
-[ -f /data/opt/env.sh ] && source /data/opt/env.sh
-[ -f $cur_dir/fzf.bash ] && source $cur_dir/fzf.bash
-[ -f ~/.tmp.bash ] && source ~/.tmp.bash
+#-----------------------------------------------------------------
+# export
+#-----------------------------------------------------------------
+
+export VISUAL=vim
+export EDITOR=vim
+
+#-----------------------------------------------------------------
+# alias
+#-----------------------------------------------------------------
+
+alias xbashrc='vim $cur_fil'
+alias xtmprc='vim ~/.tmp.bash'
+
+alias xvimrc="vim ${VIM_DIR}/vimrc"
+alias xvimup="cd ${VIM_DIR}; git pull; cd - >/dev/null"
+
+alias xdate='date +"%Y%m%d%H%M%S"'
+alias xneta='netstat -ntpa'
+alias xnetl='netstat -ntpl'
+alias which='command -v'
+# sudo lsof -i:port
+# /var/cache/apt/archives
+alias aptd='apt install -d'
+
+alias xsmbmount='sudo mount -t cifs -o rw,uid=1000,gid=1000,vers=3.0,username=lidong,password=1'
+
+alias ls='ls --color=auto'
+alias ll='ls --color=auto -alF'
+alias la='ls --color=auto -A'
+alias l='ls --color=auto -CF'
+alias du='du --exclude=.git --exclude=.svn --exclude=.*__pycache__ --exclude=.*.pyc'
+alias tree='tree -I *.pyc -I __pycache__'
+alias jcurl='curl --header  "Content-Type: application/json" --request POST --data '
+
+alias python='python3'
+alias sl='ls'
+alias vi='vim'
+alias vi0='vim --noplugin'
+alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
+
+alias rvim='RSYNC=1 vim'
+alias rgvim='RSYNC=1 gvim'
+alias rnvim='RSYNC=1 nvim'
+alias fzf='fzf --bind "tab:toggle-up,btab:toggle-down"'
+
+alias fzfd='cd $(find * -type d | fzf --bind "tab:toggle-up,btab:toggle-down")'
+
+xfzf() {
+    fzf --bind "tab:toggle-up,btab:toggle-down" | xsel
+    xsel -v
+}
+
+xhistory() {
+    history | fzf --tac --bind "tab:toggle-up,btab:toggle-down" | cut -c 8- | xsel
+    xsel -v
+}
+
+alias gitv='GIT_CURL_VERBOSE=1 git'
+alias gitc='git clone --depth 1'
+alias gitr='git rev-parse --show-toplevel'
+
+alias cmake='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+alias unzip='unzip -O CP936'
+
+# alias sudo='sudo env PATH=$PATH'
+
+#-----------------------------------------------------------------
+# common
+#-----------------------------------------------------------------
+
+SED_DELIM='~'
+RET_OK=1
+RET_ERR=0
+
+__echo_run() {
+    echo -e "\n\033[1;31m$*\033[0;m\n"
+    bash -c "$*"
+}
+
+__trim() {
+    local var="$*"
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
+    printf '%s' "$var"
+}
+
+__gotmpl_slice() {
+    local field=$1 length=$2
+    if (( $length < 0 ))
+    then
+        (( length = -1 * length ))
+        echo "{{with \$i:=(print $field)}}{{if le (len \$i) $length}}{{\$i}}{{else}}{{print \"*\"}}{{slice \$i (slice \$i $length|len)}}{{end}}{{end}}"
+    else
+        echo "{{with \$i:=(print $field)}}{{if le (len \$i) $length}}{{\$i}}{{else}}{{slice \$i 0 $length}}{{print \"*\"}}{{end}}{{end}}"
+    fi
+}
+
+
+__select_item() {
+    local -n __s=$1
+    shift
+    local array=(${@:1:$#-1})
+    # local element=${@:$#}
+    local prompt=${@:$#}
+    if [[ x$prompt == xNONE ]]
+    then
+        prompt="(1 - ${#array[@]})"
+    fi
+    __line__
+    for i in $(seq 0 $((${#array[@]} - 1)))
+    do
+        # item=$(echo "${array[$i]}" | tr $SED_DELIM ' ')
+        item=${array[$i]//$SED_DELIM/\ }
+        title=${item%%\ *}
+        descr=${item#*\ }
+        if [[ ${descr} == ${title} ]]
+        then
+            descr=''
+        fi
+        # [[ "${title}" == "$element" ]] && star="*" || star=" "
+        # printf "    %3s.\033[1;93m %s\033[0;m %s %s\n"  $((${i} + 1)) ${star} ${title} "${descr}"
+        printf "    %3s. \033[1;93m %s \033[0;m %s\n"  $((${i} + 1)) ${title} "${descr}"
+    done
+    __line__
+    read -p "Select ${prompt}: " result
+    if [[ x$result == x ]] || [[ ! $result =~ [1-9][0-9]*$ ]] || \
+        (( $result < 1 || $result > ${#array[@]} ))
+    then
+        __s='invalid'
+    else
+        __s=${array[$((${result} - 1))]}
+    fi
+}
+
+__split_args() {
+    # __split_args arr1 arr2 -- before1 before2 -- after1 after2
+    # -n == nameref
+    local -n __a=$1 __b=$2
+    local delim=$3
+    shift 3
+    for i in $(seq 1 "$#")
+    do
+        if [[ "${!i}" = "$delim" ]]
+        then
+            __a=("${@:1:$(($i-1))}")
+            __b=("${@:$(($i+1))}")
+            return
+        fi
+    done
+    __a=("$@")
+}
+
+s() { [[ -f "$1" ]] && . "$1"; }
+
+is-set()   { [[ -n "$1" ]]; }
+is-unset() { [[ -z "$1" ]]; }
+
+is-blank() { [[ "$1" = *[^[:space:]]* ]]; }
+is-nonblank() { ! is-blank "$1"; }
+is-digit() { [[ "$1" = *[^[:digit:]]* ]]; }
+is-nondigit() { ! is-digit "$1"; }
+
+is-string-contains() { [[ "$1" =~ "$2" ]] && return $RET_OK || return $RET_ERR; }
+
+is-array-contains() {
+    local i
+    local array=("${@:1:$#-1}")
+    local element=${@:$#}
+    for i in $(seq 0 $(("${#array[@]}"-1)))
+    do
+        [[ "${array[$i]}" = "$element" ]] && return $RET_OK
+    done
+    return $RET_ERR
+}
+
+has_cmd() { command -v "$1" > /dev/null; }
+
+c() {
+    # echo "$(c red bi)test$(c)
+    local p
+    for a in "$@"; do
+        case "$a" in
+            black)    p+=(30); continue ;;
+            red)      p+=(31); continue ;;
+            green)    p+=(32); continue ;;
+            yellow)   p+=(33); continue ;;
+            blue)     p+=(34); continue ;;
+            magenta)  p+=(35); continue ;;
+            cyan)     p+=(36); continue ;;
+            white)    p+=(37); continue ;;
+            black+)   p+=(90); continue ;;
+            red+)     p+=(91); continue ;;
+            green+)   p+=(92); continue ;;
+            yellow+)  p+=(93); continue ;;
+            blue+)    p+=(94); continue ;;
+            magenta+) p+=(95); continue ;;
+            cyan+)    p+=(96); continue ;;
+            white+)   p+=(97); continue ;;
+        esac
+        a=($(grep -o . <<<"$a"))
+        for i in "${a[@]}"; do
+            case "$i" in
+                x) p+=(0) ;;  # Reset
+                b) p+=(1) ;;  # Bold
+                d) p+=(2) ;;  # Dim
+                i) p+=(3) ;;  # Italic
+                u) p+=(4) ;;  # Underlined
+            esac
+        done
+    done
+    printf "\e[$(tr ' ' ';' <<<"${p[@]}")m"
+}
+
+#-----------------------------------------------------------------
+# other
+#-----------------------------------------------------------------
+
+if [[ ! $PATH =~ .*$VIM_DIR/bin*. ]]
+then
+    export PATH=$VIM_DIR/bin:$HOME/.local/bin:$PATH
+    if [[ -d $HOME/.config/nvim/bin ]]
+    then
+        export PATH=$HOME/.config/nvim/bin:$PATH
+    fi
+fi
+export BLOG_DIR=/blog
+
+export PROXY=${PROXY:-"127.0.0.1:8001"}
+export PROXY_PATH=${VIM_DIR}/bin/proxy:${PATH}
+export PROXY_ENVS="PATH=${PROXY_PATH} http_proxy=http://${PROXY} https_proxy=http://${PROXY} HTTP_PROXY=http://${PROXY} HTTPS_PROXY=http://${PROXY}"
+alias nvim-proxy='bash -c "${PROXY_ENVS} nvim"'
+alias vim-proxy='bash -c "${PROXY_ENVS} vim"'
+alias git-proxy='git -c "http.proxy=${PROXY}"'
+
+xprint_proxy_env() {
+    echo "export PATH=${PROXY_PATH}"
+    echo "export http_proxy=http://${PROXY}"
+    echo "export https_proxy=http://${PROXY}"
+    echo "export HTTP_PROXY=http://${PROXY}"
+    echo "export HTTPS_PROXY=http://${PROXY}"
+}
+
+s ~/.tmp.bash
 
 if [[ x$TAG_HOME == x ]]
 then
@@ -22,33 +262,11 @@ then
     export TAG_HOME=$HOME/.tags
 fi
 
-alias xvimup='cd $vim_dir; git pull; cd - >/dev/null'
-alias xbashrc='vim $cur_fil'
-alias xvimrc='vim $vim_dir/vimrc'
-alias xtmprc='vim ~/.tmp.bash'
-alias xneta='netstat -ntpa'
-alias xnetl='netstat -ntpl'
-
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-alias sl='ls'
-alias xrm='/bin/rm -i'
-# alias sudo='sudo env PATH=$PATH'
-alias grep='grep --color=auto --exclude-dir=.svn --exclude-dir=.git --exclude-dir=.tags --exclude=tags'
-
-alias vi0='vim --noplugin'
-alias xrs='sed -i "s/\s\+$//g" `find . -maxdepth 1 -type f `'
-
-alias rvim='RSYNC=1 vim'
-alias rgvim='RSYNC=1 vim -g'
-
 ########### Utils ############
-alias frm='/bin/rm -rif'
-alias rm='_rm'
-_rm()
-{
+FIND_EXCLUDE='! -path "*.git*" -a ! -path "*.svn*" -a ! -path "*.tags*" -a ! -path "*objs*" -a ! -path "*__pycache__*"'
+
+alias xrm='_rm'
+_rm() {
     trash_dir=/trash
     if [[ ! -d $trash_dir ]]
     then
@@ -74,36 +292,76 @@ _rm()
     done
 }
 
-xpwd()
-{
+xpwd() {
     tt=`pwd`
-    if [[ x$(which xsel) == x ]]
+    if [[ x$(command -v xsel) == x ]]
     then
-        echo $tt
+        echo "set export tt=${tt}, you can use xcd"
+        echo $tt > /tmp/xsel
         export tt
     else
+        echo "set $tt in xsel, you can use xcd"
         echo $tt | xsel
     fi
 }
 
-xps()
-{
+xcd() {
+    if [[ x$(command -v xsel) == x ]]
+    then
+        cd $(cat /tmp/xsel)
+    else
+        cd $(xsel)
+    fi
+}
+
+xps() {
     if [[ x$1 == x ]]
     then
         ps H -eo pid,ppid,tid,%cpu,args --sort=%cpu
     else
-        ps -eo pid,args | grep "$1" | grep -v grep
+        ps -eo pid,args | grep -i "$1" | grep -v grep
     fi
 }
 
-xgrep()
-{
-    exclude_dirs=
+alias xpsw='ps -wwhf -o pid,cmd -C'
+
+xtop() {
+    if [[ x$1 == x ]]
+    then
+        top -H
+    else
+        pid=$(ps hf -o pid -C nvim | awk '{print $1; exit}')
+        if [[ x$pid != x ]]
+        then
+            echo "top -H -p ${pid}"
+            top -H -p ${pid}
+        fi
+    fi
+}
+
+xpskill() {
+    if [[ x$1 == x ]]
+    then
+        ps H -eo pid,ppid,tid,%cpu,args --sort=%cpu
+    else
+        SAVEIFS=$IFS
+        IFS=$'\n'
+        for line in `ps -eo pid,args | grep "$1" | grep -v grep`
+        do
+            pid=`echo $line | cut -c1-7`
+            echo "kill ${line} ${pid}"
+            sudo /bin/bash -c "kill -9 $pid"
+        done
+        IFS=$SAVEIFS
+    fi
+}
+
+xgrep() {
+    exclude_files="{tags"
+    exclude_dirs="{\.svn,\.git,\.tags"
     tmp=$(pwd)/.grepignore
     if [[ -f $tmp ]]
     then
-        exclude_files="{tags"
-        exclude_dirs="{\.svn,\.git,\.tags"
         while read line
         do
             fty=`echo $line | cut -d\  -f1`
@@ -115,328 +373,92 @@ xgrep()
                 exclude_files="${exclude_files},${pat}"
             fi
         done < $tmp
-        exclude_dirs="${exclude_dirs}}"
-        exclude_files="${exclude_files}}"
     fi
-    eval egrep --color=auto --exclude-dir=${exclude_dirs} -I -rin $*
-}
-########### Docker: gpasswd -a ${USER} docker; newgrp docker ###########
-
-alias dst='docker stats'
-alias dil='docker history'
-
-docker()
-{
-    if [[ "${1}" = "tags" ]]
-    then
-        docker_tag_search $2;
-    else
-        command docker "$@";
-    fi
+    exclude_dirs="${exclude_dirs}}"
+    exclude_files="${exclude_files}}"
+    eval egrep --color=auto --exclude-dir=${exclude_dirs} --exclude=${exclude_files} -I -rin $*
 }
 
-docker_tag_search()
-{
-    image="$1"
-    tags=`wget -q https://registry.hub.docker.com/v1/repositories/${image}/tags -O -  | sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}'`
-    if [ -n "$2" ]
-    then
-        tags=`echo "${tags}" | grep "$2" `
-    fi
-    echo "${tags}"
+__grep() {
+    find . -name "*.$1" -type f ${FIND_EXCLUDE} -exec egrep -Hin --color=auto ${@:2:$#} "{}" \;
 }
 
-alias di='docker images'
-alias dirma='docker rmi `docker images | grep  "<none>" | awk "{print $3}"` 2>/dev/null'
-dirm()
-{
-    if [[ x$1 == x ]]
-    then
-        docker images
-        echo -ne "\n[RM] Input ID: "
-        read image
-    else
-        image=$@
-    fi
-    docker rmi $image
-}
+alias pygrep='__grep py'
 
-dii()
-{
-    if [[ x$1 == x ]]
-    then
-        docker images
-        echo -ne "\n[INFO] Input ID: "
-        read image
-    else
-        image=$@
-    fi
-    docker inspect $image
-}
 
-did()
-{
-    if [[ x$1 == x ]]
-    then
-        docker images
-        echo -ne "\n[DEPEND] Input ID: "
-        read image
-    else
-        image=$@
-    fi
-    docker image inspect --format='{{.RepoTags}} {{.Id}} {{.Parent}}' $(docker image ls -q --filter since=$image)
-}
+########### Blog ############
+alias cdposts='cd $BLOG_DIR/source/_posts'
+alias cdcodes='cd $BLOG_DIR/source/_codes'
+alias cdassets='cd $BLOG_DIR/source/_assets'
 
-alias dc='docker container ls -a --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}"'
-alias dcrma='docker container prune -f'
-dcrm()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls -a
-        echo -ne "\n[RM] Input ID: "
-        read container
-    else
-        container=$@
-    fi
-    # docker container kill --signal="SIGTERM" $container
-    docker container stop $container
-    docker container rm $container
-}
-
-dcc()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls -a
-        echo -ne "\n[INFO] Input ID: "
-        read container
-    else
-        container=$@
-    fi
-    docker inspect $container
-}
-
-dcup()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls -a
-        echo -ne "\n[UP] Input ID: "
-        read container
-    else
-        container=$@
-    fi
-    docker container start $container
-}
-
-dcdown()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls -a
-        echo -ne "\n[DOWN] Input ID: "
-        read container
-    else
-        container=$@
-    fi
-    docker container stop $container
-}
-
-alias dv='docker volume ls'
-alias dvrma='docker volume prune'
-dvrm()
-{
-    if [[ x$1 == x ]]
-    then
-        docker volume ls
-        echo -ne "\n[RM] Input ID: "
-        read vols
-    else
-        vols=$@
-    fi
-    docker volume rm $vols
-}
-
-drun()
-{
-    args="-it"
-    if [[ x$1 == xhelp ]]
-    then
-        echo "drun [host] [gpu] [sh] [image]"
-        return
-    fi
-    if [[ x$1 == xhost ]]
-    then
-        args="$args --network host"
-        shift
-    fi
-    if [[ x$1 == xgpu ]]
-    then
-        args="$args --runtime nvidia"
-        shift
-    fi
-    if [[ x$1 == xsh ]]
-    then
-        # args="--rm $args --entrypoint /bin/bash"
-        args="--rm $args"
-        shift
-    fi
-    if [[ x$1 == x ]]
-    then
-        docker images
-        echo -ne "\n[RUN] Input ID: "
-        read image
-    else
-        image=$1
-    fi
-    if [[ x$image == x ]]
-    then
-        echo "Not input image id"
-    else
-        docker run $args $image
-    fi
-}
-
-dsh()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls
-        echo -ne "\n[SH] Input ID: "
-        read container
-    else
-        container=$1
-    fi
-    if [[ x$container == x ]]
-    then
-        return
-    fi
-    docker exec -it $container bash
-}
-
-dlog()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls
-        echo -ne "\n[LOG] Input ID: "
-        read container
-    else
-        id=$1                                                                                       
-        if [[ ${#id} -le 2 ]]
+ifnames=("eth0" "ens3" "wlp4s0")
+__find_lanip() {
+    for ifname in ${ifnames[*]}
+    do
+        result=`ifconfig $ifname 2>&1 | grep -v "error"`
+        if [[ x$result != x ]]
         then
-            container=`docker container ls -a --format "{{.ID}}" | head -n $id | tail -n 1`
-        else
-            container=$1
+            ip=`echo "$result" | grep inet\ | awk '{print $2}'`
+            echo $ip
+            return
         fi
-    fi
-    if [[ x$container == x ]]
+    done
+    exit -1
+}
+
+__find_netip() {
+    result=`curl -s ifconfig.me`
+    if [[ x$result != x ]]
     then
+        echo "$result"
         return
     fi
-    logfile=`docker inspect --format='{{.LogPath}}' $container`
-    logbase=`basename $logfile`
-    if [[ x$2 == x ]]
+    result=`curl -s icanhazip.com`
+    if [[ x$result != x ]]
     then
-        echo -ne "[LOG] Clear $logbase (Y/n): "
-        read result
-    else
-        result=$2
-    fi
-    if [[ x$result != xN ]] && [[ x$result != xn ]]
-    then
-        sudo truncate -s 0 $logfile
-    fi
-    docker logs --follow $container
-}
-
-dexe()
-{
-    args=($@)
-    container=$1
-    if [ "${#container}" -eq "12" ]
-    then
-        bashcmd=${args[@]: 1:$#}
-        docker exec $container bash -c "$bashcmd"
-    else
-        docker container ls
-        echo -ne "\n[SH] Input ID: "
-        read container
-        echo ""
-        docker exec $container bash -c "$@"
-    fi
-}
-
-dip()
-{
-    container=$1
-    if [ "${#container}" -ne "12" ]
-    then
-        docker container ls
-        echo -ne "\n[IP] Input ID: "
-        read container
-    fi
-    if [[ x$container == x ]]
-    then
+        echo "$result"
         return
     fi
-    docker inspect --format="{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $container
-}
-
-dmount()
-{
-    container=$1
-    if [ "${#container}" -ne "12" ]
+    result=`wget -qO - ifconfig.co`
+    if [[ x$result != x ]]
     then
-        docker container ls
-        echo -ne "\n[MOUNT] Input ID: "
-        read container
-    fi
-    if [[ x$container == x ]]
-    then
+        echo "$result"
         return
     fi
-    jsontool=`which jq`
-    if [[ x$jsontool == x ]]
+    result=`curl -s ipecho.net/plain`
+    if [[ x$result != x ]]
     then
-        jsontool=python -m json.tool
+        echo "$result"
+        return
     fi
-    docker inspect -f '{{ json .Mounts }}' $container | $jsontool
+    exit -1
 }
 
-dcst()
-{
-    if [[ x$1 == x ]]
-    then
-        docker container ls
-        echo -ne "\n[STAT] Input ID: "
-        read container
-    else
-        container=$@
-    fi
-    docker stats --no-stream $container
-}
+# hostname=`hostname`
+# hostlanip=$(__find_lanip)
+# hostnetip=$(__find_netip)
 
-dcrmk12()
-{
-    filters=
-    if [[ x$1 != x ]]
-    then
-        filters="${filters} --filter label=k12ai.service.user=$1"
-    fi
-    if [[ x$2 != x ]]
-    then
-        filters="${filters} --filter label=k12ai.service.uuid=$2"
-    fi
-    if [[ x$filters != x ]]
-    then
-        for c in `docker container ls -a ${filters} --format "{{.ID}}"`
-        do
-            docker container stop $c > /dev/null
-            docker container rm $c
-        done
-    else
-        echo "dcrmk12 user uuid"
-    fi
-}
+# setupfotiaovpn: su3-xotn7-tj
+# sudo apt-get install xclip
+# ctrl + v: echo "Hello, world" | xclip -selection clipboard
+# mouse + middel(X): echo "Hello, world" | xclip
+
+# disable mail check
+unset MAILCHECK
+
+# disable ssh-agent
+unset SSH_AUTH_SOCK
+unset SSH_AGENT_PID
+# use xprint_proxy_env instead
+export GO111MODULE=on
+export GOPROXY=https://mirrors.aliyun.com/goproxy/,https://goproxy.cn,direct
+
+alias X="source $cur_dir/bashrc"
+
+# [ -f $cur_dir/.tmp.bash ] && s $cur_dir/.tmp.bash
+has_cmd kubectl && s $cur_dir/env/k8s.env
+has_cmd docker && s $cur_dir/env/docker.env && s $cur_dir/env/kafka.env
+
+# -s 1920x1280 
+alias xrecord='ffmpeg -f x11grab -i ${DISPLAY} -r 25 -vcodec libx264  ~/output.mp4'
+alias xwechat='docker restart wechat -t 0'

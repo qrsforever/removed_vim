@@ -22,11 +22,11 @@ echo "$*" > $log_file
 
 # randnum=`date +%s%N`
 
-destdir="$vim_home_dir/extern/git-blog-setting"
-drafts="source/_drafts"
-assets="source/_assets"
-workdir=${destdir}/${drafts}/$rootDir
-assetsdir=${destdir}/${assets}
+destdir="$vim_home_dir/extern/blog_setting"
+# assets (not _assets) and _drafts dir using in blog/graphviz.py
+assets="source/assets"
+posts="source/_drafts"
+workdir=${destdir}/${posts}/$rootDir
 
 HEXO_CMD=`which hexo`
 CMD_NTFSND=`which notify-send`
@@ -46,8 +46,22 @@ then
     exit 0
 fi
 
+if [[ ! -d $destdir ]]
+then
+    __echo__ "not found $destdir"
+    exit 0
+fi
+
+port=5001
+
+result=`lsof -i4:$port -Fp`
+if [[ x$result != x ]]
+then
+    pid=`echo $result | cut -d\  -f1 | cut -c2-`
+    sudo kill -9 $pid
+fi
+
 cd $destdir
-killall hexo
 
 if [ ! -d "${workdir}" ]
 then
@@ -55,18 +69,12 @@ then
     mkdir -p ${workdir}
 fi
 
-if [ ! -d $assetsdir ]
-then
-    echo "mkdir -p ${assetsdir}" >> $log_file
-    mkdir -p $assetsdir
-fi
-
 if [[ $2 == 2 ]]
 then
     echo "hexo clean" >> $log_file
     $HEXO_CMD clean
-    rm -rf ${destdir}/${drafts}/*
-    # rm -rf $assetsdir
+    rm -rf ${destdir}/${posts}
+    rm -rf ${destdir}/${assets}
     exit 0
 else
     rm -rf "${workdir}/${fileME}"
@@ -89,19 +97,19 @@ then
     ln -s $pathdir/notebook ${workdir}/notebook
 fi
 
-# asset dir
 if [[ -d $pathdir/${filePP} ]]
 then
     echo "ln -s $pathdir/${filePP} ${workdir}/${filePP}" >> $log_file
     ln -s $pathdir/${filePP} ${workdir}/${filePP}
 fi
 
-$HEXO_CMD g --draft 2>&1 | tee -a $log_file
-$HEXO_CMD s --silent --draft &
+rm -f $log_file
+$HEXO_CMD g --drafts 2>&1 | tee -a $log_file
+$HEXO_CMD s --port $port --silent --drafts &
 
 sleep 1
 
-__echo__ "Open: http://localhost:4000"
+__echo__ "Open: http://localhost:$port"
 
 if [[ $2 == 1 ]]
 then

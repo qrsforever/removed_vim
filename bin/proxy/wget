@@ -1,0 +1,5 @@
+#!/bin/bash
+
+params="$(printf " %q" "${@}")"
+echo "[http_proxy=http://${PROXY} https_proxy=https://${PROXY} /usr/bin/wget --no-check-certificate $params -> $?]" >> /tmp/proxy_wget.txt
+bash -c "http_proxy=http://${PROXY} https_proxy=https://${PROXY} /usr/bin/wget --no-check-certificate $params"

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# cat > /tmp/files.txt <<EOF
+# ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}
+# EOF
+
+# 保存默认分割符
+OLD_IFS=$IFS
+# 设置换行为分隔符
+IFS=$'\n'
+
+for file in ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}
+do
+    if [[ x$file != x ]]
+    then
+        gvim "$file"
+    fi
+done
+IFS=$OLD_IFS

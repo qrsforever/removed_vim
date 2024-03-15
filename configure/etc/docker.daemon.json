@@ -1,0 +1,17 @@
+{
+    "exec-opts": ["native.cgroupdriver=systemd"],
+    "log-opts": {
+        "max-size": "20m",
+        "max-file": "10"
+    },
+    "features": { "containerd-snapshotter": true },
+    "registry-mirrors": [
+        "https://docker.mirrors.ustc.edu.cn",
+        "https://p3mki545.mirror.aliyuncs.com",
+        "https://registry.docker-cn.com",
+        "https://registry-1.docker.io",
+        "https://docker.io"
+    ],
+    "data-root": "/data/docker",
+    "insecure-registries": ["0.0.0.0/0"]
+}

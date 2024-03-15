@@ -25,54 +25,59 @@ filetype indent on
 nnoremap [search] <Nop>
 nmap s [search]
 
-" 暂用映射: [m in ppython.vim: Python_jump
-let g:no_python_maps = '1'
+" 映射: [m in python.vim: Python_jump
+" see ftplugin/python.vim change [m to [f
+" let g:no_python_maps = '1'
 
-exec 'source ' . g:VIM_HOME . '/bundle/.configs/init.vim'
+exec 'source ' . g:VIM_HOME . '/init/main.vim'
 
 "F1~F12快捷键映射"{{{
 nmap <unique> <silent> <F1>         :MyMarksBrowser<CR>
-nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
+" nmap <unique> <silent> <F2>         :MyBufExplorer<CR>
 nmap <unique> <silent> <F3>         :NERDTreeToggle %:p:h<CR>
 nmap <unique> <silent> <F4>         :TagbarToggle<CR>
-nmap <unique> <silent> <F5>         :XHexo<CR>
-nmap <unique> <silent> <F8>         :<c-u>call MyTags('n')<CR>
+" nmap <unique> <silent> <F5>         :<CR>
+" nmap <unique> <silent> <F8>         :<c-u>call MyTags('n')<CR>
 nmap <unique> <silent> <F9>         :MyMarkColor<CR>
 nmap <unique> <silent> <F10>        :MyColColor<CR>
 nmap <unique> <silent> <F11>        :MaximizerToggle<CR>
-nmap <unique> <silent> <F12>        ,ra
+" nmap <unique> <silent> <F12>        ,ra
 
-imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
+" imap <unique> <silent> <F1>    <ESC>:MarksBrowser<CR>
 imap <unique> <silent> <F2>    <ESC>:MyBufExplorer<CR>
 imap <unique> <silent> <F3>    <ESC>:NERDTreeToggle %:p:h<CR>
 imap <unique> <silent> <F4>    <ESC>:TagbarToggle<CR>
-imap <unique> <silent> <F5>    <ESC>:XHexo<CR>
-imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>
+" imap <unique> <silent> <F5>    <ESC>:<CR>
+" imap <unique> <silent> <F8>    <ESC>:<c-u>call MyTags('i')<CR>
 imap <unique> <silent> <F9>    <ESC>:MyMarkColor<CR>
 imap <unique> <silent> <F10>   <ESC>:MyColColor<CR>
 imap <unique> <silent> <F11>   <ESC>:MaximizerToggle<CR>
-imap <unique> <silent> <F12>   <ESC>,ra
+" imap <unique> <silent> <F12>   <ESC>,ra
 
-vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
+" vmap <unique> <silent> <F12>        :<c-u>call MyYank2Reg('v')<CR>
 
 " "Shift"
 nmap <unique> <silent> <S-F1>       :lnext<CR>
 nmap <unique> <silent> <S-F2>       :cprevious<CR>
 nmap <unique> <silent> <S-F3>       :cnext<CR>
+nmap <unique> <silent> <S-F9>       [A
 
 imap <unique> <silent> <S-F1>  <ESC>:lnext<CR>
 imap <unique> <silent> <S-F2>  <ESC>:cprevious<CR>
 imap <unique> <silent> <S-F3>  <ESC>:cnext<CR>
+imap <unique> <silent> <S-F9>  <ESC>[A
 
 " "Ctrl"
 nmap <unique> <silent> <C-F1>       :lprevious<CR>
 nmap <unique> <silent> <C-F2>       :tprevious<CR>
 nmap <unique> <silent> <C-F3>       :tnext<CR>
+nmap <unique> <silent> <C-F9>       [a
 nmap <unique> <silent> <C-F10>      :g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 imap <unique> <silent> <C-F1>  <ESC>:lprevious<CR>
 imap <unique> <silent> <C-F2>  <ESC>:tprevious<CR>
 imap <unique> <silent> <C-F3>  <ESC>:tnext<CR>
+imap <unique> <silent> <C-F9>  <ESC>[a
 imap <unique> <silent> <C-F10> <ESC>:g/<C-R>=expand("<cword>")<CR>/d<CR>
 
 "Shift and Ctrl &term不同特殊映射 ctrl+F1不可用
@@ -145,27 +150,29 @@ nmap <C-s> :MyDoSave<CR>
 " imap \\ <C-x><C-o>
 
 " 标签跳转页面
-nmap g0 :tabl<CR>
-nmap g1 1gt
-nmap g2 2gt
-nmap g3 3gt
-nmap g4 4gt
-nmap g5 5gt
-nmap g6 6gt
-nmap g7 7gt
-nmap g8 8gt
-nmap g9 9gt
+nmap <silent> g1 1gt
+nmap <silent> g2 2gt
+nmap <silent> g3 3gt
+nmap <silent> g4 4gt
+nmap <silent> g5 5gt
+nmap <silent> g6 6gt
+nmap <silent> g7 7gt
+nmap <silent> g8 :tablast<CR>
+nmap <silent> g0 :tabprevious<CR>
+nmap <silent> g9 :tabnext<CR>
 
-tmap <M-0> <esc>:tabl<CR>
-tmap <M-1> <esc>1gt
-tmap <M-2> <esc>2gt
-tmap <M-3> <esc>3gt
-tmap <M-4> <esc>4gt
-tmap <M-5> <esc>5gt
-tmap <M-6> <esc>6gt
-tmap <M-7> <esc>7gt
-tmap <M-8> <esc>8gt
-tmap <M-9> <esc>9gt
+if has("terminal")
+    tmap <silent> <M-1> <esc>1gt
+    tmap <silent> <M-2> <esc>2gt
+    tmap <silent> <M-3> <esc>3gt
+    tmap <silent> <M-4> <esc>4gt
+    tmap <silent> <M-5> <esc>5gt
+    tmap <silent> <M-6> <esc>6gt
+    tmap <silent> <M-7> <esc>7gt
+    tmap <silent> <M-8> <esc>:tablast<CR>
+    tmap <silent> <M-0> <esc>:tabprevious<CR>
+    tmap <silent> <M-9> <esc>:tabnext<CR>
+endif
 
 " 如果使能了YCM补全, 直接使用<C-x><C-k>会直接触发digraphs(C-K), 所以在此映射
 imap <C-k> <C-x><C-k>
@@ -177,6 +184,7 @@ command XCCTags !ctags --c++-kinds=+p --fields=+ialS --extra=+q -R .
 command XRS %s/\s\+$//ge     "消除每行后面的多余的空格
 command XRW %s///ge        "消除文件中的^M字符
 command XONE 0,$s/\n//       "多行变一行
+command XRD %s/^\d\{1,4}$\n//ge "消除只含数字的行
 " sudo usermod -a -G sudo $USER
 " 或者: /etc/sudoers: $USER ALL=(ALL) NOPASSWD: ALL
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -184,11 +192,13 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 "窗口配置"{{{
 " 让terminal进入norm模式
-tnoremap <Esc> <C-W>N
-tnoremap <C-j> <C-W>j
-tnoremap <C-k> <C-W>k
-tnoremap <C-h> <C-W>h
-tnoremap <C-l> <C-W>l
+if has("terminal")
+    tnoremap <Esc> <C-W>N
+    tnoremap <C-j> <C-W>j
+    tnoremap <C-k> <C-W>k
+    tnoremap <C-h> <C-W>h
+    tnoremap <C-l> <C-W>l
+endif
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
@@ -209,6 +219,7 @@ filetype on
 set t_Co=256
 
 "设置VIM颜色主题 你可以借助插件scrollcolor.vim和color_sample_pack.vim来选择你喜爱的主题(150多个)(请参考下面插件)
+"see gui below
 colorscheme elflord
 
 "预览窗口,eg. ctr+w { 时的窗口大小
@@ -220,9 +231,13 @@ set pumheight=15
 "使用鼠标
 set mouse=a  "在vim里可以用鼠标复制粘贴, 用鼠标左键选中,中键粘贴(中键), shift + 选中:可复制(右键)
 
-"粘贴板
-" + : clipboard, common-key-bind ctrl+c, 右键粘贴
-" * : primary, copy-on-select, 鼠标中键
+"粘贴板(export DISPLAY=:0.0)
+" + : clipboard, common-key-bind ctrl+c, (选择后ctrl+c内容)
+" * : primary, copy-on-select (选择的内容)
+" (y, d, s, x)默认的未命名寄存器与系统剪贴板关联上
+set clipboard^=unnamed,unnamedplus
+imap <C-v> <ESC>"+pa
+vmap <C-c> "+y
 
 "可以在buffer中任意地方使用鼠标
 " set selection=exclusive
@@ -233,11 +248,8 @@ set mouse=a  "在vim里可以用鼠标复制粘贴, 用鼠标左键选中,中键
 "  autocmd BufWinEnter * :lchdir %:p:h
 "endif
 "将当前编辑文件的路径设置为当前路径
-" set autochdir
+set autochdir
 "autocmd
-
-"解决consle输出乱码
-language messages zh_CN.utf-8
 
 "可用来改动补全时采用的方式
 set wildmode=list:full
@@ -418,7 +430,7 @@ set matchtime=1
 "set updatecount=40  "设置敲入40个字符后执行
 
 "交换文件刷新后的超时时间
-set updatetime=5000  "x毫秒秒后刷新
+set updatetime=500  "x毫秒秒后刷新
 ":preserve "若设置的时间过长,该命令会手工的存入交换文件中.
 
 " When using make, where should it dump the file, please see ./bundle/.config/errormarker.vim_conf.vim
@@ -444,19 +456,21 @@ set wildignore=*.o,*~,*.pyc,*.sh,*.png,.git\*,.hg\*,.svn\*
 "简单配置"}}}
 
 "{{{ Terminal终端
-tmap <expr> <C-l> SendToTerm("\<C-l>")
 func SendToTerm(what)
   call term_sendkeys('', a:what)
   return ''
 endfunc
-set termwinscroll=5000
-au TerminalOpen * if &buftype == 'terminal'
-            \ | setlocal bufhidden=hide
-            \ | setlocal noshowcmd
-            \ | setlocal filetype=terminal
-            \ | endif
-nmap <C-W>t :silent! MyTermOpen<CR>
-" imap <C-W>t <Esc>:silent! MyTermOpen<CR>
+if has("X11") && has('terminal')
+    tmap <expr> <C-l> SendToTerm("\<C-l>")
+    set termwinscroll=5000
+    au TerminalOpen * if &buftype == 'terminal'
+                \ | setlocal bufhidden=hide
+                \ | setlocal noshowcmd
+                \ | setlocal filetype=terminal
+                \ | endif
+    nmap <C-W>t :silent! MyTermOpen<CR>
+    " imap <C-W>t <Esc>:silent! MyTermOpen<CR>
+endif
 "}}}
 
 "Gui选项 放到.gvimrc"{{{
@@ -465,8 +479,8 @@ if has("gui_running")
     set termguicolors
     set guifont=Monospace\ 14  "在Linux下设置字体的命令是：
     "set guicursor=a:blinkon0 "停止光标闪烁
-    set guioptions=a    " * autoselection
-    " set guioptions=P    " + autoselection 鼠标右键
+    set guioptions=a    " * autoselection 选择的内容
+    " set guioptions=P    " + autoselection 选择后ctrl+c的内容
     " set guioptions+=e   " GUI Tabbar
     " set guioptions+=m   " 菜单栏
     " set guioptions+=T   " 工具栏
@@ -476,35 +490,41 @@ if has("gui_running")
     " set guioptions+=r   " 右边滚动条
     " set guioptions+=R   " 垂直分隔窗口右边滚动条
     " set mousemodel=popup
-    map! <S-Insert> <MiddleMouse>
-    "MiddleMouse: 粘贴
     colorscheme spring
 
     set kp=man\ -P\ more  " remove the [m when using K man help
 
-    map <M-0> :tabl<CR>
-    map <M-1> 1gt
-    map <M-2> 2gt
-    map <M-3> 3gt
-    map <M-4> 4gt
-    map <M-5> 5gt
-    map <M-6> 6gt
-    map <M-7> 7gt
-    map <M-8> 8gt
-    map <M-9> 9gt
-    map! <M-0> <esc>:tabl<CR>
-    map! <M-1> <esc>1gt
-    map! <M-2> <esc>2gt
-    map! <M-3> <esc>3gt
-    map! <M-4> <esc>4gt
-    map! <M-5> <esc>5gt
-    map! <M-6> <esc>6gt
-    map! <M-7> <esc>7gt
-    map! <M-8> <esc>8gt
-    map! <M-9> <esc>9gt
+    " MiddleMouse: 粘贴"*"(选择的内容)
+    map! <S-Insert> <MiddleMouse>
+
+    map <silent> <M-1> 1gt
+    map <silent> <M-2> 2gt
+    map <silent> <M-3> 3gt
+    map <silent> <M-4> 4gt
+    map <silent> <M-5> 5gt
+    map <silent> <M-6> 6gt
+    map <silent> <M-7> 7gt
+    map <silent> <M-8> :tablast<CR>
+    map <silent> <M-9> :tabprevious<CR>
+    map <silent> <M-0> :tabnext<CR>
+    map! <silent> <M-1> <esc>1gt
+    map! <silent> <M-2> <esc>2gt
+    map! <silent> <M-3> <esc>3gt
+    map! <silent> <M-4> <esc>4gt
+    map! <silent> <M-5> <esc>5gt
+    map! <silent> <M-6> <esc>6gt
+    map! <silent> <M-7> <esc>7gt
+    map! <silent> <M-8> <esc>:tablast<CR>
+    map! <silent> <M-9> <esc>:tabprevious<CR>
+    map! <silent> <M-0> <esc>:tabnext<CR>
 
     set showtabline=2
-	set guitablabel=%{MyGuiTabLabel()}
+    set guitablabel=%{MyGuiTabLabel()}
+else
+    " set background=light
+    " set background=dark
+    " colorscheme solarized
+    " let g:solarized_termcolors=256
 endif
 set tabline=%!MyTabLine()  " custom tab pages line
 "Gui选项 放到.gvimrc"}}}
@@ -564,8 +584,12 @@ if has("multi_byte")
     set termencoding=utf-8
     set encoding=utf-8
 endif
+
 "VIM中显示信息都为英文的.
-language en_US.utf8
+" language C.utf8
+" language messages C.utf-8
+"解决consle输出乱码
+"language messages zh_CN.utf-8
 "字符编码(多字节)"}}}
 
 "设置C/C++语言的具体缩进方式 eg. switch case 缩进"{{{
@@ -729,3 +753,4 @@ au FocusGained,BufEnter * :silent! !
 
 " use jsonnet.vim
 " au BufRead,BufNewFile *.jsonnet set filetype=json
+" set statusline=%<%f\ %{VCSCommandGetStatusLine()}\ %h%m%r%=%l,%c%V\ %P

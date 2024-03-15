@@ -1,0 +1,7 @@
+#!/bin/bash
+
+params="$(printf " %q" "${@}")"
+PROXY_HOST=$(echo ${PROXY} | cut -d: -f1)
+PROXY_PORT=$(echo ${PROXY} | cut -d: -f2)
+bash -c "/usr/bin/svn --config-option servers:global:http-proxy-host=${PROXY_HOST} --config-option servers:global:http-proxy-port=${PROXY_PORT} ${params}"
+echo "[/usr/bin/svn --config-option servers:global:http-proxy-host=${PROXY_HOST} --config-option servers:global:http-proxy-port=${PROXY_PORT} ${params}]" >> /tmp/proxy_svn.txt

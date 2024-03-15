@@ -1,0 +1,5 @@
+#!/bin/bash
+
+params="$(printf " %q" "${@}")"
+bash -c "/usr/bin/git -c 'http.proxy=http://${PROXY}' ${params}"
+echo "[/usr/bin/git -c "http.proxy=http://${PROXY}" ${params} -> $?]" >> /tmp/proxy_git.txt

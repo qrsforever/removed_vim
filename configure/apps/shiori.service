@@ -1,0 +1,20 @@
+# docker run -d --name shiori --restart=always -p 8080:8080 -v ~/shiori:/srv/shiori radhifadlillah/shiori
+# init user, passwd : shiori, gopher
+
+[Unit]
+Description=Shiori container
+After=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker rm shiori-1
+ExecStart=/usr/bin/docker run \
+--rm \
+--name shiori-1 \
+-p 8080:8080 \
+-v /srv/machines/shiori:/srv/shiori \
+radhifadlillah/shiori
+ExecStop=/usr/bin/docker stop -t 2 shiori-1
+
+[Install]
+WantedBy=multi-user.target

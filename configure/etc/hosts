@@ -1,0 +1,14 @@
+127.0.0.1	localhost
+127.0.1.1	erlangai
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+0.0.0.0 jupyter.localhost.cn
+0.0.0.0 www.localhost.cn
+0.0.0.0 blog.localhost.cn
+0.0.0.0 samba.localhost.cn

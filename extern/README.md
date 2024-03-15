@@ -7,7 +7,7 @@
 
 个人本地博客
 -----------
-1. git clone git@gitee.com:lidongai/git-blog-setting.git
+1. git clone git@gitee.com:qrsforever/blog_setting.git
 2. npm install
 
 ripgrep
@@ -17,7 +17,9 @@ git clone https://github.com/BurntSushi/ripgrep
 
 see ripgrep/README
 
-    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+    https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+    curl -LO https://github.91chi.fun/https://github.com//BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+    <!-- curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb -->
     sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
 
@@ -48,3 +50,24 @@ jsonnet
 
     1. git clone https://github.com/google/jsonnet.git
     2. make -j4; sudo make install
+
+
+omnitty
+-------
+
+git clone github.com/qrsforever/omnitty.git
+
+
+sysfonts
+--------
+git clone https://gitee.com/qrsforever/sysfonts.git
+
+
+nautilus-terminal
+-----------------
+git clone --depth 1 https://github.com/flozz/nautilus-terminal.git
+
+
+proxy-switcher
+--------------
+git clone --depth 1 https://github.com/tomflannaghan/proxy-switcher

@@ -2,11 +2,12 @@
 
 if [[ x$# != x1 ]]
 then
-    echo "0gitsvn url"
+    echo "0gitsvn https://github.com/xxx/xxx/tree/xxx/xxx"
     exit 0
 fi
 
 url=$1
+url=${url/tree\/*\//trunk\/}
 
-echo "svn co ${url/tree\/master/trunk}"
-svn co ${url/tree\/master/trunk}
+echo "svn co ${url}"
+svn co ${url}

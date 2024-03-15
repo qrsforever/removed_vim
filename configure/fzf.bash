@@ -15,7 +15,7 @@ else
 fi
 
 if [[ ! "$PATH" == *$vim_dir/extern/fzf/bin* ]]; then
-      export PATH="$PATH:$vim_dir/extern/fzf/bin"
+    export PATH="$PATH:$vim_dir/extern/fzf/bin"
 fi
 
 # Auto-completion
@@ -24,7 +24,7 @@ fi
 
 # Key bindings
 # ------------
-source "$vim_dir/extern/fzf/shell/key-bindings.bash"
+source "$vim_dir/extern/fzf/shell/key-bindings.bash" 2>/dev/null
 
 alias dfzf='cd $(find * -type d | fzf)'
 alias vfzf='vim $(fzf)'

@@ -1,16 +1,8 @@
 #!/bin/bash
 
-current_dir=`pwd`
-cmd_path=`which 0gvim`
-
-if [[ x$cmd_path == x ]]
-then
-    cmd_path=${BASH_SOURCE[0]}
-fi
-
 if [[ x$RSYNC == x1 ]]
 then
-    vim -g $@
+    vim -g --servername REM $@
     exit 0
 fi
 
@@ -19,13 +11,15 @@ then
     sudo update-alternatives --install /usr/local/bin/gvim gvim $cmd_path 100
 fi
 
-rel_path=`readlink /etc/alternatives/gvim`
-if [[ x"$rel_path" != x"$cmd_path" ]]
+res=`sudo update-alternatives --list gvim 2>&1 | grep "0gvim"`
+if [[ x$res == x ]]
 then
     sudo update-alternatives --set gvim $cmd_path
 fi
 
 ss=`vim --serverlist | head -n1 | cut -c 1-3`
+
+echo "$@" > /tmp/0gvim
 
 files=$@
 if [[ $@ =~ "-f" ]]
@@ -33,20 +27,36 @@ then
     files=`echo "$files" | cut -d\  -f2-`    
 fi
 
+args="-g -p --servername QRS"
+
 if [[ x$ss == x"QRS" ]]
 then
+    args="${args} --remote-tab-silent"
+fi
+
+# 从终端HandleURL传过来 (eg: +, https)
+if [[ ${1: 0:1} == '+' ]]
+then
+    vim ${args} $@
+elif [[ ${1} =~ "https://" ]]
+then
+    xdg-open $@
+else
     if [[ x$@ != x ]]
     then
         have=`echo "$files" | grep servername`
         if [[ x$have == x ]]
         then
-            vim -g -p --servername QRS --remote-tab-silent $files
+            vim ${args} $files
         else
+            # --servername作为了参数传过来了
             vim -g $files
         fi
     else 
-        vim -g -p --servername QRS --remote-send ":NERDTree $current_dir <cr>"
+        # vim ${args} --remote-send ":NERDTree $current_dir <cr>"
+        vim ${args}
     fi
-else
-    vim -g -p --servername QRS $files
 fi
+
+# 所有插件加载后，执行-c
+# vim -g -p -c "set showtabline=1" --servername QRS $files

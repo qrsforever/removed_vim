@@ -1,0 +1,54 @@
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
+venvPath = ".venv"
+venv = "pytorch"
+include = ["src"]
+exclude = [
+    "**/__pycache__",
+    "**/__pypackages__",
+    "**/.ipynb_checkpoints",
+    "src/typestubs",
+    ".venv",
+]
+# Paths of directories or files whose diagnostic output (errors and warnings) should be suppressed
+ignore = [
+    "src/oldstuff"
+]
+# Paths of directories or files that should use “strict” analysis if they are included ('# pyright: strict')
+strict = []
+# Set of identifiers that should be assumed to contain a constant value wherever used within this program
+defineConstant = {
+    DEBUG = true
+}
+
+# Path to a directory that contains typeshed type stub files
+# typeshedPath =  
+# Path to a directory that contains custom type stubs
+# stubPath = "src/stubs"
+
+# Specifies whether output logs should be verbose.
+verboseOutput = False
+
+# Additional search paths that will be used when searching for modules imported by files
+extraPaths = [
+]
+
+executionEnvironments = [
+    { root = "src" },
+    { root = "test", extraPaths = [
+        "src",
+        ".",
+    ] },
+]
+
+# Specifies the default rule set to use: "off", "basic", "standard", "strict"
+typeCheckingMode = "basic"
+
+# Determines whether pyright reads, parses and analyzes library code to extract type information in the absence of type stub files. 
+useLibraryCodeForTypes = true
+
+
+reportMissingImports = true
+reportMissingTypeStubs = false

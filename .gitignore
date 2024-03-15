@@ -3,9 +3,12 @@
 .netrwhist
 .VimballRecord
 .cache
+.vim-sync
+**/**/*.pyc
 **/**/doc/tags
 **/**/__pycache__
 configure/eclimrc
-configure/bashrc
+configure/.tmp.bash
 bundle
+n-bundle
 extern

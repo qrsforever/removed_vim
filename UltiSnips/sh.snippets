@@ -1,6 +1,9 @@
 snippet xhead "shell header" b
 #!/bin/bash
 
+CUR_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
+
+[[ "${BASH_SOURCE[0]}" != "\${0}" ]] && SOURCED=1 || SOURCED=0
 $0
 endsnippet
 
@@ -27,4 +30,12 @@ snippet xxcase
 case ${1:word} in
     ${2:pattern} ) $0;;
 esac
+endsnippet
+
+snippet xxblogcode "pandoc code"
+################## pandoc code file filter beg ###################
+
+$0
+
+################## pandoc code file filter end ###################
 endsnippet

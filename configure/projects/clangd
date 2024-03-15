@@ -1,0 +1,4 @@
+CompileFlags:
+  Add: 
+    - -working-directory=/data/source/<project_name>
+    - -I<relative_path>

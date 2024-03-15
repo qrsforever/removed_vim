@@ -1,0 +1,7 @@
+service sensor99 /system/etc/sensor99.sh
+    class main
+    user root
+    group root
+
+on property:sys.boot_completed=1
+    start sensor99

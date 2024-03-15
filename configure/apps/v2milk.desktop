@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Categories=VPN;Education;Search;
+Name=V2Milk
+GenericName=VPN V2Milk
+Keywords=vpn;nzl;v2milk
+Icon=/home/lidong/bin/nzlclient/resources/extra/static/ico/ico.png
+Exec=/home/lidong/bin/nzlclient/v2milk

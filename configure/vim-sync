@@ -1,21 +1,13 @@
 #!/bin/bash
 
-# put the script into the project root dir
-
-# ssh-keygen -t rsa -f ~/.ssh/remote_key
-# ssh-copy-id -i ~/.ssh/remote_key.pub remote_user@remote_host
-
-remote_hostname='remote_host'
-remote_relative_path='/to/project/path'
+remote_hostnames=('k8-master' 'k8-storage')
+remote_relative_path=('/root/hzcsai_com/hzcsk8s/' '/data/k8s-nfs/codes/hzcsk8s')
 
 cd $(dirname $0)
 
-if [[ 'upload' == $1 ]]
-then
-    rsync -azcul --exclude '.git' --relative "$2/$3" "$remote_hostname:$remote_relative_path"
-elif [[ 'download' == $1 ]]
-then
-    rsync -azcul --exclude '.git' "$remote_hostname:$remote_relative_path/$2/$3" "$2/$3"
-fi
+for (( i=0; i<${#remote_hostnames[@]}; i++ ))
+do
+    rsync -azcul --exclude ".git" --relative "$2/$3" "${remote_hostnames[$i]}:${remote_relative_path[$i]}"
+done
 
 cd -

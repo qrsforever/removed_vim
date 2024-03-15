@@ -96,11 +96,11 @@ find $SRCS_INCLUDE $VIM_HOME/tags/test.c $SRCS_EXCLUDE \
     ! -path "*output*" -a \
     ! -path "*objs*" -a \
     ! -path "*bin*" -a \
-    -regex '.*\.\(c\|cpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|py\)' \
+    -regex '.*\.\(c\|cpp\|hpp\|java\|h\|cs\|txt\|aidl\|php\|js\|sh\|conf\|py\)' \
     -type f -printf "%f	%p	1\n" | sort -f > $TAG_DIR/filenametags
 
 cut -f2 $TAG_DIR/filenametags | grep -v aidl > $TAG_DIR/cscope.files
-cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.java$|*.py$|*.php$' > $TAG_DIR/cscope.tag.files
+cut -f2 $TAG_DIR/filenametags | grep -E '*.c$|*.cpp$|*.h$|*.hpp$|*.java$|*.py$|*.php$' > $TAG_DIR/cscope.tag.files
 
 #-----------------------------------------------------------------
 # Generate cscope
@@ -151,5 +151,5 @@ fi
 
 if [[ x$CMD_NTFSND != x ]]
 then
-    $CMD_NTFSND -i $VIM_HOME/res/icons/dialog-information.png hexo "TagDB Generate $(dirname $TAG_DIR) ok!"
+    $CMD_NTFSND -i $VIM_HOME/res/icons/dialog-information.png TagDB "TagDB Generate $(dirname $TAG_DIR) ok!"
 fi

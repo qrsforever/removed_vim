@@ -4,7 +4,7 @@ cmd=`which expect`
 
 if [[ x$cmd == x ]]
 then
-    sudo apt-get install expect
+    sudo apt install -y expect
 fi
 
 if [[ ! -f ~/.qrsgit.pass ]]

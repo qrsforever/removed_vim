@@ -1,0 +1,5 @@
+#!/bin/bash
+
+params="$(printf " %q" "${@}")"
+bash -c "/usr/bin/pip --proxy ${PROXY} ${params}"
+echo "[/usr/bin/pip --proxy ${PROXY} ${params} -> $?]"  >> /tmp/proxy_pip.txt

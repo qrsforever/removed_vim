@@ -24,3 +24,5 @@ export http_proxy=''
 export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
+
+# ffmpeg -i test-002.mp4 -strict -2  -vf scale=640:360 test-002-1.mp4

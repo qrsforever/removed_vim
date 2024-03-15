@@ -151,9 +151,11 @@ function! s:_MyDoSave()
     exec 'silent update!'
     " exec 'silent lchdir %:p:h'
     call setreg('p', 'a'. expand('%:p'))
+    call setreg('f', 'a'. expand('%:t'))
+    call setreg('*', expand('%:p'))
 
     "@p
-    echomsg expand("%:p")
+    echomsg expand("%:p") . ' ---> You can paste path: @p,@f,primary'
 endfunction
 "}}}
 
